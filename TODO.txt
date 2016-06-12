@@ -1,0 +1,31 @@
+Player
+* HP
+* Bullet types?
+* Shield?
+
+Basic features
+//* Camera follow
+//* LAYOUT BOUNDARIES
+* Add enemy type class
+//* Load basic level
+* Add basic hazard class
+
+Graphical 
+* Add player sprite
+* Add player bullet
+
+* Add trail to player, effects
+* Add constant sine movement to player, "floaty"
+
+Enemy / Hazard types
+* Sine movement enemy (chained)
+* Interesting shooting patterns (per enemy type?)
+* Turret on ground (on ceilings, on ground). 
+	- Simple shot
+	- Multiple shots (double, triple)
+	
+Level design 
+* Optional routes that player can miss. Must replay to discover them.  -> Finds bonus.
+* Destructible blocks
+* Camera : allow for flexible changes in camera. Stopping, restarting, vertical movement, as needed (triggers on .tmx)
+
