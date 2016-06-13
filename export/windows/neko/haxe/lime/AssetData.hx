@@ -24,12 +24,12 @@ class AssetData {
 			type.set ("assets/images/images-go-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/images/player.png", "assets/images/player.png");
 			type.set ("assets/images/player.png", Reflect.field (AssetType, "image".toUpperCase ()));
-			path.set ("assets/images/player.pyxel", "assets/images/player.pyxel");
-			type.set ("assets/images/player.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 			path.set ("assets/images/tiles.png", "assets/images/tiles.png");
 			type.set ("assets/images/tiles.png", Reflect.field (AssetType, "image".toUpperCase ()));
-			path.set ("assets/images/tiles.pyxel", "assets/images/tiles.pyxel");
-			type.set ("assets/images/tiles.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+			path.set ("assets/images/tiles.png_palette.png", "assets/images/tiles.png_palette.png");
+			type.set ("assets/images/tiles.png_palette.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/turret.png", "assets/images/turret.png");
+			type.set ("assets/images/turret.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/music/music-goes-here.txt", "assets/music/music-goes-here.txt");
 			type.set ("assets/music/music-goes-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/sounds/sounds-go-here.txt", "assets/sounds/sounds-go-here.txt");

@@ -35,9 +35,13 @@ class Enemy extends FlxSprite
 	{
 		FlxObject.separate(this, player);
 			kill();
-			player.damage(); 
+			player.damage();
 	}
 	
+	private function damage()
+	{
+		HP--;
+	}
 	override public function kill()
 	{
 		alive = false;

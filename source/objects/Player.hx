@@ -31,6 +31,7 @@ class Player extends FlxSprite
 		loadGraphic(AssetPaths.player__png, true, 8, 8);
 		animation.add("move", [0]);
 		animation.play("move");
+	
 		
 		drag.x = DECELERATION;
 		drag.y = DECELERATION;
@@ -38,14 +39,12 @@ class Player extends FlxSprite
 		
 	}
 	
-	
 	override public function update(elapsed:Float):Void
 	{
 		if (alive)
 		{
 		    move();
 		    shoot();
-			
 			_cooldown -= elapsed * 4;
 		}
 			

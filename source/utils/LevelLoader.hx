@@ -64,14 +64,25 @@ class LevelLoader
 		for (enemy in getLevelObjects(tiledMap, "enemies"))
 		{
 			switch(enemy.type)
-			{
+			{	
 				default:
-		            state.enemies.add(new EnemyTurretA(enemy.x, enemy.y - 16)); 
-					// change default for the most common emey type
+					//trace(Type.typeof(enemy));
+					var flip = enemy.flippedVertically;
+					var e = new EnemyTurretA(enemy.x, enemy.y - 16, flip);
+					
+					
+					//trace(flip);
+
+
+
+					state.enemies.add(e);
+				//change default for the most common emey type
 				case "turret":
-					state.enemies.add(new EnemyTurretA(enemy.x, enemy.y - 16));
+				    trace("placeholder");//state.enemies.add(new EnemyTurretA(enemy.x, enemy.y - 16));
 			}
+			
 		}
+
 		/*
 		for (block in getLevelObjects(tiledMap, "blocks"))
 		{

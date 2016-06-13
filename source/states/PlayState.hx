@@ -11,6 +11,7 @@ import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
+import objects.EnemyBullet;
 import objects.Player;
 import objects.PlayerBullet;
 import objects.Scroller;
@@ -26,6 +27,7 @@ class PlayState extends FlxState
 	public var map:FlxTilemap;
 	public var player(default, null):Player;
 	public var PBullets:FlxTypedGroup<PlayerBullet>;
+	public var EBullets:FlxTypedGroup<EnemyBullet>;
 	private var _entities:FlxGroup;
 	public var enemies(default, null):FlxTypedGroup<Enemy>;
 		
@@ -41,12 +43,14 @@ class PlayState extends FlxState
 		enemies = new FlxTypedGroup<Enemy>();
 		_entities = new FlxGroup();
         PBullets = new FlxTypedGroup<PlayerBullet>();
+		EBullets = new FlxTypedGroup<EnemyBullet>();
 		FlxG.mouse.visible = false;
 
 
 		LevelLoader.loadLevel(this, Reg.levels[Reg.currentLevel]);
 		add(player);
 		add(PBullets);
+		_entities.add(EBullets);
 		
 		_entities.add(enemies);
 		add(_entities);
@@ -64,11 +68,11 @@ class PlayState extends FlxState
 			FlxG.collide(map, player);
 		}
 		
-		if (FlxG.collide(enemies, player))
+		if (FlxG.collide(_entities, player))
 		{
 			player.damage();
 		}
-
+	
 		// Could use some sort of check to kill the player if he
 		// touches bounds when he shouldn't 
 		// Good enough for now.
