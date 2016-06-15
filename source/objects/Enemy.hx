@@ -40,7 +40,7 @@ class Enemy extends FlxSprite
 	
 	private function damage()
 	{
-		HP--;
+		//HP--;
 	}
 	override public function kill()
 	{

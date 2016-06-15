@@ -42,12 +42,20 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.TEXT);
 		
 		
+		urls.push ("assets/images/player.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
 		urls.push ("assets/images/tiles.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
-		urls.push ("assets/images/tiles.pyxel");
-		types.push (lime.Assets.AssetType.BINARY);
+		urls.push ("assets/images/tiles.png_palette.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/turret.png");
+		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
 		urls.push ("assets/music/music-goes-here.txt");
@@ -139,7 +147,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "302",
+			build: "831",
 			company: "Alvarop",
 			file: "untitled shmup",
 			fps: 60,

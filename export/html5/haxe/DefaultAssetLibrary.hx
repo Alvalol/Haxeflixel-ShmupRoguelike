@@ -60,6 +60,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_monsterrat_ttf);
 		
@@ -74,10 +76,14 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/data/sandbox.tmx", AssetType.TEXT);
 		className.set ("assets/images/images-go-here.txt", __ASSET__assets_images_images_go_here_txt);
 		type.set ("assets/images/images-go-here.txt", AssetType.TEXT);
+		className.set ("assets/images/player.png", __ASSET__assets_images_player_png);
+		type.set ("assets/images/player.png", AssetType.IMAGE);
 		className.set ("assets/images/tiles.png", __ASSET__assets_images_tiles_png);
 		type.set ("assets/images/tiles.png", AssetType.IMAGE);
-		className.set ("assets/images/tiles.pyxel", __ASSET__assets_images_tiles_pyxel);
-		type.set ("assets/images/tiles.pyxel", AssetType.BINARY);
+		className.set ("assets/images/tiles.png_palette.png", __ASSET__assets_images_tiles_png_palette_png);
+		type.set ("assets/images/tiles.png_palette.png", AssetType.IMAGE);
+		className.set ("assets/images/turret.png", __ASSET__assets_images_turret_png);
+		type.set ("assets/images/turret.png", AssetType.IMAGE);
 		className.set ("assets/music/music-goes-here.txt", __ASSET__assets_music_music_goes_here_txt);
 		type.set ("assets/music/music-goes-here.txt", AssetType.TEXT);
 		className.set ("assets/sounds/sounds-go-here.txt", __ASSET__assets_sounds_sounds_go_here_txt);
@@ -109,14 +115,22 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		
 		type.set (id, AssetType.TEXT);
+		id = "assets/images/player.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
 		id = "assets/images/tiles.png";
 		path.set (id, id);
 		
 		type.set (id, AssetType.IMAGE);
-		id = "assets/images/tiles.pyxel";
+		id = "assets/images/tiles.png_palette.png";
 		path.set (id, id);
 		
-		type.set (id, AssetType.BINARY);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/turret.png";
+		path.set (id, id);
+		
+		type.set (id, AssetType.IMAGE);
 		id = "assets/music/music-goes-here.txt";
 		path.set (id, id);
 		
@@ -172,11 +186,17 @@ class DefaultAssetLibrary extends AssetLibrary {
 		className.set ("assets/images/images-go-here.txt", __ASSET__assets_images_images_go_here_txt);
 		type.set ("assets/images/images-go-here.txt", AssetType.TEXT);
 		
+		className.set ("assets/images/player.png", __ASSET__assets_images_player_png);
+		type.set ("assets/images/player.png", AssetType.IMAGE);
+		
 		className.set ("assets/images/tiles.png", __ASSET__assets_images_tiles_png);
 		type.set ("assets/images/tiles.png", AssetType.IMAGE);
 		
-		className.set ("assets/images/tiles.pyxel", __ASSET__assets_images_tiles_pyxel);
-		type.set ("assets/images/tiles.pyxel", AssetType.BINARY);
+		className.set ("assets/images/tiles.png_palette.png", __ASSET__assets_images_tiles_png_palette_png);
+		type.set ("assets/images/tiles.png_palette.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/turret.png", __ASSET__assets_images_turret_png);
+		type.set ("assets/images/turret.png", AssetType.IMAGE);
 		
 		className.set ("assets/music/music-goes-here.txt", __ASSET__assets_music_music_goes_here_txt);
 		type.set ("assets/music/music-goes-here.txt", AssetType.TEXT);
@@ -846,8 +866,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep @:bind #if display private #end class __ASSET__assets_data_data_goes_here_txt extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_sandbox_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_images_images_go_here_txt extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_player_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_tiles_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_pyxel extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_png_palette_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_turret_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_music_music_goes_here_txt extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_sounds_sounds_go_here_txt extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
@@ -858,6 +880,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
+
 
 
 
@@ -883,15 +907,17 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:file("assets/data/data-goes-here.txt") #if display private #end class __ASSET__assets_data_data_goes_here_txt extends lime.utils.Bytes {}
 @:file("assets/data/sandbox.tmx") #if display private #end class __ASSET__assets_data_sandbox_tmx extends lime.utils.Bytes {}
 @:file("assets/images/images-go-here.txt") #if display private #end class __ASSET__assets_images_images_go_here_txt extends lime.utils.Bytes {}
+@:image("assets/images/player.png") #if display private #end class __ASSET__assets_images_player_png extends lime.graphics.Image {}
 @:image("assets/images/tiles.png") #if display private #end class __ASSET__assets_images_tiles_png extends lime.graphics.Image {}
-@:file("assets/images/tiles.pyxel") #if display private #end class __ASSET__assets_images_tiles_pyxel extends lime.utils.Bytes {}
+@:image("assets/images/tiles.png_palette.png") #if display private #end class __ASSET__assets_images_tiles_png_palette_png extends lime.graphics.Image {}
+@:image("assets/images/turret.png") #if display private #end class __ASSET__assets_images_turret_png extends lime.graphics.Image {}
 @:file("assets/music/music-goes-here.txt") #if display private #end class __ASSET__assets_music_music_goes_here_txt extends lime.utils.Bytes {}
 @:file("assets/sounds/sounds-go-here.txt") #if display private #end class __ASSET__assets_sounds_sounds_go_here_txt extends lime.utils.Bytes {}
-@:file("D:/HaxeToolkit/haxe/lib/flixel/4,0,1/assets/sounds/beep.ogg") #if display private #end class __ASSET__flixel_sounds_beep_ogg extends lime.utils.Bytes {}
-@:file("D:/HaxeToolkit/haxe/lib/flixel/4,0,1/assets/sounds/flixel.ogg") #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends lime.utils.Bytes {}
-@:font("D:/HaxeToolkit/haxe/lib/flixel/4,0,1/assets/fonts/nokiafc22.ttf") #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends lime.text.Font {}
-@:font("D:/HaxeToolkit/haxe/lib/flixel/4,0,1/assets/fonts/monsterrat.ttf") #if display private #end class __ASSET__flixel_fonts_monsterrat_ttf extends lime.text.Font {}
-@:image("D:/HaxeToolkit/haxe/lib/flixel/4,0,1/assets/images/ui/button.png") #if display private #end class __ASSET__flixel_images_ui_button_png extends lime.graphics.Image {}
+@:file("C:/HaxeToolkit/haxe/lib/flixel/4,0,1/assets/sounds/beep.ogg") #if display private #end class __ASSET__flixel_sounds_beep_ogg extends lime.utils.Bytes {}
+@:file("C:/HaxeToolkit/haxe/lib/flixel/4,0,1/assets/sounds/flixel.ogg") #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends lime.utils.Bytes {}
+@:font("C:/HaxeToolkit/haxe/lib/flixel/4,0,1/assets/fonts/nokiafc22.ttf") #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends lime.text.Font {}
+@:font("C:/HaxeToolkit/haxe/lib/flixel/4,0,1/assets/fonts/monsterrat.ttf") #if display private #end class __ASSET__flixel_fonts_monsterrat_ttf extends lime.text.Font {}
+@:image("C:/HaxeToolkit/haxe/lib/flixel/4,0,1/assets/images/ui/button.png") #if display private #end class __ASSET__flixel_images_ui_button_png extends lime.graphics.Image {}
 
 
 
