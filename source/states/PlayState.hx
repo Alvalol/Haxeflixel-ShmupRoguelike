@@ -12,6 +12,7 @@ import flixel.tile.FlxTilemap;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import objects.EnemyBullet;
+import objects.Goal;
 import objects.Player;
 import objects.PlayerBullet;
 import objects.Scroller;
@@ -29,7 +30,9 @@ class PlayState extends FlxState
 	public var PBullets:FlxTypedGroup<PlayerBullet>;
 	public var EBullets:FlxTypedGroup<EnemyBullet>;
 	private var _entities:FlxGroup;
+	private var _system:FlxGroup;
 	public var enemies(default, null):FlxTypedGroup<Enemy>;
+	public var goals(default, null):FlxTypedGroup<Goal>;
 		
 	private var _scroller(default, null):Scroller;
 	
@@ -41,7 +44,9 @@ class PlayState extends FlxState
 		
 		player = new Player();
 		enemies = new FlxTypedGroup<Enemy>();
+		goals = new FlxTypedGroup<Goal>();
 		_entities = new FlxGroup();
+		_system = new FlxGroup();
         PBullets = new FlxTypedGroup<PlayerBullet>();
 		EBullets = new FlxTypedGroup<EnemyBullet>();
 		FlxG.mouse.visible = false;
@@ -50,10 +55,12 @@ class PlayState extends FlxState
 		LevelLoader.loadLevel(this, Reg.levels[Reg.currentLevel]);
 		add(player);
 		add(PBullets);
+		_system.add(goals);
 		_entities.add(EBullets);
-		
 		_entities.add(enemies);
+		
 		add(_entities);
+		add(_system);
 		
 		cameraSetup();
 		super.create();
@@ -62,17 +69,7 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		
-		if (player.alive)
-		{
-			FlxG.collide(map, player);
-		}
-		
-		if (FlxG.collide(_entities, player))
-		{
-			player.damage();
-		}
-	
+		collisions();
 		// Could use some sort of check to kill the player if he
 		// touches bounds when he shouldn't 
 		// Good enough for now.
@@ -94,10 +91,42 @@ class PlayState extends FlxState
 		FlxG.camera.pixelPerfectRender = true;	
 		
 		add(_scroller);
-		
-
-	
-
 	}
+	
+	public function collisions()
+	{
+		
+		for (enemy in enemies)
+		{
+			for (bullet in PBullets){
+			if (FlxG.collide(enemy, bullet))
+			{
+			   enemy.damage();
+			   bullet.kill();
+			}
+		}
+			   
+		}
+		
+		if (player.alive)
+		{
+			FlxG.collide(map, player);
+		}
+		
+		if (FlxG.collide(_entities, player))
+		{
+			player.damage();
+		
+	    }
+		
+		for (goal in goals){
+		
+		if (FlxG.collide(goal, player))
+		{
+			goal.reach(player);
+		}
+		}
+}
+
 }
 

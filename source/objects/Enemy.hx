@@ -8,7 +8,7 @@ import flixel.FlxObject;
 class Enemy extends FlxSprite
 {
     private static inline var SCORE_AMOUNT:Int = 0;
-	private static inline var HP:Int = 0;
+	private var HP:Int;
 	
 	private var _appeared:Bool = false;
 	
@@ -22,10 +22,13 @@ class Enemy extends FlxSprite
 	{
 		if (!inWorldBounds())
 			exists = false;
-
-
+			
 		if (isOnScreen() && !_appeared) 
 			_appeared = true;	
+			
+			
+		if (HP <= 0)
+		    kill();
 			
 		if (!Reg.pause)
 			super.update(elapsed);
@@ -38,13 +41,14 @@ class Enemy extends FlxSprite
 			player.damage();
 	}
 	
-	private function damage()
+	public function damage()
 	{
-		//HP--;
+		HP--;
 	}
 	override public function kill()
 	{
 		alive = false;
+	    exists = false;
 		Reg.score += SCORE_AMOUNT;
 		
 		velocity.x = 0;

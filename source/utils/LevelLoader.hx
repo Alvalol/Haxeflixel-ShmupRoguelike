@@ -8,7 +8,9 @@ import flixel.FlxObject;
 import flixel.FlxState;
 import flixel.group.FlxGroup;
 import flixel.math.FlxPoint;
+
 import objects.EnemyTurretA;
+import objects.Goal;
 
 import flixel.addons.editors.tiled.TiledLayer;
 import flixel.addons.editors.tiled.TiledTileLayer;
@@ -62,28 +64,42 @@ class LevelLoader
 		
 
 		for (enemy in getLevelObjects(tiledMap, "enemies"))
-		{
-			switch(enemy.type)
-			{	
-				default:
-					//trace(Type.typeof(enemy));
-					var flip = enemy.flippedVertically;
-					var e = new EnemyTurretA(enemy.x, enemy.y - 16, flip);
+			{
+				switch(enemy.type)
+				{	
+				default: // enemyturretA
 					
-					
-					//trace(flip);
-
-
-
-					state.enemies.add(e);
+					var flipInt:Int = cast(enemy.flippedVertically, Int);
+			//		trace(Type.typeof(flipInt));
+				    var flipy:Bool = cast flipInt;
+			//		trace(flipy);
+					//trace(flipy ? true : false);
+					//trace(enemy.gid);
+			        var enemyToAdd = new EnemyTurretA(enemy.x + 1, enemy.y - 7, flipy);
+		
+				 
+				state.enemies.add(enemyToAdd);
 				//change default for the most common emey type
-				case "turret":
-				    trace("placeholder");//state.enemies.add(new EnemyTurretA(enemy.x, enemy.y - 16));
+				//case "turret":
+				//    trace("placeholder");//state.enemies.add(new EnemyTurretA(enemy.x, enemy.y - 16));
+			}
+			
+		
+			}
+			
+		for (trigger in getLevelObjects(tiledMap, "triggers"))
+		{
+			switch(trigger.type)
+			{
+				default: // Goal
+			       var triggerToAdd = new Goal(trigger.x, 0);
+				   state.goals.add(triggerToAdd);
 			}
 			
 		}
-
 		/*
+		 * 
+		 
 		for (block in getLevelObjects(tiledMap, "blocks"))
 		{
 			var blockToAdd = new BonusBlock(block.x, block.y - 16);
