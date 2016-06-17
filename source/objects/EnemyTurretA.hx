@@ -37,9 +37,7 @@ class EnemyTurretA extends Enemy
 		centerOffsets();
 		immovable = true;
 		solid = true;
-		
-		//if (ceiling > 0)
-		//   flipY = true;
+		flipY = flip;
 	}
 	
 	override public function update(elapsed:Float)

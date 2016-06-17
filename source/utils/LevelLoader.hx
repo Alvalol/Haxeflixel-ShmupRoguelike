@@ -46,8 +46,21 @@ class LevelLoader
 			AssetPaths.tiles__png, 
 			8, 8, 1);
 		backMap.solid = false;
+		
+		
+		var hazardLayer:TiledTileLayer = cast tiledMap.getLayer("hazards");
+		state.hazardMap = new FlxTilemap();
+		
+		state.hazardMap.loadMapFromArray(
+		    hazardLayer.tileArray,
+			tiledMap.width,
+			tiledMap.height,	
+			AssetPaths.tiles__png,
+			8, 8, 1);
+		
 
 		state.add(backMap);
+		state.add(state.hazardMap);
 		state.add(state.map);
 		
 		
@@ -67,60 +80,26 @@ class LevelLoader
 			{
 				switch(enemy.type)
 				{	
-				default: // enemyturretA
-					
-					var flipInt:Int = cast(enemy.flippedVertically, Int);
-			//		trace(Type.typeof(flipInt));
-				    var flipy:Bool = cast flipInt;
-			//		trace(flipy);
-					//trace(flipy ? true : false);
-					//trace(enemy.gid);
-			        var enemyToAdd = new EnemyTurretA(enemy.x + 1, enemy.y - 7, flipy);
-		
-				 
-				state.enemies.add(enemyToAdd);
-				//change default for the most common emey type
-				//case "turret":
-				//    trace("placeholder");//state.enemies.add(new EnemyTurretA(enemy.x, enemy.y - 16));
+				default: 
+			        var enemyToAdd = new EnemyTurretA(enemy.x + 1, enemy.y - 7, enemy.flippedVertically);
+				    state.enemies.add(enemyToAdd);
+				
 			}
 			
 		
 			}
 			
-		for (trigger in getLevelObjects(tiledMap, "triggers"))
-		{
+	 	for (trigger in getLevelObjects(tiledMap, "triggers"))
+	      	{
 			switch(trigger.type)
-			{
+			    {
 				default: // Goal
 			       var triggerToAdd = new Goal(trigger.x, 0);
 				   state.goals.add(triggerToAdd);
-			}
-			
-		}
-		/*
-		 * 
-		 
-		for (block in getLevelObjects(tiledMap, "blocks"))
-		{
-			var blockToAdd = new BonusBlock(block.x, block.y - 16);
-		    blockToAdd.content = block.type;
-			state.blocks.add(blockToAdd);
-		}
-			
-		
-	    for (object in getLevelObjects(tiledMap, "system"))
-		{
-			switch(object.type)
-			{
-				case "checkpoint":
-					state.checkpoint = new FlxPoint(object.x, object.y - 16);
-					
-				case "goal":
-					state.items.add(new Goal(object.x, object.y - 16));
-			}
-		}
-		    */
-	}
+			     }
+		    }
+}
+
 	public static function getLevelObjects(map:TiledMap, layer:String):Array<TiledObject>
 	{
 		

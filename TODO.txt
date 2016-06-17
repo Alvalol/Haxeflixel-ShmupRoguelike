@@ -1,21 +1,22 @@
 Player
 * HP
+* Death
 * Bullet types?
 * Shield?
 
 Basic features
 //* Camera follow
 //* LAYOUT BOUNDARIES
-* Add enemy type class
+//* Add enemy type class
 //* Load basic level
-* Add basic hazard class
+//* Add basic hazard class
 
 Graphical 
-* Add player sprite
+//* Add player sprite
 * Add player bullet
 
 * Add trail to player, effects
-* Add constant sine movement to player, "floaty"
+* Add constant sine movement to player, "floaty" --= maybe not
 
 Enemy / Hazard types
 * Sine movement enemy (chained)

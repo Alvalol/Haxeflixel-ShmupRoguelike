@@ -2,6 +2,7 @@ package states;
 
 import flixel.FlxG;
 import flixel.FlxObject;
+import flixel.addons.effects.FlxTrail;
 import flixel.group.FlxGroup;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.FlxSprite;
@@ -11,13 +12,16 @@ import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
+import flixel.util.FlxSpriteUtil;
+
+
 import objects.EnemyBullet;
 import objects.Goal;
 import objects.Player;
 import objects.PlayerBullet;
 import objects.Scroller;
 import objects.Enemy;
-import flixel.util.FlxSpriteUtil;
+
 
 import utils.LevelLoader;
 
@@ -26,6 +30,7 @@ class PlayState extends FlxState
 {
 	
 	public var map:FlxTilemap;
+	public var hazardMap:FlxTilemap;
 	public var player(default, null):Player;
 	public var PBullets:FlxTypedGroup<PlayerBullet>;
 	public var EBullets:FlxTypedGroup<EnemyBullet>;
@@ -33,6 +38,7 @@ class PlayState extends FlxState
 	private var _system:FlxGroup;
 	public var enemies(default, null):FlxTypedGroup<Enemy>;
 	public var goals(default, null):FlxTypedGroup<Goal>;
+	public var m:FlxTrail;
 		
 	private var _scroller(default, null):Scroller;
 	
@@ -49,9 +55,9 @@ class PlayState extends FlxState
 		_system = new FlxGroup();
         PBullets = new FlxTypedGroup<PlayerBullet>();
 		EBullets = new FlxTypedGroup<EnemyBullet>();
+		
 		FlxG.mouse.visible = false;
-
-
+		
 		LevelLoader.loadLevel(this, Reg.levels[Reg.currentLevel]);
 		add(player);
 		add(PBullets);
@@ -113,7 +119,7 @@ class PlayState extends FlxState
 			FlxG.collide(map, player);
 		}
 		
-		if (FlxG.collide(_entities, player))
+		if (FlxG.collide(_entities, player) || FlxG.collide(hazardMap,player))
 		{
 			player.damage();
 		

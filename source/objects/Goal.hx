@@ -24,8 +24,7 @@ class Goal extends FlxSprite
 	{
 		solid = false;
 		Reg.pause = true;
-		player.velocity.x = 0;
-		player.acceleration.x = 0;
+		trace("YOU WIN");
 		//FlxG.switchState(new MenuState() );		
 	}
 	
