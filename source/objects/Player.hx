@@ -8,6 +8,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxTimer;
 import objects.PlayerBullet;
 import flixel.util.FlxSpriteUtil;
+import states.PlayState;
 
 class Player extends FlxSprite
 {
@@ -27,7 +28,7 @@ class Player extends FlxSprite
 	public function new() 
 	{
 		super();
-		HP = 4;
+		HP = 3;
 		loadGraphic(AssetPaths.player__png, true, 8, 8);
 		animation.add("move", [0]);
 		animation.play("move");
@@ -100,5 +101,6 @@ class Player extends FlxSprite
 	override public function kill()
 	{
 		super.kill();
+		FlxG.switchState(new PlayState());
 	}
 }

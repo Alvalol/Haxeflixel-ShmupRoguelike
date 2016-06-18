@@ -14,7 +14,6 @@ import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxSpriteUtil;
 
-
 import objects.EnemyBullet;
 import objects.Goal;
 import objects.Player;
@@ -38,7 +37,6 @@ class PlayState extends FlxState
 	private var _system:FlxGroup;
 	public var enemies(default, null):FlxTypedGroup<Enemy>;
 	public var goals(default, null):FlxTypedGroup<Goal>;
-	public var m:FlxTrail;
 		
 	private var _scroller(default, null):Scroller;
 	
@@ -85,10 +83,17 @@ class PlayState extends FlxState
 							FlxG.camera.scroll.y,
 							FlxG.camera.scroll.y + FlxG.camera.height);
 		//trace(FlxG.camera.scroll);
+		
+	    if (player.x <= FlxG.camera.scroll.x)
+		{
+			player.damage();
+		//    FlxObject.separate(FlxG.camera, player);
+		}
 	}
 	
 	public function cameraSetup()
 	{
+	
 		_scroller = new Scroller(player.x + 80, player.y);
 		
 		FlxG.camera.follow(_scroller, FlxCameraFollowStyle.TOPDOWN_TIGHT,0.01);
@@ -104,16 +109,15 @@ class PlayState extends FlxState
 		
 		for (enemy in enemies)
 		{
-			for (bullet in PBullets){
-			if (FlxG.collide(enemy, bullet))
+		    for (bullet in PBullets){
+			   if (FlxG.collide(enemy, bullet))
 			{
-			   enemy.damage();
-			   bullet.kill();
+			       enemy.damage();
+			       bullet.kill();
 			}
-		}
-			   
-		}
-		
+		                            }
+	}
+									
 		if (player.alive)
 		{
 			FlxG.collide(map, player);
@@ -132,7 +136,5 @@ class PlayState extends FlxState
 			goal.reach(player);
 		}
 		}
+	}
 }
-
-}
-
