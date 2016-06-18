@@ -56,7 +56,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		super ();
 		
 		
-		
+		Font.registerFont (__ASSET__assets_data_pixel_font_ttf);
 		
 		
 		
@@ -512,11 +512,13 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+@:keep class __ASSET__assets_data_pixel_font_ttf extends openfl.text.Font { public function new () { super (); __fontPath = "assets/data/pixel-font.ttf"; fontName = "Early GameBoy Regular"; }}
 
 
 #else
 
 
+class __ASSET__assets_data_pixel_font_ttf extends openfl.text.Font { public function new () { super (); __fontPath = "assets/data/pixel-font.ttf"; fontName = "Early GameBoy Regular";  }}
 class __ASSET__flixel_fonts_nokiafc22_ttf extends openfl.text.Font { public function new () { super (); __fontPath = "flixel/fonts/nokiafc22.ttf"; fontName = "Nokia Cellphone FC Small";  }}
 class __ASSET__flixel_fonts_monsterrat_ttf extends openfl.text.Font { public function new () { super (); __fontPath = "flixel/fonts/monsterrat.ttf"; fontName = "Monsterrat";  }}
 
@@ -581,7 +583,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if (openfl && !flash)
 		
-		
+		openfl.text.Font.registerFont (__ASSET__OPENFL__assets_data_pixel_font_ttf);
 		
 		
 		
@@ -600,8 +602,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
-		path.set ("assets/data/data-goes-here.txt", "assets/data/data-goes-here.txt");
-		type.set ("assets/data/data-goes-here.txt", AssetType.TEXT);
+		path.set ("assets/data/pixel-font.ttf", "assets/data/pixel-font.ttf");
+		type.set ("assets/data/pixel-font.ttf", AssetType.FONT);
 		path.set ("assets/data/sandbox.tmx", "assets/data/sandbox.tmx");
 		type.set ("assets/data/sandbox.tmx", AssetType.TEXT);
 		path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");
@@ -633,9 +635,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#elseif html5
 		
 		var id;
-		id = "assets/data/data-goes-here.txt";
+		id = "assets/data/pixel-font.ttf";
 		path.set (id, id);
-		type.set (id, AssetType.TEXT);
+		type.set (id, AssetType.FONT);
 		id = "assets/data/sandbox.tmx";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
@@ -697,7 +699,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
-		useManifest = true;
+		
+		className.set ("assets/data/pixel-font.ttf", __ASSET__assets_data_pixel_font_ttf);
+		type.set ("assets/data/pixel-font.ttf", AssetType.FONT);
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -1457,7 +1461,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 #elseif html5
 
-
+@:keep #if display private #end class __ASSET__assets_data_pixel_font_ttf extends lime.text.Font { public function new () { super (); name = "Early GameBoy Regular"; } } 
 
 
 
@@ -1475,6 +1479,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 #else
 
+@:keep #if display private #end class __ASSET__assets_data_pixel_font_ttf extends lime.text.Font { public function new () { __fontPath = #if ios "assets/" + #end "assets/data/pixel-font.ttf"; name = "Early GameBoy Regular"; super (); }}
 
 
 #if (windows || mac || linux || cpp)
@@ -1492,6 +1497,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 #end
 
 #if (openfl && !flash)
+@:keep #if display private #end class __ASSET__OPENFL__assets_data_pixel_font_ttf extends openfl.text.Font { public function new () { __fontPath = #if ios "assets/" + #end "assets/data/pixel-font.ttf"; name = "Early GameBoy Regular"; super (); }}
 @:keep #if display private #end class __ASSET__OPENFL__flixel_fonts_nokiafc22_ttf extends openfl.text.Font { public function new () { var font = new __ASSET__flixel_fonts_nokiafc22_ttf (); src = font.src; name = font.name; super (); }}
 @:keep #if display private #end class __ASSET__OPENFL__flixel_fonts_monsterrat_ttf extends openfl.text.Font { public function new () { var font = new __ASSET__flixel_fonts_monsterrat_ttf (); src = font.src; name = font.name; super (); }}
 

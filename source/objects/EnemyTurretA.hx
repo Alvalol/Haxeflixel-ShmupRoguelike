@@ -10,7 +10,7 @@ import flixel.math.FlxPoint;
 class EnemyTurretA extends Enemy
 {
 
-    private static inline var SCORE_AMOUNT:Int = 0;
+    private static inline var SCORE_AMOUNT:Int = 100;
 	private static inline var SHOOT_SPEED = 250;
 	
 	private var bullet:EnemyBullet;
@@ -49,7 +49,11 @@ class EnemyTurretA extends Enemy
 		super.update(elapsed);
 	}
 	
-	
+	override public function kill():Void
+	{
+		Reg.score += SCORE_AMOUNT;
+		super.kill();
+	}
 	private function shoot():Void
 	{
 		// the bullet speed should be a variable that is passed at creation, depending on the flipped value of the enemyTurret

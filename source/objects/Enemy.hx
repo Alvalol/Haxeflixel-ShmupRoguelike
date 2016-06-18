@@ -7,12 +7,11 @@ import flixel.FlxObject;
 
 class Enemy extends FlxSprite
 {
-    private static inline var SCORE_AMOUNT:Int = 0;
 	private var HP:Int;
 	
 	private var _appeared:Bool = false;
-	
 	public function new(x:Float, y:Float) 
+	
 	{
 		super(x, y);
 		
@@ -49,8 +48,7 @@ class Enemy extends FlxSprite
 	{
 		alive = false;
 	    exists = false;
-		Reg.score += SCORE_AMOUNT;
-		
+	
 		velocity.x = 0;
 		acceleration.x = 0;
 		//animation.play("dead");

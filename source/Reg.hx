@@ -1,6 +1,7 @@
 package;
 
 import states.PlayState;
+import states.ProcState;
 
 class Reg
 {

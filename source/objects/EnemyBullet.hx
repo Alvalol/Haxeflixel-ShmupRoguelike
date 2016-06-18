@@ -10,6 +10,7 @@ class EnemyBullet extends FlxSprite
 {
 
 	private static var trail:FlxTrail;
+	private static inline var SCORE_AMOUNT:Int = 100;
 	
 	public function new(x:Float,y:Float) 
 	{
@@ -37,8 +38,7 @@ class EnemyBullet extends FlxSprite
 	}
 	
 	override public function kill():Void
-	{
-		
+	{	
 	 alive = false;
 	 exists = false;
 		

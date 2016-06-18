@@ -8,11 +8,13 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.FlxCamera;
+import flixel.util.FlxColor;
 import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxSpriteUtil;
+
 
 import objects.EnemyBullet;
 import objects.Goal;
@@ -29,6 +31,7 @@ class PlayState extends FlxState
 {
 	
 	public var map:FlxTilemap;
+	
 	public var hazardMap:FlxTilemap;
 	public var player(default, null):Player;
 	public var PBullets:FlxTypedGroup<PlayerBullet>;
@@ -41,10 +44,18 @@ class PlayState extends FlxState
 	private var _scroller(default, null):Scroller;
 	
 	
+	private var _hud:HUD;
+	private var _gameCamera:FlxCamera;
+	private var _hudCamera:FlxCamera;
+	
+	
 	
 	override public function create():Void
 	{
 		Reg.PS = this;
+		Reg.pause = false;
+		
+	
 		
 		player = new Player();
 		enemies = new FlxTypedGroup<Enemy>();
@@ -53,10 +64,17 @@ class PlayState extends FlxState
 		_system = new FlxGroup();
         PBullets = new FlxTypedGroup<PlayerBullet>();
 		EBullets = new FlxTypedGroup<EnemyBullet>();
-		
+	
 		FlxG.mouse.visible = false;
 		
 		LevelLoader.loadLevel(this, Reg.levels[Reg.currentLevel]);
+	
+		
+		_gameCamera = new FlxCamera();
+		_hudCamera = new FlxCamera();
+      	cameraSetup();
+		
+			
 		add(player);
 		add(PBullets);
 		_system.add(goals);
@@ -66,7 +84,6 @@ class PlayState extends FlxState
 		add(_entities);
 		add(_system);
 		
-		cameraSetup();
 		super.create();
 	}
 	
@@ -96,12 +113,21 @@ class PlayState extends FlxState
 	
 		_scroller = new Scroller(player.x + 80, player.y);
 		
-		FlxG.camera.follow(_scroller, FlxCameraFollowStyle.TOPDOWN_TIGHT,0.01);
-		FlxG.camera.setScrollBoundsRect(0, 0, map.width, map.height, true);
+		FlxG.cameras.reset(_gameCamera);
+		FlxG.cameras.add(_hudCamera);
+		_hudCamera.bgColor = FlxColor.TRANSPARENT;
+		FlxCamera.defaultCameras = [_gameCamera];
+		_hud = new HUD();
+		_hud.setCamera(_hudCamera);
+		
+		_gameCamera.follow(_scroller, FlxCameraFollowStyle.TOPDOWN_TIGHT,0.01);
+		_gameCamera.setScrollBoundsRect(0, 0, map.width, map.height, true);
 		//FlxG.camera.antialiasing = false;
-		FlxG.camera.pixelPerfectRender = true;	
+		_gameCamera.pixelPerfectRender = true;	
 		
 		add(_scroller);
+		add(_hud);
+	
 	}
 	
 	public function collisions()

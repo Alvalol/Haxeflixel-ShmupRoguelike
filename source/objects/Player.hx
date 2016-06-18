@@ -77,7 +77,7 @@ class Player extends FlxSprite
 	
 	public function shoot()
 	{
-		if (FlxG.keys.anyPressed([SPACE, M, L, O]) && Reg.PS.PBullets.countLiving() < MAX_BULLETS && _cooldown <= 0)
+		if (FlxG.keys.anyPressed([SPACE, M, L, O]) && Reg.PS.PBullets.countLiving() < MAX_BULLETS && _cooldown <= 0) // change to PS if back to PS
 		{
 			var pb:PlayerBullet =  Reg.PS.PBullets.recycle();
 			if (pb == null)
