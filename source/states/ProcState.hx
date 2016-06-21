@@ -34,7 +34,7 @@ class ProcState extends FlxState
 		player = new Player();
 	
 		FlxG.mouse.visible = false;
-			
+        
 		add(player);
 		
 		super.create();

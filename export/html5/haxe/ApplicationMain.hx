@@ -30,8 +30,8 @@ class ApplicationMain {
 		var types = [];
 		
 		
-		urls.push ("assets/data/data-goes-here.txt");
-		types.push (lime.Assets.AssetType.TEXT);
+		urls.push ("Early GameBoy Regular");
+		types.push (lime.Assets.AssetType.FONT);
 		
 		
 		urls.push ("assets/data/sandbox.tmx");
@@ -147,7 +147,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "1119",
+			build: "1643",
 			company: "Alvarop",
 			file: "untitled shmup",
 			fps: 60,

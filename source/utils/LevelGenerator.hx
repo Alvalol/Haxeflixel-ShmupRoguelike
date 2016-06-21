@@ -5,8 +5,7 @@ import flixel.FlxState;
 
 import utils.pcg.MapChunk;
 
-
-class LevelGenerator extends FlxState
+class LevelGenerator
 {
 	
 	/*Generates levels using chunks.
@@ -17,33 +16,25 @@ class LevelGenerator extends FlxState
 	
 	*/
 	private var mapChunk:MapChunk;
-	private var currentMap:Array<MapChunk>;
+	public var currentMap:Array<MapChunk>;
 	
-	
-	private static var mapWidth:Int = 3;
+	private static var mapWidth:Int = 2;
 	private static var mapHeight:Int = 4;
 	
-	
-
 	public function new() 
 	{
-    super();
 	currentMap = new Array<MapChunk>();
 	currentMap = populateCurrentMap();
-
 	}
 	
-	
-	public function populateCurrentMap()
+	public function populateCurrentMap():Array<MapChunk>
 	{
-	for (i in 0...mapWidth)
+	for (i in 0...mapWidth-1)
 		{
-	     mapChunk = new MapChunk();
-	     currentMap[i] = mapChunk;
+	     currentMap.push(new MapChunk());
 		}
-		return currentMap;
-		
-	}
 	
+		return currentMap;
+	}
 	
 }
