@@ -1,13 +1,14 @@
 package utils;
+import flixel.FlxBasic;
 import flixel.FlxState;
 import flixel.tile.FlxTilemap;
 import utils.pcg.MapChunk;
 import utils.LevelGenerator;
 
-class LevelLoaderProc extends FlxState
+class LevelLoaderProc
 {
-	public var loadedLevel:FlxTilemap;
-	public var test:Array<Array<Int>>;
+	public var loadedMap:FlxTilemap;
+	
 	// will use the Data from LevelGenerator to load a level
 	// And display it. Collisions?, etc. 
 	// Also create objects too, based, again, on the values 
@@ -15,30 +16,30 @@ class LevelLoaderProc extends FlxState
 
 	public function new()
 	{	
-		super();
-		loadedLevel = loadGeneratedLevel();
 		
-	    
-		add(loadedLevel);
-		
+		loadedMap = loadGeneratedLevel();
+      
 	}	
 	
 	public function loadGeneratedLevel():FlxTilemap
 	{
         var loadedMap = new FlxTilemap();
-		var generatedMap:Array<Array<Int>> = cast new LevelGenerator().populateCurrentMap();
+		var generatedMap = new LevelGenerator().populateCurrentMap(); // should be concat map
 		
-		//loadedMap.loadMapFrom2DArray(generatedMap,
-	    //AssetPaths.tiles__png, 8, 8);	
-		var test = new Array<Array<Int>>();
-		for (i in generatedMap)
-		{
-		   for (j in i)
-		   {
-		   test.push(j);	
-		    }
-		}
-		trace(test);
+		var cleanArray = new Array<Array<Int>>();
+		
+		
+		/*for (obj in generatedMap)
+	    {
+				cleanArray.push(obj);
+			}
+		
+		//trace("Clean array size : " + cleanArray.length);
+		//trace(cleanArray);
+
+	loadedMap.loadMapFrom2DArray(cleanArray,
+	AssetPaths.solid__png, 8, 8);	
+		*/
 		return loadedMap;
 	}
 }

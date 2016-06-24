@@ -15,26 +15,49 @@ class LevelGenerator
 	Maybe I could use a seed to generate the chunks.
 	
 	*/
-	private var mapChunk:MapChunk;
-	public var currentMap:Array<MapChunk>;
+
 	
-	private static var mapWidth:Int = 2;
-	private static var mapHeight:Int = 4;
+	private static var mapWidth:Int = 10;
 	
 	public function new() 
 	{
-	currentMap = new Array<MapChunk>();
-	currentMap = populateCurrentMap();
+
 	}
 	
 	public function populateCurrentMap():Array<MapChunk>
 	{
-	for (i in 0...mapWidth-1)
+	var populatedMap = new Array<MapChunk>();
+	
+	for (i in 0...mapWidth)
 		{
-	     currentMap.push(new MapChunk());
+	     populatedMap.push(new MapChunk());
 		}
+		
 	
-		return currentMap;
+	 var comparator:Int = 0;
+	 var counter:Int = 0;
+
+	 trace(populatedMap);
+     for (element in populatedMap)
+	 {
+		 for (i in element.accessibleChunk)
+		 {
+			 if (comparator == element.accessibleChunk.indexOf(i))
+			 {
+			 trace("Array: " + i,  " index: " +  element.accessibleChunk.indexOf(i),
+			 " map len : " + populatedMap.length, " counter : " +  counter, "  comparator : " +  comparator);
+			 comparator++;
+			 }
+			 if (comparator >= populatedMap.length)
+			 {
+
+               comparator= 0;
+			 }
+		 }
+	 
+	 }
+	    return populatedMap;
+	 
 	}
-	
+
 }

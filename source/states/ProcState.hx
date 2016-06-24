@@ -18,23 +18,26 @@ import flixel.util.FlxSpriteUtil;
 import objects.Player;
 
 
-import utils.LevelLoader;
+import utils.LevelLoaderProc;
 
 
 class ProcState extends FlxState
 {
 	
 	public var player(default, null):Player;
-	
+	public var LevelLoader:LevelLoaderProc;
 	
 	
 	override public function create():Void
 	{
 		
 		player = new Player();
-	
+	   
 		FlxG.mouse.visible = false;
-        
+        FlxG.camera.follow(player, LOCKON, 0.5); 
+		LevelLoader = new LevelLoaderProc();
+		add(LevelLoader.loadedMap);
+
 		add(player);
 		
 		super.create();
@@ -43,6 +46,5 @@ class ProcState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		
-}
+    }
 }

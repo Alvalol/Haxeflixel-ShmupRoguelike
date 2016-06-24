@@ -12,31 +12,31 @@ class MapChunk
 	Could also use a seed to generate the randomness.
 	*/
 
-	private static var chunkWidth:Int = 3;
-	private static var chunkHeight:Int = 3;
+	private static var chunkWidth:Int = 5;
+	private static var chunkHeight:Int = 2;
 	
-	private var currentChunk:Array<Array<Int>>;
 	public var accessibleChunk:Array<Array<Int>>;
 	
 
 	public function new()
 	{
-	 populateChunk(); 
+	    populateChunk(); 
 	}
 	
 	public function populateChunk():Array<Array<Int>>
 	{
 	
-	currentChunk = new Array<Array<Int>>();
+	accessibleChunk = new Array<Array<Int>>();
 	 for (x in 0...chunkHeight)
 	 {
-		 currentChunk[x] = new Array<Int>();
+		 accessibleChunk[x] = new Array<Int>();
 		 for (y in 0...chunkWidth)
 		 {
-			 currentChunk[x][y] = FlxG.random.int(0, 1);
+			 accessibleChunk[x][y] = FlxG.random.int(0, 1);
 		 }
 	 }
-	return currentChunk;
+	 
+	return accessibleChunk;
 }
 	
 }
