@@ -511,7 +511,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "2849",
+			build: "3078",
 			company: "Alvarop",
 			file: "untitled shmup",
 			fps: 60,

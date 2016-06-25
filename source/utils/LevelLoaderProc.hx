@@ -29,16 +29,13 @@ class LevelLoaderProc
 		
 		for (obj in generatedMap)
 	    {
-			for (i in 0...obj.length)
-			{
-				
-				cleanArray.push(obj[i]);
-			}
+				cleanArray.push(obj);
 		}
 		
 		
-		trace("Clean array size : " + cleanArray.length);
-		trace(cleanArray);
+		
+		//trace("Clean array size : " + cleanArray.length);
+		//trace(cleanArray);
 
 	loadedMap.loadMapFrom2DArray(cleanArray,
 	AssetPaths.solid__png, 8, 8);

@@ -12,8 +12,8 @@ class MapChunk
 	Could also use a seed to generate the randomness.
 	*/
 
-	private static var chunkWidth:Int = 4;
-	private static var chunkHeight:Int = 3;
+	private static var chunkWidth:Int = 20;
+	private static var chunkHeight:Int = 18;
 	
 	public var accessibleChunk:Array<Array<Int>>;
 	

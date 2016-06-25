@@ -17,14 +17,14 @@ class LevelGenerator
 	*/
 
 	
-	private static var mapWidth:Int = 10;
+	private static var mapWidth:Int = 2;
 	
 	public function new() 
 	{
 
 	}
 	
-	public function populateCurrentMap():Array<MapChunk>
+	public function populateCurrentMap():Array<Array<Int>>
 	{
 	var populatedMap = new Array<MapChunk>();
 	
@@ -32,18 +32,29 @@ class LevelGenerator
 		{
 	     populatedMap.push(new MapChunk());
 		}
-	trace(concatArray(populatedMap));
-	return populatedMap;
+	var concatedArray:Array<Array<Int>> = cast concatArray(populatedMap);
+	trace(concatedArray);
+	return concatedArray;
+	
+	//return populatedMap;
 	}
 	
+	// The problem seems to be in the different sizes (populating the ret with [], populating ret[j] based on cur.lenght, etc)
+	// Check what each value correspond to and fix accordingly.
 	static function concatArray(Arr:Array<Dynamic>) {
-		var ret:Array<Dynamic> = new Array<Dynamic>();
-		for (i in 0...Arr.length) {
+		var ret:Array<Array<Int>> = new Array<Array<Int>>();
+		for (i in 0...mapWidth)
+		{
 			ret.push([]);
-		    var cur:Array<MapChunk> = Arr[i].accessibleChunk;
-			trace(ret);
-			for (j in 0...cur.length) {
-				ret[j].push(cur[j]);
+		}
+		
+
+		for (i in 0...Arr.length) {
+			
+		    var cur:Array<Array<Int>> = Arr[i].accessibleChunk;			
+			for (j in 0...cur.length) 
+			   {
+				ret[j].push(cur[j][j]);
 				}
 		}
 		return ret;
