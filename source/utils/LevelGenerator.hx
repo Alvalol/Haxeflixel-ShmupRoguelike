@@ -32,32 +32,21 @@ class LevelGenerator
 		{
 	     populatedMap.push(new MapChunk());
 		}
-		
-	
-	 var comparator:Int = 0;
-	 var counter:Int = 0;
-
-	 trace(populatedMap);
-     for (element in populatedMap)
-	 {
-		 for (i in element.accessibleChunk)
-		 {
-			 if (comparator == element.accessibleChunk.indexOf(i))
-			 {
-			 trace("Array: " + i,  " index: " +  element.accessibleChunk.indexOf(i),
-			 " map len : " + populatedMap.length, " counter : " +  counter, "  comparator : " +  comparator);
-			 comparator++;
-			 }
-			 if (comparator >= populatedMap.length)
-			 {
-
-               comparator= 0;
-			 }
-		 }
-	 
-	 }
-	    return populatedMap;
-	 
+	trace(concatArray(populatedMap));
+	return populatedMap;
 	}
-
+	
+	static function concatArray(Arr:Array<Dynamic>) {
+		var ret:Array<Dynamic> = new Array<Dynamic>();
+		for (i in 0...Arr.length) {
+			ret.push([]);
+		    var cur:Array<MapChunk> = Arr[i].accessibleChunk;
+			trace(ret);
+			for (j in 0...cur.length) {
+				ret[j].push(cur[j]);
+				}
+		}
+		return ret;
+	}
 }
+

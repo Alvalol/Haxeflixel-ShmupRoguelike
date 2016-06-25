@@ -24,22 +24,25 @@ class LevelLoaderProc
 	public function loadGeneratedLevel():FlxTilemap
 	{
         var loadedMap = new FlxTilemap();
-		var generatedMap = new LevelGenerator().populateCurrentMap(); // should be concat map
-		
+		var generatedMap = new LevelGenerator().populateCurrentMap();
 		var cleanArray = new Array<Array<Int>>();
 		
-		
-		/*for (obj in generatedMap)
+		for (obj in generatedMap)
 	    {
-				cleanArray.push(obj);
+			for (i in 0...obj.length)
+			{
+				
+				cleanArray.push(obj[i]);
 			}
+		}
 		
-		//trace("Clean array size : " + cleanArray.length);
-		//trace(cleanArray);
+		
+		trace("Clean array size : " + cleanArray.length);
+		trace(cleanArray);
 
 	loadedMap.loadMapFrom2DArray(cleanArray,
-	AssetPaths.solid__png, 8, 8);	
-		*/
+	AssetPaths.solid__png, 8, 8);
+		
 		return loadedMap;
 	}
 }
