@@ -24,22 +24,22 @@ import objects.Scroller;
 import objects.Enemy;
 
 
-import utils.LevelLoader;
+import utils.LevelLoaderProc;
 
 
 class PlayState extends FlxState
 {
 	
-	public var map:FlxTilemap;
+	public var map:LevelLoaderProc;
 	
-	public var hazardMap:FlxTilemap;
+	//public var hazardMap:FlxTilemap;
 	public var player(default, null):Player;
 	public var PBullets:FlxTypedGroup<PlayerBullet>;
 	public var EBullets:FlxTypedGroup<EnemyBullet>;
-	private var _entities:FlxGroup;
-	private var _system:FlxGroup;
-	public var enemies(default, null):FlxTypedGroup<Enemy>;
-	public var goals(default, null):FlxTypedGroup<Goal>;
+//	private var _entities:FlxGroup;
+//	private var _system:FlxGroup;
+//	public var enemies(default, null):FlxTypedGroup<Enemy>;
+//	public var goals(default, null):FlxTypedGroup<Goal>;
 		
 	private var _scroller(default, null):Scroller;
 	
@@ -58,31 +58,33 @@ class PlayState extends FlxState
 	
 		
 		player = new Player();
-		enemies = new FlxTypedGroup<Enemy>();
-		goals = new FlxTypedGroup<Goal>();
-		_entities = new FlxGroup();
-		_system = new FlxGroup();
+		//enemies = new FlxTypedGroup<Enemy>();
+		//goals = new FlxTypedGroup<Goal>();
+		//_entities = new FlxGroup();
+		//_system = new FlxGroup();
+		
         PBullets = new FlxTypedGroup<PlayerBullet>();
 		EBullets = new FlxTypedGroup<EnemyBullet>();
 	
 		FlxG.mouse.visible = false;
 		
-		LevelLoader.loadLevel(this, Reg.levels[Reg.currentLevel]);
-	
-		
+		//LevelLoader.loadLevel(this, Reg.levels[Reg.currentLevel]);
+	   
+		 map = new LevelLoaderProc();
 		_gameCamera = new FlxCamera();
 		_hudCamera = new FlxCamera();
       	cameraSetup();
 		
 			
+		add(map.loadedMap);
 		add(player);
 		add(PBullets);
-		_system.add(goals);
-		_entities.add(EBullets);
-		_entities.add(enemies);
+		//_system.add(goals);
+		//_entities.add(EBullets);
+		//_entities.add(enemies);
 		
-		add(_entities);
-		add(_system);
+		//add(_entities);
+		//add(_system);
 		
 		super.create();
 	}
@@ -121,10 +123,9 @@ class PlayState extends FlxState
 		_hud.setCamera(_hudCamera);
 		
 		_gameCamera.follow(_scroller, FlxCameraFollowStyle.TOPDOWN_TIGHT,0.01);
-		_gameCamera.setScrollBoundsRect(0, 0, map.width, map.height, true);
+		_gameCamera.setScrollBoundsRect(0, 0, map.loadedMap.width, map.loadedMap.height, true);
 		//FlxG.camera.antialiasing = false;
 		_gameCamera.pixelPerfectRender = true;	
-		
 		add(_scroller);
 		add(_hud);
 	
@@ -133,7 +134,7 @@ class PlayState extends FlxState
 	public function collisions()
 	{
 		
-		for (enemy in enemies)
+	/*	for (enemy in enemies)
 		{
 		    for (bullet in PBullets){
 			   if (FlxG.collide(enemy, bullet))
@@ -143,12 +144,14 @@ class PlayState extends FlxState
 			}
 		                            }
 	}
+	*/
 									
 		if (player.alive)
 		{
-			FlxG.collide(map, player);
+			FlxG.collide(map.loadedMap, player);
 		}
 		
+		/*
 		if (FlxG.collide(_entities, player) || FlxG.collide(hazardMap,player))
 		{
 			player.damage();
@@ -161,6 +164,6 @@ class PlayState extends FlxState
 		{
 			goal.reach(player);
 		}
+		*/
 		}
-	}
 }

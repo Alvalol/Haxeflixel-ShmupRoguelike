@@ -17,7 +17,7 @@ class LevelGenerator
 	*/
 
 	
-	private static var mapWidth:Int = 5; // cannot be 1
+	private static var mapWidth:Int = 10; // cannot be 1
 	
 	public function new() 
 	{
@@ -32,43 +32,41 @@ class LevelGenerator
 		{
 	     populatedMap.push(new MapChunk());
 		}
+		
 	var concatedArray:Array<Array<Int>> = cast concatArray(populatedMap);
-	trace("populated : " +populatedMap);
-	trace("concated : " +concatedArray);
+	//trace("populated : " +populatedMap);
+	//trace("concated : " +concatedArray);
 	
 	return concatedArray;
-	
 	//return populatedMap;
 	}
 	
 	static function concatArray(Arr:Array<Dynamic>) {
+		// Takes populatedMap (usually) and makes it so that every element of each MapChunk in populatedMap gets concatenated with it's corresponding
+		// element on every other element of MapChunk... yeah, that sounds weird.
+		
 		var ret:Array<Array<Int>> = new Array<Array<Int>>();
-		for (i in 0...mapWidth)
+		for (i in 0...MapChunk.chunkHeight) 
 		{
 			ret.push([]);
 		}
 		
-
 		for (i in 0...Arr.length) {
-		    var cur:Array<Dynamic> = Arr[i].accessibleChunk;	
-			for (j in 0...cur.length) 
+			
+		    var cur:Array<Dynamic> = Arr[i].accessibleChunk;
+			
+			for (j in 0...MapChunk.chunkHeight) 
                 {
-		//			if (ret[j].toString() == "[]")
-			//		{
-			//			ret[j].push(cur[j]);
-				//	}
-					//else
-					
 						ret[j] = ret[j].concat(cur[j]);
-						trace(j);
-					}
-					
-				}
+				}			
+		}
 		return ret;
 	
 				
+	
+	
+	
 	}
-
 }
 
 

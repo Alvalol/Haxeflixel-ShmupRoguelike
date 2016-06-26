@@ -34,11 +34,12 @@ class ProcState extends FlxState
 		player = new Player();
 	   
 		FlxG.mouse.visible = false;
-        FlxG.camera.follow(player, LOCKON, 0.5); 
-		LevelLoader = new LevelLoaderProc();
+        LevelLoader = new LevelLoaderProc();
 		add(LevelLoader.loadedMap);
-
 		add(player);
+		
+		FlxG.camera.follow(player, LOCKON, 0.5);
+		FlxG.camera.setScrollBoundsRect(0, 0, LevelLoader.loadedMap.width, LevelLoader.loadedMap.height, true);
 		
 		super.create();
 	}
@@ -46,5 +47,7 @@ class ProcState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
+		FlxG.collide(LevelLoader.loadedMap,player);
+		
     }
 }

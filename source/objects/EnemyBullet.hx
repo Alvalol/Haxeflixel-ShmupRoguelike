@@ -23,7 +23,7 @@ class EnemyBullet extends FlxSprite
 		
 		
 		super.update(elapsed);
-		if (!isOnScreen() || FlxG.collide(Reg.PS.map, this))
+		if (!isOnScreen() || FlxG.collide(Reg.PS.map.loadedMap, this))
 		    kill();
 		
 		if (FlxG.overlap(Reg.PS.player, this))

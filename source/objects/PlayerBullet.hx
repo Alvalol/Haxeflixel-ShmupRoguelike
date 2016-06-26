@@ -3,6 +3,7 @@ package objects;
 import flixel.FlxSprite;
 import flixel.FlxObject;
 import flixel.FlxG;
+import flixel.math.FlxPoint;
 import flixel.addons.effects.FlxTrail;
 import flixel.util.FlxColor;
 
@@ -22,10 +23,15 @@ class PlayerBullet extends FlxSprite
 	
 	override public function update(elapsed:Float)
 	{	
-		if (!isOnScreen() || FlxG.collide(this, Reg.PS.map))
+		if (!isOnScreen() || FlxG.collide(this, Reg.PS.map.loadedMap))
+		{
+			
+			//var tempTile = Reg.PS.map.loadedMap.getTileIndexByCoords(new FlxPoint(x, y));
 			kill();
+		}
 		else
 		    move();
+			
 		super.update(elapsed);
 	}
 	

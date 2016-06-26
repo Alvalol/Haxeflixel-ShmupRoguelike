@@ -1,6 +1,5 @@
 package utils.pcg;
 import flixel.FlxG;
-import flixel.addons.display.shapes.FlxShapeLightning.LightningStyle;
 
 class MapChunk
 {
@@ -12,8 +11,8 @@ class MapChunk
 	Could also use a seed to generate the randomness.
 	*/
 
-	private static var chunkWidth:Int = 5;
-	private static var chunkHeight:Int = 5;
+	public static var chunkWidth:Int = 12;
+	public static var chunkHeight:Int = 20; // This also helps in the level generator when LevelGenerator.concatArray() runs.
 	
 	public var accessibleChunk:Array<Array<Int>>;
 	

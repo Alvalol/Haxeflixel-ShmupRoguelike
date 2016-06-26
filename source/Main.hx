@@ -11,6 +11,6 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
-		addChild(new FlxGame(160, 144, ProcState));
+		addChild(new FlxGame(160, 144, PlayState)); // 20 tiles x 18
 	}
 }

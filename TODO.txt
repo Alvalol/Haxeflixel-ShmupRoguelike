@@ -29,7 +29,11 @@ Level design
 * Optional routes that player can miss. Must replay to discover them.  -> Finds bonus.
 * Destructible blocks
 * Camera : allow for flexible changes in camera. Stopping, restarting, vertical movement, as needed (triggers on .tmx)
-* Level generator (?)
+//* Basic level generator
+//* Template based level generator
+
+* Desctructible tiles
+
 
 Main loop / states
 * HUDState

@@ -28,12 +28,16 @@ class Player extends FlxSprite
 	public function new() 
 	{
 		super();
-		HP = 3;
+		HP = 999; //3
 		loadGraphic(AssetPaths.player__png, true, 8, 8);
+	
+	
+		width = 2; // maybe one hitbox for death, another hitbox for animations / collision with maps.
+		height = 2;
+		centerOffsets();
 		animation.add("move", [0]);
 		animation.play("move");
 	
-		
 		drag.x = DECELERATION;
 		drag.y = DECELERATION;
 		maxVelocity.set(HOR_MOVE_SPEED, VERT_MOVE_SPEED);
