@@ -31,7 +31,13 @@ class MapChunk
 		 accessibleChunk[x] = new Array<Int>();
 		 for (y in 0...chunkWidth)
 		 {
-			 accessibleChunk[x][y] = FlxG.random.int(0, 1);
+			 if (x == 0 || x == chunkHeight-1)
+			 {
+			 accessibleChunk[x][y] = 2;
+			 }
+			 else{
+			accessibleChunk[x][y] = FlxG.random.int(0, 1);
+			 }
 		 }
 	 }
 	 

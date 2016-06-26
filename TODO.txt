@@ -1,6 +1,6 @@
 Player
-* HP
-* Death
+//* HP
+//* Death
 * Bullet types?
 * Shield?
 
@@ -13,10 +13,10 @@ Basic features
 
 Graphical 
 //* Add player sprite
-* Add player bullet
+//* Add player bullet
 
 * Add trail to player, effects
-* Add constant sine movement to player, "floaty" --= maybe not
+* MAYBE NOT : Add constant sine movement to player, "floaty" --=
 
 Enemy / Hazard types
 * Sine movement enemy (chained)

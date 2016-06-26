@@ -25,16 +25,12 @@ class HUD extends FlxSpriteGroup
 		
 				forEachOfType(FlxText, function(member)
 		{
-			member.setFormat(AssetPaths.pixel_font__ttf, 8, FlxColor.WHITE,
-			                FlxTextBorderStyle.OUTLINE, 0xff000000);
+			member.setFormat(AssetPaths.pixel_font__ttf, 8, FlxColor.fromRGB(255,255,255,5) ,
+			                FlxTextBorderStyle.OUTLINE, FlxColor.fromRGB(0,0,0,200));
 							
 	    });
 		
-		
 		_textScore.alignment = FlxTextAlign.LEFT;
-		
-		
-		
 	}
 	
 	override public function update(elapsed:Float)

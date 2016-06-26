@@ -23,10 +23,16 @@ class PlayerBullet extends FlxSprite
 	
 	override public function update(elapsed:Float)
 	{	
-		if (!isOnScreen() || FlxG.collide(this, Reg.PS.map.loadedMap))
+		var tx:Int = Std.int(x / 8);
+		var ty:Int = Std.int(y / 8);
+		
+		if (!isOnScreen() || FlxG.overlap(Reg.PS.map.loadedMap,this) && Reg.PS.map.loadedMap.getTile(tx, ty) != 0)
 		{
-			
-			//var tempTile = Reg.PS.map.loadedMap.getTileIndexByCoords(new FlxPoint(x, y));
+			if (Reg.PS.map.loadedMap.getTile(tx, ty) == 1)
+			{
+				Reg.PS.map.loadedMap.setTile(tx, ty, 0, true);
+				Reg.score += 1;
+			}
 			kill();
 		}
 		else
@@ -40,12 +46,6 @@ class PlayerBullet extends FlxSprite
 		velocity.x = MOVE_SPEED;
 		
 	}
-	
-	override public function kill():Void
-	{
-		alive = false;
-		exists = false;
-	
-	}
+
 
 }

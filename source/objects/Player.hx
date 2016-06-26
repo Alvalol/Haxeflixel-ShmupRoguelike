@@ -19,7 +19,7 @@ class Player extends FlxSprite
 	private static inline var VERT_MOVE_SPEED:Int = 70;
 	
 	private static inline var MAX_BULLETS:Int = 10;
-	private static inline var BULLET_OFFSET:Int = 3;
+	private static inline var BULLET_OFFSET:Int = 1;
 	
 	public static var HP:Int;
 	
@@ -28,7 +28,7 @@ class Player extends FlxSprite
 	public function new() 
 	{
 		super();
-		HP = 999; //3
+		HP = 3; //3
 		loadGraphic(AssetPaths.player__png, true, 8, 8);
 	
 	
@@ -86,7 +86,7 @@ class Player extends FlxSprite
 			var pb:PlayerBullet =  Reg.PS.PBullets.recycle();
 			if (pb == null)
 			    pb = new PlayerBullet(x,y);
-			pb.reset(x + BULLET_OFFSET, y + 5 );
+			pb.reset(x + BULLET_OFFSET, y + BULLET_OFFSET );
 			Reg.PS.PBullets.add(pb);
 			//FlxG.camera.shake(0.003, 0.05);
 			_cooldown = .5;
