@@ -54,7 +54,6 @@ class PlayState extends FlxState
 	{
 		Reg.PS = this;
 		Reg.pause = false;
-		
 	
 		
 		player = new Player();
@@ -85,7 +84,7 @@ class PlayState extends FlxState
 		
 		//add(_entities);
 		//add(_system);
-		
+
 		super.create();
 	}
 	
@@ -125,7 +124,7 @@ class PlayState extends FlxState
 		_gameCamera.follow(_scroller, FlxCameraFollowStyle.TOPDOWN_TIGHT,0.01);
 		_gameCamera.setScrollBoundsRect(0, 0, map.loadedMap.width, map.loadedMap.height, true);
 		//FlxG.camera.antialiasing = false;
-		_gameCamera.pixelPerfectRender = true;	
+		_gameCamera.pixelPerfectRender = false;	
 		add(_scroller);
 		add(_hud);
 	

@@ -25,22 +25,10 @@ class MapChunk
 	public function populateChunk():Array<Array<Int>>
 	{
 	
-	accessibleChunk = new Array<Array<Int>>();
-	 for (x in 0...chunkHeight)
-	 {
-		 accessibleChunk[x] = new Array<Int>();
-		 for (y in 0...chunkWidth)
-		 {
-			 if (x == 0 || x == chunkHeight-1)
-			 {
-			 accessibleChunk[x][y] = 2;
-			 }
-			 else{
-			accessibleChunk[x][y] = FlxG.random.int(0, 1);
-			 }
-		 }
-	 }
+	// Temporary templates
+	accessibleChunk = FlxG.random.getObject(Reg.mapChunkTemplates);
 	 
+	//trace(accessibleChunk);
 	return accessibleChunk;
 }
 	

@@ -6,6 +6,7 @@ Player
 
 Basic features
 //* Camera follow
+*Player start location generated from map template
 //* LAYOUT BOUNDARIES
 //* Add enemy type class
 //* Load basic level
@@ -27,8 +28,8 @@ Enemy / Hazard types
 	
 Level design 
 * Optional routes that player can miss. Must replay to discover them.  -> Finds bonus.
-* Destructible blocks
-* Camera : allow for flexible changes in camera. Stopping, restarting, vertical movement, as needed (triggers on .tmx)
+//* Destructible blocks
+* ????Camera : allow for flexible changes in camera. Stopping, restarting, vertical movement, as needed (triggers on .tmx)
 //* Basic level generator
 //* Template based level generator
 
@@ -36,5 +37,5 @@ Level design
 
 
 Main loop / states
-* HUDState
+// HUDState
 * Game Over state

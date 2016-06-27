@@ -15,7 +15,6 @@ class LevelGenerator
 	Maybe I could use a seed to generate the chunks.
 	
 	*/
-
 	
 	private static var mapWidth:Int = 10; // cannot be 1
 	

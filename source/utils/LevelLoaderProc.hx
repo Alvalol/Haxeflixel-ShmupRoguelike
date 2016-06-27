@@ -1,9 +1,13 @@
 package utils;
 import flixel.FlxBasic;
 import flixel.FlxState;
+import flixel.graphics.FlxGraphic;
 import flixel.tile.FlxTilemap;
 import utils.pcg.MapChunk;
 import utils.LevelGenerator;
+import flixel.graphics.frames.FlxTileFrames;
+
+import flixel.math.FlxPoint;
 
 class LevelLoaderProc
 {
@@ -34,9 +38,12 @@ class LevelLoaderProc
 		//trace("Clean array size : " + cleanArray.length);
 		//trace(cleanArray);
 
-	loadedMap.loadMapFrom2DArray(cleanArray,
-	AssetPaths.solid__png, 8, 8);
-		
+	loadedMap.loadMapFrom2DArray(cleanArray, FlxTileFrames.fromBitmapAddSpacesAndBorders(FlxGraphic.fromAssetKey(AssetPaths.solid__png), 
+	new FlxPoint(8,8), new FlxPoint(1,1), new FlxPoint(1,1), null),  8, 8);
+	
+            
+			
 		return loadedMap;
+		
 	}
 }

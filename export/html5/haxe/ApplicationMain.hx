@@ -46,6 +46,18 @@ class ApplicationMain {
 		types.push (lime.Assets.AssetType.IMAGE);
 		
 		
+		urls.push ("assets/images/player.pyxel");
+		types.push (lime.Assets.AssetType.BINARY);
+		
+		
+		urls.push ("assets/images/solid.png");
+		types.push (lime.Assets.AssetType.IMAGE);
+		
+		
+		urls.push ("assets/images/solidtiles.pyxel");
+		types.push (lime.Assets.AssetType.TEXT);
+		
+		
 		urls.push ("assets/images/tiles.png");
 		types.push (lime.Assets.AssetType.IMAGE);
 		
@@ -147,7 +159,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "1643",
+			build: "3460",
 			company: "Alvarop",
 			file: "untitled shmup",
 			fps: 60,
