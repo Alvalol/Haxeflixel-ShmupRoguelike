@@ -1,9 +1,6 @@
-package objects;
-
-
+package objects.gamesys;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
-
 
 class Scroller extends FlxSprite
 {
@@ -28,5 +25,4 @@ class Scroller extends FlxSprite
 	   y = Reg.PS.player.y;
 	   super.update(elapsed);	   
 	}
-	
 }

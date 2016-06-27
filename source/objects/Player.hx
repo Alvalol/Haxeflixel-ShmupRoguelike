@@ -3,11 +3,13 @@ package objects;
 import flixel.FlxSprite;
 import flixel.FlxObject;
 import flixel.FlxG;
+import flixel.FlxSubState;
 import flixel.util.FlxColor;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxTimer;
 import objects.PlayerBullet;
 import flixel.util.FlxSpriteUtil;
+import states.GameOverState;
 import states.PlayState;
 
 class Player extends FlxSprite
@@ -21,14 +23,16 @@ class Player extends FlxSprite
 	private static inline var MAX_BULLETS:Int = 10;
 	private static inline var BULLET_OFFSET:Int = 1;
 	
-	public static var HP:Int;
+	public var HP:Int;
+	public var MAX_HP:Int;
 	
 	private var _cooldown:Float = 0;
 	
-	public function new() 
+	public function new(x:Float, y:Float) 
 	{
-		super();
+		super(x,y);
 		HP = 3; //3
+		MAX_HP = 3;
 		loadGraphic(AssetPaths.player__png, true, 8, 8);
 	
 	
@@ -52,11 +56,13 @@ class Player extends FlxSprite
 		    shoot();
 			_cooldown -= elapsed * 4;
 		}
-			
-		super.update(elapsed);
-		
+
+				
 		if (HP <= 0)
 		   kill();
+		
+		super.update(elapsed);
+
 	}
 	
 	
@@ -99,12 +105,13 @@ class Player extends FlxSprite
 		{
 		HP--;
 		FlxG.camera.shake(0.003, 0.5);
-		FlxSpriteUtil.flicker(this,2,0.05,true);
+		FlxSpriteUtil.flicker(this,1,0.05,true);
 	    }
 	}
 	override public function kill()
 	{
 		super.kill();
-		FlxG.switchState(new PlayState());
+		FlxG.switchState(new GameOverSubState());
+
 	}
 }

@@ -1,11 +1,15 @@
-package objects;
+package objects.enemies;
 
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.util.FlxTimer;
-import objects.EnemyBullet;
+import objects.enemies.EnemyBullet;
 import flixel.math.FlxPoint;
+import objects.enemies.Enemy;
+import objects.items.HealthItem;
+import objects.items.Item;
+import objects.Player;
 
 class EnemyTurretA extends Enemy
 {
@@ -23,18 +27,13 @@ class EnemyTurretA extends Enemy
 	
 	public function new(x:Float, y:Float, flip:Bool) 
 	{
-		super(x, y);
+		super(x, y-4); // this causes an issue if turret is on ceiling... needs to use ceiling instance variable.
 		HP = 1;
 	    ceiling = (flip ? true : false);
 		loadGraphic(AssetPaths.turret__png, true, 8, 8);
 		animation.add("idle", [0]);
 		animation.add("shoot", [1]);
 		animation.play("idle");
-		width = 6;
-		height = 6;
-		offset.x = 2;
-		offset.y = 2;
-		centerOffsets();
 		immovable = true;
 		solid = true;
 		flipY = flip;
@@ -52,7 +51,9 @@ class EnemyTurretA extends Enemy
 	override public function kill():Void
 	{
 		Reg.score += SCORE_AMOUNT;
+		dropItem(); // maybe limit the droppable items as an argument in the func. Could be an array (?)
 		super.kill();
+	
 	}
 	private function shoot():Void
 	{
@@ -64,7 +65,7 @@ class EnemyTurretA extends Enemy
 		
 		if (!ceiling)
 		{
-		eb.reset(x + 2, y - 4 );
+		eb.reset(x + 3, y - 4 );
 		eb.velocity.y = -SHOOT_SPEED;
 		}
 		else
@@ -82,4 +83,15 @@ class EnemyTurretA extends Enemy
 		
 	}
 	
+	private function dropItem()
+	{
+		var itemRoll = FlxG.random.int(0,100);
+		//trace(itemRoll);
+		if (itemRoll < 20  && Reg.PS.player.HP < Reg.PS.player.MAX_HP)
+		{
+			//trace(itemRoll);
+			Reg.PS.items.add(new HealthItem(x, y));
+		}
+		//else trace("No item");
+	}
 }

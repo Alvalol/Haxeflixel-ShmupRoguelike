@@ -1,4 +1,4 @@
-package objects;
+package objects.enemies;
 
 import flixel.FlxSprite;
 import flixel.util.FlxColor;

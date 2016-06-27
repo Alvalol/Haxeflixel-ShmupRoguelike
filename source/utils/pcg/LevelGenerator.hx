@@ -1,4 +1,4 @@
-package utils;
+package utils.pcg;
 import flixel.tile.FlxTilemap;
 import flixel.FlxG;
 import flixel.FlxState;
@@ -16,7 +16,7 @@ class LevelGenerator
 	
 	*/
 	
-	private static var mapWidth:Int = 10; // cannot be 1
+	private static var mapWidth:Int = 20; // cannot be 1
 	
 	public function new() 
 	{
@@ -60,10 +60,6 @@ class LevelGenerator
 				}			
 		}
 		return ret;
-	
-				
-	
-	
 	
 	}
 }

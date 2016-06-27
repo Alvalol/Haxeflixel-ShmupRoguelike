@@ -14,17 +14,19 @@ import flixel.tile.FlxTilemap;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxSpriteUtil;
+import objects.items.Item;
 
 
-import objects.EnemyBullet;
-import objects.Goal;
+import objects.enemies.EnemyBullet;
+//import objects.Goal;
 import objects.Player;
 import objects.PlayerBullet;
-import objects.Scroller;
-import objects.Enemy;
+import objects.gamesys.Scroller;
+import objects.enemies.Enemy;
 
 
-import utils.LevelLoaderProc;
+import utils.pcg.LevelLoaderProc;
+import utils.pcg.LevelEnemies;
 
 
 class PlayState extends FlxState
@@ -36,11 +38,12 @@ class PlayState extends FlxState
 	public var player(default, null):Player;
 	public var PBullets:FlxTypedGroup<PlayerBullet>;
 	public var EBullets:FlxTypedGroup<EnemyBullet>;
-//	private var _entities:FlxGroup;
-//	private var _system:FlxGroup;
-//	public var enemies(default, null):FlxTypedGroup<Enemy>;
+	public var enemies(default, null):FlxTypedGroup<Enemy>;
+	public var items(default, null):FlxTypedGroup<Item>;
 //	public var goals(default, null):FlxTypedGroup<Goal>;
-		
+	private var _entities:FlxGroup;
+//	private var _system:FlxGroup;
+
 	private var _scroller(default, null):Scroller;
 	
 	
@@ -56,33 +59,36 @@ class PlayState extends FlxState
 		Reg.pause = false;
 	
 		
-		player = new Player();
-		//enemies = new FlxTypedGroup<Enemy>();
+		player = new Player(16, FlxG.width/2);
+		enemies = new FlxTypedGroup<Enemy>();
+		items = new FlxTypedGroup<Item>();
 		//goals = new FlxTypedGroup<Goal>();
-		//_entities = new FlxGroup();
+		_entities = new FlxGroup();
 		//_system = new FlxGroup();
 		
         PBullets = new FlxTypedGroup<PlayerBullet>();
 		EBullets = new FlxTypedGroup<EnemyBullet>();
 	
-		FlxG.mouse.visible = false;
+		FlxG.mouse.visible = false; // must always be set to false pls
 		
-		//LevelLoader.loadLevel(this, Reg.levels[Reg.currentLevel]);
-	   
 		 map = new LevelLoaderProc();
 		_gameCamera = new FlxCamera();
 		_hudCamera = new FlxCamera();
       	cameraSetup();
 		
-			
+		
+
 		add(map.loadedMap);
 		add(player);
 		add(PBullets);
+		add(items);
 		//_system.add(goals);
-		//_entities.add(EBullets);
-		//_entities.add(enemies);
+		_entities.add(EBullets);
+		_entities.add(enemies);
 		
-		//add(_entities);
+		LevelEnemies.populateEnemies(map.loadedMap);
+	
+		add(_entities);
 		//add(_system);
 
 		super.create();
@@ -92,15 +98,14 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 		collisions();
-		// Could use some sort of check to kill the player if he
-		// touches bounds when he shouldn't 
-		// Good enough for now.
+		
 		FlxSpriteUtil.bound(player, 
 		                    FlxG.camera.scroll.x, 
 							FlxG.camera.scroll.x + FlxG.camera.width,
 							FlxG.camera.scroll.y,
 							FlxG.camera.scroll.y + FlxG.camera.height);
 		//trace(FlxG.camera.scroll);
+		
 		
 	    if (player.x <= FlxG.camera.scroll.x)
 		{
@@ -133,7 +138,7 @@ class PlayState extends FlxState
 	public function collisions()
 	{
 		
-	/*	for (enemy in enemies)
+		for (enemy in enemies)
 		{
 		    for (bullet in PBullets){
 			   if (FlxG.collide(enemy, bullet))
@@ -143,20 +148,27 @@ class PlayState extends FlxState
 			}
 		                            }
 	}
-	*/
+	
+	   for (item in items)
+	   {
+		   if (FlxG.collide(item, player))
+		   {
+			   item.interact(player);
+		   }
+	   }
 									
 		if (player.alive)
 		{
 			FlxG.collide(map.loadedMap, player);
 		}
 		
-		/*
-		if (FlxG.collide(_entities, player) || FlxG.collide(hazardMap,player))
+		
+		if (FlxG.collide(_entities, player))
 		{
 			player.damage();
 		
 	    }
-		
+		/*
 		for (goal in goals){
 		
 		if (FlxG.collide(goal, player))

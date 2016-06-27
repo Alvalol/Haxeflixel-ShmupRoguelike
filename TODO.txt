@@ -4,6 +4,10 @@ Player
 * Bullet types?
 * Shield?
 
+HUD
+* HEALTH BAR
+* Current weapons
+
 Basic features
 //* Camera follow
 *Player start location generated from map template
@@ -11,12 +15,13 @@ Basic features
 //* Add enemy type class
 //* Load basic level
 //* Add basic hazard class
+//* Health item (dropped by enemies, based on X)
 
 Graphical 
-//* Add player sprite
-//* Add player bullet
+//* Add player sprite (PLACEHOLDER)
+//* Add player bullet (PLACEHOLDER)
 
-* Add trail to player, effects
+* WAY LATER : Add trail to player, effects 
 * MAYBE NOT : Add constant sine movement to player, "floaty" --=
 
 Enemy / Hazard types
@@ -27,15 +32,55 @@ Enemy / Hazard types
 	- Multiple shots (double, triple)
 	
 Level design 
-* Optional routes that player can miss. Must replay to discover them.  -> Finds bonus.
+* To do way later : Optional routes that player can miss. Must replay to discover them.  -> Finds bonus.
+* MAYBE NOT? : Camera : allow for flexible changes in camera. Stopping, restarting, vertical movement, as needed (triggers on .tmx)
 //* Destructible blocks
-* ????Camera : allow for flexible changes in camera. Stopping, restarting, vertical movement, as needed (triggers on .tmx)
+* Dinamically placed GOAL (different templates for the end of each level type)
+* Dinamically placed LEVEL START
+* Once tiles 0 - 9 have their role and if the game feels limited, rework the mapChunk generator so taht it can take 
+  any alphanumeric character and assign game elementsaccordingly.
+
 //* Basic level generator
 //* Template based level generator
 
-* Desctructible tiles
 
+// Destructible tiles
+
+Gameplay features
+* Stackable powerups
+* Gamepad support
+
+
+-- Sound --
+* Add sound
+* Add per level music
+* Add sound feedback
 
 Main loop / states
 // HUDState
-* Game Over state
+
+//* Game Over state (basic, ugly)
+* Next level state
+* Game completed state
+* Main menu state
+
+-- Items --
+
+* Items need to look attractice and make the player wanna "get them". So as they appear, they should maybe move in a sine wave, glow or something.
+* + Max HP item
+* + MoveSpeed item
+* Homing bullets item
+* Spread bullet item
+* Grenade bullet item
+
+-- Design ideas  -- 
+* Maybe use the points as currency to buy randomly chosen items on level transitions? Or just leave them as score, but it make meaningful somehow.
+* Survivor mode
+
+* Possible enemy attribute. Enemies that have a "bomb" attached to them. If they get past the player (out of the screen), this triggers a bomb that draw a horizontal
+  line across the screen, from the point it exploded.
+  
+* Items don't have their use revealed until they're picked up. Just like scrolls in classic roguelikes. Then, once picked the item remains the same for the rest of the 
+  run.
+  
+* Item or condition that will make the scroller go faster / slower.

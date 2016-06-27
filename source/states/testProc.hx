@@ -18,10 +18,10 @@ import flixel.util.FlxSpriteUtil;
 import objects.Player;
 
 
-import utils.LevelLoaderProc;
+import utils.pcg.LevelLoaderProc;
 
 
-class ProcState extends FlxState
+class testProc extends FlxState
 {
 	
 	public var player(default, null):Player;
@@ -31,7 +31,7 @@ class ProcState extends FlxState
 	override public function create():Void
 	{
 		
-		player = new Player();
+		player = new Player(16,FlxG.height / 2);
 	   
 		FlxG.mouse.visible = false;
         LevelLoader = new LevelLoaderProc();

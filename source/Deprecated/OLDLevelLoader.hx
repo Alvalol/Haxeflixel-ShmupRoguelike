@@ -1,4 +1,4 @@
-package utils;
+package Deprecated;
 /*
  * General and temporary level loader. Loads TMX files from Tiled. Deals with objects, layers, etc.
  */
@@ -9,7 +9,7 @@ import flixel.FlxState;
 import flixel.group.FlxGroup;
 import flixel.math.FlxPoint;
 
-import objects.EnemyTurretA;
+import objects.enemies.EnemyTurretA;
 import objects.Goal;
 
 import flixel.addons.editors.tiled.TiledLayer;
@@ -22,7 +22,7 @@ import flixel.tile.FlxTilemap;
 import states.PlayState;
 
 
-class LevelLoader
+class OLDLevelLoader
 {
 	public static function loadLevel(state:states.PlayState, level:String) {
 		

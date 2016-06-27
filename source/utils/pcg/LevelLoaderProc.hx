@@ -1,10 +1,10 @@
-package utils;
+package utils.pcg;
 import flixel.FlxBasic;
 import flixel.FlxState;
 import flixel.graphics.FlxGraphic;
 import flixel.tile.FlxTilemap;
 import utils.pcg.MapChunk;
-import utils.LevelGenerator;
+import utils.pcg.LevelGenerator;
 import flixel.graphics.frames.FlxTileFrames;
 
 import flixel.math.FlxPoint;
@@ -34,6 +34,7 @@ class LevelLoaderProc
 		for (obj in generatedMap)
 	    {
 				cleanArray.push(obj);
+				
 		}
 		//trace("Clean array size : " + cleanArray.length);
 		//trace(cleanArray);
@@ -42,7 +43,7 @@ class LevelLoaderProc
 	new FlxPoint(8,8), new FlxPoint(1,1), new FlxPoint(1,1), null),  8, 8);
 	
             
-			
+	
 		return loadedMap;
 		
 	}
