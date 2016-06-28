@@ -6,6 +6,7 @@ import flixel.math.FlxPoint;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.group.FlxSpriteGroup;
+import flixel.FlxG;
 
 
 class HUD extends FlxSpriteGroup
@@ -13,14 +14,17 @@ class HUD extends FlxSpriteGroup
 
 	static inline var OFFSET:Int = 4;
 	private var _textScore:FlxText;
+	private var _currentHealth:FlxText;
 	
 	public function new() 
 	{
 		super();
 		
 		_textScore = new FlxText(OFFSET, OFFSET, 0);
+		_currentHealth = new FlxText(FlxG.width - 30 , OFFSET,0);
 		
 		add(_textScore);
+		add(_currentHealth);
 		
 		
 				forEachOfType(FlxText, function(member)
@@ -38,6 +42,8 @@ class HUD extends FlxSpriteGroup
 		
 		_textScore.text =  StringTools.lpad(
 		Std.string(Reg.score), "0", 5);
+		_currentHealth.text = (Reg.PS.player.HP + "-" +Reg.PS.player.MAX_HP);
+		
 		
 		super.update(elapsed);
 	}

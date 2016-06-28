@@ -6,6 +6,7 @@ import flixel.FlxG;
 import flixel.math.FlxPoint;
 import flixel.addons.effects.FlxTrail;
 import flixel.util.FlxColor;
+import objects.items.CoinItem;
 
 
 class PlayerBullet extends FlxSprite
@@ -31,7 +32,8 @@ class PlayerBullet extends FlxSprite
 			if (Reg.PS.map.loadedMap.getTile(tx, ty) == 1)
 			{
 				Reg.PS.map.loadedMap.setTile(tx, ty, 0, true);
-				Reg.score += 1;
+				var newCoin = new CoinItem(x, y);
+				Reg.PS.items.add(newCoin);
 			}
 			kill();
 		}

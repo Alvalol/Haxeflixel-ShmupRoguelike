@@ -2,6 +2,7 @@ package utils.pcg;
 import flixel.math.FlxPoint;
 import flixel.tile.FlxTilemap;
 import objects.enemies.Enemy;
+import objects.enemies.EnemyMover;
 import objects.enemies.EnemyTurretA;
 
 
@@ -25,6 +26,13 @@ class LevelEnemies
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
 				Reg.PS.enemies.add(new EnemyTurretA(enPos.x, enPos.y, false));
 				
+			}
+			
+			if (currentLevel.getTileByIndex(i) == 4)
+			{
+				currentLevel.setTileByIndex(i, 0, true);
+				var enPos = (currentLevel.getTileCoordsByIndex(i));
+				Reg.PS.enemies.add(new EnemyMover(enPos.x, enPos.y));
 			}
 		}
 	}

@@ -5,7 +5,7 @@ Player
 * Shield?
 
 HUD
-* HEALTH BAR
+//* HEALTH BAR
 * Current weapons
 
 Basic features
@@ -16,6 +16,7 @@ Basic features
 //* Load basic level
 //* Add basic hazard class
 //* Health item (dropped by enemies, based on X)
+* Create a utility that handles random numbers, seeds, etc.
 
 Graphical 
 //* Add player sprite (PLACEHOLDER)
@@ -47,7 +48,7 @@ Level design
 // Destructible tiles
 
 Gameplay features
-* Stackable powerups
+* Stackable weapons
 * Gamepad support
 
 
@@ -64,17 +65,18 @@ Main loop / states
 * Game completed state
 * Main menu state
 
+
 -- Items --
 
 * Items need to look attractice and make the player wanna "get them". So as they appear, they should maybe move in a sine wave, glow or something.
-* + Max HP item
-* + MoveSpeed item
+//* + Max HP item
+//* + MoveSpeed item
 * Homing bullets item
 * Spread bullet item
 * Grenade bullet item
 
 -- Design ideas  -- 
-* Maybe use the points as currency to buy randomly chosen items on level transitions? Or just leave them as score, but it make meaningful somehow.
+* Maybe ??Maybe use the points as currency to buy randomly chosen items on level transitions? Or just leave them as score, but it make meaningful somehow.
 * Survivor mode
 
 * Possible enemy attribute. Enemies that have a "bomb" attached to them. If they get past the player (out of the screen), this triggers a bomb that draw a horizontal
@@ -84,3 +86,5 @@ Main loop / states
   run.
   
 * Item or condition that will make the scroller go faster / slower.
+
+* Enemies that come from the left

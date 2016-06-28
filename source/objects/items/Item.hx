@@ -10,6 +10,7 @@ import flixel.effects.FlxFlicker;
 
 class Item extends FlxSprite
 {
+	// Maybe each item has its own drop % modifier, so that it will make some items more rare, and not only based on enemy types that can drop them.
 	
 	private var _appeared:Bool = false;
 	private var _lifespan:Int = 3;
@@ -43,5 +44,12 @@ class Item extends FlxSprite
 	public function interact(player:Player)
 	{
 		kill();
+		Reg.score += 50;
+	}
+	
+	override function kill()
+	{
+		super.kill();
+		Reg.PS.items.remove(this, true);
 	}
 }

@@ -7,19 +7,24 @@ import flixel.util.FlxTimer;
 import objects.enemies.EnemyBullet;
 import flixel.math.FlxPoint;
 import objects.enemies.Enemy;
+import objects.items.CoinItem;
 import objects.items.HealthItem;
+import objects.items.HealthMaxItem;
 import objects.items.Item;
 import objects.Player;
+import objects.items.SpeedItem;
 
 class EnemyTurretA extends Enemy
 {
 
     private static inline var SCORE_AMOUNT:Int = 100;
-	private static inline var SHOOT_SPEED = 250;
+	private static inline var SHOOT_SPEED = 200;
 	
 	private var bullet:EnemyBullet;
 	private var justShot:Bool;
 	private var shootDelay:Float = 2;
+	
+
 	
 	private  var ceiling:Bool;
 	
@@ -50,8 +55,8 @@ class EnemyTurretA extends Enemy
 	
 	override public function kill():Void
 	{
-		Reg.score += SCORE_AMOUNT;
-		dropItem(); // maybe limit the droppable items as an argument in the func. Could be an array (?)
+		var drops:Array<Item> = [new HealthItem(x,y), new SpeedItem(x,y), new HealthMaxItem(x,y)];
+		dropItem(drops);
 		super.kill();
 	
 	}
@@ -83,15 +88,5 @@ class EnemyTurretA extends Enemy
 		
 	}
 	
-	private function dropItem()
-	{
-		var itemRoll = FlxG.random.int(0,100);
-		//trace(itemRoll);
-		if (itemRoll < 20  && Reg.PS.player.HP < Reg.PS.player.MAX_HP)
-		{
-			//trace(itemRoll);
-			Reg.PS.items.add(new HealthItem(x, y));
-		}
-		//else trace("No item");
-	}
+
 }

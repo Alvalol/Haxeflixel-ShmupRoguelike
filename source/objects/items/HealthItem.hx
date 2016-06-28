@@ -10,6 +10,7 @@ class HealthItem extends Item
 	{
 		super(x,y);
 		makeGraphic(8, 8, FlxColor.BLUE, true);
+
 		
 	}
 	
@@ -19,9 +20,7 @@ class HealthItem extends Item
 		{
 		player.HP++;
 		}
-		else{
-			Reg.score += 200;
-		}
+
 		super.interact(player);
 	}
 	

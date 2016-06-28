@@ -23,6 +23,13 @@ class Scroller extends FlxSprite
 
 	   acceleration.x += ACCELERATION;	   
 	   y = Reg.PS.player.y;
-	   super.update(elapsed);	   
-	}
+	   super.update(elapsed);	 
+	   
+	   switch Reg.PS.player.HP{
+		   
+		   case 3 : MOVE_SPEED = 15; 		maxVelocity.set(MOVE_SPEED, MOVE_SPEED);
+		   case 2 : MOVE_SPEED = 20; 		maxVelocity.set(MOVE_SPEED, MOVE_SPEED);
+		   case 1 : MOVE_SPEED = 40;		maxVelocity.set(MOVE_SPEED, MOVE_SPEED);
+	                          }
+    }
 }

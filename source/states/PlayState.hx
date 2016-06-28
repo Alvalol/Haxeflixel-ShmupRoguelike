@@ -98,7 +98,9 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 		collisions();
-		
+//	    trace(items.length);
+//		trace(items.members);
+
 		FlxSpriteUtil.bound(player, 
 		                    FlxG.camera.scroll.x, 
 							FlxG.camera.scroll.x + FlxG.camera.width,
@@ -168,13 +170,5 @@ class PlayState extends FlxState
 			player.damage();
 		
 	    }
-		/*
-		for (goal in goals){
-		
-		if (FlxG.collide(goal, player))
-		{
-			goal.reach(player);
-		}
-		*/
-		}
+    }
 }

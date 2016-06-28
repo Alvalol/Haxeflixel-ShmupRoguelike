@@ -4,12 +4,16 @@ import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxObject;
+import objects.items.Item;
+import objects.items.CoinItem;
 
 class Enemy extends FlxSprite
 {
 	private var HP:Int;
 	
 	private var _appeared:Bool = false;
+	private var drops:Array<Item>;
+	
 	public function new(x:Float, y:Float) 
 	
 	{
@@ -52,5 +56,24 @@ class Enemy extends FlxSprite
 		velocity.x = 0;
 		acceleration.x = 0;
 		//animation.play("dead");
+	}
+	
+		private function dropItem(list:Array<Item>)
+	{
+
+		var itemRoll = FlxG.random.int(0,100);
+		//trace(itemRoll);
+		if (itemRoll < 10)
+		{
+			//trace(itemRoll);
+			var tObject:Item =	FlxG.random.getObject(list);			
+			Reg.PS.items.add(tObject);
+		}
+		else
+		{
+			var tObject:Item = new CoinItem(x, y);
+			Reg.PS.items.add(tObject);
+		}
+		//else drop 'coins'
 	}
 }

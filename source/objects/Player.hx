@@ -15,10 +15,12 @@ import states.PlayState;
 class Player extends FlxSprite
 {
 	
-	private static inline var ACCELERATION:Int = 250;
-	private static inline var DECELERATION:Int = 300;
-	private static inline var HOR_MOVE_SPEED:Int = 60;
-	private static inline var VERT_MOVE_SPEED:Int = 70;
+	private static inline var ACCELERATION:Int = 800;
+	private static inline var DECELERATION:Int = 800;
+	public  var HOR_MOVE_SPEED:Int = 60;
+	public var VERT_MOVE_SPEED:Int = 70;
+	public var MAX_HOR_MOVE_SPEED = 80;
+	public var MAX_VERT_MOVE_SPEED = 90;
 	
 	private static inline var MAX_BULLETS:Int = 10;
 	private static inline var BULLET_OFFSET:Int = 1;
@@ -61,14 +63,14 @@ class Player extends FlxSprite
 		if (HP <= 0)
 		   kill();
 		
+		
 		super.update(elapsed);
-
 	}
 	
 	
 	public function move()
 	{
-		
+
 		acceleration.x = 0;
 		acceleration.y = 0;
 		if (FlxG.keys.anyPressed([UP, W]))
