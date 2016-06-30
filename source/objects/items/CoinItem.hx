@@ -27,7 +27,7 @@ class CoinItem extends Item
 	
     override function interact(player:Player)
 	{
-	  kill();
+	  super.kill();
 	  Reg.score += 5;
 	}
 	

@@ -23,25 +23,21 @@ class EnemyTurretA extends Enemy
 	private var bullet:EnemyBullet;
 	private var justShot:Bool;
 	private var shootDelay:Float = 2;
-	
+	public var tileIndex:Int;
 
-	
-	private  var ceiling:Bool;
-	
-	
 	
 	public function new(x:Float, y:Float, flip:Bool) 
 	{
 		super(x, y-4); // this causes an issue if turret is on ceiling... needs to use ceiling instance variable.
 		HP = 1;
-	    ceiling = (flip ? true : false);
+
 		loadGraphic(AssetPaths.turret__png, true, 8, 8);
 		animation.add("idle", [0]);
 		animation.add("shoot", [1]);
 		animation.play("idle");
 		immovable = true;
 		solid = true;
-		flipY = flip;
+		flipY = true;
 	}
 	
 	override public function update(elapsed:Float)
@@ -68,7 +64,7 @@ class EnemyTurretA extends Enemy
 	    if (eb == null)
 		    eb = new EnemyBullet(x, y);
 		
-		if (!ceiling)
+		if (!flipY)
 		{
 		eb.reset(x + 3, y - 4 );
 		eb.velocity.y = -SHOOT_SPEED;
@@ -85,6 +81,14 @@ class EnemyTurretA extends Enemy
 			justShot = false;
 			animation.play("shoot");
 		}, 1);
+		
+	}
+	
+	private function adjustFlip()
+	{
+		
+		
+	
 		
 	}
 	

@@ -34,12 +34,16 @@ class PlayerBullet extends FlxSprite
 			if (ttile == 1)
 			{
 				Reg.PS.map.loadedMap.setTile(tx, ty, 0, true);
-				if (FlxG.random.int(0, 100) > 50)
-				{
-				var newCoin = new CoinItem(x,y); // must fix to spawn it ON the midpoint of the tile
-				Reg.PS.items.add(newCoin); // must recycle
-				}
+				var newCoin:CoinItem =  Reg.PS.coins.recycle(CoinItem);
+				
+				if (newCoin == null) 
+				    newCoin = new CoinItem(x, y);
+				newCoin.reset(x , y);
+				
+				Reg.PS.coins.add(newCoin);
 			}
+			
+			
 			kill();
 		}
 		else

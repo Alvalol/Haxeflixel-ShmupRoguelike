@@ -23,7 +23,7 @@ import objects.Player;
 import objects.PlayerBullet;
 import objects.gamesys.Scroller;
 import objects.enemies.Enemy;
-
+import objects.items.CoinItem;
 
 import utils.pcg.LevelLoaderProc;
 import utils.pcg.LevelEnemies;
@@ -40,6 +40,7 @@ class PlayState extends FlxState
 	public var EBullets:FlxTypedGroup<EnemyBullet>;
 	public var enemies(default, null):FlxTypedGroup<Enemy>;
 	public var items(default, null):FlxTypedGroup<Item>;
+	public var coins:FlxTypedGroup < CoinItem>;
 //	public var goals(default, null):FlxTypedGroup<Goal>;
 	private var _entities:FlxGroup;
 //	private var _system:FlxGroup;
@@ -61,6 +62,7 @@ class PlayState extends FlxState
 		
 		player = new Player(16, FlxG.width/2);
 		enemies = new FlxTypedGroup<Enemy>();
+		coins = new FlxTypedGroup<CoinItem>();
 		items = new FlxTypedGroup<Item>();
 		//goals = new FlxTypedGroup<Goal>();
 		_entities = new FlxGroup();
@@ -79,6 +81,7 @@ class PlayState extends FlxState
 		
 
 		add(map.loadedMap);
+		add(coins);
 		add(player);
 		add(PBullets);
 		add(items);
@@ -156,6 +159,15 @@ class PlayState extends FlxState
 		   if (FlxG.collide(item, player))
 		   {
 			   item.interact(player);
+		   }
+	   }
+	   
+	   
+	   	   for (coin in coins)
+	   {
+		   if (FlxG.collide(coin, player))
+		   {
+			   coin.interact(player);
 		   }
 	   }
 									

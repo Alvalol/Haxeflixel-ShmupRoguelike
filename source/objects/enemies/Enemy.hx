@@ -71,9 +71,13 @@ class Enemy extends FlxSprite
 		}
 		else
 		{
-			var tObject:Item = new CoinItem(x, y);
-			Reg.PS.items.add(tObject);
+				var newCoin:CoinItem =  Reg.PS.coins.recycle(CoinItem);
+					
+				if (newCoin == null) 
+				    newCoin = new CoinItem(x, y);
+					
+				newCoin.reset(x , y);
+				Reg.PS.coins.add(newCoin);
 		}
-		//else drop 'coins'
 	}
 }

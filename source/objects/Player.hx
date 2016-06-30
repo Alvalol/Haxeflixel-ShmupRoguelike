@@ -17,8 +17,8 @@ class Player extends FlxSprite
 	
 	private static inline var ACCELERATION:Int = 800;
 	private static inline var DECELERATION:Int = 800;
-	public  var HOR_MOVE_SPEED:Int = 60;
-	public var VERT_MOVE_SPEED:Int = 70;
+	public  var HOR_MOVE_SPEED:Int = 50;
+	public var VERT_MOVE_SPEED:Int = 60;
 	public var MAX_HOR_MOVE_SPEED = 80;
 	public var MAX_VERT_MOVE_SPEED = 90;
 	
@@ -27,6 +27,7 @@ class Player extends FlxSprite
 	
 	public var HP:Int;
 	public var MAX_HP:Int;
+	public var MAX_POSSIBLE_HP:Int = 6;
 	
 	private var _cooldown:Float = 0;
 	

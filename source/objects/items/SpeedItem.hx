@@ -14,6 +14,11 @@ class SpeedItem extends Item
 		
 	}
 	
+	override public function update(elapsed:Float)
+	{
+		super.update(elapsed);
+	}
+	
 	override function interact(player:Player)
 	{
 		if (player.HOR_MOVE_SPEED < player.MAX_HOR_MOVE_SPEED 

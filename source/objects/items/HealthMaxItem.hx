@@ -16,8 +16,11 @@ class HealthMaxItem extends Item
 	
 	override function interact(player:Player)
 	{
-		player.MAX_HP ++; // not limited for now, but might have to in the future
+		if (player.MAX_HP < player.MAX_POSSIBLE_HP)
+		{
+		player.MAX_HP ++;
 		player.HP = player.MAX_HP;
 		super.interact(player);
+		}
 	}
 }

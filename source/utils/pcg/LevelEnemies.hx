@@ -1,9 +1,13 @@
 package utils.pcg;
 import flixel.math.FlxPoint;
 import flixel.tile.FlxTilemap;
+import flixel.FlxG;
 import objects.enemies.Enemy;
+import objects.enemies.EnemyLeft;
 import objects.enemies.EnemyMover;
+import objects.enemies.EnemyMoverGroup;
 import objects.enemies.EnemyTurretA;
+
 
 
 class LevelEnemies
@@ -11,7 +15,7 @@ class LevelEnemies
 
 	public function new() 
 	{
-		
+		// I MUST BE REFACTORED
 	}
 	
 	static public function populateEnemies(currentLevel:FlxTilemap)//:Enemy
@@ -24,7 +28,9 @@ class LevelEnemies
 			{
 				currentLevel.setTileByIndex(i, 0, true); // updates the tile so that there is no tile overlapping the enemy
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
-				Reg.PS.enemies.add(new EnemyTurretA(enPos.x, enPos.y, false));
+				var en = new EnemyTurretA(enPos.x, enPos.y, false);
+				en.tileIndex = currentLevel.getTileIndexByCoords(enPos);5
+				Reg.PS.enemies.add(en);
 				
 			}
 			
@@ -32,9 +38,21 @@ class LevelEnemies
 			{
 				currentLevel.setTileByIndex(i, 0, true);
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
-				Reg.PS.enemies.add(new EnemyMover(enPos.x, enPos.y));
-			}
-		}
+				var enGroup = new EnemyMoverGroup(enPos.x, enPos.y);
+				for (enemy in enGroup.chainedGroup)
+				{
+				Reg.PS.enemies.add(enemy);
+			   }
+		    }
+		
+			if (currentLevel.getTileByIndex(i) == 5)
+			{
+				var enPos = (currentLevel.getTileCoordsByIndex(i));
+				currentLevel.setTileByIndex(i, 0, true);
+				var enemy = new EnemyLeft(enPos.x, enPos.y);
+				Reg.PS.enemies.add(enemy);
+			   }
+	}
 	}
 	
 }

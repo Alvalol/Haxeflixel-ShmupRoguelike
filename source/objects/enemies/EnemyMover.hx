@@ -12,6 +12,7 @@ class EnemyMover extends Enemy
 {
 	private var sinfact:Float = 0;
 	private var factor:Int = 0;
+	private var MOVE_SPEED:Float = 0.5;
 
 	public function new(x:Float, y:Float) 
 	{
@@ -37,9 +38,10 @@ class EnemyMover extends Enemy
 		move();
 		}
 		
-		}
+	}
+	
 	override public function kill():Void
-	{
+	{	
 		drops = [new HealthItem(x, y)];
 		dropItem(drops);
 		super.kill();
@@ -47,9 +49,9 @@ class EnemyMover extends Enemy
 	
 	private function move()
 	{
-		sinfact += factor * .03 * Math.PI;
+		sinfact += factor * .02 * Math.PI;
 		y += Math.sin(sinfact);
-		x -= 0.5;	
+		x -= MOVE_SPEED;	
 	}
 	
 }
