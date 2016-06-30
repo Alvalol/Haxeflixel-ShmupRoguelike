@@ -88,3 +88,8 @@ Main loop / states
 * Item or condition that will make the scroller go faster / slower.
 
 * Enemies that come from the left
+
+* Coins move towards the player (magnet-like)
+
+* Tell how many points the player got from the last hit (feedback)
+

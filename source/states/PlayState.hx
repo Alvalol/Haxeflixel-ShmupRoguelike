@@ -162,6 +162,7 @@ class PlayState extends FlxState
 		if (player.alive)
 		{
 			FlxG.collide(map.loadedMap, player);
+		
 		}
 		
 		

@@ -36,6 +36,9 @@ class LevelLoaderProc
 				cleanArray.push(obj);
 				
 		}
+		
+
+	
 		//trace("Clean array size : " + cleanArray.length);
 		//trace(cleanArray);
 

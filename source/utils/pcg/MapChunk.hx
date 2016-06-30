@@ -24,9 +24,9 @@ class MapChunk
 	
 	public function populateChunk():Array<Array<Int>>
 	{
-	
 	// Temporary templates
 	accessibleChunk = FlxG.random.getObject(Reg.mapChunkTemplates);
+	
 	if (FlxG.random.int(0,100) < 50) // maybe reverse them for more variety and little effort :D
 	{
 		for (i in 0...accessibleChunk.length)

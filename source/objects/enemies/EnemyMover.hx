@@ -11,20 +11,33 @@ import flixel.math.FlxMath;
 class EnemyMover extends Enemy
 {
 	private var sinfact:Float = 0;
+	private var factor:Int = 0;
 
 	public function new(x:Float, y:Float) 
 	{
+	    super(x, y);
 		HP = 1;
-		super(x, y);
-		makeGraphic(8, 8, FlxColor.RED);
-	
+	    chooseDirection();
+		makeGraphic(8, 8, FlxColor.PURPLE);	
+		immovable = true;
 	}
 	
+	public function chooseDirection()
+	{
+		while (factor == 0)
+		{
+			factor = FlxG.random.int( -1, 1);
+		}
+	}
     override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		if (_appeared)
+		{
 		move();
-	}
+		}
+		
+		}
 	override public function kill():Void
 	{
 		drops = [new HealthItem(x, y)];
@@ -34,8 +47,8 @@ class EnemyMover extends Enemy
 	
 	private function move()
 	{
-		sinfact += .08 * Math.PI;
-		y = Math.sin(sinfact);
+		sinfact += factor * .03 * Math.PI;
+		y += Math.sin(sinfact);
 		x -= 0.5;	
 	}
 	
