@@ -93,15 +93,17 @@ class PlayState extends FlxState
 	
 		add(_entities);
 		//add(_system);
-
+		items.clear();
+		coins.clear();
 		super.create();
 	}
 	
 	override public function update(elapsed:Float):Void
 	{
-		super.update(elapsed);
 		collisions();
-//	    trace(items.length);
+		cleanItems();
+		trace(EBullets.length);
+		//trace("coins length " + coins.length);
 //		trace(items.members);
 
 		FlxSpriteUtil.bound(player, 
@@ -117,6 +119,8 @@ class PlayState extends FlxState
 			player.damage();
 		//    FlxObject.separate(FlxG.camera, player);
 		}
+		
+				super.update(elapsed);
 	}
 	
 	public function cameraSetup()
@@ -145,14 +149,21 @@ class PlayState extends FlxState
 		
 		for (enemy in enemies)
 		{
+			if (FlxG.collide(enemy, player))
+			{
+				player.damage();
+				enemy.kill();
+			}
+			
 		    for (bullet in PBullets){
 			   if (FlxG.collide(enemy, bullet))
 			{
 			       enemy.damage();
 			       bullet.kill();
 			}
-		                            }
-	}
+		            }
+		}
+	
 	
 	   for (item in items)
 	   {
@@ -183,5 +194,33 @@ class PlayState extends FlxState
 			player.damage();
 		
 	    }
+		
+		for (coin in coins)
+		{
+			for (eb in EBullets)
+			{
+				if (coin.magnetized)
+				if (FlxG.collide(coin, eb))
+				{
+					eb.kill();
+					coin.kill();
+				}
+			}
+		}
     }
-}
+	
+	private function cleanItems()
+	{
+	   if (coins.countLiving() < 1)
+	   {
+		coins.clear(); 
+	   }
+	   
+	   if (items.countLiving() < 1)
+	   {
+		   items.clear();
+	   }
+	   
+	  
+
+}}

@@ -9,9 +9,12 @@ class HealthItem extends Item
 	public function new(x:Float,y:Float) 
 	{
 		super(x,y);
-		makeGraphic(8, 8, FlxColor.BLUE, true);
-
-		
+		makeGraphic(8, 8, FlxColor.BLUE);
+	}
+	
+		override public function update(elapsed:Float)
+	{
+		super.update(elapsed);
 	}
 	
 	override function interact(player:Player)

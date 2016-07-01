@@ -1,5 +1,6 @@
 package utils.pcg;
 import flixel.FlxG;
+import flixel.math.FlxRandom;
 
 class MapChunk
 {
@@ -15,17 +16,21 @@ class MapChunk
 	public static var chunkHeight:Int = 20; // This also helps in the level generator when LevelGenerator.concatArray() runs.
 	
 	public var accessibleChunk:Array<Array<Int>>;
+	private var _randomGen:FlxRandom;
 	
 
 	public function new()
 	{
 	    populateChunk(); 
+		_randomGen = new FlxRandom(1);
 	}
 	
 	public function populateChunk():Array<Array<Int>>
 	{
 	// Temporary templates
+
 	accessibleChunk = FlxG.random.getObject(Reg.mapChunkTemplates);
+	
 	
 	if (FlxG.random.int(0,100) < 50) // maybe reverse them for more variety and little effort :D
 	{

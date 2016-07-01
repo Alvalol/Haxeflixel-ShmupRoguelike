@@ -20,10 +20,6 @@ class EnemyBullet extends FlxSprite
 	
 	override public function update(elapsed:Float):Void
 	{
-		
-		
-		super.update(elapsed);
-		
 		var tx:Int = Std.int(x / 8);
 		var ty:Int = Std.int(y / 8);
 		
@@ -32,13 +28,21 @@ class EnemyBullet extends FlxSprite
 		
 			if (Reg.PS.map.loadedMap.getTile(tx, ty) == 1)
 			{
-		    Reg.PS.map.loadedMap.setTile(tx, ty, 0, true) ;
-		    kill();
+		    Reg.PS.map.loadedMap.setTile(tx, ty, 0, true);
+			kill();
 			}
-		}
+		
+			if (!isOnScreen())
+				kill();
+				
 		if (FlxG.overlap(Reg.PS.player, this))
 		     interact(Reg.PS.player);
 			 
+		}
+		
+	
+			 	super.update(elapsed);
+	
 	}
 	
 		private function interact(player:Player)

@@ -13,6 +13,7 @@ import objects.items.HealthMaxItem;
 import objects.items.Item;
 import objects.Player;
 import objects.items.SpeedItem;
+import objects.items.MagnetItem;
 
 class EnemyTurretA extends Enemy
 {
@@ -23,39 +24,61 @@ class EnemyTurretA extends Enemy
 	private var bullet:EnemyBullet;
 	private var justShot:Bool;
 	private var shootDelay:Float = 2;
-	public var tileIndex:Int;
+	private var tx:Int;
+	private var ty:Int;
 
 	
 	public function new(x:Float, y:Float, flip:Bool) 
 	{
-		super(x, y-4); // this causes an issue if turret is on ceiling... needs to use ceiling instance variable.
+		super(x, y); // this causes an issue if turret is on ceiling... needs to use ceiling instance variable.
 		HP = 1;
 
+        tx = Std.int(x / 8);
+        ty = Std.int(y / 8);
 		loadGraphic(AssetPaths.turret__png, true, 8, 8);
+
+
+
+		
 		animation.add("idle", [0]);
+		
 		animation.add("shoot", [1]);
 		animation.play("idle");
 		immovable = true;
 		solid = true;
-		flipY = true;
+		adjustFlip();
+
 	}
 	
 	override public function update(elapsed:Float)
 	{
-		if (!justShot)
+		if (!justShot && isOnScreen())
 			shoot();
 		else
 		   animation.play("idle");
+		   
+		//trace(tileIndex);
+		checkFloorCeiling();
+		//clearBullets();
 		super.update(elapsed);
 	}
 	
 	override public function kill():Void
 	{
-		var drops:Array<Item> = [new HealthItem(x,y), new SpeedItem(x,y), new HealthMaxItem(x,y)];
+		var drops:Array<Item> = [new HealthItem(x,y), new SpeedItem(x,y), new HealthMaxItem(x,y), new MagnetItem(x,y)];
 		dropItem(drops);
 		super.kill();
 	
 	}
+	
+	private function checkFloorCeiling()
+	{
+		if ( (Reg.PS.map.loadedMap.getTile(tx, ty - 1) == 0 && flipY) || (Reg.PS.map.loadedMap.getTile(tx, ty + 1) == 0 && !flipY))
+		{
+			kill();
+		}
+	}
+	
 	private function shoot():Void
 	{
 		// the bullet speed should be a variable that is passed at creation, depending on the flipped value of the enemyTurret
@@ -71,7 +94,7 @@ class EnemyTurretA extends Enemy
 		}
 		else
 		{
-		eb.reset(x + 2, y - 4 );
+		eb.reset(x + 3, y - 4 );
 		eb.velocity.y = SHOOT_SPEED;			
 		}
 	     Reg.PS.EBullets.add(eb);
@@ -84,11 +107,20 @@ class EnemyTurretA extends Enemy
 		
 	}
 	
+	private function clearBullets()
+	{
+		if (Reg.PS.EBullets.countLiving() < 0)
+		{
+			Reg.PS.EBullets.clear();
+		}
+
+	}
 	private function adjustFlip()
 	{
-		
-		
-	
+		if (Reg.PS.map.loadedMap.getTile(tx,ty-1) != 0) // not accurate enough
+		{
+			flipY = true;
+		}
 		
 	}
 	

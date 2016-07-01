@@ -19,8 +19,13 @@ class Player extends FlxSprite
 	private static inline var DECELERATION:Int = 800;
 	public  var HOR_MOVE_SPEED:Int = 50;
 	public var VERT_MOVE_SPEED:Int = 60;
-	public var MAX_HOR_MOVE_SPEED = 80;
-	public var MAX_VERT_MOVE_SPEED = 90;
+	public var MAX_HOR_MOVE_SPEED:Int = 70;
+	public var MAX_VERT_MOVE_SPEED:Int = 80;
+	
+	public var MAGNET:Int = 30;
+	public var MAX_MAGNET:Int = 300;
+	public var MAGNET_FORCE:Int = 20;
+	public var MAX_MAGNET_FORCE:Int = 100;
 	
 	private static inline var MAX_BULLETS:Int = 10;
 	private static inline var BULLET_OFFSET:Int = 1;

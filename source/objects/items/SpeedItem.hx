@@ -9,7 +9,7 @@ class SpeedItem extends Item
 	public function new(x:Float, y:Float) 
 	{
 	  super(x, y);
-	  makeGraphic(8, 8, FlxColor.BROWN, true);
+	  makeGraphic(8, 8, FlxColor.BROWN);
 	  
 		
 	}
@@ -24,8 +24,8 @@ class SpeedItem extends Item
 		if (player.HOR_MOVE_SPEED < player.MAX_HOR_MOVE_SPEED 
 		    && player.VERT_MOVE_SPEED < player.MAX_VERT_MOVE_SPEED)
 			{
-				player.HOR_MOVE_SPEED += 10;
-				player.VERT_MOVE_SPEED += 10;
+				player.HOR_MOVE_SPEED += 5;
+				player.VERT_MOVE_SPEED += 5;
 				player.maxVelocity.set(player.HOR_MOVE_SPEED, player.VERT_MOVE_SPEED);
 			}
 

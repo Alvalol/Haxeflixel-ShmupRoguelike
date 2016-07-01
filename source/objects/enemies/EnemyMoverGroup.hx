@@ -3,6 +3,7 @@ import flixel.input.FlxAccelerometer;
 import objects.enemies.EnemyMover;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.FlxG;
 
 class EnemyMoverGroup extends FlxSprite
 {

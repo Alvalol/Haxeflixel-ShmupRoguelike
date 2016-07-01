@@ -20,7 +20,7 @@ class HealthMaxItem extends Item
 		{
 		player.MAX_HP ++;
 		player.HP = player.MAX_HP;
-		super.interact(player);
 		}
+		super.interact(player);
 	}
 }

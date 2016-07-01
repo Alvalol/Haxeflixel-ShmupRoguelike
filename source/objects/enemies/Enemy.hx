@@ -63,7 +63,7 @@ class Enemy extends FlxSprite
 
 		var itemRoll = FlxG.random.int(0,100);
 		//trace(itemRoll);
-		if (itemRoll < 10)
+		if (itemRoll < 90)
 		{
 			//trace(itemRoll);
 			var tObject:Item =	FlxG.random.getObject(list);			

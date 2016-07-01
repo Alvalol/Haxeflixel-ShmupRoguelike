@@ -30,7 +30,7 @@ class EnemyLeft extends Enemy
 		
 		if (x - FlxG.camera.scroll.x < FlxG.width && !updatedPosition)
 		{
-			x = FlxG.camera.scroll.x;
+			x = FlxG.camera.scroll.x - 10;
 			updatedPosition = true;
 		}
 		

@@ -34,7 +34,7 @@ class PlayerBullet extends FlxSprite
 			if (ttile == 1)
 			{
 				Reg.PS.map.loadedMap.setTile(tx, ty, 0, true);
-				var newCoin:CoinItem =  Reg.PS.coins.recycle(CoinItem);
+				var newCoin:CoinItem =  Reg.PS.coins.recycle();
 				
 				if (newCoin == null) 
 				    newCoin = new CoinItem(x, y);

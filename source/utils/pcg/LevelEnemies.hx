@@ -28,8 +28,7 @@ class LevelEnemies
 			{
 				currentLevel.setTileByIndex(i, 0, true); // updates the tile so that there is no tile overlapping the enemy
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
-				var en = new EnemyTurretA(enPos.x, enPos.y, false);
-				en.tileIndex = currentLevel.getTileIndexByCoords(enPos);5
+				var en = new EnemyTurretA(enPos.x-4, enPos.y-4, false);
 				Reg.PS.enemies.add(en);
 				
 			}

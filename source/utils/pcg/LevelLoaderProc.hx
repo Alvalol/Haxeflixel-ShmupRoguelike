@@ -33,8 +33,7 @@ class LevelLoaderProc
 		
 		for (obj in generatedMap)
 	    {
-				cleanArray.push(obj);
-				
+				cleanArray.push(obj);		
 		}
 		
 
