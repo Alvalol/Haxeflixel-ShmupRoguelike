@@ -12,7 +12,11 @@ class MenuState extends FlxState
 	override public function create():Void
 	{
 		super.create();
-	
+			
+	 var   cursor = new FlxSprite();
+		cursor.loadGraphic(AssetPaths.cursor__png, false, 8, 8);
+		FlxG.mouse.load(cursor.pixels,4);
+		//FlxG.mouse.visible = false; // must always be set to false pls
 	    var startgame = new FlxButton(FlxG.width / 2 - 50, FlxG.height / 2, 
 		"START GAME", startGame);
 		add(startgame);

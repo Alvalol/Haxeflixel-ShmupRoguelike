@@ -1,5 +1,6 @@
 package objects.enemies;
 
+import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -19,8 +20,10 @@ class EnemyMover extends Enemy
 	    super(x, y);
 		HP = 1;
 	    chooseDirection();
-		makeGraphic(8, 8, FlxColor.PURPLE);	
-		immovable = true;
+		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
+		animation.add("idle", [16,17,18,19,20,21,22], 12, true);
+        animation.play("idle");
+        scale = new FlxPoint(1.5,1.5);
 	}
 	
 	public function chooseDirection()
@@ -32,12 +35,12 @@ class EnemyMover extends Enemy
 	}
     override public function update(elapsed:Float)
 	{
-		super.update(elapsed);
+
 		if (_appeared)
 		{
 		move();
 		}
-		
+		super.update(elapsed);		
 	}
 	
 	override public function kill():Void

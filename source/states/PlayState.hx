@@ -24,6 +24,7 @@ import objects.PlayerBullet;
 import objects.gamesys.Scroller;
 import objects.enemies.Enemy;
 import objects.items.CoinItem;
+import objects.enemies.enemyobjects.EnemyExplosiveExplosion;
 
 import utils.pcg.LevelLoaderProc;
 import utils.pcg.LevelEnemies;
@@ -38,6 +39,8 @@ class PlayState extends FlxState
 	public var player(default, null):Player;
 	public var PBullets:FlxTypedGroup<PlayerBullet>;
 	public var EBullets:FlxTypedGroup<EnemyBullet>;
+	
+	public var EExplosions:FlxTypedGroup<EnemyExplosiveExplosion>;
 	public var enemies(default, null):FlxTypedGroup<Enemy>;
 	public var items(default, null):FlxTypedGroup<Item>;
 	public var coins:FlxTypedGroup < CoinItem>;
@@ -70,7 +73,12 @@ class PlayState extends FlxState
 		
         PBullets = new FlxTypedGroup<PlayerBullet>();
 		EBullets = new FlxTypedGroup<EnemyBullet>();
-	
+		EExplosions = new FlxTypedGroup<EnemyExplosiveExplosion>();
+		
+			
+	    //var   cursor = new FlxSprite();
+		//cursor.loadGraphic(AssetPaths.cursor__png, false, 8, 8);
+		//FlxG.mouse.load(cursor.pixels,4);
 		FlxG.mouse.visible = false; // must always be set to false pls
 		
 		 map = new LevelLoaderProc();
@@ -86,9 +94,11 @@ class PlayState extends FlxState
 		add(PBullets);
 		add(items);
 		//_system.add(goals);
+		_entities.add(EExplosions);
 		_entities.add(EBullets);
 		_entities.add(enemies);
 		
+	
 		LevelEnemies.populateEnemies(map.loadedMap);
 	
 		add(_entities);
@@ -102,8 +112,10 @@ class PlayState extends FlxState
 	{
 		collisions();
 		cleanItems();
-		trace(EBullets.length);
-		//trace("coins length " + coins.length);
+		//trace("items : " + items.length);
+		//trace("enemies : " + enemies.length);
+		//trace("eBullets : " +EBullets.length);
+	    //trace("coins length " + coins.length);
 //		trace(items.members);
 
 		FlxSpriteUtil.bound(player, 
@@ -149,14 +161,14 @@ class PlayState extends FlxState
 		
 		for (enemy in enemies)
 		{
-			if (FlxG.collide(enemy, player))
+			if (FlxG.overlap(enemy, player))
 			{
 				player.damage();
 				enemy.kill();
 			}
 			
 		    for (bullet in PBullets){
-			   if (FlxG.collide(enemy, bullet))
+			   if (FlxG.overlap(enemy, bullet))
 			{
 			       enemy.damage();
 			       bullet.kill();
@@ -167,21 +179,13 @@ class PlayState extends FlxState
 	
 	   for (item in items)
 	   {
-		   if (FlxG.collide(item, player))
+		   if (FlxG.overlap(item, player))
 		   {
 			   item.interact(player);
 		   }
 	   }
 	   
-	   
-	   	   for (coin in coins)
-	   {
-		   if (FlxG.collide(coin, player))
-		   {
-			   coin.interact(player);
-		   }
-	   }
-									
+	 							
 		if (player.alive)
 		{
 			FlxG.collide(map.loadedMap, player);
@@ -189,24 +193,23 @@ class PlayState extends FlxState
 		}
 		
 		
-		if (FlxG.collide(_entities, player))
+		if (FlxG.overlap(_entities, player))
 		{
 			player.damage();
-		
 	    }
 		
 		for (coin in coins)
 		{
 			for (eb in EBullets)
 			{
-				if (coin.magnetized)
-				if (FlxG.collide(coin, eb))
+				if (FlxG.overlap(coin, eb))
 				{
 					eb.kill();
 					coin.kill();
 				}
 			}
-		}
+		}		
+		
     }
 	
 	private function cleanItems()

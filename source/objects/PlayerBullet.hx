@@ -19,7 +19,13 @@ class PlayerBullet extends FlxSprite
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
-		makeGraphic(5, 1, FlxColor.WHITE, false);
+		loadGraphic(AssetPaths.items__png, true, 8, 8);
+		height = 2;
+		width = 8;
+		offset.set(0, 2);
+		animation.add("static", [16]);
+		animation.play("static");
+		animation.add("explosion", [17, 18, 19], 60,false);
 	}
 	
 	override public function update(elapsed:Float)
@@ -37,14 +43,14 @@ class PlayerBullet extends FlxSprite
 				var newCoin:CoinItem =  Reg.PS.coins.recycle();
 				
 				if (newCoin == null) 
-				    newCoin = new CoinItem(x, y);
+				newCoin = new CoinItem(x, y);
 				newCoin.reset(x , y);
 				
 				Reg.PS.coins.add(newCoin);
 			}
-			
-			
-			kill();
+
+			animation.play("explosion");
+			if (animation.finished) kill();
 		}
 		else
 		    move();
@@ -57,6 +63,8 @@ class PlayerBullet extends FlxSprite
 		velocity.x = MOVE_SPEED;
 		
 	}
+	
+
 
 
 }

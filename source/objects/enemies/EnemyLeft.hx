@@ -18,9 +18,12 @@ class EnemyLeft extends Enemy
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
-		
 		HP = 1;
-		makeGraphic(8, 8, FlxColor.PURPLE);
+		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
+		animation.add("idle", [8,9,10,11], 12, true);
+        animation.play("idle");
+		flipX = true;
+		
 	}
 	
 	override public function update(elapsed:Float) 
@@ -30,7 +33,7 @@ class EnemyLeft extends Enemy
 		
 		if (x - FlxG.camera.scroll.x < FlxG.width && !updatedPosition)
 		{
-			x = FlxG.camera.scroll.x - 10;
+			reset(FlxG.camera.scroll.x - 50, y);
 			updatedPosition = true;
 		}
 		

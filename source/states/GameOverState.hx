@@ -22,7 +22,11 @@ class GameOverSubState extends FlxState
 	override public function create():Void
 	{
 		super.create();
-		FlxG.mouse.visible = true; // temporary
+			
+	 var   cursor = new FlxSprite();
+		cursor.loadGraphic(AssetPaths.cursor__png, false, 8, 8);
+		FlxG.mouse.load(cursor.pixels,4);
+		FlxG.mouse.visible = true; // must always be set to false pls
 		_text = new FlxText(FlxG.width / 2 - 50, 20, FlxG.width, "Game Over");
 		_textScore = new FlxText(FlxG.width/ 2 - 50, FlxG.width, FlxG.width, Reg.score);
 	    _restartButton = new FlxButton(FlxG.width / 2 - 60, 60, "Restart", onClick);

@@ -24,7 +24,7 @@ class Player extends FlxSprite
 	
 	public var MAGNET:Int = 30;
 	public var MAX_MAGNET:Int = 300;
-	public var MAGNET_FORCE:Int = 20;
+	public var MAGNET_FORCE:Int = 40;
 	public var MAX_MAGNET_FORCE:Int = 100;
 	
 	private static inline var MAX_BULLETS:Int = 10;
@@ -41,15 +41,15 @@ class Player extends FlxSprite
 		super(x,y);
 		HP = 3; //3
 		MAX_HP = 3;
-		loadGraphic(AssetPaths.player__png, true, 8, 8);
+		loadGraphic(AssetPaths.player__png, true, 16, 8);
 	
 	
-		width = 2; // maybe one hitbox for death, another hitbox for animations / collision with maps.
-		height = 2;
+		width = 8; // maybe one hitbox for death, another hitbox for animations / collision with maps.
+		height = 8;
 		centerOffsets();
-		animation.add("move", [0]);
+		animation.add("move", [0,1,2],30);
 		animation.play("move");
-	
+	    immovable = false;
 		drag.x = DECELERATION;
 		drag.y = DECELERATION;
 		maxVelocity.set(HOR_MOVE_SPEED, VERT_MOVE_SPEED);
@@ -120,6 +120,5 @@ class Player extends FlxSprite
 	{
 		super.kill();
 		FlxG.switchState(new GameOverSubState());
-
 	}
 }

@@ -8,7 +8,7 @@
 -cp C:/HaxeToolkit/haxe/lib/flixel-addons/2,0,0
 -D flixel-addons=2.0.0
 -cp source
--cp C:\HaxeToolkit\haxe\lib/lime/2,9,1/legacy
+-cp C:\HaxeToolkit\haxe\lib\lime/2,9,1/legacy
 -D openfl-legacy
 -D tools=2.9.1
 -D lime-legacy

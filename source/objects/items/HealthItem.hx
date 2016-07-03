@@ -2,14 +2,19 @@ package objects.items;
 import objects.Player;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
+import flixel.FlxG;
 
 class HealthItem extends Item
 {
 
 	public function new(x:Float,y:Float) 
 	{
-		super(x,y);
-		makeGraphic(8, 8, FlxColor.BLUE);
+		super(x, y);
+		lifespan = 4;
+		loadGraphic(AssetPaths.items__png, true, 8,8);
+		animation.add("move", [7,8,9,10,11], 12);
+		animation.play("move");
+
 	}
 	
 		override public function update(elapsed:Float)

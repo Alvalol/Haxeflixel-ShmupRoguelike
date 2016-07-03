@@ -19,7 +19,7 @@ class EnemyTurretA extends Enemy
 {
 
     private static inline var SCORE_AMOUNT:Int = 100;
-	private static inline var SHOOT_SPEED = 200;
+	private static inline var SHOOT_SPEED = 150;
 	
 	private var bullet:EnemyBullet;
 	private var justShot:Bool;
@@ -35,14 +35,10 @@ class EnemyTurretA extends Enemy
 
         tx = Std.int(x / 8);
         ty = Std.int(y / 8);
-		loadGraphic(AssetPaths.turret__png, true, 8, 8);
-
-
-
+		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		
-		animation.add("idle", [0]);
-		
-		animation.add("shoot", [1]);
+		animation.add("idle", [0,1], 6, true);
+		animation.add("shoot", [0, 1, 2, 3, 4, 5, 6, 7,7,7, 8, 8] , 8,false);
 		animation.play("idle");
 		immovable = true;
 		solid = true;
@@ -53,22 +49,67 @@ class EnemyTurretA extends Enemy
 	override public function update(elapsed:Float)
 	{
 		if (!justShot && isOnScreen())
-			shoot();
-		else
-		   animation.play("idle");
-		   
-		//trace(tileIndex);
+		{
+		    animation.play("shoot");
+			justShot = true;
+		}
+
+			if (animation.curAnim.name == "shoot" && animation.curAnim.curFrame == 6)
+			{
+				Reg.PS.EBullets.add(shoot());
+				animation.play("idle");
+			}
+			
+		for (bullet in Reg.PS.EBullets)
+		{
+			
+		
+		if (FlxG.overlap(Reg.PS.player, bullet))
+		bullet.interact(Reg.PS.player);
+		}
+	
+		
 		checkFloorCeiling();
-		//clearBullets();
+
 		super.update(elapsed);
 	}
+		
+	private function shoot():EnemyBullet
+	{
+		// the bullet speed should be a variable that is passed at creation, depending on the flipped value of the enemyTurret
+
+	
+		var eb:EnemyBullet = Reg.PS.EBullets.recycle();
+	    if (eb == null)
+		    eb = new EnemyBullet(x, y);
+        
+						if (!flipY)
+		{
+			
+		eb.reset(x , y - 1 );
+		eb.velocity.y = -SHOOT_SPEED;
+		}
+		else
+		{
+		eb.reset(x, y + 1 );
+		eb.velocity.y = SHOOT_SPEED;			
+		}
+
+		new FlxTimer().start(shootDelay, function(_)
+		{
+
+			justShot = false;
+		}, 1);	
+		
+		return eb; 
+	}
+	
 	
 	override public function kill():Void
 	{
 		var drops:Array<Item> = [new HealthItem(x,y), new SpeedItem(x,y), new HealthMaxItem(x,y), new MagnetItem(x,y)];
 		dropItem(drops);
 		super.kill();
-	
 	}
 	
 	private function checkFloorCeiling()
@@ -78,34 +119,7 @@ class EnemyTurretA extends Enemy
 			kill();
 		}
 	}
-	
-	private function shoot():Void
-	{
-		// the bullet speed should be a variable that is passed at creation, depending on the flipped value of the enemyTurret
-		justShot = true;
-		var eb:EnemyBullet = Reg.PS.EBullets.recycle();
-	    if (eb == null)
-		    eb = new EnemyBullet(x, y);
-		
-		if (!flipY)
-		{
-		eb.reset(x + 3, y - 4 );
-		eb.velocity.y = -SHOOT_SPEED;
-		}
-		else
-		{
-		eb.reset(x + 3, y - 4 );
-		eb.velocity.y = SHOOT_SPEED;			
-		}
-	     Reg.PS.EBullets.add(eb);
 
-		new FlxTimer().start(shootDelay, function(_)
-		{
-			justShot = false;
-			animation.play("shoot");
-		}, 1);
-		
-	}
 	
 	private function clearBullets()
 	{

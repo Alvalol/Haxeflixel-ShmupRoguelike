@@ -3,6 +3,7 @@ import flixel.math.FlxPoint;
 import flixel.tile.FlxTilemap;
 import flixel.FlxG;
 import objects.enemies.Enemy;
+import objects.enemies.EnemyExplosive;
 import objects.enemies.EnemyLeft;
 import objects.enemies.EnemyMover;
 import objects.enemies.EnemyMoverGroup;
@@ -48,8 +49,17 @@ class LevelEnemies
 			{
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
 				currentLevel.setTileByIndex(i, 0, true);
+				
+				var roll = FlxG.random.int(0, 100);
+				if(roll>5){
 				var enemy = new EnemyLeft(enPos.x, enPos.y);
 				Reg.PS.enemies.add(enemy);
+				}
+				else{
+				
+				var enemy = new EnemyExplosive(enPos.x, enPos.y);
+				Reg.PS.enemies.add(enemy);
+				}
 			   }
 	}
 	}

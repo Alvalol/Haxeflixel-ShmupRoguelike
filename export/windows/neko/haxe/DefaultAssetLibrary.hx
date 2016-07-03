@@ -70,6 +70,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
 		Font.registerFont (__ASSET__flixel_fonts_nokiafc22_ttf);
 		Font.registerFont (__ASSET__flixel_fonts_monsterrat_ttf);
 		
@@ -78,6 +81,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -603,6 +609,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_monsterrat_ttf);
 		
@@ -615,8 +624,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/data/pixel-font.ttf", AssetType.FONT);
 		path.set ("assets/data/sandbox.tmx", "assets/data/sandbox.tmx");
 		type.set ("assets/data/sandbox.tmx", AssetType.TEXT);
+		path.set ("assets/images/enemies.png", "assets/images/enemies.png");
+		type.set ("assets/images/enemies.png", AssetType.IMAGE);
 		path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");
 		type.set ("assets/images/images-go-here.txt", AssetType.TEXT);
+		path.set ("assets/images/items.png", "assets/images/items.png");
+		type.set ("assets/images/items.png", AssetType.IMAGE);
 		path.set ("assets/images/player.png", "assets/images/player.png");
 		type.set ("assets/images/player.png", AssetType.IMAGE);
 		path.set ("assets/images/player.pyxel", "assets/images/player.pyxel");
@@ -625,6 +638,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/images/solid.png", AssetType.IMAGE);
 		path.set ("assets/images/solidtiles.pyxel", "assets/images/solidtiles.pyxel");
 		type.set ("assets/images/solidtiles.pyxel", AssetType.TEXT);
+		path.set ("assets/images/sys/cursor.png", "assets/images/sys/cursor.png");
+		type.set ("assets/images/sys/cursor.png", AssetType.IMAGE);
 		path.set ("assets/images/tiles.png", "assets/images/tiles.png");
 		type.set ("assets/images/tiles.png", AssetType.IMAGE);
 		path.set ("assets/images/tiles.png_palette.png", "assets/images/tiles.png_palette.png");
@@ -656,9 +671,15 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/data/sandbox.tmx";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
+		id = "assets/images/enemies.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/images/images-go-here.txt";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
+		id = "assets/images/items.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/images/player.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
@@ -671,6 +692,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/images/solidtiles.pyxel";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
+		id = "assets/images/sys/cursor.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/images/tiles.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
@@ -726,6 +750,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("assets/data/pixel-font.ttf", __ASSET__assets_data_pixel_font_ttf);
 		type.set ("assets/data/pixel-font.ttf", AssetType.FONT);
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -1482,6 +1509,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends null { }
@@ -1492,6 +1522,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 #elseif html5
 
 @:keep #if display private #end class __ASSET__assets_data_pixel_font_ttf extends lime.text.Font { public function new () { super (); name = "Early GameBoy Regular"; } } 
+
+
+
 
 
 

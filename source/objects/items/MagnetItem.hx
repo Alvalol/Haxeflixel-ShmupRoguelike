@@ -2,7 +2,7 @@ package objects.items;
 import objects.Player;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
-
+import flixel.FlxG;
 
 class MagnetItem extends Item
 {
@@ -10,7 +10,11 @@ class MagnetItem extends Item
 	public function new(x:Float, y:Float)
 	{
 		super(x, y);
-		makeGraphic(8, 8, FlxColor.GREEN);
+		//makeGraphic(8, 8, FlxColor.GREEN);
+		lifespan = 4;
+		loadGraphic(AssetPaths.items__png, true, 8,8);
+		animation.add("static", [3]);
+		animation.play("static");
 	}
 	
 		override public function update(elapsed:Float)

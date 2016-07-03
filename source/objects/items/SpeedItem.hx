@@ -2,6 +2,7 @@ package objects.items;
 import objects.Player;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
+import flixel.FlxG;
 
 class SpeedItem extends Item
 {
@@ -9,8 +10,11 @@ class SpeedItem extends Item
 	public function new(x:Float, y:Float) 
 	{
 	  super(x, y);
-	  makeGraphic(8, 8, FlxColor.BROWN);
-	  
+	 // makeGraphic(8, 8, FlxColor.BROWN);
+	  lifespan = 4;
+		loadGraphic(AssetPaths.items__png, true, 8,8);
+		animation.add("static", [4]);
+		animation.play("static");
 		
 	}
 	

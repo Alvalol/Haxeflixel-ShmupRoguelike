@@ -10,51 +10,65 @@ class EnemyBullet extends FlxSprite
 {
 
 	private static var trail:FlxTrail;
-	private static inline var SCORE_AMOUNT:Int = 100;
+	
+	private var bTrail:FlxTrail;
 	
 	public function new(x:Float,y:Float) 
 	{
-		super(x,y);
-		makeGraphic(2, 2, FlxColor.WHITE, false); // placeholder;
+		super(x, y);
+		loadGraphic(AssetPaths.items__png, true, 8, 8);
+		animation.add("idle", [14, 15], 8, false);
+		animation.play("idle");
+		width = 8;
+		height = 8;
+		bTrail = new FlxTrail(this, null, 10, 1, 0.3, 0.05);
+		Reg.PS.add(bTrail);
+
 	}
 	
 	override public function update(elapsed:Float):Void
 	{
 		var tx:Int = Std.int(x / 8);
 		var ty:Int = Std.int(y / 8);
+		var ttile = Reg.PS.map.loadedMap.getTile(tx, ty);
 		
-		if (!isOnScreen() || FlxG.overlap(Reg.PS.map.loadedMap,this) && Reg.PS.map.loadedMap.getTile(tx, ty) != 0)
+		if (isOnScreen())
 		{
-		
-			if (Reg.PS.map.loadedMap.getTile(tx, ty) == 1)
-			{
-		    Reg.PS.map.loadedMap.setTile(tx, ty, 0, true);
-			kill();
-			}
-		
-			if (!isOnScreen())
-				kill();
-				
-		if (FlxG.overlap(Reg.PS.player, this))
-		     interact(Reg.PS.player);
-			 
+			bTrail.reset(x, y);
+			bTrail.visible = true; // needs a fix
+		}
+		else
+		{
+			bTrail.visible = false;
 		}
 		
-	
-			 	super.update(elapsed);
-	
+		if ((!isOnScreen() || FlxG.overlap(Reg.PS.map.loadedMap,this) && ttile != 0))
+		{
+		
+			if (ttile == 1)
+			{
+		    Reg.PS.map.loadedMap.setTile(tx, ty, 0, true);
+			}
+			
+			kill();
+		}
+
+			 
+		super.update(elapsed);
 	}
 	
-		private function interact(player:Player)
+		public function interact(player:Player)
 	{
+		kill();
 		player.damage();
-		kill();	
+
 	}
 	
 	override public function kill():Void
 	{	
-	 alive = false;
-	 exists = false;
+		bTrail.visible = false;
+	super.kill();
+
 	}
 	
 	
