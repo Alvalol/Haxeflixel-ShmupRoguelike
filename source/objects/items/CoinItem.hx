@@ -11,8 +11,8 @@ import flixel.FlxObject;
 
 class CoinItem extends Item
 {
-	public var magnetized:Bool = false;
-	private var cTrail:FlxTrail;
+	public var magnetized:Bool;
+	private var bTrail:FlxTrail;
 
 	
 	override public function new(x:Float,y:Float) 
@@ -23,15 +23,36 @@ class CoinItem extends Item
 		offset.set( -4, -4);
 		lifespan = FlxG.random.int(6, 10);
 		centerOffsets();
-		cTrail = new FlxTrail(this, null, 10, 2, 0.5, 0.08);
-		Reg.PS.add(cTrail);
+
+		/*
+		
+		bTrail =  cast Reg.PS.effects.recycle();		
+		if (bTrail== null) 
+            bTrail = new FlxTrail(this, null, 10, 1, 0.3, 0.05);
+			bTrail.reset(x , y);	
+			Reg.PS.effects.add(bTrail);*/
 	}
 		
 	override public function update(elapsed:Float)
 	{
-		cTrail.update(elapsed);
+	/*	if (velocity.x > 0)
+		{
+		bTrail.update(elapsed);
+		}*/
 		angle+= 5;
+		if (magnetized)
 		move();
+		else
+		{velocity.set(0, 0);
+		acceleration.set(0, 0);}
+		
+			trace(FlxMath.distanceBetween(this, Reg.PS.player));	
+		
+	    if (FlxMath.distanceBetween(this,Reg.PS.player) < Reg.PS.player.MAGNET && magnetized == false )
+			magnetized = true;	
+		else
+		    magnetized = false;
+			
 		noOverlapping();
 		
 		
@@ -49,9 +70,6 @@ class CoinItem extends Item
 		move();
 	}
 		
-	    if (FlxMath.distanceBetween(Reg.PS.player, this) < 20)
-		{
-			magnetized = true;	
 	        angularVelocity = 100;
 			var rotPos = rotateOnPlayer(); 
 			setPosition(rotPos.x,rotPos.y);
@@ -103,7 +121,7 @@ class CoinItem extends Item
 	override function kill()
 	{
 		super.kill();
-	    cTrail.kill(); // this needs to be worked out for Ebullets as well
+	   //s bTrail.kill(); // this needs to be worked out for Ebullets as well
 	}
 	
 }

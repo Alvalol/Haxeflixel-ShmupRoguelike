@@ -28,7 +28,7 @@ class Player extends FlxSprite
 	public var MAX_MAGNET_FORCE:Int = 100;
 	
 	private static inline var MAX_BULLETS:Int = 10;
-	private static inline var BULLET_OFFSET:Int = 1;
+	private static inline var BULLET_OFFSET:Int = 3;
 	
 	public var HP:Int;
 	public var MAX_HP:Int;
@@ -100,7 +100,7 @@ class Player extends FlxSprite
 			var pb:PlayerBullet =  Reg.PS.PBullets.recycle();
 			if (pb == null)
 			    pb = new PlayerBullet(x,y);
-			pb.reset(x + BULLET_OFFSET, y + BULLET_OFFSET );
+			pb.reset(x + BULLET_OFFSET, y + 4 );
 			Reg.PS.PBullets.add(pb);
 			//FlxG.camera.shake(0.003, 0.05);
 			_cooldown = .5;

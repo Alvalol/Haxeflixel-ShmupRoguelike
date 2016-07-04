@@ -20,16 +20,16 @@ class PlayerBullet extends FlxSprite
 	{
 		super(x, y);
 		loadGraphic(AssetPaths.items__png, true, 8, 8);
-		height = 2;
+		height = 2; // weird collision
 		width = 8;
-		offset.set(0, 2);
+		centerOffsets();
 		animation.add("static", [16]);
 		animation.play("static");
-		animation.add("explosion", [17, 18, 19], 60,false);
 	}
 	
 	override public function update(elapsed:Float)
-	{	
+	{
+		
 		var tx:Int = Std.int(x / 8);
 		var ty:Int = Std.int(y / 8);
 		var ttile = Reg.PS.map.loadedMap.getTile(tx, ty);
@@ -49,22 +49,25 @@ class PlayerBullet extends FlxSprite
 				Reg.PS.coins.add(newCoin);
 			}
 
-			animation.play("explosion");
-			if (animation.finished) kill();
+			kill();
+
 		}
 		else
 		    move();
 			
+
 		super.update(elapsed);
 	}
-	
+
 	public function move()
 	{
 		velocity.x = MOVE_SPEED;
 		
 	}
-	
 
-
-
+	override public function kill()
+	{
+		super.kill();
+		
+	}
 }

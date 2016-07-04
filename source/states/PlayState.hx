@@ -8,6 +8,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.FlxCamera;
+import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
 import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
@@ -15,6 +16,7 @@ import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxSpriteUtil;
 import objects.items.Item;
+import flixel.addons.effects.FlxTrail;
 
 
 import objects.enemies.EnemyBullet;
@@ -39,12 +41,13 @@ class PlayState extends FlxState
 	public var player(default, null):Player;
 	public var PBullets:FlxTypedGroup<PlayerBullet>;
 	public var EBullets:FlxTypedGroup<EnemyBullet>;
-	
+	public var effects:FlxSpriteGroup;
 	public var EExplosions:FlxTypedGroup<EnemyExplosiveExplosion>;
 	public var enemies(default, null):FlxTypedGroup<Enemy>;
 	public var items(default, null):FlxTypedGroup<Item>;
 	public var coins:FlxTypedGroup < CoinItem>;
-//	public var goals(default, null):FlxTypedGroup<Goal>;
+
+	//	public var goals(default, null):FlxTypedGroup<Goal>;
 	private var _entities:FlxGroup;
 //	private var _system:FlxGroup;
 
@@ -65,6 +68,7 @@ class PlayState extends FlxState
 		
 		player = new Player(16, FlxG.width/2);
 		enemies = new FlxTypedGroup<Enemy>();
+		effects = new FlxSpriteGroup();
 		coins = new FlxTypedGroup<CoinItem>();
 		items = new FlxTypedGroup<Item>();
 		//goals = new FlxTypedGroup<Goal>();
@@ -80,14 +84,14 @@ class PlayState extends FlxState
 		//cursor.loadGraphic(AssetPaths.cursor__png, false, 8, 8);
 		//FlxG.mouse.load(cursor.pixels,4);
 		FlxG.mouse.visible = false; // must always be set to false pls
-		
+		 
 		 map = new LevelLoaderProc();
 		_gameCamera = new FlxCamera();
 		_hudCamera = new FlxCamera();
       	cameraSetup();
 		
 		
-
+add(effects);
 		add(map.loadedMap);
 		add(coins);
 		add(player);
@@ -116,7 +120,8 @@ class PlayState extends FlxState
 		//trace("enemies : " + enemies.length);
 		//trace("eBullets : " +EBullets.length);
 	    //trace("coins length " + coins.length);
-//		trace(items.members);
+		//trace(length);
+		trace(effects.length);
 
 		FlxSpriteUtil.bound(player, 
 		                    FlxG.camera.scroll.x, 
@@ -222,6 +227,11 @@ class PlayState extends FlxState
 	   if (items.countLiving() < 1)
 	   {
 		   items.clear();
+	   }
+	   
+	   if (effects.countLiving() < 1)
+	   {
+		   effects.clear();
 	   }
 	   
 	  

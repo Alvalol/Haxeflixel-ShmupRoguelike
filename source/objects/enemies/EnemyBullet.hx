@@ -21,9 +21,14 @@ class EnemyBullet extends FlxSprite
 		animation.play("idle");
 		width = 8;
 		height = 8;
-		bTrail = new FlxTrail(this, null, 10, 1, 0.3, 0.05);
-		Reg.PS.add(bTrail);
-
+		
+	/*	bTrail =  cast Reg.PS.effects.recycle();
+				
+		if (bTrail== null) 
+            bTrail = new FlxTrail(this, null, 10, 1, 0.3, 0.05);
+		
+		bTrail.reset(x , y);
+		Reg.PS.effects.add(bTrail);*/
 	}
 	
 	override public function update(elapsed:Float):Void
@@ -31,16 +36,7 @@ class EnemyBullet extends FlxSprite
 		var tx:Int = Std.int(x / 8);
 		var ty:Int = Std.int(y / 8);
 		var ttile = Reg.PS.map.loadedMap.getTile(tx, ty);
-		
-		if (isOnScreen())
-		{
-			bTrail.reset(x, y);
-			bTrail.visible = true; // needs a fix
-		}
-		else
-		{
-			bTrail.visible = false;
-		}
+
 		
 		if ((!isOnScreen() || FlxG.overlap(Reg.PS.map.loadedMap,this) && ttile != 0))
 		{
@@ -66,9 +62,10 @@ class EnemyBullet extends FlxSprite
 	
 	override public function kill():Void
 	{	
-		bTrail.visible = false;
 	super.kill();
 
+//	bTrail.visible = false;
+	
 	}
 	
 	
