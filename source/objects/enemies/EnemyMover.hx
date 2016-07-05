@@ -12,27 +12,20 @@ import flixel.math.FlxMath;
 class EnemyMover extends Enemy
 {
 	private var sinfact:Float = 0;
-	private var factor:Int = 0;
+	public var factor:Int = 0;
 	private var MOVE_SPEED:Float = 0.5;
 
 	public function new(x:Float, y:Float) 
 	{
 	    super(x, y);
 		HP = 1;
-	    chooseDirection();
+	   // chooseDirection();
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		animation.add("idle", [16,17,18,19,20,21,22], 12, true);
         animation.play("idle");
         scale = new FlxPoint(1.5,1.5);
 	}
 	
-	public function chooseDirection()
-	{
-		while (factor == 0)
-		{
-			factor = FlxG.random.int( -1, 1);
-		}
-	}
     override public function update(elapsed:Float)
 	{
 

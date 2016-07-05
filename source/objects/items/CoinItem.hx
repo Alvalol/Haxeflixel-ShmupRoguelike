@@ -12,7 +12,7 @@ import flixel.FlxObject;
 class CoinItem extends Item
 {
 	public var magnetized:Bool;
-	private var bTrail:FlxTrail;
+//	private var bTrail:FlxTrail;
 
 	
 	override public function new(x:Float,y:Float) 
@@ -21,9 +21,8 @@ class CoinItem extends Item
 		var t = FlxG.random.int(2, 5);
 		makeGraphic(t,t, FlxColor.WHITE);
 		offset.set( -4, -4);
-		lifespan = FlxG.random.int(6, 10);
+		_appeared = false;
 		centerOffsets();
-
 		/*
 		
 		bTrail =  cast Reg.PS.effects.recycle();		
@@ -35,18 +34,24 @@ class CoinItem extends Item
 		
 	override public function update(elapsed:Float)
 	{
-	/*	if (velocity.x > 0)
+		   if (FlxG.overlap(this, Reg.PS.player))
+		   {
+			   this.interact(Reg.PS.player);
+		   }
+	   
+	    angle+= 5;
+		if (velocity.x > 0)
 		{
-		bTrail.update(elapsed);
-		}*/
-		angle+= 5;
+		//bTrail.update(elapsed);
+		}
+
 		if (magnetized)
 		move();
 		else
 		{velocity.set(0, 0);
 		acceleration.set(0, 0);}
 		
-			trace(FlxMath.distanceBetween(this, Reg.PS.player));	
+		//trace(FlxMath.distanceBetween(this, Reg.PS.player));	
 		
 	    if (FlxMath.distanceBetween(this,Reg.PS.player) < Reg.PS.player.MAGNET && magnetized == false )
 			magnetized = true;	
@@ -54,28 +59,18 @@ class CoinItem extends Item
 		    magnetized = false;
 			
 		noOverlapping();
-		
-		
-		
-	  for (coin in Reg.PS.coins)
-	   {
-		   if (FlxG.overlap(coin, Reg.PS.player))
-		   {
-			   coin.interact(Reg.PS.player);
-		   }
-	   }
-/*
+
 	if (!magnetized)
 	{
 		move();
 	}
 		
-	        angularVelocity = 100;
-			var rotPos = rotateOnPlayer(); 
-			setPosition(rotPos.x,rotPos.y);
-		}*/
+	      //  angularVelocity = 100;
+		//	var rotPos = rotateOnPlayer(); 
+		//	setPosition(rotPos.x,rotPos.y);
 		
-		super.update(elapsed);	
+		
+		super.update(elapsed);
 	}
 	
 	
@@ -88,7 +83,7 @@ class CoinItem extends Item
 		FlxVelocity.accelerateTowardsObject(this, Reg.PS.player, Reg.PS.player.MAGNET_FORCE, Reg.PS.player.MAGNET_FORCE * 2);
 		}
 	}
-	
+
 	private function rotateOnPlayer():FlxPoint
 	{
 		angle = (angle) * (Math.PI / 180);
@@ -104,24 +99,29 @@ class CoinItem extends Item
 	{
 		for (coin in Reg.PS.coins)
 		{
-			if (FlxG.collide(this, coin))
+			if (FlxG.overlap(this, coin))
 			{
 				FlxObject.separate(this, coin);
 			}
 		}
 	}
+	
+	override public function kill()
+	{
+		lifespan = 4;
+		super.kill();
+		
+	}
     override function interact(player:Player)
 	{
-	  velocity.set(0, 0);
 	  kill();
-
 	  Reg.score += 5;
 	}
 	
-	override function kill()
+	/*override function kill()
 	{
 		super.kill();
 	   //s bTrail.kill(); // this needs to be worked out for Ebullets as well
-	}
+	}*/
 	
 }

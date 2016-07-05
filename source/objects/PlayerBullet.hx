@@ -6,6 +6,7 @@ import flixel.FlxG;
 import flixel.math.FlxPoint;
 import flixel.addons.effects.FlxTrail;
 import flixel.util.FlxColor;
+import objects.enemies.Enemy;
 import objects.items.CoinItem;
 
 
@@ -44,8 +45,8 @@ class PlayerBullet extends FlxSprite
 				
 				if (newCoin == null) 
 				newCoin = new CoinItem(x, y);
-				newCoin.reset(x , y);
 				
+			    newCoin.reset(x , y);
 				Reg.PS.coins.add(newCoin);
 			}
 
@@ -59,15 +60,14 @@ class PlayerBullet extends FlxSprite
 		super.update(elapsed);
 	}
 
+
 	public function move()
 	{
-		velocity.x = MOVE_SPEED;
-		
+		velocity.x = MOVE_SPEED;	
 	}
 
 	override public function kill()
 	{
 		super.kill();
-		
 	}
 }

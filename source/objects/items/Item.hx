@@ -14,7 +14,7 @@ class Item extends FlxSprite
 	// Maybe each item has its own drop % modifier, so that it will make some items more rare, and not only based on enemy types that can drop them.
 	
 	private var _appeared:Bool = false;
-	public var lifespan:Int;
+	private var lifespan:Int;
 	private var tframe:Int;
 	
 
@@ -38,8 +38,7 @@ class Item extends FlxSprite
 		if (isOnScreen() && !_appeared) 
 			_appeared = true;
 			
-			
-	
+
 		if (!isOnScreen())
 		    kill();
 			
@@ -56,7 +55,12 @@ class Item extends FlxSprite
 	private function onTimedOut(t:FlxFlicker):Void
 	{
 		kill();
-
+	}
+	
+	override public function kill()
+	{
+		_appeared = false;
+		super.kill();
 	}
 	
 	public function interact(player:Player)

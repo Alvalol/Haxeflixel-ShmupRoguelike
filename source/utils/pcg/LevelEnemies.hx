@@ -7,6 +7,7 @@ import objects.enemies.EnemyExplosive;
 import objects.enemies.EnemyLeft;
 import objects.enemies.EnemyMover;
 import objects.enemies.EnemyMoverGroup;
+import objects.enemies.EnemyMultishotDeath;
 import objects.enemies.EnemyTurretA;
 
 
@@ -23,7 +24,8 @@ class LevelEnemies
 	{
 		for (i in 0...currentLevel.totalTiles) // this must be false or else it will return 0,1 only
 		{
-	
+			if (FlxG.camera.scroll.x + FlxG.width + 10 >= currentLevel.getTileCoordsByIndex(i).x)
+			{
 			// Add more randomness to the enemy picking. 3 could be a type of enemy, for instance.
 			if (currentLevel.getTileByIndex(i) == 3)
 			{
@@ -31,9 +33,9 @@ class LevelEnemies
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
 				var en = new EnemyTurretA(enPos.x-4, enPos.y-4, false);
 				Reg.PS.enemies.add(en);
+		    }
 				
-			}
-			
+
 			if (currentLevel.getTileByIndex(i) == 4)
 			{
 				currentLevel.setTileByIndex(i, 0, true);
@@ -51,16 +53,17 @@ class LevelEnemies
 				currentLevel.setTileByIndex(i, 0, true);
 				
 				var roll = FlxG.random.int(0, 100);
-				if(roll>5){
+				if(roll>50){
 				var enemy = new EnemyLeft(enPos.x, enPos.y);
 				Reg.PS.enemies.add(enemy);
 				}
 				else{
 				
-				var enemy = new EnemyExplosive(enPos.x, enPos.y);
+				var enemy = new EnemyMultishotDeath(enPos.x, enPos.y);
 				Reg.PS.enemies.add(enemy);
 				}
 			   }
+			}
 	}
 	}
 	

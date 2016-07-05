@@ -41,7 +41,7 @@ class PlayState extends FlxState
 	public var player(default, null):Player;
 	public var PBullets:FlxTypedGroup<PlayerBullet>;
 	public var EBullets:FlxTypedGroup<EnemyBullet>;
-	public var effects:FlxSpriteGroup;
+	//public var effects:FlxSpriteGroup;
 	public var EExplosions:FlxTypedGroup<EnemyExplosiveExplosion>;
 	public var enemies(default, null):FlxTypedGroup<Enemy>;
 	public var items(default, null):FlxTypedGroup<Item>;
@@ -68,7 +68,7 @@ class PlayState extends FlxState
 		
 		player = new Player(16, FlxG.width/2);
 		enemies = new FlxTypedGroup<Enemy>();
-		effects = new FlxSpriteGroup();
+		//effects = new FlxSpriteGroup();
 		coins = new FlxTypedGroup<CoinItem>();
 		items = new FlxTypedGroup<Item>();
 		//goals = new FlxTypedGroup<Goal>();
@@ -91,7 +91,7 @@ class PlayState extends FlxState
       	cameraSetup();
 		
 		
-add(effects);
+        //add(effects);
 		add(map.loadedMap);
 		add(coins);
 		add(player);
@@ -101,9 +101,6 @@ add(effects);
 		_entities.add(EExplosions);
 		_entities.add(EBullets);
 		_entities.add(enemies);
-		
-	
-		LevelEnemies.populateEnemies(map.loadedMap);
 	
 		add(_entities);
 		//add(_system);
@@ -116,12 +113,16 @@ add(effects);
 	{
 		collisions();
 		cleanItems();
+		LevelEnemies.populateEnemies(map.loadedMap);
 		//trace("items : " + items.length);
 		//trace("enemies : " + enemies.length);
+		//trace(enemies.countLiving());
 		//trace("eBullets : " +EBullets.length);
+		//trace("PBullets : " + PBullets.length);
 	    //trace("coins length " + coins.length);
 		//trace(length);
-		trace(effects.length);
+	
+		//trace(effects.length);
 
 		FlxSpriteUtil.bound(player, 
 		                    FlxG.camera.scroll.x, 
@@ -137,7 +138,7 @@ add(effects);
 		//    FlxObject.separate(FlxG.camera, player);
 		}
 		
-				super.update(elapsed);
+		super.update(elapsed);
 	}
 	
 	public function cameraSetup()
@@ -151,7 +152,6 @@ add(effects);
 		FlxCamera.defaultCameras = [_gameCamera];
 		_hud = new HUD();
 		_hud.setCamera(_hudCamera);
-		
 		_gameCamera.follow(_scroller, FlxCameraFollowStyle.TOPDOWN_TIGHT,0.01);
 		_gameCamera.setScrollBoundsRect(0, 0, map.loadedMap.width, map.loadedMap.height, true);
 		//FlxG.camera.antialiasing = false;
@@ -163,23 +163,21 @@ add(effects);
 	
 	public function collisions()
 	{
+
+
 		
-		for (enemy in enemies)
-		{
-			if (FlxG.overlap(enemy, player))
-			{
-				player.damage();
-				enemy.kill();
-			}
-			
-		    for (bullet in PBullets){
-			   if (FlxG.overlap(enemy, bullet))
+ 	for (enemy in enemies){
+	for (bullet in PBullets)
+	{
+		
+			if(FlxG.overlap(bullet,enemy))
 			{
 			       enemy.damage();
 			       bullet.kill();
 			}
 		            }
-		}
+	}
+		
 	
 	
 	   for (item in items)
@@ -203,7 +201,7 @@ add(effects);
 			player.damage();
 	    }
 		
-		for (coin in coins)
+	/*	for (coin in coins)
 		{
 			for (eb in EBullets)
 			{
@@ -214,7 +212,7 @@ add(effects);
 				}
 			}
 		}		
-		
+	*/	
     }
 	
 	private function cleanItems()
@@ -223,16 +221,34 @@ add(effects);
 	   {
 		coins.clear(); 
 	   }
+	
+	   
+	   if (EBullets.countLiving() < 1)
+	   {
+		EBullets.clear(); 
+	   }
+	   
+	   	   if (enemies.countLiving() < 1)
+	   {
+		enemies.clear(); 
+	   }
 	   
 	   if (items.countLiving() < 1)
 	   {
 		   items.clear();
 	   }
 	   
+	   	   if (PBullets.countLiving() < 1)
+	   {
+		   PBullets.clear();
+	   }
+	   
+	   /*
 	   if (effects.countLiving() < 1)
 	   {
 		   effects.clear();
 	   }
+	   */
 	   
 	  
 

@@ -6,6 +6,7 @@ import flixel.FlxG;
 import flixel.util.FlxTimer;
 import objects.enemies.EnemyBullet;
 import flixel.math.FlxPoint;
+import flixel.math.FlxVelocity;
 import objects.enemies.Enemy;
 import objects.items.CoinItem;
 import objects.items.HealthItem;
@@ -26,13 +27,14 @@ class EnemyTurretA extends Enemy
 	private var shootDelay:Float = 2;
 	private var tx:Int;
 	private var ty:Int;
+	private var type:Int;
 
 	
 	public function new(x:Float, y:Float, flip:Bool) 
 	{
 		super(x, y); // this causes an issue if turret is on ceiling... needs to use ceiling instance variable.
 		HP = 1;
-
+		type = FlxG.random.int(0, 1);
         tx = Std.int(x / 8);
         ty = Std.int(y / 8);
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
@@ -43,6 +45,10 @@ class EnemyTurretA extends Enemy
 		immovable = true;
 		solid = true;
 		adjustFlip();
+		if (type == 1)
+		{
+			color = 0xFFFFFF00;
+		}
 
 	}
 	
@@ -98,10 +104,16 @@ class EnemyTurretA extends Enemy
 		new FlxTimer().start(shootDelay, function(_)
 		{
 
-			justShot = false;
+	    justShot = false;
 		}, 1);	
 		
-		return eb; 
+		if (type == 1)
+		{
+		var aim = new FlxPoint(Reg.PS.player.x, Reg.PS.player.y);
+		FlxVelocity.moveTowardsPoint(eb, aim, 60, 0);
+		}
+		return eb;
+
 	}
 	
 	
@@ -137,6 +149,4 @@ class EnemyTurretA extends Enemy
 		}
 		
 	}
-	
-
 }

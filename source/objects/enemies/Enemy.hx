@@ -23,6 +23,13 @@ class Enemy extends FlxSprite
 	
 	override public function update(elapsed:Float) 
 	{
+		
+		if (FlxG.overlap(this, Reg.PS.player))
+			{
+				interact(Reg.PS.player);
+			}
+			
+			
 		if (!inWorldBounds())
 			exists = false;
 			
@@ -30,7 +37,7 @@ class Enemy extends FlxSprite
 			_appeared = true;	
 			
 			
-		if (HP <= 0)
+		if (HP <= 0 || !isOnScreen() && _appeared)
 		    kill();
 			
 		if (!Reg.pause)
@@ -71,12 +78,14 @@ class Enemy extends FlxSprite
 		}
 		else
 		{
-				var newCoin:CoinItem =  Reg.PS.coins.recycle(CoinItem);
-					
+				var newCoin:CoinItem =  Reg.PS.coins.recycle();
+
+				
 				if (newCoin == null) 
 				    newCoin = new CoinItem(x, y);
 					
 				newCoin.reset(x , y);
+
 				Reg.PS.coins.add(newCoin);
 		}
 	}
