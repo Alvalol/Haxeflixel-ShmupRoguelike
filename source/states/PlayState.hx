@@ -9,12 +9,14 @@ import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.FlxCamera;
 import flixel.group.FlxSpriteGroup;
+import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxSpriteUtil;
+import objects.hazards.Hazard;
 import objects.items.Item;
 import flixel.addons.effects.FlxTrail;
 
@@ -28,6 +30,7 @@ import objects.enemies.Enemy;
 import objects.items.CoinItem;
 import objects.enemies.enemyobjects.EnemyExplosiveExplosion;
 
+
 import utils.pcg.LevelLoaderProc;
 import utils.pcg.LevelEnemies;
 
@@ -37,7 +40,7 @@ class PlayState extends FlxState
 	
 	public var map:LevelLoaderProc;
 	
-	//public var hazardMap:FlxTilemap;
+	public var hazards:FlxTypedGroup<Hazard>;
 	public var player(default, null):Player;
 	public var PBullets:FlxTypedGroup<PlayerBullet>;
 	public var EBullets:FlxTypedGroup<EnemyBullet>;
@@ -68,6 +71,7 @@ class PlayState extends FlxState
 		
 		player = new Player(16, FlxG.width/2);
 		enemies = new FlxTypedGroup<Enemy>();
+		hazards = new FlxTypedGroup<Hazard>();
 		//effects = new FlxSpriteGroup();
 		coins = new FlxTypedGroup<CoinItem>();
 		items = new FlxTypedGroup<Item>();
@@ -100,6 +104,7 @@ class PlayState extends FlxState
 		//_system.add(goals);
 		_entities.add(EExplosions);
 		_entities.add(EBullets);
+		_entities.add(hazards);
 		_entities.add(enemies);
 	
 		add(_entities);
@@ -177,8 +182,6 @@ class PlayState extends FlxState
 			}
 		            }
 	}
-		
-	
 	
 	   for (item in items)
 	   {
@@ -187,19 +190,20 @@ class PlayState extends FlxState
 			   item.interact(player);
 		   }
 	   }
-	   
-	 							
+	   						
 		if (player.alive)
 		{
-			FlxG.collide(map.loadedMap, player);
-		
+		   if (FlxG.collide(map.loadedMap, player))
+		   {
+			player.damage();
+			FlxObject.separate(player, map.loadedMap);
+		   }
 		}
 		
-		
-		if (FlxG.overlap(_entities, player))
+	/*	if (FlxG.overlap(_entities, player))
 		{
 			player.damage();
-	    }
+	    }*/
 		
 	/*	for (coin in coins)
 		{

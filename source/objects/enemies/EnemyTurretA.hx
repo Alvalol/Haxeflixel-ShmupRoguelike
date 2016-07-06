@@ -60,7 +60,7 @@ class EnemyTurretA extends Enemy
 			justShot = true;
 		}
 
-			if (animation.curAnim.name == "shoot" && animation.curAnim.curFrame == 6)
+		if (animation.curAnim.name == "shoot" && animation.curAnim.curFrame == 6)
 			{
 				Reg.PS.EBullets.add(shoot());
 				animation.play("idle");
@@ -68,8 +68,6 @@ class EnemyTurretA extends Enemy
 			
 		for (bullet in Reg.PS.EBullets)
 		{
-			
-		
 		if (FlxG.overlap(Reg.PS.player, bullet))
 		bullet.interact(Reg.PS.player);
 		}
@@ -89,7 +87,7 @@ class EnemyTurretA extends Enemy
 	    if (eb == null)
 		    eb = new EnemyBullet(x, y);
         
-						if (!flipY)
+		if (!flipY)
 		{
 			
 		eb.reset(x , y - 1 );
@@ -103,7 +101,6 @@ class EnemyTurretA extends Enemy
 
 		new FlxTimer().start(shootDelay, function(_)
 		{
-
 	    justShot = false;
 		}, 1);	
 		
@@ -112,8 +109,8 @@ class EnemyTurretA extends Enemy
 		var aim = new FlxPoint(Reg.PS.player.x, Reg.PS.player.y);
 		FlxVelocity.moveTowardsPoint(eb, aim, 60, 0);
 		}
+		
 		return eb;
-
 	}
 	
 	

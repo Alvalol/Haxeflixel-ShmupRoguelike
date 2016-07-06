@@ -11,7 +11,7 @@ class EnemyMoverGroup extends FlxSprite
 	private var chainedGroupSize:Int = 4;
 	private var sep:Int = 0;
 	private inline static var sepMod:Int = 6;
-	private var patterns:Array<Array<Int>> = [[1, 1, 1, 1], [-1,-1,-1,-1]];
+	private var patterns:Array<Array<Int>> = [[1, 1, 1, 1], [-1,-1,-1,-1],[1,-1,1,-1]];
 
 	
 	// can't have these enemies in the first chunk of loadedMap

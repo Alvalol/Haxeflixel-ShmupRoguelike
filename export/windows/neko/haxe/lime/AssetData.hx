@@ -30,6 +30,10 @@ class AssetData {
 			type.set ("assets/images/player.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/player.pyxel", "assets/images/player.pyxel");
 			type.set ("assets/images/player.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+			path.set ("assets/images/playerDawnbringer.pyxel", "assets/images/playerDawnbringer.pyxel");
+			type.set ("assets/images/playerDawnbringer.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+			path.set ("assets/images/playerWip.pyxel", "assets/images/playerWip.pyxel");
+			type.set ("assets/images/playerWip.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
 			path.set ("assets/images/solid.png", "assets/images/solid.png");
 			type.set ("assets/images/solid.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/solidtiles.pyxel", "assets/images/solidtiles.pyxel");

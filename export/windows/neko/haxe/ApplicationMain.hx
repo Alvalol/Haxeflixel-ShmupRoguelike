@@ -57,8 +57,8 @@ class ApplicationMain {
 				
 				#if mobile
 				
-				forceWidth = 1280;
-				forceHeight = 1152;
+				forceWidth = 640;
+				forceHeight = 576;
 				
 				container = new flash.display.Sprite ();
 				barA = new flash.display.Sprite ();
@@ -127,7 +127,7 @@ class ApplicationMain {
 				}
 				
 			},
-			1280, 1152, 
+			640, 576, 
 			60, 
 			0,
 			(true ? flash.Lib.HARDWARE : 0) |
@@ -248,13 +248,13 @@ class ScaledStage extends flash.display.Stage {
 	
 	private override function get_stageHeight ():Int {
 		
-		return 1152;
+		return 576;
 	
 	}
 	
 	private override function get_stageWidth ():Int {
 		
-		return 1280;
+		return 640;
 	
 	}
 	
@@ -325,11 +325,11 @@ class ApplicationMain {
 		wx.App.boot (function () {
 			
 			
-			frame = wx.Frame.create (null, null, "untitled shmup", null, { width: 1280, height: 1152 });
+			frame = wx.Frame.create (null, null, "untitled shmup", null, { width: 640, height: 576 });
 			
 			
 			#if openfl
-			var stage = wx.NMEStage.create (frame, null, null, { width: 1280, height: 1152 });
+			var stage = wx.NMEStage.create (frame, null, null, { width: 640, height: 576 });
 			#end
 			
 			var hasMain = false;
@@ -511,7 +511,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "5371",
+			build: "5559",
 			company: "Alvarop",
 			file: "untitled shmup",
 			fps: 60,
@@ -529,13 +529,13 @@ class ApplicationMain {
 					display: 0,
 					fullscreen: false,
 					hardware: true,
-					height: 1152,
+					height: 576,
 					parameters: "{}",
 					resizable: true,
 					stencilBuffer: false,
 					title: "untitled shmup",
 					vsync: true,
-					width: 1280,
+					width: 640,
 					x: null,
 					y: null
 				},
@@ -545,7 +545,7 @@ class ApplicationMain {
 		
 		#if (js && html5)
 		#if (munit || utest)
-		openfl.Lib.embed (null, 1280, 1152, "null");
+		openfl.Lib.embed (null, 640, 576, "null");
 		#end
 		#else
 		create ();

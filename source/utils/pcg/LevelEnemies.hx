@@ -2,6 +2,7 @@ package utils.pcg;
 import flixel.math.FlxPoint;
 import flixel.tile.FlxTilemap;
 import flixel.FlxG;
+import objects.hazards.HazardHorizontalBlock;
 import objects.enemies.Enemy;
 import objects.enemies.EnemyExplosive;
 import objects.enemies.EnemyLeft;
@@ -9,6 +10,7 @@ import objects.enemies.EnemyMover;
 import objects.enemies.EnemyMoverGroup;
 import objects.enemies.EnemyMultishotDeath;
 import objects.enemies.EnemyTurretA;
+import objects.hazards.HazardLaser;
 
 
 
@@ -63,6 +65,15 @@ class LevelEnemies
 				Reg.PS.enemies.add(enemy);
 				}
 			   }
+			 
+			 if (currentLevel.getTileByIndex(i) == 6)
+			{
+				currentLevel.setTileByIndex(i, 0, true);
+				var enPos = (currentLevel.getTileCoordsByIndex(i));
+				var haz = new HazardHorizontalBlock(enPos.x, enPos.y);
+				Reg.PS.hazards.add(haz);
+		    }  
+			   
 			}
 	}
 	}

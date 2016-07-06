@@ -44,8 +44,8 @@ class Player extends FlxSprite
 		loadGraphic(AssetPaths.player__png, true, 16, 8);
 	
 	
-		width = 8; // maybe one hitbox for death, another hitbox for animations / collision with maps.
-		height = 8;
+		width = 2; // maybe one hitbox for death, another hitbox for animations / collision with maps.
+		height = 2;
 		centerOffsets();
 		animation.add("move", [0,1,2],30);
 		animation.play("move");
@@ -68,7 +68,6 @@ class Player extends FlxSprite
 				
 		if (HP <= 0)
 		   kill();
-		
 		
 		super.update(elapsed);
 	}
@@ -100,7 +99,7 @@ class Player extends FlxSprite
 			var pb:PlayerBullet =  Reg.PS.PBullets.recycle();
 			if (pb == null)
 			    pb = new PlayerBullet(x,y);
-			pb.reset(x + BULLET_OFFSET, y + 4 );
+			pb.reset(x + BULLET_OFFSET, y + 1 );
 			Reg.PS.PBullets.add(pb);
 			//FlxG.camera.shake(0.003, 0.05);
 			_cooldown = .5;
