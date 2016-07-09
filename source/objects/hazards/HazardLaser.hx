@@ -42,7 +42,7 @@ class HazardLaser extends Hazard
 			
 		
 		//trace("counter : " + counter, "max counter : " + maxCounter);
-		trace(tactive);
+		//trace(tactive);
 		super.update(elapsed);
      }
 	

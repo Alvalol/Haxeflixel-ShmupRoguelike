@@ -6,6 +6,7 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import objects.items.Item;
 import objects.items.HealthItem;
+import objects.items.RangeItem;
 import flixel.math.FlxMath;
 
 
@@ -38,7 +39,7 @@ class EnemyMover extends Enemy
 	
 	override public function kill():Void
 	{	
-		drops = [new HealthItem(x, y)];
+		drops = [new HealthItem(x, y),new RangeItem(x,y)];
 		dropItem(drops);
 		super.kill();
 	}

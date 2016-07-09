@@ -1,22 +1,19 @@
 package objects;
-
 import flixel.FlxSprite;
 import flixel.FlxObject;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
 import flixel.addons.effects.FlxTrail;
 import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
 import objects.enemies.Enemy;
 import objects.items.CoinItem;
-
 
 class PlayerBullet extends FlxSprite
 {
 	
 	private static inline var MOVE_SPEED = 250;
 	
-	
-
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
@@ -31,7 +28,7 @@ class PlayerBullet extends FlxSprite
 	override public function update(elapsed:Float)
 	{
 		
-		var tx:Int = Std.int(x / 8);
+		var tx:Int = Std.int((x+4) / 8);
 		var ty:Int = Std.int(y / 8);
 		var ttile = Reg.PS.map.loadedMap.getTile(tx, ty);
 		
@@ -64,6 +61,15 @@ class PlayerBullet extends FlxSprite
 	public function move()
 	{
 		velocity.x = MOVE_SPEED;	
+	}
+	
+	override public function revive()
+	{		
+		new FlxTimer().start(Reg.PS.player.RANGE, function(_)
+		{
+	    kill();
+		}, 1);
+		super.revive();
 	}
 
 	override public function kill()

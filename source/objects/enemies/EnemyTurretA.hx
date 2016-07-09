@@ -11,6 +11,7 @@ import objects.enemies.Enemy;
 import objects.items.CoinItem;
 import objects.items.HealthItem;
 import objects.items.HealthMaxItem;
+import objects.items.SpreadItem;
 import objects.items.Item;
 import objects.Player;
 import objects.items.SpeedItem;

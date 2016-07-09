@@ -111,6 +111,7 @@ class PlayState extends FlxState
 		//add(_system);
 		items.clear();
 		coins.clear();
+		enemies.clear();
 		super.create();
 	}
 	

@@ -9,6 +9,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxTimer;
 import objects.PlayerBullet;
 import flixel.util.FlxSpriteUtil;
+import flixel.math.FlxVelocity;
 import states.GameOverState;
 import states.PlayState;
 
@@ -27,6 +28,9 @@ class Player extends FlxSprite
 	public var MAGNET_FORCE:Int = 40;
 	public var MAX_MAGNET_FORCE:Int = 100;
 	
+	public var RANGE:Float = 0.1;
+	public var MAX_RANGE:Float = 2.0;
+	
 	private static inline var MAX_BULLETS:Int = 10;
 	private static inline var BULLET_OFFSET:Int = 3;
 	
@@ -36,12 +40,18 @@ class Player extends FlxSprite
 	
 	private var _cooldown:Float = 0;
 	
+	public var SHOT_MOD:Int;
+	public var MAX_SHOTMOD:Int = 1;
+	
+	
 	public function new(x:Float, y:Float) 
 	{
 		super(x,y);
 		HP = 3; //3
 		MAX_HP = 3;
 		loadGraphic(AssetPaths.player__png, true, 16, 8);
+
+		SHOT_MOD = 0;
 	
 	
 		width = 2; // maybe one hitbox for death, another hitbox for animations / collision with maps.
@@ -94,17 +104,41 @@ class Player extends FlxSprite
 	
 	public function shoot()
 	{
-		if (FlxG.keys.anyPressed([SPACE, M, L, O]) && Reg.PS.PBullets.countLiving() < MAX_BULLETS && _cooldown <= 0) // change to PS if back to PS
+		var ang = 10;
+
+
+		if (FlxG.keys.anyPressed([SPACE, M, L, O]) && Reg.PS.PBullets.countLiving() < MAX_BULLETS && _cooldown <= 0) 
 		{
 			var pb:PlayerBullet =  Reg.PS.PBullets.recycle();
 			if (pb == null)
-			    pb = new PlayerBullet(x,y);
+			pb = new PlayerBullet(x, y);
+
+			switch SHOT_MOD {
+			case 0:
+			{
 			pb.reset(x + BULLET_OFFSET, y + 1 );
 			Reg.PS.PBullets.add(pb);
 			//FlxG.camera.shake(0.003, 0.05);
-			_cooldown = .5;
+			_cooldown = .4;
+			}
+			
+			case 1:
+			{ // this is dumb
+			var pb2:PlayerBullet =  Reg.PS.PBullets.recycle();
+			if (pb2 == null)
+			pb2 = new PlayerBullet(x, y);
+            pb.velocity.set(FlxVelocity.velocityFromAngle(10, 250).x, FlxVelocity.velocityFromAngle(10, 250).y);
+            pb2.velocity.set(FlxVelocity.velocityFromAngle(350, 250).x, FlxVelocity.velocityFromAngle(350, 250).y);
+            pb.angle = 10;
+            pb2.angle = 350;
+	        Reg.PS.PBullets.add(pb); 
+	        Reg.PS.PBullets.add(pb2);
+	        _cooldown = .2;
+			}
+			}
 		}
-    }
+	}
+	
 	
 	public function damage()
 	{

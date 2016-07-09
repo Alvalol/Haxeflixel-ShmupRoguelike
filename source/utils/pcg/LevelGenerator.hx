@@ -16,7 +16,7 @@ class LevelGenerator
 	
 	*/
 	
-	private static var mapWidth:Int = 20; // cannot be 1
+	private static var mapWidth:Int = 30; // cannot be 1
 	
 	public function new() 
 	{

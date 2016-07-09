@@ -78,11 +78,13 @@ class LevelEnemies
 			{
 				currentLevel.setTileByIndex(i, 0, true);
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
-				var haz = new HazardRotator(enPos.x, enPos.y);
+				var haz = new HazardLaser(enPos.x, 0);
+				Reg.PS.hazards.add(haz);
+				/*var haz = new HazardRotator(enPos.x, enPos.y);
 				for (rot in haz.compGroup)
 				{
 				Reg.PS.hazards.add(rot);
-			   }
+			   }*/
 		    }  			   
 			}
 	}
