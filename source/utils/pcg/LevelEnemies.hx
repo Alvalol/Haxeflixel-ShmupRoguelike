@@ -11,6 +11,7 @@ import objects.enemies.EnemyMoverGroup;
 import objects.enemies.EnemyMultishotDeath;
 import objects.enemies.EnemyTurretA;
 import objects.hazards.HazardLaser;
+import objects.hazards.HazardRotator;
 
 
 
@@ -70,10 +71,19 @@ class LevelEnemies
 			{
 				currentLevel.setTileByIndex(i, 0, true);
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
-				var haz = new HazardHorizontalBlock(enPos.x, enPos.y);
+				var haz = new HazardHorizontalBlock(enPos.x-4, enPos.y);
 				Reg.PS.hazards.add(haz);
 		    }  
-			   
+			 if (currentLevel.getTileByIndex(i) == 7)
+			{
+				currentLevel.setTileByIndex(i, 0, true);
+				var enPos = (currentLevel.getTileCoordsByIndex(i));
+				var haz = new HazardRotator(enPos.x, enPos.y);
+				for (rot in haz.compGroup)
+				{
+				Reg.PS.hazards.add(rot);
+			   }
+		    }  			   
 			}
 	}
 	}

@@ -12,8 +12,10 @@ class HazardHorizontalBlock extends Hazard
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
-		solid = true;
 		makeGraphic(8, 8, FlxColor.WHITE);
+		centerOffsets();
+		solid = true;
+
 	}
 	
 	override public function update(elapsed:Float):Void 
