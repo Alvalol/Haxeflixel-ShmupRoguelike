@@ -2,6 +2,7 @@ package utils.pcg;
 import flixel.math.FlxPoint;
 import flixel.tile.FlxTilemap;
 import flixel.FlxG;
+import objects.hazards.HazardBlock;
 import objects.hazards.HazardHorizontalBlock;
 import objects.enemies.Enemy;
 import objects.enemies.EnemyExplosive;
@@ -27,9 +28,23 @@ class LevelEnemies
 	{
 		for (i in 0...currentLevel.totalTiles) // this must be false or else it will return 0,1 only
 		{
-			if (FlxG.camera.scroll.x + FlxG.width + 10 >= currentLevel.getTileCoordsByIndex(i).x)
+			if (FlxG.camera.scroll.x + FlxG.width + 8 >= currentLevel.getTileCoordsByIndex(i).x)
 			{
 			// Add more randomness to the enemy picking. 3 could be a type of enemy, for instance.
+			
+			if (currentLevel.getTileByIndex(i) == 1)
+			{
+				currentLevel.setTileByIndex(i, 0, true); // updates the tile so that there is no tile overlapping the enemy
+				var enPos = (currentLevel.getTileCoordsByIndex(i));
+				var destructible:HazardBlock = Reg.PS.blocks.recycle();
+				if (destructible == null)
+			        destructible = new HazardBlock(enPos.x - 4, enPos.y - 4);
+				
+				destructible.reset(enPos.x - 4, enPos.y - 4);
+				Reg.PS.blocks.add(destructible);
+		    }
+			
+			
 			if (currentLevel.getTileByIndex(i) == 3)
 			{
 				currentLevel.setTileByIndex(i, 0, true); // updates the tile so that there is no tile overlapping the enemy
@@ -38,7 +53,6 @@ class LevelEnemies
 				Reg.PS.enemies.add(en);
 		    }
 				
-
 			if (currentLevel.getTileByIndex(i) == 4)
 			{
 				currentLevel.setTileByIndex(i, 0, true);
@@ -78,7 +92,7 @@ class LevelEnemies
 			{
 				currentLevel.setTileByIndex(i, 0, true);
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
-				var haz = new HazardLaser(enPos.x, 0);
+				var haz = new HazardLaser(enPos.x, 8);
 				Reg.PS.hazards.add(haz);
 				/*var haz = new HazardRotator(enPos.x, enPos.y);
 				for (rot in haz.compGroup)

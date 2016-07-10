@@ -40,7 +40,10 @@ class Item extends FlxSprite
 			
 
 		if (!isOnScreen())
+		    {
 		    kill();
+			Reg.PS.items.remove(this, true);
+			}
 			
 		if (_appeared)
 		{
@@ -59,7 +62,8 @@ class Item extends FlxSprite
 	
 	override public function kill()
 	{
-		_appeared = false;
+		//_appeared = false;
+		Reg.PS.items.remove(this, true);
 		super.kill();
 	}
 	

@@ -109,19 +109,14 @@ class CoinItem extends Item
 	override public function kill()
 	{
 		lifespan = 4;
+		Reg.PS.coins.remove(this, true);
 		super.kill();
-		
 	}
+	
     override function interact(player:Player)
 	{
 	  kill();
 	  Reg.score += 5;
 	}
-	
-	/*override function kill()
-	{
-		super.kill();
-	   //s bTrail.kill(); // this needs to be worked out for Ebullets as well
-	}*/
 	
 }

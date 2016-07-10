@@ -57,6 +57,7 @@ class Enemy extends FlxSprite
 	}
 	override public function kill()
 	{
+		Reg.PS.enemies.remove(this, true);
 		alive = false;
 	    exists = false;
 	

@@ -23,7 +23,6 @@ class EnemyExplosive extends Enemy
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		animation.add("idle", [8,9,10,11], 12, true);
         animation.play("idle");
-		
 	}
 	
 	override public function update(elapsed:Float)

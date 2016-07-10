@@ -28,6 +28,9 @@ class Hazard extends FlxSprite
 			
 		if (isOnScreen() && !_appeared) 
 			_appeared = true;	
+			
+		if (!isOnScreen() && _appeared)
+		    kill();
 		
 		super.update(elapsed);		
 	}
@@ -35,5 +38,11 @@ class Hazard extends FlxSprite
 		private function interact(player:Player)
 	{
 			player.damage();
+	}
+	
+	override public function kill()
+	{
+		super.kill();
+		Reg.PS.hazards.remove(this, true);
 	}
 }

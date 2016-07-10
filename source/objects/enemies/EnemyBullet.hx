@@ -33,23 +33,14 @@ class EnemyBullet extends FlxSprite
 	
 	override public function update(elapsed:Float):Void
 	{
-		var tx:Int = Std.int(x / 8);
-		var ty:Int = Std.int(y / 8);
-		var ttile = Reg.PS.map.loadedMap.getTile(tx, ty);
-
+		for(block in Reg.PS.blocks){
+		if (FlxG.overlap(this, block)) kill();
+		}
 		
-		if ((!isOnScreen() || FlxG.overlap(Reg.PS.map.loadedMap,this) && ttile != 0))
+		if (!isOnScreen() || FlxG.collide(Reg.PS.map.loadedMap, this))
 		{
-		
-			if (ttile == 1)
-			{
-		    Reg.PS.map.loadedMap.setTile(tx, ty, 0, true);
-			}
-			
 			kill();
 		}
-
-			 
 		super.update(elapsed);
 	}
 	
@@ -62,6 +53,7 @@ class EnemyBullet extends FlxSprite
 	
 	override public function kill():Void
 	{	
+		Reg.PS.EBullets.remove(this, true);
 	super.kill();
 
 //	bTrail.visible = false;

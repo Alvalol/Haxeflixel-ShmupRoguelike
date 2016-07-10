@@ -28,32 +28,29 @@ class PlayerBullet extends FlxSprite
 	override public function update(elapsed:Float)
 	{
 		
-		var tx:Int = Std.int((x+4) / 8);
-		var ty:Int = Std.int(y / 8);
-		var ttile = Reg.PS.map.loadedMap.getTile(tx, ty);
-		
-		if (!isOnScreen() || FlxG.overlap(Reg.PS.map.loadedMap,this) && ttile != 0)
+		for(block in Reg.PS.blocks){
+		if (FlxG.overlap(this, block))
 		{
-			
-			if (ttile == 1)
-			{
-				Reg.PS.map.loadedMap.setTile(tx, ty, 0, true);
-				var newCoin:CoinItem =  Reg.PS.coins.recycle();
-				
+				var newCoin:CoinItem =  Reg.PS.coins.recycle();	
 				if (newCoin == null) 
 				newCoin = new CoinItem(x, y);
 				
 			    newCoin.reset(x , y);
 				Reg.PS.coins.add(newCoin);
+			    kill();
+				block.kill();
 			}
 
-			kill();
-
-		}
-		else
-		    move();
+	
 			
+	}
 
+	if (FlxG.collide(Reg.PS.map.loadedMap, this))
+	{
+		kill();
+	}
+		move();
+	
 		super.update(elapsed);
 	}
 
@@ -74,6 +71,7 @@ class PlayerBullet extends FlxSprite
 
 	override public function kill()
 	{
+		Reg.PS.PBullets.remove(this, true);
 		super.kill();
 	}
 }

@@ -28,9 +28,10 @@ import objects.PlayerBullet;
 import objects.gamesys.Scroller;
 import objects.enemies.Enemy;
 import objects.items.CoinItem;
+import objects.hazards.HazardBlock;
 import objects.enemies.enemyobjects.EnemyExplosiveExplosion;
 
-
+import flixel.FlxG;
 import utils.pcg.LevelLoaderProc;
 import utils.pcg.LevelEnemies;
 
@@ -44,6 +45,7 @@ class PlayState extends FlxState
 	public var player(default, null):Player;
 	public var PBullets:FlxTypedGroup<PlayerBullet>;
 	public var EBullets:FlxTypedGroup<EnemyBullet>;
+	public var blocks:FlxTypedGroup<HazardBlock>;
 	//public var effects:FlxSpriteGroup;
 	public var EExplosions:FlxTypedGroup<EnemyExplosiveExplosion>;
 	public var enemies(default, null):FlxTypedGroup<Enemy>;
@@ -72,6 +74,7 @@ class PlayState extends FlxState
 		player = new Player(16, FlxG.width/2);
 		enemies = new FlxTypedGroup<Enemy>();
 		hazards = new FlxTypedGroup<Hazard>();
+		blocks = new FlxTypedGroup<HazardBlock>();
 		//effects = new FlxSpriteGroup();
 		coins = new FlxTypedGroup<CoinItem>();
 		items = new FlxTypedGroup<Item>();
@@ -98,16 +101,17 @@ class PlayState extends FlxState
         //add(effects);
 		add(map.loadedMap);
 		add(coins);
-		add(player);
 		add(PBullets);
 		add(items);
 		//_system.add(goals);
 		_entities.add(EExplosions);
+		_entities.add(blocks);	
 		_entities.add(EBullets);
 		_entities.add(hazards);
 		_entities.add(enemies);
 	
 		add(_entities);
+		add(player);
 		//add(_system);
 		items.clear();
 		coins.clear();
@@ -117,19 +121,20 @@ class PlayState extends FlxState
 	
 	override public function update(elapsed:Float):Void
 	{
+		if (FlxG.keys.justPressed.R) FlxG.resetState();
 		collisions();
 		cleanItems();
 		LevelEnemies.populateEnemies(map.loadedMap);
-		//trace("items : " + items.length);
-		//trace("enemies : " + enemies.length);
-		//trace(enemies.countLiving());
-		//trace("eBullets : " +EBullets.length);
-		//trace("PBullets : " + PBullets.length);
-	    //trace("coins length " + coins.length);
-		//trace(length);
-	
+		/*trace("items : " + items.length);
+		trace("enemies : " + enemies.length);
+		//trace("enemies liviing : " + enemies.countLiving());
+		trace("eBullets : " +EBullets.length);
+		trace("PBullets : " + PBullets.length);
+	    trace("coins length " + coins.length);
+		trace("blocks length " + blocks.length);
+		trace("_entities length " + _entities.length);
 		//trace(effects.length);
-
+*/
 		FlxSpriteUtil.bound(player, 
 		                    FlxG.camera.scroll.x, 
 							FlxG.camera.scroll.x + FlxG.camera.width,
@@ -227,6 +232,10 @@ class PlayState extends FlxState
 		coins.clear(); 
 	   }
 	
+	   if (blocks.countLiving() < 1)
+	   {
+		blocks.clear(); 
+	   }
 	   
 	   if (EBullets.countLiving() < 1)
 	   {

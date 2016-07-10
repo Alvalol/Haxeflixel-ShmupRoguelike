@@ -124,10 +124,7 @@ class EnemyTurretA extends Enemy
 	
 	private function checkFloorCeiling()
 	{
-		if ( (Reg.PS.map.loadedMap.getTile(tx, ty - 1) == 0 && flipY) || (Reg.PS.map.loadedMap.getTile(tx, ty + 1) == 0 && !flipY))
-		{
-			kill();
-		}
+     // not sure if this is interesting at all
 	}
 
 	

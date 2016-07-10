@@ -14,7 +14,6 @@ class HazardHorizontalBlock extends Hazard
 		super(x, y);
 		makeGraphic(8, 8, FlxColor.WHITE);
 		centerOffsets();
-		solid = true;
 
 	}
 	
@@ -27,7 +26,11 @@ class HazardHorizontalBlock extends Hazard
 			direction *=-1;
 		
 		if (FlxG.overlap(this, Reg.PS.player))
+		{
 			interact(Reg.PS.player);
+			// some sort of collision could be a good thing.
+		}
+			
 		
 		if (direction == 0)
 			direction = FlxG.random.int( -1, 1);

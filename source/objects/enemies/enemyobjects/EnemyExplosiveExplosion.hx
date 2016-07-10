@@ -28,7 +28,7 @@ class EnemyExplosiveExplosion extends FlxSprite
     }
 	
 			private function interact(player:Player)
-	{
+	    {
 		player.kill();
 		}
 }
