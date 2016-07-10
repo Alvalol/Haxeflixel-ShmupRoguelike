@@ -102,7 +102,7 @@ class CoinItem extends Item
 			if (FlxG.overlap(this, coin))
 			{
 				FlxObject.separate(this, coin);
-			}
+			}//sddsffsddsfd
 		}
 	}
 	
