@@ -15,14 +15,13 @@ class Hazard extends FlxSprite
 		super(x, y);
 	}
 	
-	override public function update(elapsed:Float):Void 
+	override public function update(elapsed:Float)
 	{
         basicChecks();
 		collisions();
 		super.update(elapsed);		
 	}
-	
-	
+
 	private function collisions()
 	{
 		if (FlxG.overlap(Reg.PS.player, this))
@@ -59,8 +58,6 @@ class Hazard extends FlxSprite
 	{
 		Reg.PS.hazards.remove(this, true);
 		super.kill();
-		
 	}
-	
 	
 }

@@ -38,5 +38,6 @@ class HazardRotator extends FlxSprite
 			Reg.PS.player.damage();
 		}
 		}
+		
 	}
 }

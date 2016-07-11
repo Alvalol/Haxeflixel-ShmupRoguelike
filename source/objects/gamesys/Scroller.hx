@@ -14,7 +14,6 @@ class Scroller extends FlxSprite
 	    makeGraphic(1, 1, FlxColor.RED);
 		alpha = 0.5;
 		visible = false;
-	 
 		maxVelocity.set(MOVE_SPEED, MOVE_SPEED);
 	}
 	
@@ -31,6 +30,7 @@ class Scroller extends FlxSprite
 		   case 1 : MOVE_SPEED = 40;		maxVelocity.set(MOVE_SPEED, MOVE_SPEED);
 	   }
 	   
+	   if(!Reg.pause)
 	   super.update(elapsed);
     }
 }

@@ -1,4 +1,5 @@
 package objects;
+
 import flixel.FlxSprite;
 import flixel.FlxObject;
 import flixel.FlxG;
@@ -12,7 +13,6 @@ import objects.items.CoinItem;
 
 class PlayerBullet extends FlxSprite
 {
-	
 	private static inline var MOVE_SPEED = 250;
 	
 	public function new(x:Float, y:Float) 
@@ -28,7 +28,16 @@ class PlayerBullet extends FlxSprite
 	
 	override public function update(elapsed:Float)
 	{
-		
+	    collisions();
+		move();
+	
+		if(!Reg.pause)
+		    super.update(elapsed);
+	}
+	
+	private function collisions()
+	{
+		// I feel like there is something I'm doing wrong here. Must ask.
 		for(block in Reg.PS.blocks){
 		if (FlxG.overlap(this, block))
 		{
@@ -58,15 +67,12 @@ class PlayerBullet extends FlxSprite
 		createNoHit();
 		
 	}
-		move();
-	
-		super.update(elapsed);
 	}
 
 
-	public function move()
+	private function move()
 	{
-		velocity.x = MOVE_SPEED;	
+		velocity.x = MOVE_SPEED;
 	}
 	
 	override public function revive()
@@ -86,8 +92,7 @@ class PlayerBullet extends FlxSprite
 	
 	override public function kill()
 	{ 
-	    Reg.PS.PBullets.remove(this, true);
-
+	   // Reg.PS.PBullets.remove(this, true);
 		super.kill();
 	}
 }

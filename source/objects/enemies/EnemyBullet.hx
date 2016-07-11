@@ -34,6 +34,8 @@ class EnemyBullet extends FlxSprite
 	override public function update(elapsed:Float):Void
 	{
 		collisions();
+		
+		if(!Reg.pause)
 		super.update(elapsed);
 	}
 

@@ -29,7 +29,7 @@ class EnemyMultishotDeath extends Enemy
 	override public function update(elapsed:Float) 
 	{
 
-		angle-= 10;
+
 		if (!justShot && isOnScreen())
 		{
 			shoot();

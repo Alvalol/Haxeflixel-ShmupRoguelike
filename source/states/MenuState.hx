@@ -13,27 +13,28 @@ class MenuState extends FlxState
 	{
 		super.create();
 			
-	 var   cursor = new FlxSprite();
+	    var cursor = new FlxSprite();
 		cursor.loadGraphic(AssetPaths.cursor__png, false, 8, 8);
-		FlxG.mouse.load(cursor.pixels,4);
-		//FlxG.mouse.visible = false; // must always be set to false pls
-	    var startgame = new FlxButton(FlxG.width / 2 - 50, FlxG.height / 2, 
+		FlxG.mouse.load(cursor.pixels, 4);
+		
+	    var startgame = new FlxButton(FlxG.width / 2 - 45 , FlxG.height / 2 - 10, 
 		"START GAME", startGame);
 		add(startgame);
-		
 		
 	}
 
 	override public function update(elapsed:Float):Void
 	{
-		super.update(elapsed);
 		if (FlxG.keys.anyJustPressed(["ENTER"]))
 		    startGame();
-		//FlxG.switchState(new MyState());1
+			
+		super.update(elapsed);
+			
 	}
 	
 	private function startGame():Void
-{
+    {
 	FlxG.switchState(new PlayState());
-}
+    }
+
 }

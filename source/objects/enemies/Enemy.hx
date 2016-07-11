@@ -21,6 +21,17 @@ class Enemy extends FlxSprite
 	
 	override public function update(elapsed:Float) 
 	{
+
+		basicChecks();
+		collisions();
+		
+		if (!Reg.pause)
+			super.update(elapsed);
+	}
+	
+	
+	private function basicChecks()
+	{
 		if (!inWorldBounds())
 			exists = false;
 			
@@ -37,11 +48,6 @@ class Enemy extends FlxSprite
 		if (HP <= 0)
 		    kill();
 			
-			
-		collisions();
-		
-		if (!Reg.pause)
-			super.update(elapsed);
 	}
 	
 	

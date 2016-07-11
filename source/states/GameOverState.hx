@@ -10,8 +10,6 @@ import flixel.util.FlxTimer;
 import flixel.util.FlxColor;
 import flixel.ui.FlxButton;
 
-
-
 class GameOverSubState extends FlxState
 {
 
@@ -23,7 +21,7 @@ class GameOverSubState extends FlxState
 	{
 		super.create();
 			
-	 var   cursor = new FlxSprite();
+	    var cursor = new FlxSprite();
 		cursor.loadGraphic(AssetPaths.cursor__png, false, 8, 8);
 		FlxG.mouse.load(cursor.pixels,4);
 		FlxG.mouse.visible = true; // must always be set to false pls
@@ -35,9 +33,9 @@ class GameOverSubState extends FlxState
 		
 	forEachOfType(FlxText, function(member)
 	{
-		
 		member.setFormat(AssetPaths.pixel_font__ttf, 8, FlxColor.WHITE, FlxTextBorderStyle.OUTLINE, 0xffffffff);
 	});	
+	
 	add(_text);
 	add(_textScore);
 	add(_restartButton);
@@ -48,7 +46,6 @@ class GameOverSubState extends FlxState
 		super.update(elapsed);
 		if (FlxG.keys.anyJustPressed(["ENTER"]))
 		    onClick();
-
 	}
 	
 	public function onClick()

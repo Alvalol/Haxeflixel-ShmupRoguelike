@@ -14,21 +14,13 @@ class HealthItem extends Item
 		loadGraphic(AssetPaths.items__png, true, 8,8);
 		animation.add("move", [7,8,9,10,11], 12);
 		animation.play("move");
-
-	}
-	
-		override public function update(elapsed:Float)
-	{
-		super.update(elapsed);
 	}
 	
 	override function interact(player:Player)
 	{
 		if (player.HP < player.MAX_HP)
-		{
 		player.HP++;
-		}
-
+		
 		super.interact(player);
 	}
 	

@@ -6,6 +6,8 @@ import flixel.FlxG;
 
 class MagnetItem extends Item
 {
+	
+	// This item needs to be calibrated properly pls.
 
 	public function new(x:Float, y:Float)
 	{
@@ -26,12 +28,12 @@ class MagnetItem extends Item
 	{
 		if (player.MAGNET < player.MAX_MAGNET)
 		{
-		player.MAGNET += 30;
+		player.MAGNET += 50;
 		}
 		
 		if (player.MAGNET_FORCE < player.MAX_MAGNET_FORCE)
 		{
-		     player.MAGNET_FORCE += 10;
+		     player.MAGNET_FORCE += 50;
 		}
 
 		super.interact(player);

@@ -5,13 +5,8 @@ import flixel.util.FlxTimer;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 
-/**
- * ...
- * @author Alvarop
- */
 class HazardLaser extends Hazard
 {
-	
 	private var counter:Int = FlxG.random.int(0,20);
 	private var maxCounter:Int = 300;
 	private var tactive:Bool = false;
@@ -23,8 +18,13 @@ class HazardLaser extends Hazard
 	}
 	
 	override public function update(elapsed:Float):Void 
+	 {
+		switchingStates();
+		super.update(elapsed);
+     }
+	 
+	private function switchingStates()
 	{
-
 		if (_appeared && counter < maxCounter)
 		{
 			appear(); 
@@ -39,12 +39,8 @@ class HazardLaser extends Hazard
 			alpha = 1;
 		else
 		    alpha = 0.1;
-			
 		
-		//trace("counter : " + counter, "max counter : " + maxCounter);
-		//trace(tactive);
-		super.update(elapsed);
-     }
+	}
 	
 	override private function interact(player:Player)
 	{

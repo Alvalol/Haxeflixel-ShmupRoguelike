@@ -9,18 +9,11 @@ class SpeedItem extends Item
 
 	public function new(x:Float, y:Float) 
 	{
-	  super(x, y);
-	 // makeGraphic(8, 8, FlxColor.BROWN);
-	  lifespan = 4;
-		loadGraphic(AssetPaths.items__png, true, 8,8);
+	    super(x, y);
+	    lifespan = 4;
+	    loadGraphic(AssetPaths.items__png, true, 8,8);
 		animation.add("static", [4]);
 		animation.play("static");
-		
-	}
-	
-	override public function update(elapsed:Float)
-	{
-		super.update(elapsed);
 	}
 	
 	override function interact(player:Player)
@@ -28,11 +21,10 @@ class SpeedItem extends Item
 		if (player.HOR_MOVE_SPEED < player.MAX_HOR_MOVE_SPEED 
 		    && player.VERT_MOVE_SPEED < player.MAX_VERT_MOVE_SPEED)
 			{
-				player.HOR_MOVE_SPEED += 5;
-				player.VERT_MOVE_SPEED += 5;
+				player.HOR_MOVE_SPEED += 10;
+				player.VERT_MOVE_SPEED += 10;
 				player.maxVelocity.set(player.HOR_MOVE_SPEED, player.VERT_MOVE_SPEED);
 			}
-
 		super.interact(player);
 		
 	}

@@ -11,7 +11,6 @@ import flixel.FlxG;
 
 class HUD extends FlxSpriteGroup
 {
-
 	static inline var OFFSET:Int = 4;
 	private var _textScore:FlxText;
 	private var _currentHealth:FlxText;
@@ -21,7 +20,7 @@ class HUD extends FlxSpriteGroup
 		super();
 		
 		_textScore = new FlxText(OFFSET, OFFSET, 0);
-		_currentHealth = new FlxText(FlxG.width - 30 , OFFSET,0);
+		_currentHealth = new FlxText(FlxG.width - 35 , OFFSET,0);
 		
 		add(_textScore);
 		add(_currentHealth);
@@ -42,9 +41,9 @@ class HUD extends FlxSpriteGroup
 		
 		_textScore.text =  StringTools.lpad(
 		Std.string(Reg.score), "0", 5);
-		_currentHealth.text = (Reg.PS.player.HP + "-" +Reg.PS.player.MAX_HP);
+		_currentHealth.text = (Reg.PS.player.HP +  ":" + Reg.PS.player.MAX_HP);
 		
-		
+		if(!Reg.pause)
 		super.update(elapsed);
 	}
 	

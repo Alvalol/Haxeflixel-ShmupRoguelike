@@ -96,13 +96,13 @@ class PlayState extends FlxState
 		//_system.add(goals);
 		_entities.add(EExplosions);
 		_entities.add(blocks);	
+		_entities.add(coins);
+		_entities.add(items);
+		_entities.add(effects);
 		_entities.add(EBullets);
 		_entities.add(hazards);
 		_entities.add(enemies);
 		_entities.add(PBullets);
-		_entities.add(coins);
-		_entities.add(items);
-		_entities.add(effects);
 		add(_entities);
 
 
@@ -119,6 +119,10 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 		displayTracers();
+		if (FlxG.keys.justPressed.P)
+		{
+			Reg.pause = !Reg.pause;
+		}
 		
 		if (FlxG.keys.justPressed.R) FlxG.resetState();
 		

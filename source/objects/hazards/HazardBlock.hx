@@ -27,7 +27,11 @@ class HazardBlock extends Hazard
 		Reg.PS.blocks.remove(this, true);
 		alive = false;
 		exists = false;
+		
+		if (isOnScreen())
+		{
 		var e = new Explosion(x - 4, y - 4);
 		Reg.PS.effects.add(e);
+		}
 	}
 }

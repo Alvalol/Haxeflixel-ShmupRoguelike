@@ -15,13 +15,12 @@ import states.PlayState;
 
 class Player extends FlxSprite
 {
-	
 	private static inline var ACCELERATION:Int = 800;
 	private static inline var DECELERATION:Int = 800;
 	public  var HOR_MOVE_SPEED:Int = 50;
 	public var VERT_MOVE_SPEED:Int = 60;
-	public var MAX_HOR_MOVE_SPEED:Int = 70;
-	public var MAX_VERT_MOVE_SPEED:Int = 80;
+	public var MAX_HOR_MOVE_SPEED:Int = 90;
+	public var MAX_VERT_MOVE_SPEED:Int = 100;
 	
 	public var MAGNET:Int = 30;
 	public var MAX_MAGNET:Int = 300;
@@ -36,7 +35,7 @@ class Player extends FlxSprite
 	
 	public var HP:Int;
 	public var MAX_HP:Int;
-	public var MAX_POSSIBLE_HP:Int = 6;
+	public var MAX_POSSIBLE_HP:Int = 10; //? Not sure. Needs playtest.
 	
 	private var _cooldown:Float = 0;
 	
@@ -50,43 +49,48 @@ class Player extends FlxSprite
 		HP = 3; //3
 		MAX_HP = 3;
 		loadGraphic(AssetPaths.player__png, true, 16, 8);
-
+		
 		SHOT_MOD = 0;
-	
 	
 		width = 4; // maybe one hitbox for death, another hitbox for animations / collision with maps.
 		height = 4;
 		centerOffsets();
-		animation.add("move", [0,1,2],30);
+		animation.add("move", [0,1,2]);
 		animation.play("move");
-	    immovable = false;
+		
 		drag.x = DECELERATION;
 		drag.y = DECELERATION;
+		
 		maxVelocity.set(HOR_MOVE_SPEED, VERT_MOVE_SPEED);
 	}
 	
 	override public function update(elapsed:Float):Void
 	{		
+		basicChecks(elapsed);
+		
+		if(!Reg.pause)
+		    super.update(elapsed);
+	}
+		
+	private function basicChecks(elapsed:Float)
+	{
 		if (alive)
 		{
 		    move();
 		    shoot();
 			_cooldown -= elapsed * 4;
 		}
-
-				
+	
 		if (HP <= 0)
 		   kill();
-		
-		super.update(elapsed);
 	}
 	
-	
-	public function move()
+	// needs to be reworked offstream to support GAMEPAD and MOBILE controls.
+	private function move()
 	{
-
 		acceleration.x = 0;
 		acceleration.y = 0;
+		
 		if (FlxG.keys.anyPressed([UP, W]))
 			acceleration.y -= ACCELERATION;
 		
@@ -101,21 +105,19 @@ class Player extends FlxSprite
 		    acceleration.x += ACCELERATION;
 	}
 	
-	public function shoot()
+	//********** needs to be reworked completely to support different types of "weapons"  *************
+	private function shoot()
 	{
 		var ang = 10;
-
-
+		
 		if (FlxG.keys.anyPressed([SPACE, M, L, O]) && Reg.PS.PBullets.countLiving() < MAX_BULLETS && _cooldown <= 0) 
 		{
-			var pb:PlayerBullet =  Reg.PS.PBullets.recycle();
-			if (pb == null)
-			pb = new PlayerBullet(x, y);
+			var pb:PlayerBullet =  new PlayerBullet(x, y);
 
 			switch SHOT_MOD {
 			case 0:
 			{
-			pb.reset(x + BULLET_OFFSET, y + 1 );
+			pb.reset(x + BULLET_OFFSET, y + 2 );
 			Reg.PS.PBullets.add(pb);
 			//FlxG.camera.shake(0.003, 0.05);
 			_cooldown = .4;
@@ -123,9 +125,7 @@ class Player extends FlxSprite
 			
 			case 1:
 			{ // this is dumb
-			var pb2:PlayerBullet =  Reg.PS.PBullets.recycle();
-			if (pb2 == null)
-			pb2 = new PlayerBullet(x, y);
+			var pb2:PlayerBullet =  new PlayerBullet(x, y);
             pb.velocity.set(FlxVelocity.velocityFromAngle(10, 250).x, FlxVelocity.velocityFromAngle(10, 250).y);
             pb2.velocity.set(FlxVelocity.velocityFromAngle(350, 250).x, FlxVelocity.velocityFromAngle(350, 250).y);
             pb.angle = 10;
@@ -137,7 +137,6 @@ class Player extends FlxSprite
 			}
 		}
 	}
-	
 	
 	public function damage()
 	{

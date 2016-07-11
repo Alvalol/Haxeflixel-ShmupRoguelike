@@ -17,7 +17,6 @@ class HealthMaxItem extends Item
 		animation.play("static");
 	}
 	
-	
 	override function interact(player:Player)
 	{
 		if (player.MAX_HP < player.MAX_POSSIBLE_HP)
@@ -25,6 +24,7 @@ class HealthMaxItem extends Item
 		player.MAX_HP ++;
 		player.HP = player.MAX_HP;
 		}
+		
 		super.interact(player);
 	}
 }

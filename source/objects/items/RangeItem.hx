@@ -11,7 +11,7 @@ class RangeItem extends Item
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
-		makeGraphic(8, 8, FlxColor.GREEN);
+		makeGraphic(8, 8, FlxColor.GREEN); // needs graphic
 		lifespan = 4;
 	}
 	
