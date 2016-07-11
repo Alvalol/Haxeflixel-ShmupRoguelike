@@ -19,7 +19,7 @@ class HazardBlock extends Hazard
 	override public function kill()
 	{
 		super.kill();
-		if (isOnScreen())
+		if (isOnScreen())//sdf
 		{
 		var e = new Explosion(x - 4, y - 4);
 		Reg.PS.effects.add(e);			
