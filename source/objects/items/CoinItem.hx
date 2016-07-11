@@ -12,10 +12,10 @@ import flixel.FlxObject;
 class CoinItem extends Item
 {
 	public var magnetized:Bool;
-//	private var bTrail:FlxTrail;
+	private var bTrail:FlxTrail;
 
 	
-	override public function new(x:Float,y:Float) 
+	public function new(x:Float,y:Float) 
 	{
 		super(x, y);
 		var t = FlxG.random.int(2, 5);
@@ -23,20 +23,20 @@ class CoinItem extends Item
 		offset.set( -4, -4);
 		_appeared = false;
 		centerOffsets();
-		/*
+
 		
 		bTrail =  cast Reg.PS.effects.recycle();		
 		if (bTrail== null) 
             bTrail = new FlxTrail(this, null, 10, 1, 0.3, 0.05);
 			bTrail.reset(x , y);	
-			Reg.PS.effects.add(bTrail);*/
+			Reg.PS.effects.add(bTrail);
 	}
 		
 	override public function update(elapsed:Float)
 	{
-		   if (FlxG.overlap(this, Reg.PS.player))
+		   if (FlxG.overlap(Reg.PS.player,this))
 		   {
-			   this.interact(Reg.PS.player);
+			   interact(Reg.PS.player);
 		   }
 	   
 	    angle+= 5;
@@ -109,7 +109,8 @@ class CoinItem extends Item
 	override public function kill()
 	{
 		lifespan = 4;
-		Reg.PS.coins.remove(this, true);
+		//Reg.PS.coins.remove(coin, true);
+		Reg.PS.effects.remove(bTrail, true);
 		super.kill();
 	}
 	

@@ -33,9 +33,7 @@ class EnemyMultishotDeath extends Enemy
 		{
 			shoot();
 		}
-		// make it move up and down (sine-like)
-			
-		//trace(ang);
+
 		super.update(elapsed);
 	
 	}

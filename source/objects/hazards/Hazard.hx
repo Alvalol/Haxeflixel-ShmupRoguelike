@@ -43,6 +43,5 @@ class Hazard extends FlxSprite
 	override public function kill()
 	{
 		super.kill();
-		Reg.PS.hazards.remove(this, true);
 	}
 }

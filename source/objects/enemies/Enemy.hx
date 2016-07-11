@@ -4,6 +4,7 @@ import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxObject;
+import objects.effects.Explosion;
 import objects.items.Item;
 import objects.items.CoinItem;
 
@@ -21,17 +22,18 @@ class Enemy extends FlxSprite
 	override public function update(elapsed:Float) 
 	{
 		
-		if (FlxG.overlap(this, Reg.PS.player))
-			{
-				interact(Reg.PS.player);
-			}
-			
 			
 		if (!inWorldBounds())
 			exists = false;
 			
-		if (isOnScreen() && !_appeared) 
-			_appeared = true;	
+        if (isOnScreen()) {
+        if (!_appeared) 
+             _appeared = true;
+                          }
+         else {
+           if (_appeared)
+            kill();
+		 }
 			
 			
 		if (HP <= 0 || !isOnScreen() && _appeared)
@@ -51,16 +53,6 @@ class Enemy extends FlxSprite
 	public function damage()
 	{
 		HP--;
-	}
-	override public function kill()
-	{
-		Reg.PS.enemies.remove(this, true);
-		alive = false;
-	    exists = false;
-	
-		velocity.x = 0;
-		acceleration.x = 0;
-		//animation.play("dead");
 	}
 	
 		private function dropItem(list:Array<Item>)
@@ -83,8 +75,21 @@ class Enemy extends FlxSprite
 				    newCoin = new CoinItem(x, y);
 					
 				newCoin.reset(x , y);
-
 				Reg.PS.coins.add(newCoin);
 		}
+	}	
+	
+	override public function kill()
+	{
+		//Reg.PS.enemies.remove(this, true);
+		
+		if(isOnScreen()){
+		var e = new Explosion(x - 4, y - 4);
+		Reg.PS.effects.add(e);
+		}
+		
+		alive = false;
+	    exists = false;
 	}
+	
 }

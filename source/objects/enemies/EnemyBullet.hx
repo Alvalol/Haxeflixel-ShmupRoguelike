@@ -5,6 +5,7 @@ import flixel.addons.effects.FlxTrail;
 import flixel.util.FlxColor;
 import flixel.FlxObject;
 import flixel.FlxG;
+import objects.effects.NoHit;
 
 class EnemyBullet extends FlxSprite
 {
@@ -21,26 +22,43 @@ class EnemyBullet extends FlxSprite
 		animation.play("idle");
 		width = 8;
 		height = 8;
-		
-	/*	bTrail =  cast Reg.PS.effects.recycle();
-				
+		createTrail();
+	}
+	
+	private function createTrail()
+	{
+		bTrail =  cast Reg.PS.effects.recycle();
 		if (bTrail== null) 
             bTrail = new FlxTrail(this, null, 10, 1, 0.3, 0.05);
-		
+			
 		bTrail.reset(x , y);
-		Reg.PS.effects.add(bTrail);*/
+		Reg.PS.effects.add(bTrail);
 	}
 	
 	override public function update(elapsed:Float):Void
 	{
 		for(block in Reg.PS.blocks){
-		if (FlxG.overlap(this, block)) kill();
+		if (FlxG.overlap(this, block)){
+            createNoHit();
+			kill();
+		}
+		}
+		
+		for (hazard in Reg.PS.hazards)
+		{
+			if (FlxG.overlap(this, hazard))
+			{
+				createNoHit();
+				kill();
+			}
 		}
 		
 		if (!isOnScreen() || FlxG.collide(Reg.PS.map.loadedMap, this))
 		{
+			createNoHit();
 			kill();
 		}
+		
 		super.update(elapsed);
 	}
 	
@@ -48,16 +66,19 @@ class EnemyBullet extends FlxSprite
 	{
 		kill();
 		player.damage();
-
+	}
+	
+	private function createNoHit()
+	{
+		var e = new NoHit(x, y);
+		Reg.PS.effects.add(e);
 	}
 	
 	override public function kill():Void
 	{	
-		Reg.PS.EBullets.remove(this, true);
+	Reg.PS.EBullets.remove(this, true);
+	Reg.PS.effects.remove(bTrail, true);
 	super.kill();
-
-//	bTrail.visible = false;
-	
 	}
 	
 	

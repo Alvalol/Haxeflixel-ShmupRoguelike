@@ -6,6 +6,7 @@ import flixel.math.FlxPoint;
 import flixel.addons.effects.FlxTrail;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import objects.effects.NoHit;
 import objects.enemies.Enemy;
 import objects.items.CoinItem;
 
@@ -39,15 +40,23 @@ class PlayerBullet extends FlxSprite
 				Reg.PS.coins.add(newCoin);
 			    kill();
 				block.kill();
-			}
-
-	
-			
+		}
 	}
+	
+	  for (hazard in Reg.PS.hazards)
+	  {
+		  if (FlxG.pixelPerfectOverlap(hazard, this))
+		  {
+		       kill();
+		       createNoHit();
+		  }
+	  }
 
 	if (FlxG.collide(Reg.PS.map.loadedMap, this))
 	{
 		kill();
+		createNoHit();
+		
 	}
 		move();
 	
@@ -69,9 +78,15 @@ class PlayerBullet extends FlxSprite
 		super.revive();
 	}
 
+	private function createNoHit()
+	{
+		var e = new NoHit(x, y-4);
+		Reg.PS.effects.add(e);
+	}
+	
 	override public function kill()
 	{
-		Reg.PS.PBullets.remove(this, true);
+		//Reg.PS.PBullets.remove(this, true);
 		super.kill();
 	}
 }

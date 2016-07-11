@@ -25,7 +25,7 @@ class Item extends FlxSprite
 		tframe = FlxG.random.int(2, 5);
 		width = 8;
 		height = 8;
-		Reg.availableItems.remove(tframe);
+		//Reg.availableItems.remove(tframe);
 
 	}
 	
@@ -35,15 +35,14 @@ class Item extends FlxSprite
 			exists = false;
 		
 					
-		if (isOnScreen() && !_appeared) 
-			_appeared = true;
-			
-
-		if (!isOnScreen())
-		    {
-		    kill();
-			Reg.PS.items.remove(this, true);
-			}
+        if (isOnScreen()) {
+        if (!_appeared) 
+             _appeared = true;
+                          }
+         else {
+           if (_appeared)
+            kill();
+		 }
 			
 		if (_appeared)
 		{
@@ -63,7 +62,7 @@ class Item extends FlxSprite
 	override public function kill()
 	{
 		//_appeared = false;
-		Reg.PS.items.remove(this, true);
+		//Reg.PS.items.remove(this,false);
 		super.kill();
 	}
 	

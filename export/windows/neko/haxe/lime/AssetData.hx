@@ -22,12 +22,16 @@ class AssetData {
 			type.set ("assets/data/sandbox.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/images/enemies.png", "assets/images/enemies.png");
 			type.set ("assets/images/enemies.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/explosion.png", "assets/images/explosion.png");
+			type.set ("assets/images/explosion.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");
 			type.set ("assets/images/images-go-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/images/items.png", "assets/images/items.png");
 			type.set ("assets/images/items.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/mockups.pyxel", "assets/images/mockups.pyxel");
 			type.set ("assets/images/mockups.pyxel", Reflect.field (AssetType, "binary".toUpperCase ()));
+			path.set ("assets/images/nohit.png", "assets/images/nohit.png");
+			type.set ("assets/images/nohit.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/player.png", "assets/images/player.png");
 			type.set ("assets/images/player.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/player.pyxel", "assets/images/player.pyxel");

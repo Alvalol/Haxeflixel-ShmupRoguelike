@@ -68,6 +68,8 @@ class Player extends FlxSprite
 	
 	override public function update(elapsed:Float):Void
 	{
+		
+		
 		if (alive)
 		{
 		    move();
@@ -82,6 +84,16 @@ class Player extends FlxSprite
 		super.update(elapsed);
 	}
 	
+	
+	private function checkCollision()
+	{
+		if (FlxG.overlap(Reg.PS.blocks, this))
+		{
+         damage();
+	     //FlxObject.separate(Reg.PS.blocks, player);
+	    }
+		
+	}
 	
 	public function move()
 	{

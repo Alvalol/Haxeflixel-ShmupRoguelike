@@ -2,6 +2,7 @@ package objects.hazards;
 import objects.Player;
 import flixel.FlxG;
 import flixel.FlxObject;
+import objects.effects.Explosion;
 
 class HazardBlock extends Hazard
 {
@@ -15,22 +16,15 @@ class HazardBlock extends Hazard
 		immovable = true;
 	}
 	
-	override public function update(elapsed:Float):Void 
-	{
-		if (FlxG.overlap(this, Reg.PS.player))
-	    {
-			FlxObject.separate(this, Reg.PS.player);
-			interact(Reg.PS.player);
-		}
-		
-		super.update(elapsed);
-	}
-	
 	override public function kill()
 	{
-		alive = false;
-		exists = false;
-		Reg.PS.blocks.remove(this, true);
+		super.kill();
+		if (isOnScreen())
+		{
+		var e = new Explosion(x - 4, y - 4);
+		Reg.PS.effects.add(e);			
+		}
+
 	}
 	
 }

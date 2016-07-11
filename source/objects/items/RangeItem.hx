@@ -12,14 +12,14 @@ class RangeItem extends Item
 	{
 		super(x, y);
 		makeGraphic(8, 8, FlxColor.GREEN);
-		
+		lifespan = 4;
 	}
 	
 	override function interact(player:Player)
 	{
 		if (player.RANGE < player.MAX_RANGE)
 		{
-			player.RANGE += 0.2;
+			player.RANGE += 0.1;
 		}
 		
 		super.interact(player);
