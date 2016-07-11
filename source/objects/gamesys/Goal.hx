@@ -5,10 +5,6 @@ import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import states.MenuState;
 
-/**
- * ...
- * @author Alvarop
- */
 class Goal extends FlxSprite
 {
 

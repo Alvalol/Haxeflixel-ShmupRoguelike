@@ -11,7 +11,7 @@ import flixel.math.FlxMath;
 
 class EnemyExplosive extends Enemy
 {
-
+	
 	private var MOVE_SPEED:Float = 0.5;
 	
 	public function new(x:Float, y :Float) 
@@ -25,10 +25,9 @@ class EnemyExplosive extends Enemy
         animation.play("idle");
 	}
 	
+	
 	override public function update(elapsed:Float)
 	{
-		super.update(elapsed);
-		
 		if (_appeared)
 		{
 		move();
@@ -38,6 +37,7 @@ class EnemyExplosive extends Enemy
 		super.update(elapsed);	
 	}
 	
+	
 		override public function kill():Void
 	{	
 		drops = [new HealthItem(x, y)];
@@ -45,10 +45,13 @@ class EnemyExplosive extends Enemy
 		super.kill();
 	}
 	
+	
 	private function move()
 	{
 		x -= MOVE_SPEED;
 	}
+	
+	
 	private function reachedScrollX()
 	{
 

@@ -109,7 +109,7 @@ class CoinItem extends Item
 	override public function kill()
 	{
 		lifespan = 4;
-		//Reg.PS.coins.remove(coin, true);
+		Reg.PS.coins.remove(this, true);
 		Reg.PS.effects.remove(bTrail, true);
 		super.kill();
 	}

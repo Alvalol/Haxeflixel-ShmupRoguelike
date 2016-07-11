@@ -23,12 +23,15 @@ class EnemyExplosiveExplosion extends FlxSprite
 		
 		if (FlxG.overlap(Reg.PS.player, this))
 		     interact(Reg.PS.player);
-			 
-		super.update(elapsed);
+		
+	    
+		if(!Reg.pause)
+		    super.update(elapsed);
     }
 	
-			private function interact(player:Player)
-	    {
-		player.kill();
-		}
+	private function interact(player:Player)
+    {
+		player.kill();	
+	}
+	
 }

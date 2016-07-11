@@ -36,11 +36,8 @@ class LevelEnemies
 			{
 				currentLevel.setTileByIndex(i, 0, true); // updates the tile so that there is no tile overlapping the enemy
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
-				var destructible:HazardBlock = Reg.PS.blocks.recycle();
-				if (destructible == null)
-			        destructible = new HazardBlock(enPos.x - 4, enPos.y - 4);
+			    var destructible = new HazardBlock(enPos.x - 4, enPos.y - 4);
 				
-				destructible.reset(enPos.x - 4, enPos.y - 4);
 				Reg.PS.blocks.add(destructible);
 		    }
 			

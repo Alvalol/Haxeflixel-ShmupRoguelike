@@ -17,36 +17,36 @@ class EnemyMultishotDeath extends Enemy
 	private var justShot:Bool;
 	private var shootDelay:Float = 0.25;
 	private var ang:Int = 180;
-	private var bulletSpeed = 50;
+	private var bulletSpeed = 80;
 
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
 		HP = 1;
-		makeGraphic(8, 8, FlxColor.PURPLE);
+		makeGraphic(8, 8, FlxColor.RED);
 	}
 	
 	override public function update(elapsed:Float) 
 	{
 
+		angle-= 10;
 		if (!justShot && isOnScreen())
 		{
 			shoot();
 		}
-
+		
 		super.update(elapsed);
-	
 	}
 	
-	override public function kill():Void
+	override public function kill()
 	{
 		drops = [new HealthItem(x, y)];
 		dropItem(drops);
-		deathShoot();
+		deathShot();
 		super.kill();
 	}
 	
-	public function shoot()
+	private function shoot()
 	{
 		justShot = true;
 		var eb = new EnemyBullet(x, y);
@@ -60,21 +60,18 @@ class EnemyMultishotDeath extends Enemy
 		{
 	    justShot = false;
 		}, 1);
-
 	}
-	
 
-	public function deathShoot()
+	private function deathShot()
 	{
 		var tang = -90;
-		var bulletSpeed = 45;
 		for (i in 0...9)
 		{
-			var en = new EnemyBullet(x, y);
-			en.velocity.set(FlxVelocity.velocityFromAngle(tang, bulletSpeed).x,FlxVelocity.velocityFromAngle(tang, bulletSpeed).y);
+			var eb = new EnemyBullet(x, y);
+			eb.velocity.set(FlxVelocity.velocityFromAngle(tang, bulletSpeed).x,FlxVelocity.velocityFromAngle(tang, bulletSpeed).y);
 			tang += 45;
-			en.scale.set(0.5, 0.5);
-			Reg.PS.EBullets.add(en);
+			eb.scale.set(0.5, 0.5);
+			Reg.PS.EBullets.add(eb);
 		}
 	}
 }

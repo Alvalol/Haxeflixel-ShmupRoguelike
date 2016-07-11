@@ -10,47 +10,41 @@ import objects.effects.NoHit;
 class EnemyBullet extends FlxSprite
 {
 
-	private static var trail:FlxTrail;
-	
 	private var bTrail:FlxTrail;
 	
 	public function new(x:Float,y:Float) 
 	{
 		super(x, y);
 		loadGraphic(AssetPaths.items__png, true, 8, 8);
-		animation.add("idle", [14, 15], 8, false);
+		animation.add("idle", [14, 15], 8, true); // looping gives it an interesting wobbly effect
 		animation.play("idle");
-		scale.set(0.5, 0.5);
+		//scale.set(0.5, 0.5);
 		width = 8;
 		height = 8;
+		
 		createTrail();
 	}
 	
 	private function createTrail()
 	{
-
         bTrail = new FlxTrail(this, null, 10, 1, 0.3, 0.05);
-	
-		bTrail.reset(x , y);
 		Reg.PS.effects.add(bTrail);
 	}
 	
 	override public function update(elapsed:Float):Void
 	{
-		for(block in Reg.PS.blocks){
-		if (FlxG.overlap(this, block)){
+		collisions();
+		super.update(elapsed);
+	}
+
+	
+	private function collisions()
+	{
+		
+		if (FlxG.overlap(this, Reg.PS.blocks) || FlxG.overlap(this, Reg.PS.hazards))
+		{
             createNoHit();
 			kill();
-		}
-		}
-		
-		for (hazard in Reg.PS.hazards)
-		{
-			if (FlxG.overlap(this, hazard))
-			{
-				createNoHit();
-				kill();
-			}
 		}
 		
 		if (!isOnScreen() || FlxG.collide(Reg.PS.map.loadedMap, this))
@@ -59,10 +53,14 @@ class EnemyBullet extends FlxSprite
 			kill();
 		}
 		
-		super.update(elapsed);
+		if (FlxG.overlap(this, Reg.PS.player))
+		{
+			interact(Reg.PS.player);
+		}
+		
 	}
-	
-		public function interact(player:Player)
+
+	public function interact(player:Player)
 	{
 		kill();
 		player.damage();

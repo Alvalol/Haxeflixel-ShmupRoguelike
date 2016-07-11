@@ -36,68 +36,57 @@ class EnemyTurretA extends Enemy
 		super(x, y); // this causes an issue if turret is on ceiling... needs to use ceiling instance variable.
 		HP = 1;
 		type = FlxG.random.int(0, 1);
-        tx = Std.int(x / 8);
+        tx = Std.int(x / 8); // tx, ty here because it never changes anyway
         ty = Std.int(y / 8);
-		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		
+		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		animation.add("idle", [0,1], 6, true);
-		animation.add("shoot", [0, 1, 2, 3, 4, 5, 6, 7,7,7, 8, 8] , 8,false);
+		animation.add("shoot", [0, 1, 2, 3, 4, 5, 6, 7, 7, 7, 8, 8], 8,false);
 		animation.play("idle");
+		
 		immovable = true;
 		solid = true;
 		adjustFlip();
-		if (type == 1)
-		{
-			color = 0xFFFFFF00;
-		}
+		chooseType();
 
 	}
-	
+
 	override public function update(elapsed:Float)
 	{
+		animateToShoot();		
+		super.update(elapsed);
+	}
+
+    private function animateToShoot()
+	{
 		if (!justShot && isOnScreen())
-		{
-		    animation.play("shoot");
-			justShot = true;
-		}
+			{
+				animation.play("shoot");
+				justShot = true;
+			}
 
 		if (animation.curAnim.name == "shoot" && animation.curAnim.curFrame == 6)
 			{
 				Reg.PS.EBullets.add(shoot());
 				animation.play("idle");
-			}
-			
-		for (bullet in Reg.PS.EBullets)
-		{
-		if (FlxG.overlap(Reg.PS.player, bullet))
-		bullet.interact(Reg.PS.player);
-		}
-	
-		
-		checkFloorCeiling();
-
-		super.update(elapsed);
+			}	
 	}
-		
+	
 	private function shoot():EnemyBullet
 	{
-		// the bullet speed should be a variable that is passed at creation, depending on the flipped value of the enemyTurret
-
-	
 		var eb:EnemyBullet = Reg.PS.EBullets.recycle();
 	    if (eb == null)
 		    eb = new EnemyBullet(x, y);
         
 		if (!flipY)
-		{
-			
-		eb.reset(x , y - 1 );
-		eb.velocity.y = -SHOOT_SPEED;
+		{	
+			eb.reset(x , y - 1 );
+			eb.velocity.y = -SHOOT_SPEED;
 		}
 		else
 		{
-		eb.reset(x, y + 1 );
-		eb.velocity.y = SHOOT_SPEED;			
+			eb.reset(x, y + 1 );
+			eb.velocity.y = SHOOT_SPEED;			
 		}
 
 		new FlxTimer().start(shootDelay, function(_)
@@ -122,26 +111,20 @@ class EnemyTurretA extends Enemy
 		super.kill();
 	}
 	
-	private function checkFloorCeiling()
-	{
-     // not sure if this is interesting at all
-	}
-
-	
-	private function clearBullets()
-	{
-		if (Reg.PS.EBullets.countLiving() < 0)
-		{
-			Reg.PS.EBullets.clear();
-		}
-
-	}
 	private function adjustFlip()
 	{
 		if (Reg.PS.map.loadedMap.getTile(tx,ty-1) != 0) // not accurate enough
 		{
 			flipY = true;
 		}
+	}
+	
 		
+	private function chooseType()
+	{
+		if (type == 1)
+		{
+			color = 0xFFFFFF00;
+		}
 	}
 }

@@ -11,7 +11,6 @@ import objects.items.CoinItem;
 class Enemy extends FlxSprite
 {
 	private var HP:Int;
-	
 	private var _appeared:Bool = false;
 	private var drops:Array<Item>;
 	
@@ -19,45 +18,64 @@ class Enemy extends FlxSprite
 	{
 		super(x, y);
 	}
+	
 	override public function update(elapsed:Float) 
 	{
-		
-			
 		if (!inWorldBounds())
 			exists = false;
 			
         if (isOnScreen()) {
-        if (!_appeared) 
-             _appeared = true;
-                          }
-         else {
-           if (_appeared)
-            kill();
-		 }
+			if (!_appeared) 
+				 _appeared = true;
+							  }
+			 else {
+			   if (_appeared)
+				kill();
+			 }
 			
 			
-		if (HP <= 0 || !isOnScreen() && _appeared)
+		if (HP <= 0)
 		    kill();
 			
+			
+		collisions();
+		
 		if (!Reg.pause)
 			super.update(elapsed);
 	}
 	
+	
+	private function collisions()
+	{
+		if (FlxG.overlap(Reg.PS.player,this))
+		{
+			interact(Reg.PS.player);
+		}
+		
+		if (FlxG.overlap(Reg.PS.PBullets, this))
+		{
+			damage();
+			Reg.PS.PBullets.getFirstAlive().kill();
+		}
+	}
+	
 	private function interact(player:Player)
 	{
+		damage(); // or kill()? 
+		player.damage();
 		FlxObject.separate(this, player);
-			kill();
-			player.damage();
 	}
 	
 	public function damage()
 	{
 		HP--;
+		//make it flash or something if it has more than 1 HP obviously.
 	}
 	
-		private function dropItem(list:Array<Item>)
+	private function dropItem(list:Array<Item>)
 	{
-
+		// Make the drop system a bit better than this. Have items have a probability.
+		
 		var itemRoll = FlxG.random.int(0,100);
 		//trace(itemRoll);
 		if (itemRoll < 15)
@@ -68,20 +86,15 @@ class Enemy extends FlxSprite
 		}
 		else
 		{
-				var newCoin:CoinItem =  Reg.PS.coins.recycle();
-
-				
-				if (newCoin == null) 
-				    newCoin = new CoinItem(x, y);
-					
-				newCoin.reset(x , y);
+				var newCoin:CoinItem =  new CoinItem(x, y);
 				Reg.PS.coins.add(newCoin);
 		}
 	}	
 	
 	override public function kill()
 	{
-		//Reg.PS.enemies.remove(this, true);
+		//?
+		Reg.PS.enemies.remove(this, true);
 		
 		if(isOnScreen()){
 		var e = new Explosion(x - 4, y - 4);

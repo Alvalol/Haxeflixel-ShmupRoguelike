@@ -8,7 +8,6 @@ import flixel.FlxObject;
 
 class Hazard extends FlxSprite
 {
-
 	private var _appeared:Bool = false;
 	
 	public function new(x:Float,y:Float) 
@@ -18,21 +17,37 @@ class Hazard extends FlxSprite
 	
 	override public function update(elapsed:Float):Void 
 	{
-		if (FlxG.overlap(this, Reg.PS.player))
-	    {
+        basicChecks();
+		collisions();
+		super.update(elapsed);		
+	}
+	
+	
+	private function collisions()
+	{
+		if (FlxG.overlap(Reg.PS.player, this))
+		{
 			interact(Reg.PS.player);
 		}
-		
+	}
+	
+	private function basicChecks()
+	{
 		if (!inWorldBounds())
 			exists = false;
 			
-		if (isOnScreen() && !_appeared) 
+		if (isOnScreen())
+		{
+			if (!_appeared) 
+			{
 			_appeared = true;	
-			
-		if (!isOnScreen() && _appeared)
+			}
+		}
+		else
+		{
+			if(_appeared)
 		    kill();
-		
-		super.update(elapsed);		
+		}
 	}
 	
 		private function interact(player:Player)
@@ -42,6 +57,10 @@ class Hazard extends FlxSprite
 	
 	override public function kill()
 	{
+		Reg.PS.hazards.remove(this, true);
 		super.kill();
+		
 	}
+	
+	
 }

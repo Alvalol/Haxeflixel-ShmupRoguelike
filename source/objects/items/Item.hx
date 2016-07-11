@@ -62,7 +62,7 @@ class Item extends FlxSprite
 	override public function kill()
 	{
 		//_appeared = false;
-		//Reg.PS.items.remove(this,false);
+		Reg.PS.items.remove(this,true);
 		super.kill();
 	}
 	

@@ -16,15 +16,18 @@ class HazardBlock extends Hazard
 		immovable = true;
 	}
 	
-	override public function kill()
+	override private function interact(player:Player)
 	{
-		super.kill();
-		if (isOnScreen())//sdf
-		{
-		var e = new Explosion(x - 4, y - 4);
-		Reg.PS.effects.add(e);			
-		}
-
+	  super.interact(player);
+	  FlxObject.separate(this, player);
 	}
 	
+	override public function kill()
+	{
+		Reg.PS.blocks.remove(this, true);
+		alive = false;
+		exists = false;
+		var e = new Explosion(x - 4, y - 4);
+		Reg.PS.effects.add(e);
+	}
 }

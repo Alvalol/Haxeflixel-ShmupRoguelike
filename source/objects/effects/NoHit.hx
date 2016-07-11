@@ -10,17 +10,19 @@ class NoHit extends FlxSprite
 	{
 		super(x, y);
 		loadGraphic(AssetPaths.nohit__png, true, 8, 8);
-		animation.add("explosion",[0,1,1]);
-		animation.play("explosion");
+		animation.add("nohit",[0,0,1,1]);
+		animation.play("nohit");
 	}
 	
 	override public function update(elapsed:Float):Void 
 	{
-		if (animation.curAnim.curFrame == 2 && isOnScreen())
+		if (animation.curAnim.curFrame == 3 && isOnScreen())
 		{
 			kill();
-			//Reg.PS.effects.remove(this, true);
+			Reg.PS.effects.remove(this, true);
 		}
-		super.update(elapsed);
+	
+		if(!Reg.pause)	
+		   super.update(elapsed);
 	}
 }

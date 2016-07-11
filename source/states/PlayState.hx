@@ -163,18 +163,6 @@ class PlayState extends FlxState
 	
 	public function collisions()
 	{
-		
- 	for (enemy in enemies){
-	for (bullet in PBullets)
-	{
-		
-	if(FlxG.overlap(bullet,enemy))
-			{
-			       enemy.damage();
-			       bullet.kill();
-			}
-		            }
-	}
 	
 	   for (item in items)
 	   {

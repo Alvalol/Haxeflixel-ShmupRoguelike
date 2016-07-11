@@ -9,7 +9,6 @@ class Explosion extends FlxSprite
 
 	private var escale = FlxG.random.float(1, 2.5);
 	
-	
 	public function new(x:Float,y:Float) 
 	{
 		super(x, y);
@@ -21,11 +20,15 @@ class Explosion extends FlxSprite
 	
 	override public function update(elapsed:Float):Void 
 	{
+		// maybe kill enemy on collision with this?
+		
 		if (animation.curAnim.curFrame == 4 && isOnScreen())
 		{
 			kill();
-			//Reg.PS.effects.remove(this, true);
+			Reg.PS.effects.remove(this, true);
 		}
-		super.update(elapsed);
+		
+		if(!Reg.pause)
+		  super.update(elapsed);
 	}
 }

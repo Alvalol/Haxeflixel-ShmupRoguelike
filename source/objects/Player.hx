@@ -54,8 +54,8 @@ class Player extends FlxSprite
 		SHOT_MOD = 0;
 	
 	
-		width = 2; // maybe one hitbox for death, another hitbox for animations / collision with maps.
-		height = 2;
+		width = 4; // maybe one hitbox for death, another hitbox for animations / collision with maps.
+		height = 4;
 		centerOffsets();
 		animation.add("move", [0,1,2],30);
 		animation.play("move");
@@ -63,13 +63,10 @@ class Player extends FlxSprite
 		drag.x = DECELERATION;
 		drag.y = DECELERATION;
 		maxVelocity.set(HOR_MOVE_SPEED, VERT_MOVE_SPEED);
-		
 	}
 	
 	override public function update(elapsed:Float):Void
-	{
-		
-		
+	{		
 		if (alive)
 		{
 		    move();
@@ -84,16 +81,6 @@ class Player extends FlxSprite
 		super.update(elapsed);
 	}
 	
-	
-	private function checkCollision()
-	{
-		if (FlxG.overlap(Reg.PS.blocks, this))
-		{
-         damage();
-	     //FlxObject.separate(Reg.PS.blocks, player);
-	    }
-		
-	}
 	
 	public function move()
 	{
