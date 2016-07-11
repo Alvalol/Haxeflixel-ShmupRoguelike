@@ -20,6 +20,7 @@ class EnemyBullet extends FlxSprite
 		loadGraphic(AssetPaths.items__png, true, 8, 8);
 		animation.add("idle", [14, 15], 8, false);
 		animation.play("idle");
+		scale.set(0.5, 0.5);
 		width = 8;
 		height = 8;
 		createTrail();
@@ -27,10 +28,9 @@ class EnemyBullet extends FlxSprite
 	
 	private function createTrail()
 	{
-		bTrail =  cast Reg.PS.effects.recycle();
-		if (bTrail== null) 
-            bTrail = new FlxTrail(this, null, 10, 1, 0.3, 0.05);
-			
+
+        bTrail = new FlxTrail(this, null, 10, 1, 0.3, 0.05);
+	
 		bTrail.reset(x , y);
 		Reg.PS.effects.add(bTrail);
 	}

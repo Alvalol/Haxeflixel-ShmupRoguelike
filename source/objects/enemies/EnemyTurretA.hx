@@ -21,7 +21,7 @@ class EnemyTurretA extends Enemy
 {
 
     private static inline var SCORE_AMOUNT:Int = 100;
-	private static inline var SHOOT_SPEED = 150;
+	private static inline var SHOOT_SPEED = 200;
 	
 	private var bullet:EnemyBullet;
 	private var justShot:Bool;
@@ -108,7 +108,7 @@ class EnemyTurretA extends Enemy
 		if (type == 1)
 		{
 		var aim = new FlxPoint(Reg.PS.player.x, Reg.PS.player.y);
-		FlxVelocity.moveTowardsPoint(eb, aim, 60, 0);
+		FlxVelocity.moveTowardsPoint(eb, aim, SHOOT_SPEED, 0);
 		}
 		
 		return eb;
