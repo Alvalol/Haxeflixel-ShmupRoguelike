@@ -41,6 +41,8 @@ class HUD extends FlxSpriteGroup
 		
 		_textScore.text =  StringTools.lpad(
 		Std.string(Reg.score), "0", 5);
+		
+
 		_currentHealth.text = (Reg.PS.player.HP +  ":" + Reg.PS.player.MAX_HP);
 		
 		if(!Reg.pause)

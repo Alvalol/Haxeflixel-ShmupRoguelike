@@ -19,10 +19,10 @@ import flixel.util.FlxSpriteUtil;
 import objects.hazards.Hazard;
 import objects.items.Item;
 import flixel.addons.effects.FlxTrail;
+import openfl.system.System;
 
 
 import objects.enemies.EnemyBullet;
-//import objects.Goal;
 import objects.Player;
 import objects.PlayerBullet;
 import objects.gamesys.Scroller;
@@ -38,7 +38,6 @@ import utils.pcg.LevelEnemies;
 
 class PlayState extends FlxState
 {
-	
 	public var map:LevelLoaderProc;
 	public var hazards:FlxTypedGroup<Hazard>;
 	public var player(default, null):Player;
@@ -50,9 +49,7 @@ class PlayState extends FlxState
 	public var enemies(default, null):FlxTypedGroup<Enemy>;
 	public var items(default, null):FlxTypedGroup<Item>;
 	public var coins:FlxTypedGroup < CoinItem>;
-	//	public var goals(default, null):FlxTypedGroup<Goal>;
 	private var _entities:FlxGroup;
-//	private var _system:FlxGroup;
 
 	private var _scroller(default, null):Scroller;
 	
@@ -79,9 +76,7 @@ class PlayState extends FlxState
         PBullets = new FlxTypedGroup<PlayerBullet>();
 		EBullets = new FlxTypedGroup<EnemyBullet>();
 		EExplosions = new FlxTypedGroup<EnemyExplosiveExplosion>();
-		//goals = new FlxTypedGroup<Goal>();
 		_entities = new FlxGroup();
-		//_system = new FlxGroup();
 		
 		FlxG.mouse.visible = false; // must always be set to false pls
 		 
@@ -92,8 +87,6 @@ class PlayState extends FlxState
 		
 		
 		add(map.loadedMap);
-
-		//_system.add(goals);
 		_entities.add(EExplosions);
 		_entities.add(blocks);	
 		_entities.add(coins);
@@ -105,9 +98,7 @@ class PlayState extends FlxState
 		_entities.add(PBullets);
 		add(_entities);
 
-
 		add(player);
-		//add(_system);
 		items.clear();
 		coins.clear();
 		enemies.clear();
@@ -117,20 +108,16 @@ class PlayState extends FlxState
 	
 	override public function update(elapsed:Float):Void
 	{
+		if(!Reg.pause)
 		super.update(elapsed);
+		
 		displayTracers();
-		if (FlxG.keys.justPressed.P)
-		{
-			Reg.pause = !Reg.pause;
-		}
-		
-		if (FlxG.keys.justPressed.R) FlxG.resetState();
-		
+		gameControls();
+
 		collisions();
 		cleanItems();
 		
 		LevelEnemies.populateEnemies(map.loadedMap);
-
 
 		FlxSpriteUtil.bound(player, 
 		                    FlxG.camera.scroll.x, 
@@ -138,11 +125,7 @@ class PlayState extends FlxState
 							FlxG.camera.scroll.y,
 							FlxG.camera.scroll.y + FlxG.camera.height);
 		
-		
-	    if (player.x <= FlxG.camera.scroll.x)
-		{
-			player.damage();
-		}
+
 		
 	}
 	
@@ -168,6 +151,11 @@ class PlayState extends FlxState
 	public function collisions()
 	{
 	
+	    if (player.x <= FlxG.camera.scroll.x)
+		{
+			player.damage();
+		}
+		
 	   for (item in items)
 	   {
 		   if (FlxG.overlap(item, player))
@@ -186,6 +174,13 @@ class PlayState extends FlxState
 		}
     }
 	
+	private function gameControls()
+	{
+		if (FlxG.keys.justPressed.P) Reg.pause = !Reg.pause;
+		if (FlxG.keys.justPressed.ESCAPE) System.exit(0);
+		if (FlxG.keys.justPressed.R) FlxG.resetState();
+	}
+	
 	private function cleanItems()
 	{
 	   if (coins.countLiving() < 1)
@@ -195,7 +190,7 @@ class PlayState extends FlxState
 	
 	   if (blocks.countLiving() < 1)
 	   {
-		//blocks.clear();
+		blocks.clear();
 	   }
 	   
 	   if (EBullets.countLiving() < 1)

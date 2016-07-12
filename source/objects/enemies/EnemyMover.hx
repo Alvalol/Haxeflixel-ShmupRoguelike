@@ -24,10 +24,10 @@ class EnemyMover extends Enemy
 	    super(x, y);
 		HP = 1;
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
-		animation.add("idle", [16,17,18,19,20,21,22], 12, true);
+		animation.add("idle", [16]);
         animation.play("idle");
-        scale = new FlxPoint(1.5, 1.5);
-		//createTrail();
+       // scale = new FlxPoint(1.5, 1.5);
+		createTrail();
 	}
 	
     override public function update(elapsed:Float)
@@ -49,6 +49,7 @@ class EnemyMover extends Enemy
 	{	
 		drops = [new HealthItem(x, y),new RangeItem(x,y)];
 		dropItem(drops);
+		Reg.PS.effects.remove(bTrail);
 		super.kill();
 	}
 	
