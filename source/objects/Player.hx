@@ -67,11 +67,28 @@ class Player extends FlxSprite
 	override public function update(elapsed:Float):Void
 	{		
 		basicChecks(elapsed);
-		
+		collisions();
 		if(!Reg.pause)
 		    super.update(elapsed);
 	}
 		
+	private function collisions()
+	{
+			   						
+		if (alive)
+		{
+		   if (FlxG.collide(Reg.PS.map.loadedMap, this))
+		   {
+			damage();
+			FlxObject.separate(this, Reg.PS.map.loadedMap);
+		   }
+		   if (x <= FlxG.camera.scroll.x)
+		   {
+			damage();
+		   }
+		}
+	}
+	
 	private function basicChecks(elapsed:Float)
 	{
 		if (alive)

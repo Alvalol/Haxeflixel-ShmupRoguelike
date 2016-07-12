@@ -22,6 +22,7 @@ class CoinItem extends Item
 		makeGraphic(t,t, FlxColor.WHITE);
 		offset.set( -4, -4);
 		centerOffsets();
+		lifespan = 4;
 
         bTrail = new FlxTrail(this, null, 10, 1, 0.3, 0.05);
 		Reg.PS.effects.add(bTrail);
@@ -29,7 +30,6 @@ class CoinItem extends Item
 		
 	override public function update(elapsed:Float)
 	{
-	    collisions();
 		magnetize();
 		angle += rotspeed;
 
@@ -53,14 +53,7 @@ class CoinItem extends Item
 		else
 		    magnetized = false;
 	}
-	
-	private function collisions()
-	{
-		if (FlxG.overlap(Reg.PS.player,this))
-		  {
-		    interact(Reg.PS.player);
-		  }
-	}
+
 	private function move()
 	{
 		angle += velocity.x/10;

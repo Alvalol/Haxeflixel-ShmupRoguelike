@@ -26,7 +26,16 @@ class Item extends FlxSprite
 	override public function update(elapsed:Float)
 	{
         basicChecks();
+		collisions();
 		super.update(elapsed);
+	}
+	
+	private function collisions()
+	{
+		   if (FlxG.overlap(Reg.PS.player, this))
+		   {
+			interact(Reg.PS.player);   
+		   }
 	}
 	
 	private function basicChecks()

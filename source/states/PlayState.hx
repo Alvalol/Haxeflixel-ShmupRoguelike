@@ -53,7 +53,6 @@ class PlayState extends FlxState
 
 	private var _scroller(default, null):Scroller;
 	
-	
 	private var _hud:HUD;
 	private var _gameCamera:FlxCamera;
 	private var _hudCamera:FlxCamera;
@@ -66,6 +65,7 @@ class PlayState extends FlxState
 		Reg.PS = this;
 		Reg.pause = false;
 
+		// init gameplay elements
 		player = new Player(16, FlxG.width/2);
 		enemies = new FlxTypedGroup<Enemy>();
 		hazards = new FlxTypedGroup<Hazard>();
@@ -80,12 +80,38 @@ class PlayState extends FlxState
 		
 		FlxG.mouse.visible = false; // must always be set to false pls
 		 
-		 map = new LevelLoaderProc();
-		_gameCamera = new FlxCamera();
-		_hudCamera = new FlxCamera();
+		map = new LevelLoaderProc();
+		
       	cameraSetup();
 		
+		items.clear();
+		coins.clear();
+		enemies.clear();
+		addGameplayElements();
+
+		super.create();
+	}
+	
+	
+	override public function update(elapsed:Float):Void
+	{
+		if(!Reg.pause)
+		super.update(elapsed);
 		
+		displayTracers();
+		gameControls();
+
+		LevelEnemies.populateEnemies(map.loadedMap);
+
+		FlxSpriteUtil.bound(player, 
+		                    FlxG.camera.scroll.x, 
+							FlxG.camera.scroll.x + FlxG.camera.width,
+							FlxG.camera.scroll.y,
+							FlxG.camera.scroll.y + FlxG.camera.height);	
+	}
+	
+	private function addGameplayElements()
+	{		
 		add(map.loadedMap);
 		_entities.add(EExplosions);
 		_entities.add(blocks);	
@@ -97,40 +123,13 @@ class PlayState extends FlxState
 		_entities.add(enemies);
 		_entities.add(PBullets);
 		add(_entities);
-
-		add(player);
-		items.clear();
-		coins.clear();
-		enemies.clear();
-		
-		super.create();
+		add(player);	
 	}
 	
-	override public function update(elapsed:Float):Void
-	{
-		if(!Reg.pause)
-		super.update(elapsed);
-		
-		displayTracers();
-		gameControls();
-
-		collisions();
-		cleanItems();
-		
-		LevelEnemies.populateEnemies(map.loadedMap);
-
-		FlxSpriteUtil.bound(player, 
-		                    FlxG.camera.scroll.x, 
-							FlxG.camera.scroll.x + FlxG.camera.width,
-							FlxG.camera.scroll.y,
-							FlxG.camera.scroll.y + FlxG.camera.height);
-		
-
-		
-	}
-	
-	public function cameraSetup()
-	{
+	private function cameraSetup()
+	{	
+		_gameCamera = new FlxCamera();
+		_hudCamera = new FlxCamera();
 		_scroller = new Scroller(player.x + 80, player.y);
 		
 		FlxG.cameras.reset(_gameCamera);
@@ -139,40 +138,14 @@ class PlayState extends FlxState
 		FlxCamera.defaultCameras = [_gameCamera];
 		_hud = new HUD();
 		_hud.setCamera(_hudCamera);
-		_gameCamera.follow(_scroller, FlxCameraFollowStyle.TOPDOWN_TIGHT,0.01);
 		_gameCamera.setScrollBoundsRect(0, 0, map.loadedMap.width, map.loadedMap.height, true);
-		//FlxG.camera.antialiasing = false;
+		FlxG.camera.antialiasing = false;
 		_gameCamera.pixelPerfectRender = false;	
+		
+		_gameCamera.follow(_scroller, FlxCameraFollowStyle.TOPDOWN_TIGHT,0.01);
 		add(_scroller);
 		add(_hud);
-	
 	}
-	
-	public function collisions()
-	{
-	
-	    if (player.x <= FlxG.camera.scroll.x)
-		{
-			player.damage();
-		}
-		
-	   for (item in items)
-	   {
-		   if (FlxG.overlap(item, player))
-		   {
-			   item.interact(player);
-		   }
-	   }
-	   						
-		if (player.alive)
-		{
-		   if (FlxG.collide(map.loadedMap, player))
-		   {
-			player.damage();
-			FlxObject.separate(player, map.loadedMap);
-		   }
-		}
-    }
 	
 	private function gameControls()
 	{
@@ -180,51 +153,6 @@ class PlayState extends FlxState
 		if (FlxG.keys.justPressed.ESCAPE) System.exit(0);
 		if (FlxG.keys.justPressed.R) FlxG.resetState();
 	}
-	
-	private function cleanItems()
-	{
-	   if (coins.countLiving() < 1)
-	   {
-		coins.clear(); 
-	   }
-	
-	   if (blocks.countLiving() < 1)
-	   {
-		blocks.clear();
-	   }
-	   
-	   if (EBullets.countLiving() < 1)
-	   {
-		EBullets.clear(); 
-	   }
-	   
-	   	   if (enemies.countLiving() < 1)
-	   {
-		enemies.clear(); 
-	   }
-	   
-	   if (items.countLiving() < 1)
-	   {
-		   items.clear();
-	   }
-	   
-	   	   if (PBullets.countLiving() < 1)
-	   {
-		   PBullets.clear();
-	   }
-	   
-	   
-	   if (effects.countLiving() < 1)
-	   {
-		   effects.clear();
-	   }
-	   if (hazards.countLiving() < 1)
-	   {
-		   hazards.clear();
-	   }
-
-}
-
 	
 	private function displayTracers()
 	{
