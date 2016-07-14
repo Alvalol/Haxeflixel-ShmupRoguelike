@@ -21,7 +21,6 @@ import objects.items.Item;
 import flixel.addons.effects.FlxTrail;
 import openfl.system.System;
 
-
 import objects.enemies.EnemyBullet;
 import objects.Player;
 import objects.PlayerBullet;
@@ -56,9 +55,8 @@ class PlayState extends FlxState
 	private var _hud:HUD;
 	private var _gameCamera:FlxCamera;
 	private var _hudCamera:FlxCamera;
-	
-	private var tracers:Bool = true;
-	
+
+	private var tracers:Bool = false;
 	
 	override public function create():Void
 	{
@@ -139,10 +137,10 @@ class PlayState extends FlxState
 		_hud = new HUD();
 		_hud.setCamera(_hudCamera);
 		_gameCamera.setScrollBoundsRect(0, 0, map.loadedMap.width, map.loadedMap.height, true);
-		FlxG.camera.antialiasing = false;
+		//FlxG.camera.antialiasing = false;
 		_gameCamera.pixelPerfectRender = false;	
 		
-		_gameCamera.follow(_scroller, FlxCameraFollowStyle.TOPDOWN_TIGHT,0.01);
+		_gameCamera.follow(_scroller, FlxCameraFollowStyle.TOPDOWN_TIGHT, 0.01);
 		add(_scroller);
 		add(_hud);
 	}
@@ -150,7 +148,7 @@ class PlayState extends FlxState
 	private function gameControls()
 	{
 		if (FlxG.keys.justPressed.P) Reg.pause = !Reg.pause;
-		if (FlxG.keys.justPressed.ESCAPE) System.exit(0);
+		if (FlxG.keys.justPressed.ESCAPE) System.exit(0);	
 		if (FlxG.keys.justPressed.R) FlxG.resetState();
 	}
 	
@@ -168,5 +166,6 @@ class PlayState extends FlxState
 		trace("effects " + effects.length);
 	    }
 	}
-
+	
 }
+

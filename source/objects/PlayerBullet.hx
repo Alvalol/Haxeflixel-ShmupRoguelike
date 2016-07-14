@@ -37,6 +37,11 @@ class PlayerBullet extends FlxSprite
 	
 	private function collisions()
 	{
+		if (!isOnScreen())
+		{
+			kill();
+			
+		}
 		// I feel like there is something I'm doing wrong here. Must ask.
 		for(block in Reg.PS.blocks){
 		if (FlxG.overlap(this, block))

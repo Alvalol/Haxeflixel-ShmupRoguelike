@@ -2,8 +2,9 @@ package utils.pcg;
 import flixel.math.FlxPoint;
 import flixel.tile.FlxTilemap;
 import flixel.FlxG;
+import objects.enemies.EnemyBlob;
+import objects.enemies.EnemySpawner;
 import objects.hazards.HazardBlock;
-import objects.hazards.HazardHorizontalBlock;
 import objects.enemies.Enemy;
 import objects.enemies.EnemyExplosive;
 import objects.enemies.EnemyLeft;
@@ -13,17 +14,13 @@ import objects.enemies.EnemyMultishotDeath;
 import objects.enemies.EnemyTurretA;
 import objects.hazards.HazardLaser;
 import objects.hazards.HazardRotator;
+import objects.hazards.HazardMovingBlock;
 
 
 
 class LevelEnemies
 {
 
-	public function new() 
-	{
-		// I MUST BE REFACTORED
-	}
-	
 	static public function populateEnemies(currentLevel:FlxTilemap)//:Enemy
 	{
 		for (i in 0...currentLevel.totalTiles) // this must be false or else it will return 0,1 only
@@ -82,7 +79,7 @@ class LevelEnemies
 			{
 				currentLevel.setTileByIndex(i, 0, true);
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
-				var haz = new HazardHorizontalBlock(enPos.x-4, enPos.y);
+				var haz = new HazardMovingBlock(enPos.x-4, enPos.y, false);
 				Reg.PS.hazards.add(haz);
 		    }  
 			 if (currentLevel.getTileByIndex(i) == 7)
@@ -91,14 +88,17 @@ class LevelEnemies
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
 				var haz = new HazardLaser(enPos.x, 8);
 				Reg.PS.hazards.add(haz);
-				/*var haz = new HazardRotator(enPos.x, enPos.y);
-				for (rot in haz.compGroup)
-				{
-				Reg.PS.hazards.add(rot);
-			   }*/
-		    }  			   
+		    }
+			
+			 if (currentLevel.getTileByIndex(i) == 8)
+			 {
+				currentLevel.setTileByIndex(i, 0, true);
+				var enPos = (currentLevel.getTileCoordsByIndex(i));
+				var enemy = new EnemyBlob(enPos.x, enPos.y);
+				Reg.PS.enemies.add(enemy);
 			}
 	}
 	}
 	
+}
 }

@@ -11,7 +11,7 @@ class Scroller extends FlxSprite
 	public function new(x:Float,y:Float)
 	{
 		super(x,y);
-	    makeGraphic(1, 1, FlxColor.RED);
+	    makeGraphic(4, 4, FlxColor.RED);
 		alpha = 0.5;
 		visible = false;
 		maxVelocity.set(MOVE_SPEED, MOVE_SPEED);
