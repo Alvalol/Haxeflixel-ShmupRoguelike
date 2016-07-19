@@ -5,32 +5,57 @@ import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.util.FlxTimer;
+import objects.items.HealthItem;
 
 
 class EnemyBlob extends Enemy
 {
 	var roll:Int;
 	var rolled:Bool;
-	var delayDirection:Float = 0.1;
+	var delayDirection:Float = 0.5;
+	var tsize:Float = 32; 
+	var mtsize:Float = 8;
 	
-	public function new(x:Float,y:Float) 
+	public function new(x:Float,y:Float, _tsize:Float) 
 	{
 		super(x, y);
 		HP = 1;
-		roll = FlxG.random.int(0, 100);	
-		makeGraphic(16, 16, FlxColor.RED);
+		solid = true;
+		tsize = _tsize;
+		roll = FlxG.random.int(0, 100);
+		makeGraphic(Std.int(tsize), Std.int(tsize), FlxColor.RED);
 	}
 	
 	override public function update(elapsed:Float) 
 	{
 		if (!rolled)
 		{
-			rolled = true;
+		rolled = true;
 		reroll();
 		}
 		trace(roll);
 		move();
+		
 		super.update(elapsed);
+	}
+	
+	private function mitosis()
+	{
+		var m1 = new EnemyBlob(x - tsize / 2, y + FlxG.random.int(1,3), tsize - 4);
+		var m2 = new EnemyBlob(x + tsize / 2, y + FlxG.random.int(1,3), tsize - 4);
+		Reg.PS.enemies.add(m1);
+		Reg.PS.enemies.add(m2);
+	}
+	
+	override public function kill()
+	{
+		super.kill();
+		drops = [new HealthItem(x,y)];
+		dropItem(drops);
+		if (tsize >= mtsize)
+		{
+		mitosis();
+		}
 	}
 	
 	private function reroll()
@@ -42,8 +67,17 @@ class EnemyBlob extends Enemy
 		}, 1);
 	}
 	
+	private function boundaries()
+	{
+		if (FlxG.collide(Reg.PS.map.loadedMap, this))
+		{
+			reroll();
+		}
+	}
+	
 	private function move()
 	{
+		boundaries();
 		// this is dum
 		if (roll < 25)
 		    velocity.x = 20;

@@ -17,6 +17,7 @@ import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxSpriteUtil;
 import objects.hazards.Hazard;
+import objects.hazards.HazardBullet;
 import objects.items.Item;
 import flixel.addons.effects.FlxTrail;
 import openfl.system.System;
@@ -45,6 +46,7 @@ class PlayState extends FlxState
 	public var blocks:FlxTypedGroup<HazardBlock>;
 	public var effects:FlxSpriteGroup;
 	public var EExplosions:FlxTypedGroup<EnemyExplosiveExplosion>;
+	public var HBullets:FlxTypedGroup<HazardBullet>;
 	public var enemies(default, null):FlxTypedGroup<Enemy>;
 	public var items(default, null):FlxTypedGroup<Item>;
 	public var coins:FlxTypedGroup < CoinItem>;
@@ -74,6 +76,7 @@ class PlayState extends FlxState
         PBullets = new FlxTypedGroup<PlayerBullet>();
 		EBullets = new FlxTypedGroup<EnemyBullet>();
 		EExplosions = new FlxTypedGroup<EnemyExplosiveExplosion>();
+		HBullets= new FlxTypedGroup<HazardBullet>();
 		_entities = new FlxGroup();
 		
 		FlxG.mouse.visible = false; // must always be set to false pls
@@ -120,6 +123,7 @@ class PlayState extends FlxState
 		_entities.add(hazards);
 		_entities.add(enemies);
 		_entities.add(PBullets);
+		_entities.add(HBullets);
 		add(_entities);
 		add(player);	
 	}
