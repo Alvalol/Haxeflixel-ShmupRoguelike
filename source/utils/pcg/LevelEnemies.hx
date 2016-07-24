@@ -4,6 +4,7 @@ import flixel.tile.FlxTilemap;
 import flixel.FlxG;
 import objects.enemies.EnemyBlob;
 import objects.enemies.EnemySpawner;
+import objects.enemies.EnemyTriangle;
 import objects.hazards.HazardBlock;
 import objects.enemies.Enemy;
 import objects.enemies.EnemyExplosive;
@@ -103,8 +104,8 @@ class LevelEnemies
 			{
 				currentLevel.setTileByIndex(i, 0, true);
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
-				var haz = new HazardProximityShooter(enPos.x, enPos.y);
-				Reg.PS.hazards.add(haz);
+				var haz = new EnemyTriangle(enPos.x, enPos.y);
+				Reg.PS.enemies.add(haz);
 	         } 
 	}
 		}

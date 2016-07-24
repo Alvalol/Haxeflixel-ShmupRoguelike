@@ -7,11 +7,12 @@ import flixel.FlxG;
 
 class EnemyMoverGroup extends FlxSprite
 {
-	public var chainedGroup:FlxTypedGroup<EnemyMover>;
+	public var chainedGroup:FlxTypedGroup<Enemy>;
 	private var chainedGroupSize:Int = 4;
 	private var sep:Int = 0;
 	private inline static var sepMod:Int = 6;
-	private var patterns:Array<Array<Int>> = [[1, 1, 1, 1], [-1,-1,-1,-1]];
+	private var patterns:Array<Array<Int>> = [[1, 1, 1, 1], [ -1, -1, -1, -1]];
+	private var randomEn:Int = FlxG.random.int(0, 1);
 
 	public function new(x:Float,y:Float) 
 	{
@@ -21,7 +22,9 @@ class EnemyMoverGroup extends FlxSprite
 	
 	private function makeGroup(x:Float,y:Float)
 	{
-		chainedGroup = new FlxTypedGroup<EnemyMover>();
+		if (randomEn == 0)
+		{
+		chainedGroup = cast new FlxTypedGroup<EnemyMover>();
 		var chosenPattern = FlxG.random.getObject(patterns);
 		
 		for (i in 0...chainedGroupSize)
@@ -30,6 +33,21 @@ class EnemyMoverGroup extends FlxSprite
 			newMover.factor = chosenPattern[i];
 			chainedGroup.add(newMover);
 			sep += sepMod;
+		}
+		}
+		
+		else
+		{
+		chainedGroup = cast new FlxTypedGroup<EnemyTriangle>();
+		var chosenPattern = FlxG.random.getObject(patterns);
+		
+		for (i in 0...chainedGroupSize)
+		{
+			var newTriangle  = new EnemyTriangle(x + sep, y); 
+			chainedGroup.add(newTriangle);
+			sep += sepMod;
+		}
+
 		}
 	}
 

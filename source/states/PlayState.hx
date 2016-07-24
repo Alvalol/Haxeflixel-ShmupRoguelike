@@ -160,6 +160,7 @@ class PlayState extends FlxState
 	{
 		if (tracers)
 		{
+			
 		trace("items : " + items.length);
 		trace("enemies : " + enemies.length);
 		trace("eBullets : " +EBullets.length);
@@ -168,6 +169,7 @@ class PlayState extends FlxState
 		trace("blocks " + blocks.length);
 		trace("_entities " + _entities.length);
 		trace("effects " + effects.length);
+		
 	    }
 	}
 	
