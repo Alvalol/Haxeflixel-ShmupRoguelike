@@ -28,6 +28,8 @@ class Hazard extends FlxSprite
 		{
 			interact(Reg.PS.player);
 		}
+		
+
 	}
 	
 	private function basicChecks()

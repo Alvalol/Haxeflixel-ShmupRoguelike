@@ -160,7 +160,8 @@ class PlayState extends FlxState
 	{
 		if (tracers)
 		{
-			
+		
+		trace("SCROLLER : " + Reg.SCROLLER_ON);	
 		trace("items : " + items.length);
 		trace("enemies : " + enemies.length);
 		trace("eBullets : " +EBullets.length);

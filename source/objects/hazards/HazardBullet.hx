@@ -26,7 +26,7 @@ class HazardBullet extends FlxSprite
 	{
 		move();
 		collisions();
-		trace(this);
+		//trace(this);
 		
 		if(!Reg.pause)
 		super.update(elapsed);

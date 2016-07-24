@@ -63,6 +63,7 @@ class Enemy extends FlxSprite
 			damage();
 			Reg.PS.PBullets.getFirstAlive().kill();
 		}
+	
 	}
 	
 	private function interact(player:Player)

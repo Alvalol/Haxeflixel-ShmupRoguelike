@@ -7,6 +7,7 @@ import flixel.FlxObject;
 import flixel.util.FlxTimer;
 import objects.items.HealthItem;
 
+// NEEDS TO BE FIXED AND DESIGNED BETTER
 
 class EnemyBlob extends Enemy
 {
@@ -33,7 +34,7 @@ class EnemyBlob extends Enemy
 		rolled = true;
 		reroll();
 		}
-		trace(roll);
+	//	trace(roll);
 		move();
 		
 		super.update(elapsed);
@@ -41,8 +42,8 @@ class EnemyBlob extends Enemy
 	
 	private function mitosis()
 	{
-		var m1 = new EnemyBlob(x - tsize / 2, y + FlxG.random.int(1,3), tsize - 4);
-		var m2 = new EnemyBlob(x + tsize / 2, y + FlxG.random.int(1,3), tsize - 4);
+		var m1 = new EnemyBlob(x , y , tsize - 3);
+		var m2 = new EnemyBlob(x , y , tsize - 3);
 		Reg.PS.enemies.add(m1);
 		Reg.PS.enemies.add(m2);
 	}
@@ -50,8 +51,6 @@ class EnemyBlob extends Enemy
 	override public function kill()
 	{
 		super.kill();
-		drops = [new HealthItem(x,y)];
-		dropItem(drops);
 		if (tsize >= mtsize)
 		{
 		mitosis();

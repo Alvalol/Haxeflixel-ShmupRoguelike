@@ -41,7 +41,7 @@ class LevelGenerator
 	}
 	
 	static function concatArray(Arr:Array<Dynamic>) {
-		// Takes populatedMap (usually) and makes it so that every element of each MapChunk in populatedMap gets concatenated with it's corresponding
+		// Takes populatedMap (usually) and makes it so that every element of each MapChunk in populatedMap gets concatenated with its corresponding
 		// element on every other element of MapChunk... yeah, that sounds weird.
 		
 		var ret:Array<Array<Int>> = new Array<Array<Int>>();

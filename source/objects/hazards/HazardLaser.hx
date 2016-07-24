@@ -42,6 +42,18 @@ class HazardLaser extends Hazard
 		
 	}
 	
+	override public function collisions()
+	{
+		super.collisions();
+		for (i in Reg.PS.enemies)
+		{
+		if (FlxG.overlap(i, this))
+		{		
+			i.kill();
+		}
+		}
+	}
+	
 	override private function interact(player:Player)
 	{
 		if (tactive)

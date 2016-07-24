@@ -10,14 +10,15 @@ import objects.enemies.Enemy;
 import objects.enemies.EnemyExplosive;
 import objects.enemies.EnemyLeft;
 import objects.enemies.EnemyMover;
+import objects.enemies.EnemyChaser;
 import objects.enemies.EnemyMoverGroup;
 import objects.enemies.EnemyMultishotDeath;
 import objects.enemies.EnemyTurretA;
+import objects.enemies.EnemyShooter;
 import objects.hazards.HazardLaser;
 import objects.hazards.HazardProximityShooter;
 import objects.hazards.HazardRotator;
 import objects.hazards.HazardMovingBlock;
-
 
 
 class LevelEnemies
@@ -39,7 +40,6 @@ class LevelEnemies
 				
 				Reg.PS.blocks.add(destructible);
 		    }
-			
 			
 			if (currentLevel.getTileByIndex(i) == 3)
 			{
@@ -104,7 +104,7 @@ class LevelEnemies
 			{
 				currentLevel.setTileByIndex(i, 0, true);
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
-				var haz = new EnemyTriangle(enPos.x, enPos.y);
+				var haz = new EnemyShooter(enPos.x, enPos.y);
 				Reg.PS.enemies.add(haz);
 	         } 
 	}

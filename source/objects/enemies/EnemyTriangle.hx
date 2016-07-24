@@ -2,27 +2,33 @@ package objects.enemies;
 
 
 import flixel.FlxObject;
+import flixel.addons.effects.FlxTrail;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.math.FlxVelocity;
 import flixel.util.FlxTimer;
 
+// NEEDS TO BE FIXED
 
 class EnemyTriangle extends Enemy
 {
 
-	private var MOVE_SPEED:Int = 30;
-	private var ang:Int = 150;
-	private var delay:Float = FlxG.random.float(0.5, 1.5);
+	private var MOVE_SPEED:Int = 50;
+	public var ang:Int = 120;
+	private var delay:Float = 1.2;
+	private var bTrail:FlxTrail;
 	
 	
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
 		HP = 1;
-		makeGraphic(8, 8, FlxColor.BLUE);
+		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
+		animation.add("idle", [16]);
+        animation.play("idle");
 		triggerAngleChange();
+		createTrail();
 	}
 	
 	override public function update(elapsed:Float) 
@@ -43,16 +49,26 @@ class EnemyTriangle extends Enemy
 	
 	private function changeAngle(timer:FlxTimer)
 	{
-		if (ang >= 260)
+		if (ang >= 240)
 		{
-			ang = 100;
+			ang = 110;
 		}
 		else
 		{
-			ang = 210;
+			ang = 240;
 		}
-		
 		triggerAngleChange();
 	}
 	
+	override public function kill():Void
+	{	
+		Reg.PS.effects.remove(bTrail);
+		super.kill();
+	}
+	
+	private function createTrail()
+	{
+        bTrail = new FlxTrail(this,null,4,1,0.4,0.05);
+		Reg.PS.effects.add(bTrail);
+	}
 }
