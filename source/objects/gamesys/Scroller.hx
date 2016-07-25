@@ -19,12 +19,11 @@ class Scroller extends FlxSprite
 	
 	override public function update(elapsed:Float)
 	{
-
-	 if (Reg.SCROLLER_ON)
-	   {
 	   acceleration.x += ACCELERATION;	   
 	   y = Reg.PS.player.y;
-	 
+	   
+	 if (Reg.SCROLLER_ON)
+	   {
 	   switch Reg.PS.player.HP
 	   {   
 		   default : MOVE_SPEED = 15; 		maxVelocity.set(MOVE_SPEED, MOVE_SPEED);

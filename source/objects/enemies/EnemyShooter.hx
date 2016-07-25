@@ -9,7 +9,6 @@ import objects.items.Item;
 import objects.items.HealthItem;
 
 class EnemyShooter extends Enemy
-
 {
 	private var MOVE_SPEED:Int = 50;
 	private var SHOOT_SPEED:Int = -100;
@@ -17,46 +16,82 @@ class EnemyShooter extends Enemy
 	private var movedVertically = false;
 	private var delay:Float = 0.8;
 	private var justShot = false;
-	private var fact:Int = 1;
+	private var fact:Int = FlxG.random.sign(50);
+	private var directionChanged = false;
 	
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
-
-		HP = 10;
-		makeGraphic(8, 8, FlxColor.LIME);
+		HP = 1;
+		makeGraphic(8,8, FlxColor.LIME);
 		startTimer();
 	}
 	
 	override public function update(elapsed:Float) 
 	{
 		move();
-		shoot();
-
 		cameraHandler();
 		trace("moved h : " + movedHorizontal);
 		trace("moved v : " + movedVertically);
 		trace("justshot : " + justShot);
+		trace("factor : " + fact);
+		trace("-----------------------");
 		super.update(elapsed);
-	}
-
-	private function cameraHandler()
-	{
-		if (isOnScreen() && _appeared)
-		{
-			Reg.SCROLLER_ON = false;
-		}
 	}
 	
 	private function startTimer()
 	{
 		new FlxTimer().start(delay, stopMoving, 1);
 	}
-    
+	
 	private function stopMoving(Timer:FlxTimer)
 	{
 		movedHorizontal = true;
 	}
+
+	private function move()
+	{
+		if (!movedHorizontal)
+		{
+		velocity.x = -MOVE_SPEED;
+		}
+
+		else
+		{
+		verticalMove();
+		velocity.x = 0;
+		}
+	}
+	
+	private function verticalMove()
+	{
+		velocity.y = MOVE_SPEED * fact;
+
+		if (!directionChanged)
+		{
+		triggerDirectionChange();
+		}
+	}
+	
+	private function triggerDirectionChange()
+	{
+		new FlxTimer().start(delay/2, changeDirection, 1);
+	}
+	
+	private function changeDirection(timer:FlxTimer)
+	{
+		fact *= -1;
+		directionChanged = !directionChanged;
+		triggerDirectionChange();
+	}
+	
+	private function cameraHandler()
+	{
+		if (isOnScreen() && _appeared)
+		{
+			Reg.SCROLLER_ON = false;
+		}
+	} 
 	
 	private function shoot()
 	{
@@ -68,52 +103,7 @@ class EnemyShooter extends Enemy
 			
 			eb.velocity.x = SHOOT_SPEED;
 			Reg.PS.EBullets.add(eb);
-		}
-		
-		if (justShot)
-		{
-			verticalMove();
-		}
-	}
-	
-	private function verticalMove()
-	{
-		
-		if (!movedVertically)
-		{
-			velocity.y = MOVE_SPEED * fact;
 			justShot = true;
-		}	
-		
-		startVertTimer();
-	}
-	
-	private function startVertTimer()
-	{
-		new FlxTimer().start(delay, stopVerticalMove, 1);
-	}
-	
-	private function stopVerticalMove(timer:FlxTimer)
-	{
-		fact = FlxG.random.int( -1, 1);
-		velocity.y = 0;
-		
-		if (fact == 0)
-		{
-			FlxG.random.int( -1, 1);
-		}
-		justShot = false;
-	}
-
-	private function move()
-	{
-		if (!movedHorizontal)
-		{
-		velocity.x = -MOVE_SPEED;
-		}
-		else
-		{
-		velocity.x = 0;
 		}
 	}
 	
