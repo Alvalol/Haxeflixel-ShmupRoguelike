@@ -96,15 +96,15 @@ class LevelEnemies
 			 {
 				currentLevel.setTileByIndex(i, 0, true);
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
-				var enemy = new EnemyBlob(enPos.x, enPos.y, 16);
+				var enemy = new EnemyChaser(enPos.x, enPos.y); // EnemyBlob(enPos.x, enPos.y, 16);
 				Reg.PS.enemies.add(enemy);
 			}
-			
+		
 			if (currentLevel.getTileByIndex(i) == 9)
 			{
 				currentLevel.setTileByIndex(i, 0, true);
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
-				var haz = new EnemyShooter(enPos.x, enPos.y);
+				var haz = new EnemySpawner(enPos.x, enPos.y);
 				Reg.PS.enemies.add(haz);
 	         } 
 	}

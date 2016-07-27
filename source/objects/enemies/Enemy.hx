@@ -35,16 +35,18 @@ class Enemy extends FlxSprite
 		if (!inWorldBounds())
 			exists = false;
 			
-        if (isOnScreen()) {
+        if (isOnScreen()) 
+		{
 			if (!_appeared) 
+			{
 				 _appeared = true;
-							  }
-			 else {
-			   if (_appeared)
+		    }
+			if (_appeared && x <= FlxG.camera.scroll.x)
+			{
 				kill();
-			 }
-			
-			
+			}
+				
+		}
 		if (HP <= 0)
 		    kill();
 			

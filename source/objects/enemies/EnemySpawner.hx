@@ -29,7 +29,6 @@ class EnemySpawner extends Enemy
 		
 		centerOrigin();
 		adjustFlip();
-
 		minions = new FlxTypedSpriteGroup<Enemy>();
 	}
 	

@@ -5,6 +5,7 @@ import flixel.addons.effects.FlxTrail;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxObject;
+import objects.items.Item;
 import flixel.util.FlxTimer;
 import flixel.math.FlxMath;
 
@@ -89,6 +90,8 @@ class EnemyMinion extends Enemy
 	
 	override public function kill() 
 	{
+	    var drops:Array<Item> = [];
+		dropItem(drops);
 		Spawner.minions.remove(this);
 		Reg.PS.effects.remove(bTrail);
 		super.kill();

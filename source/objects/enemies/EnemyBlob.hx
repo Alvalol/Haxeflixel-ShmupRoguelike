@@ -5,15 +5,17 @@ import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.util.FlxTimer;
+import flixel.util.FlxSpriteUtil;
+import flixel.math.FlxPoint;
+import flixel.math.FlxVelocity;
 import objects.items.HealthItem;
-
-// NEEDS TO BE FIXED AND DESIGNED BETTER
 
 class EnemyBlob extends Enemy
 {
 	var roll:Int;
 	var rolled:Bool;
-	var delayDirection:Float = 0.5;
+	var delayDirection:Float = 0.2;
+	var MOVE_SPEED:Float = 40;
 	var tsize:Float = 32; 
 	var mtsize:Float = 8;
 	
@@ -34,9 +36,8 @@ class EnemyBlob extends Enemy
 		rolled = true;
 		reroll();
 		}
-	//	trace(roll);
 		move();
-		
+	//	attraction();
 		super.update(elapsed);
 	}
 	
@@ -50,11 +51,11 @@ class EnemyBlob extends Enemy
 	
 	override public function kill()
 	{
-		super.kill();
 		if (tsize >= mtsize)
 		{
 		mitosis();
 		}
+		super.kill();
 	}
 	
 	private function reroll()
@@ -70,21 +71,33 @@ class EnemyBlob extends Enemy
 	{
 		if (FlxG.collide(Reg.PS.map.loadedMap, this))
 		{
-			reroll();
+		velocity.set(this.velocity.x * -1, this.velocity.y * -1);	
 		}
-	}
+		
+		if (x >=  FlxG.camera.scroll.x || x <= FlxG.camera.scroll.x + FlxG.camera.width
+		   || y >= FlxG.camera.scroll.y || x <= FlxG.camera.scroll.y + FlxG.camera.height)
+		   {
+				velocity.set(this.velocity.x * -1, this.velocity.y * -1);		   
+		   }
+		  
+        FlxSpriteUtil.bound(this, 
+		                    FlxG.camera.scroll.x, 
+							FlxG.camera.scroll.x + FlxG.camera.width,
+							FlxG.camera.scroll.y,
+							FlxG.camera.scroll.y + FlxG.camera.height);	
+							
+}
 	
+    private function attraction()
+	{
+		var aim = new FlxPoint( FlxG.camera.scroll.x + FlxG.camera.width/2, FlxG.camera.scroll.y + FlxG.camera.height/2);
+		if (roll >= 50)
+		FlxVelocity.moveTowardsPoint(this, aim, MOVE_SPEED, 0);	
+
+	}
 	private function move()
 	{
 		boundaries();
-		// this is dum
-		if (roll < 25)
-		    velocity.x = 20;
-		if (roll < 50 && roll > 25)
-		    velocity.x = -25;
-		if (roll < 75 && roll > 50)
-		    velocity.y = 20;
-		if (roll < 100 && roll > 75)
-		    velocity.y = -20;
+		velocity.set(FlxG.random.float(-MOVE_SPEED/2, MOVE_SPEED/2), FlxG.random.float( -MOVE_SPEED/2, MOVE_SPEED/2));
 	}
 }

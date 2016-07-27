@@ -18,14 +18,10 @@ class AssetData {
 			
 			path.set ("assets/data/pixel-font.ttf", "assets/data/pixel-font.ttf");
 			type.set ("assets/data/pixel-font.ttf", Reflect.field (AssetType, "font".toUpperCase ()));
-			path.set ("assets/data/sandbox.tmx", "assets/data/sandbox.tmx");
-			type.set ("assets/data/sandbox.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/images/enemies.png", "assets/images/enemies.png");
 			type.set ("assets/images/enemies.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/explosion.png", "assets/images/explosion.png");
 			type.set ("assets/images/explosion.png", Reflect.field (AssetType, "image".toUpperCase ()));
-			path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");
-			type.set ("assets/images/images-go-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/images/items.png", "assets/images/items.png");
 			type.set ("assets/images/items.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/mockups.pyxel", "assets/images/mockups.pyxel");
@@ -52,10 +48,6 @@ class AssetData {
 			type.set ("assets/images/tiles.png_palette.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/turret.png", "assets/images/turret.png");
 			type.set ("assets/images/turret.png", Reflect.field (AssetType, "image".toUpperCase ()));
-			path.set ("assets/music/music-goes-here.txt", "assets/music/music-goes-here.txt");
-			type.set ("assets/music/music-goes-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
-			path.set ("assets/sounds/sounds-go-here.txt", "assets/sounds/sounds-go-here.txt");
-			type.set ("assets/sounds/sounds-go-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("flixel/sounds/beep.ogg", "flixel/sounds/beep.ogg");
 			type.set ("flixel/sounds/beep.ogg", Reflect.field (AssetType, "sound".toUpperCase ()));
 			path.set ("flixel/sounds/flixel.ogg", "flixel/sounds/flixel.ogg");

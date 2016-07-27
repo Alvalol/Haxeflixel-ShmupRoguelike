@@ -66,7 +66,7 @@ class PlayState extends FlxState
 		Reg.pause = false;
 
 		// init gameplay elements
-		player = new Player(16, FlxG.width/2);
+		player = new Player(20, FlxG.height / 2);
 		enemies = new FlxTypedGroup<Enemy>();
 		hazards = new FlxTypedGroup<Hazard>();
 		blocks = new FlxTypedGroup<HazardBlock>();
@@ -93,12 +93,11 @@ class PlayState extends FlxState
 		super.create();
 	}
 	
-	
 	override public function update(elapsed:Float):Void
 	{
 		if(!Reg.pause)
 		super.update(elapsed);
-		
+
 		displayTracers();
 		gameControls();
 
@@ -132,7 +131,7 @@ class PlayState extends FlxState
 	{	
 		_gameCamera = new FlxCamera();
 		_hudCamera = new FlxCamera();
-		_scroller = new Scroller(player.x + 80, player.y);
+		_scroller = new Scroller(player.x + 120, player.y);
 		
 		FlxG.cameras.reset(_gameCamera);
 		FlxG.cameras.add(_hudCamera);

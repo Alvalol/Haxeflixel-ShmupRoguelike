@@ -8,7 +8,9 @@ import flixel.util.FlxColor;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxTimer;
 import objects.PlayerBullet;
+import utils.controls.Gamepad;
 import flixel.util.FlxSpriteUtil;
+import utils.controls.Keyboard;
 import flixel.math.FlxVelocity;
 import states.GameOverState;
 import states.PlayState;
@@ -42,12 +44,12 @@ class Player extends FlxSprite
 	public var SHOT_MOD:Int;
 	public var MAX_SHOTMOD:Int = 1;
 	
-	
 	public function new(x:Float, y:Float) 
 	{
 		super(x,y);
 		HP = 3; //3
 		MAX_HP = 3;
+		
 		loadGraphic(AssetPaths.player__png, true, 16, 8);
 		
 		SHOT_MOD = 0;
@@ -65,9 +67,11 @@ class Player extends FlxSprite
 	}
 	
 	override public function update(elapsed:Float):Void
-	{		
+	{	
+		trace(FlxG.gamepads.getFirstActiveGamepad());
 		basicChecks(elapsed);
 		collisions();
+		
 		if(!Reg.pause)
 		    super.update(elapsed);
 	}
@@ -93,6 +97,7 @@ class Player extends FlxSprite
 	{
 		if (alive)
 		{
+		    resetAccel();
 		    move();
 		    shoot();
 			_cooldown -= elapsed * 4;
@@ -101,33 +106,54 @@ class Player extends FlxSprite
 		if (HP <= 0)
 		   kill();
 	}
-	
-	// needs to be reworked offstream to support GAMEPAD and MOBILE controls.
 	private function move()
 	{
-		acceleration.x = 0;
-		acceleration.y = 0;
-		
-		if (FlxG.keys.anyPressed([UP, W]))
-			acceleration.y -= ACCELERATION;
-		
-		if (FlxG.keys.anyPressed([DOWN, S]))
-		    acceleration.y += ACCELERATION;
-		
-		if (FlxG.keys.anyPressed([LEFT, A]))
-		    acceleration.x -= ACCELERATION;
-			
-			
-		if (FlxG.keys.anyPressed([RIGHT, D]))
-		    acceleration.x += ACCELERATION;
+		move_up();
+		move_right();
+		move_down();
+		move_left();
+
 	}
+	
+	private function resetAccel()
+	{
+		acceleration.x = 0;
+		acceleration.y = 0;		
+	}
+		
+	public function move_up()
+	{
+		if (FlxG.keys.anyPressed(Keyboard.upKeys))
+			acceleration.y -= ACCELERATION;
+	}
+	
+	public function move_right()
+	{
+		if (FlxG.keys.anyPressed(Keyboard.rightKeys))
+		    acceleration.x += ACCELERATION;	
+	}
+	
+	
+	public function move_down()
+	{
+		if (FlxG.keys.anyPressed(Keyboard.downKeys))
+		  acceleration.y += ACCELERATION;
+	}
+
+	public function move_left()
+	{
+		if (FlxG.keys.anyPressed(Keyboard.leftKeys))
+		    acceleration.x -= ACCELERATION;
+	}
+	
+	
 	
 	//********** needs to be reworked completely to support different types of "weapons"  *************
 	private function shoot()
 	{
 		var ang = 10;
 		
-		if (FlxG.keys.anyPressed([SPACE, M, L, O]) && Reg.PS.PBullets.countLiving() < MAX_BULLETS && _cooldown <= 0) 
+		if (FlxG.keys.anyPressed(Keyboard.actionKeys) && Reg.PS.PBullets.countLiving() < MAX_BULLETS && _cooldown <= 0) 
 		{
 			var pb:PlayerBullet =  new PlayerBullet(x, y);
 

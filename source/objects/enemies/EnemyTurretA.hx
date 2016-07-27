@@ -11,6 +11,7 @@ import objects.enemies.Enemy;
 import objects.items.CoinItem;
 import objects.items.HealthItem;
 import objects.items.HealthMaxItem;
+import objects.items.RangeItem;
 import objects.items.SpreadItem;
 import objects.items.Item;
 import objects.Player;
@@ -103,10 +104,9 @@ class EnemyTurretA extends Enemy
 		return eb;
 	}
 	
-	
 	override public function kill():Void
 	{
-		var drops:Array<Item> = [new HealthItem(x,y), new SpeedItem(x,y), new HealthMaxItem(x,y), new MagnetItem(x,y)];
+		var drops:Array<Item> = [new HealthItem(x,y), new SpeedItem(x,y), new HealthMaxItem(x,y), new MagnetItem(x,y), new RangeItem(x,y)];
 		dropItem(drops);
 		super.kill();
 	}
