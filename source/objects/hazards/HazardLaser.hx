@@ -20,6 +20,7 @@ class HazardLaser extends Hazard
 	override public function update(elapsed:Float):Void 
 	 {
 		switchingStates();
+		solid = tactive;
 		super.update(elapsed);
      }
 	 

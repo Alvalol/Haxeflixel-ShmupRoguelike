@@ -4,6 +4,7 @@ import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.util.FlxTimer;
+import flixel.FlxObject;
 import objects.enemies.EnemyBullet;
 import flixel.math.FlxPoint;
 import flixel.math.FlxVelocity;
@@ -29,6 +30,7 @@ class EnemyTurretA extends Enemy
 	private var shootDelay:Float = 2;
 	private var tx:Int;
 	private var ty:Int;
+	private var typeRoll:Int;
 	private var type:Int;
 
 	
@@ -36,7 +38,7 @@ class EnemyTurretA extends Enemy
 	{
 		super(x, y); // this causes an issue if turret is on ceiling... needs to use ceiling instance variable.
 		HP = 1;
-		type = FlxG.random.int(0, 1);
+		typeRoll = FlxG.random.int(0, 100);
         tx = Std.int(x / 8); // tx, ty here because it never changes anyway
         ty = Std.int(y / 8);
 		
@@ -49,15 +51,28 @@ class EnemyTurretA extends Enemy
 		solid = true;
 		adjustFlip();
 		chooseType();
-
 	}
 
 	override public function update(elapsed:Float)
 	{
-		animateToShoot();		
+		animateToShoot();	
+		checkForBlock();
 		super.update(elapsed);
 	}
-
+	
+	
+	private function checkForBlock()
+	{
+		return;
+		// need to implement func that checks if this enemy is on top of another box or tile, if not , kill() it
+	}
+	
+	
+	override function collisions() 
+	{	
+		super.collisions();
+	}
+	
     private function animateToShoot()
 	{
 		if (!justShot && isOnScreen())
@@ -122,9 +137,10 @@ class EnemyTurretA extends Enemy
 		
 	private function chooseType()
 	{
-		if (type == 1)
+		if (typeRoll <= 10)
 		{
 			color = 0xFFFFFF00;
+			type = 1;
 		}
 	}
 }

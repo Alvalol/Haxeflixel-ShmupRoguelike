@@ -11,7 +11,7 @@ class EnemySpawner extends Enemy
 {
 	
 	public var minions:FlxTypedSpriteGroup<Enemy>;
-	private var delay:Float = 0.75;
+	private var delay:Float = 1;
 	private var justSpawned = false;
 	private var tx:Int;
 	private var ty:Int;
@@ -24,11 +24,12 @@ class EnemySpawner extends Enemy
 		makeGraphic(16, 16, FlxColor.RED);
 		HP = 7;
 	    tx = Std.int(x / 8); 
-        ty = Std.int(y / 16);
+        ty = Std.int(y / 8);
 		immovable = true;
 		
 		centerOrigin();
 		adjustFlip();
+		adjustPlacement();
 		minions = new FlxTypedSpriteGroup<Enemy>();
 	}
 	
@@ -71,6 +72,18 @@ class EnemySpawner extends Enemy
 		minions.add(minion);
 	}
 	
+	
+	private function adjustPlacement()
+	{
+		if (flipY)
+		{
+			y -= 4;
+		}
+		else
+		{
+			y -= 12;
+		}
+	}
 	private function adjustFlip()
 	{	
 		if (Reg.PS.map.loadedMap.getTile(tx,ty-1) != 0) // not accurate enough

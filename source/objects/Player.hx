@@ -68,7 +68,7 @@ class Player extends FlxSprite
 	
 	override public function update(elapsed:Float):Void
 	{	
-		trace(FlxG.gamepads.getFirstActiveGamepad());
+		//trace(FlxG.gamepads.getFirstActiveGamepad());
 		basicChecks(elapsed);
 		collisions();
 		

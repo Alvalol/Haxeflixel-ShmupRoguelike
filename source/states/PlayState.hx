@@ -79,7 +79,7 @@ class PlayState extends FlxState
 		HBullets= new FlxTypedGroup<HazardBullet>();
 		_entities = new FlxGroup();
 		
-		FlxG.mouse.visible = false; // must always be set to false pls
+		FlxG.mouse.visible = true; // must always be set to false pls
 		 
 		map = new LevelLoaderProc();
 		

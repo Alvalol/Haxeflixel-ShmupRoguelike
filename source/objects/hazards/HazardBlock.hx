@@ -14,6 +14,7 @@ class HazardBlock extends Hazard
 		animation.add("static", [1]);
 		animation.play("static");
 		immovable = true;
+		solid = true;
 	}
 	
 	override private function interact(player:Player)
