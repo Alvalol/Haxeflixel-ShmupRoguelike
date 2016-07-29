@@ -7,6 +7,7 @@ import flixel.util.FlxTimer;
 import flixel.FlxObject;
 import objects.enemies.EnemyBullet;
 import flixel.math.FlxPoint;
+import flixel.tile.FlxBaseTilemap;
 import flixel.math.FlxVelocity;
 import objects.enemies.Enemy;
 import objects.items.CoinItem;
@@ -32,7 +33,6 @@ class EnemyTurretA extends Enemy
 	private var ty:Int;
 	private var typeRoll:Int;
 	private var type:Int;
-
 	
 	public function new(x:Float, y:Float, flip:Bool) 
 	{
@@ -63,9 +63,25 @@ class EnemyTurretA extends Enemy
 	
 	private function checkForBlock()
 	{
-		return;
-		// need to implement func that checks if this enemy is on top of another box or tile, if not , kill() it
+		var tileTop = Reg.PS.map.loadedMap.getTile(tx, ty - 1);
+		var tileBottom = Reg.PS.map.loadedMap.getTile(tx, ty + 1);
+	
+		if (flipY)
+		{
+		if (!overlapsAt(x, y - 9, Reg.PS.map.loadedMap))
+		{
+		if (!overlapsAt(x, y - 9, Reg.PS.blocks)) kill();
+		}
+		}
+	    else
+		{
+			if (!overlapsAt(x, y + 1, Reg.PS.map.loadedMap))
+			{
+			if (!overlapsAt(x, y + 1, Reg.PS.blocks)) kill();
+		}
+		}
 	}
+	
 	
 	
 	override function collisions() 
@@ -128,14 +144,15 @@ class EnemyTurretA extends Enemy
 	
 	private function adjustFlip()
 	{
-		if (Reg.PS.map.loadedMap.getTile(tx,ty-1) != 0) // not accurate enough
+		if (Reg.PS.map.loadedMap.getTile(tx,ty-1) != 0 || overlapsAt(x,y-1,Reg.PS.blocks))
 		{
 			flipY = true;
 		}
+
 	}
 	
 		
-	private function chooseType()
+	private function chooseType()	
 	{
 		if (typeRoll <= 10)
 		{
