@@ -74,6 +74,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
 		Font.registerFont (__ASSET__flixel_fonts_nokiafc22_ttf);
 		Font.registerFont (__ASSET__flixel_fonts_monsterrat_ttf);
 		
@@ -82,6 +83,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -615,6 +617,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_monsterrat_ttf);
 		
@@ -625,6 +628,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		path.set ("assets/data/pixel-font.ttf", "assets/data/pixel-font.ttf");
 		type.set ("assets/data/pixel-font.ttf", AssetType.FONT);
+		path.set ("assets/images/bigEnemies.png", "assets/images/bigEnemies.png");
+		type.set ("assets/images/bigEnemies.png", AssetType.IMAGE);
 		path.set ("assets/images/enemies.png", "assets/images/enemies.png");
 		type.set ("assets/images/enemies.png", AssetType.IMAGE);
 		path.set ("assets/images/explosion.png", "assets/images/explosion.png");
@@ -673,6 +678,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/data/pixel-font.ttf";
 		path.set (id, id);
 		type.set (id, AssetType.FONT);
+		id = "assets/images/bigEnemies.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/images/enemies.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
@@ -758,6 +766,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("assets/data/pixel-font.ttf", __ASSET__assets_data_pixel_font_ttf);
 		type.set ("assets/data/pixel-font.ttf", AssetType.FONT);
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -1522,6 +1531,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends null { }
@@ -1532,6 +1542,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 #elseif html5
 
 @:keep #if display private #end class __ASSET__assets_data_pixel_font_ttf extends lime.text.Font { public function new () { super (); name = "Early GameBoy Regular"; } } 
+
 
 
 

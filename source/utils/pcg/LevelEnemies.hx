@@ -5,6 +5,7 @@ import flixel.FlxG;
 import objects.enemies.EnemyBlob;
 import objects.enemies.EnemySpawner;
 import objects.enemies.EnemyTriangle;
+import objects.enemies.EnemyWorm;
 import objects.hazards.HazardBlock;
 import objects.enemies.Enemy;
 import objects.enemies.EnemyExplosive;
@@ -84,21 +85,38 @@ class LevelEnemies
 				var haz = new HazardMovingBlock(enPos.x-4, enPos.y, false);
 				Reg.PS.hazards.add(haz);
 		    }  
-			 if (currentLevel.getTileByIndex(i) == 7)
+			/* if (currentLevel.getTileByIndex(i) == 7)
 			{
 				currentLevel.setTileByIndex(i, 0, true);
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
 				var haz = new HazardLaser(enPos.x, 8);
 				Reg.PS.hazards.add(haz);
-		    }
+		    }*/
 			
-			 if (currentLevel.getTileByIndex(i) == 8)
+			 if (currentLevel.getTileByIndex(i) == 7)
+			{
+				currentLevel.setTileByIndex(i, 0, true);
+				var enPos = (currentLevel.getTileCoordsByIndex(i));
+				var en = new EnemyWorm(enPos.x, enPos.y);
+				Reg.PS.enemies.add(en);
+		    }
+
+		 if (currentLevel.getTileByIndex(i) == 8)
+			 {
+				currentLevel.setTileByIndex(i, 0, true);
+				var enPos = (currentLevel.getTileCoordsByIndex(i));
+				var enemy = new EnemyBlob(enPos.x, enPos.y, 16);
+				Reg.PS.enemies.add(enemy);
+			 }
+		
+			
+			/* if (currentLevel.getTileByIndex(i) == 8)
 			 {
 				currentLevel.setTileByIndex(i, 0, true);
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
 				var enemy = new EnemyChaser(enPos.x, enPos.y); // EnemyBlob(enPos.x, enPos.y, 16);
 				Reg.PS.enemies.add(enemy);
-			}
+			}*/
 		
 			if (currentLevel.getTileByIndex(i) == 9)
 			{

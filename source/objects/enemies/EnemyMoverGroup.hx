@@ -12,7 +12,7 @@ class EnemyMoverGroup extends FlxSprite
 	private var sep:Int = 0;
 	private inline static var sepMod:Int = 6;
 	private var patterns:Array<Array<Int>> = [[1, 1, 1, 1], [ -1, -1, -1, -1]];
-//	private var randomEn:Int = FlxG.random.int(0, 1);
+	private var randomEn:Int = FlxG.random.int(0, 1);
 
 	public function new(x:Float,y:Float) 
 	{
@@ -22,8 +22,8 @@ class EnemyMoverGroup extends FlxSprite
 	
 	private function makeGroup(x:Float,y:Float)
 	{
-	//	if (randomEn == 0)
-	//	{
+		if (randomEn == 0)
+		{
 		chainedGroup = cast new FlxTypedGroup<EnemyMover>();
 		var chosenPattern = FlxG.random.getObject(patterns);
 		
@@ -35,7 +35,7 @@ class EnemyMoverGroup extends FlxSprite
 			sep += sepMod;
 		}
 		}
-	/*
+	
 		else
 		{
 		chainedGroup = cast new FlxTypedGroup<EnemyTriangle>();
@@ -47,7 +47,6 @@ class EnemyMoverGroup extends FlxSprite
 			chainedGroup.add(newTriangle);
 			sep += sepMod * 2;
 		}
-    */
-
-
+		}
+}
 }

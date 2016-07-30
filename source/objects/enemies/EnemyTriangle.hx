@@ -29,6 +29,7 @@ class EnemyTriangle extends Enemy
         animation.play("idle");
 		triggerAngleChange();
 		createTrail();
+		color = 0x00FF80;
 	}
 	
 	override public function update(elapsed:Float) 
@@ -42,7 +43,7 @@ class EnemyTriangle extends Enemy
 		velocity.set(FlxVelocity.velocityFromAngle(ang, MOVE_SPEED).x, FlxVelocity.velocityFromAngle(ang, MOVE_SPEED).y);
 	}
 	
-		private function triggerAngleChange()
+	private function triggerAngleChange()
 	{
 		new FlxTimer().start(delay, changeAngle, 1);
 	}

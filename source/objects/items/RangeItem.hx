@@ -11,8 +11,10 @@ class RangeItem extends Item
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
-		makeGraphic(8, 8, FlxColor.GREEN); // needs graphic
 		lifespan = 4;
+	    loadGraphic(AssetPaths.items__png, true, 8,8);
+		animation.add("static", [5]);
+		animation.play("static");
 	}
 	
 	override function interact(player:Player)
