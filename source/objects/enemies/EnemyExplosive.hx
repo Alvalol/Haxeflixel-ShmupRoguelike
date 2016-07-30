@@ -11,7 +11,7 @@ import flixel.math.FlxMath;
 
 class EnemyExplosive extends Enemy
 {
-	
+
 	private var MOVE_SPEED:Float = 0.5;
 	
 	public function new(x:Float, y :Float) 

@@ -20,7 +20,7 @@ class EnemySpawner extends Enemy
 	
 	public function new(x:Float,y:Float) 
 	{
-		super(x, y);
+		super(x-8, y);
 		makeGraphic(16, 16, FlxColor.RED);
 		HP = 7;
 	    tx = Std.int(x / 8); 

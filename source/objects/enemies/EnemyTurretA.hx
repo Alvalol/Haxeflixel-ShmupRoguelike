@@ -37,7 +37,7 @@ class EnemyTurretA extends Enemy
 	public function new(x:Float, y:Float, flip:Bool) 
 	{
 		super(x, y); // this causes an issue if turret is on ceiling... needs to use ceiling instance variable.
-		HP = 1;
+		HP = 3;
 		typeRoll = FlxG.random.int(0, 100);
         tx = Std.int(x / 8); // tx, ty here because it never changes anyway
         ty = Std.int(y / 8);

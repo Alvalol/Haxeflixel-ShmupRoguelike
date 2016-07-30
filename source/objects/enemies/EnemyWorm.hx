@@ -2,6 +2,10 @@ package objects.enemies;
 
 import flixel.FlxG;
 import flixel.FlxObject;
+import flixel.system.debug.watch.Tracker;
+import flixel.tweens.FlxTween;
+import flixel.tweens.misc.VarTween;
+import flixel.tweens.motion.LinearMotion;
 import flixel.util.FlxTimer;
 import flixel.FlxSprite;
 import flixel.math.FlxPoint;
@@ -9,61 +13,81 @@ import flixel.util.FlxColor;
 
 class EnemyWorm extends Enemy
 {
-	private var aboveGround:Bool;
+	private var waiting:Bool;
 	private var delay:Int = 1;
 	private var maxBottom:FlxPoint;
 	private var maxTop:FlxPoint;
+	private var animationTween:FlxTween;
+	var tweenOptions:TweenOptions;
 
 	public function new(x:Float, y:Float)
 	{
 		super(x, y);
 		HP = 1;
 		makeGraphic(8, 16, FlxColor.LIME);
-		aboveTimer();
-		aboveGround = false;
-		maxBottom = new FlxPoint(x, y + 16);
-		maxTop = new FlxPoint(x, y - 16);
+		//startTimer();
+		
+		tweenOptions = {type : FlxTween.PINGPONG, loopDelay:2};
+		startAnimation();
+		
+		#if !FLX_NO_DEBUG 
+		Tracker.addProfile(new TrackerProfile(EnemyWorm, ["aboveGround", "waiting"], [FlxSprite]));
+		FlxG.console.registerObject("EnemyWorm", this);
+		FlxG.debugger.track(this);
+		#end
 	}
 	
 	override public function update(elapsed:Float) 
 	{
+		animationTween.active = active;
 		super.update(elapsed);
-		if (aboveGround)
-		{
-			underTimer();
-		}
-		else
-		{
-			aboveTimer();
-		}
+		//move();
 	}
 	
-	private function underTimer()
+	private function startAnimation(?tween:FlxTween)
 	{
-		new FlxTimer().start(delay, under, 1);	
+		animationTween = FlxTween.linearMotion(this, x, y, x, y - height, 0.5, true, tweenOptions);
 	}
 	
-	private function aboveTimer()
+	/*
+	private function startTimer()
 	{
-	   new FlxTimer().start(delay, above, 1);
+		new FlxTimer().start(delay, above, 1);	
 	}
 	
 	private function above(timer:FlxTimer)
 	{
-		aboveGround = true;
-		if (y+16 >= maxTop.y)
+		aboveGround = !aboveGround;
+		startTimer();
+		
+		new FlxTimer().start(1, function(_)
 		{
-		y -= 1;
+	    waiting = !waiting;
+		}, 1);	
+	}
+	
+	private function move()
+	{
+		
+	if (!waiting)
+	{
+	if (aboveGround)
+	{
+		if (y >= maxBottom.y)
+		{
+			y -= 1;
 		}
 	}
-
-	private function under(timer:FlxTimer)
-	{
-		aboveGround = false;
-		if (y <= maxBottom.y)
+	
+	else
 		{
-		y += 1;
-		};
+			if (y >= maxTop.y)
+			{
+			y += 1;
+			}
+		}
 	}
+	}*/
+	
 	
 }
