@@ -18,6 +18,8 @@ class AssetData {
 			
 			path.set ("assets/data/pixel-font.ttf", "assets/data/pixel-font.ttf");
 			type.set ("assets/data/pixel-font.ttf", Reflect.field (AssetType, "font".toUpperCase ()));
+			path.set ("assets/data/sandboxtmx.tmx", "assets/data/sandboxtmx.tmx");
+			type.set ("assets/data/sandboxtmx.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/images/bigEnemies.png", "assets/images/bigEnemies.png");
 			type.set ("assets/images/bigEnemies.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/enemies.png", "assets/images/enemies.png");

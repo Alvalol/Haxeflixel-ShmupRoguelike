@@ -1,10 +1,11 @@
 package;
 
 import states.PlayState;
-
+import states.TestState;
 class Reg
 {
 	public static var PS:PlayState;
+	public static var DEBUG = true; // set to TRUE if testing a new enemy or feature
 	public static var currentLevel:Int = 0;
 	
 	public static var pause:Bool = false;
