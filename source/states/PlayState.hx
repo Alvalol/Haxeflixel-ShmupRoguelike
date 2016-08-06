@@ -49,7 +49,7 @@ class PlayState extends FlxState
 	public var HBullets:FlxTypedGroup<HazardBullet>;
 	public var enemies(default, null):FlxTypedGroup<Enemy>;
 	public var items(default, null):FlxTypedGroup<Item>;
-	public var coins:FlxTypedGroup < CoinItem>;
+	public var coins:FlxTypedGroup <CoinItem>;
 	private var _entities:FlxGroup;
 
 	private var _scroller(default, null):Scroller;

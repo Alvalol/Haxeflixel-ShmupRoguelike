@@ -16,6 +16,7 @@ import flixel.tile.FlxTilemap;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxSpriteUtil;
+import objects.enemies.EnemyTurretA;
 import objects.hazards.Hazard;
 import objects.hazards.HazardBullet;
 import objects.items.Item;
@@ -41,13 +42,32 @@ class TestState extends FlxState
 {
 	private var _gameCamera:FlxCamera;
     public var player(default, null):Player; 
+	private var PBullets:FlxTypedGroup<PlayerBullet>;
+	private var EBullets:FlxTypedGroup<EnemyBullet>;
+	public var blocks:FlxTypedGroup<HazardBlock>;
+	public var effects:FlxSpriteGroup;
+	public var EExplosions:FlxTypedGroup<EnemyExplosiveExplosion>;
+	public var HBullets:FlxTypedGroup<HazardBullet>;
+	public var enemies(default, null):FlxTypedGroup<Enemy>;
+	public var items(default, null):FlxTypedGroup<Item>;
+	public var coins:FlxTypedGroup <CoinItem>;
 	
 	override public function create():Void
 	{
 		Reg.PS = cast this;
 		Reg.pause = false;
-		
-		StaticLevelLoader.loadLevel(this, "sandboxtmx");
+        StaticLevelLoader.loadLevel(this, "sandboxtmx");
+		PBullets = new FlxTypedGroup<PlayerBullet>();
+		EBullets = new FlxTypedGroup<EnemyBullet>();
+		enemies = new FlxTypedGroup<Enemy>();
+		blocks = new FlxTypedGroup<HazardBlock>();
+		effects = new FlxSpriteGroup();
+		coins = new FlxTypedGroup<CoinItem>();
+		items = new FlxTypedGroup<Item>();
+        PBullets = new FlxTypedGroup<PlayerBullet>();
+		EBullets = new FlxTypedGroup<EnemyBullet>();
+		EExplosions = new FlxTypedGroup<EnemyExplosiveExplosion>();
+		HBullets= new FlxTypedGroup<HazardBullet>();
 		
 		FlxG.mouse.visible = false; // must always be set to false pls
 		 

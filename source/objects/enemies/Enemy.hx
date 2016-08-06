@@ -1,4 +1,4 @@
-package objects.enemies;
+	package objects.enemies;
 
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
@@ -112,6 +112,5 @@ class Enemy extends FlxSprite
 		
 		alive = false;
 	    exists = false;
-	}
-	
+	}	
 }

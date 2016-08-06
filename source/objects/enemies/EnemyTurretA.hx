@@ -68,9 +68,9 @@ class EnemyTurretA extends Enemy
 	
 		if (flipY)
 		{
-		if (!overlapsAt(x, y - 9, Reg.PS.map.loadedMap))
+		if (!overlapsAt(x, y - 1, Reg.PS.map.loadedMap))
 		{
-		if (!overlapsAt(x, y - 9, Reg.PS.blocks)) kill();
+		if (!overlapsAt(x, y - 1, Reg.PS.blocks)) kill();
 		}
 		}
 	    else
@@ -144,7 +144,7 @@ class EnemyTurretA extends Enemy
 	
 	private function adjustFlip()
 	{
-		if (Reg.PS.map.loadedMap.getTile(tx,ty-1) != 0 || overlapsAt(x,y-1,Reg.PS.blocks))
+		if (Reg.PS.map.loadedMap.getTile(tx, ty - 1) != 0 || overlapsAt(x, y - 1, Reg.PS.blocks))
 		{
 			flipY = true;
 		}
