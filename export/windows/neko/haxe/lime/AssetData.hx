@@ -16,10 +16,36 @@ class AssetData {
 		
 		if (!initialized) {
 			
+			path.set ("assets/data/mapchunks/legend.txt", "assets/data/mapchunks/legend.txt");
+			type.set ("assets/data/mapchunks/legend.txt", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/data/mapchunks/level_1/a-0.tmx", "assets/data/mapchunks/level_1/a-0.tmx");
 			type.set ("assets/data/mapchunks/level_1/a-0.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/data/mapchunks/level_1/a-1.tmx", "assets/data/mapchunks/level_1/a-1.tmx");
 			type.set ("assets/data/mapchunks/level_1/a-1.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/mapchunks/level_1/b-0.tmx", "assets/data/mapchunks/level_1/b-0.tmx");
+			type.set ("assets/data/mapchunks/level_1/b-0.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/mapchunks/level_1/b-1.tmx", "assets/data/mapchunks/level_1/b-1.tmx");
+			type.set ("assets/data/mapchunks/level_1/b-1.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/mapchunks/level_1/c-0.tmx", "assets/data/mapchunks/level_1/c-0.tmx");
+			type.set ("assets/data/mapchunks/level_1/c-0.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/mapchunks/level_1/c-1.tmx", "assets/data/mapchunks/level_1/c-1.tmx");
+			type.set ("assets/data/mapchunks/level_1/c-1.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/mapchunks/level_1/d-0.tmx", "assets/data/mapchunks/level_1/d-0.tmx");
+			type.set ("assets/data/mapchunks/level_1/d-0.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/mapchunks/level_1/d-1.tmx", "assets/data/mapchunks/level_1/d-1.tmx");
+			type.set ("assets/data/mapchunks/level_1/d-1.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/mapchunks/level_1/e-0.tmx", "assets/data/mapchunks/level_1/e-0.tmx");
+			type.set ("assets/data/mapchunks/level_1/e-0.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/mapchunks/level_1/e-1.tmx", "assets/data/mapchunks/level_1/e-1.tmx");
+			type.set ("assets/data/mapchunks/level_1/e-1.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/mapchunks/level_1/m-0.tmx", "assets/data/mapchunks/level_1/m-0.tmx");
+			type.set ("assets/data/mapchunks/level_1/m-0.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/mapchunks/level_1/m-1.tmx", "assets/data/mapchunks/level_1/m-1.tmx");
+			type.set ("assets/data/mapchunks/level_1/m-1.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/mapchunks/level_1/s-0.tmx", "assets/data/mapchunks/level_1/s-0.tmx");
+			type.set ("assets/data/mapchunks/level_1/s-0.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/mapchunks/level_1/s-1.tmx", "assets/data/mapchunks/level_1/s-1.tmx");
+			type.set ("assets/data/mapchunks/level_1/s-1.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/data/pixel-font.ttf", "assets/data/pixel-font.ttf");
 			type.set ("assets/data/pixel-font.ttf", Reflect.field (AssetType, "font".toUpperCase ()));
 			path.set ("assets/images/bigEnemies.png", "assets/images/bigEnemies.png");

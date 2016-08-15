@@ -4,6 +4,8 @@ import flixel.FlxG;
 import flixel.addons.editors.tiled.TiledMap;
 import flixel.tile.FlxTilemap;
 import flixel.addons.editors.tiled.TiledTileLayer;
+import objects.gamesys.Goal;
+import objects.Player;
 import sys.FileSystem;
 import openfl.Assets;
 import flixel.math.FlxRandom;
@@ -15,6 +17,8 @@ class MapChunk
 	private var chunkWidth:Int;
 	private var chunkHeight:Int;
 	private var randomizer:FlxRandom;
+	private var tileFile:TiledMap;
+	private var tileWidth(get, null):Int;
 
 	public function new(_randomizer:FlxRandom)
 	{
@@ -24,14 +28,15 @@ class MapChunk
 	private function makeChunk(_randomizer:FlxRandom)
 	{
 		randomizer = _randomizer;
-		var tileFile = chooseChunkFile();
+		tileFile = chooseChunkFile();
 		var mainLayer:TiledTileLayer = cast tileFile.getLayer("main");
 	
 		chunkData = mainLayer.tileArray;
 		type = tileFile.properties.get("type");
 		chunkWidth = Std.int(tileFile.fullWidth / tileFile.tileWidth);
 		chunkHeight = Std.int(tileFile.fullHeight / tileFile.tileHeight);
-		
+		tileWidth = tileFile.tileWidth;
+	
 		// possibilities to manipulate the raw array data before sending it to the game
 	}
 	
@@ -44,6 +49,7 @@ class MapChunk
 		return chosenFile;
 	}
 	
+
 	
 	// get, set
 	
@@ -85,6 +91,16 @@ class MapChunk
 	public function set_chunkHeight(value:Int):Int 
 	{
 		return chunkHeight = value;
+	}
+	
+	public function get_tileFile():TiledMap 
+	{
+		return tileFile;
+	}
+	
+	public function get_tileWidth():Int 
+	{
+		return tileWidth;
 	}
 
 	

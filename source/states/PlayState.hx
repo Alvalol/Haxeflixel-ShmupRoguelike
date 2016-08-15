@@ -58,7 +58,7 @@ class PlayState extends FlxState
 	private var _gameCamera:FlxCamera;
 	private var _hudCamera:FlxCamera;
 
-	private var tracers:Bool = false;
+	private var tracers:Bool = true;
 	
 	override public function create():Void
 	{

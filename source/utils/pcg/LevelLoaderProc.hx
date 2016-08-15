@@ -27,6 +27,7 @@ class LevelLoaderProc
 	{
         var loadedMap = new FlxTilemap();
 		var generatedMap:Array<Array<Int>> = cast MapChunkMerger.populateCurrentMap();
+		ObjectPlacement.loadLevelObjects();
 
 
 	   loadedMap.loadMapFrom2DArray(generatedMap, FlxTileFrames.fromBitmapAddSpacesAndBorders(FlxGraphic.fromAssetKey(AssetPaths.solid__png), 

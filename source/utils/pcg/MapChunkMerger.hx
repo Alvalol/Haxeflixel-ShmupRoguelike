@@ -1,10 +1,14 @@
 package utils.pcg;
 
+import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.math.FlxRandom;
 import flixel.tile.FlxTilemap;
 import flixel.FlxG;
 import flixel.util.FlxArrayUtil;
+import flixel.addons.editors.tiled.TiledObject;
+import flixel.addons.editors.tiled.TiledObjectLayer;
+import flixel.addons.editors.tiled.TiledMap;
 
 import utils.pcg.MapChunk;
 
@@ -12,6 +16,7 @@ class MapChunkMerger
 {
 	
 	private static var CHUNKS:Array<MapChunk>;
+	private static var RAWCHUNKS:Array<MapChunk>;
 	private static var levelHeight:Int;
 	private static var seed;
 	
@@ -19,6 +24,7 @@ class MapChunkMerger
 	{
 		var populatedMap = new Array<Dynamic>();
 		makeSeed();
+
 		CHUNKS = new Array<MapChunk>();
 		levelHeight = new MapChunk(seed).get_chunkHeight();
 		
@@ -26,9 +32,9 @@ class MapChunkMerger
 		
 		if (CHUNKS.length > 0)
 		{
+			RAWCHUNKS = CHUNKS;
 			for (chunk in CHUNKS)
-			{
-			   trace(chunk.get_type());
+			{	
 			   var formatedChunk = cast formatArray(chunk); 
 			   populatedMap.push(formatedChunk);
 			}
@@ -39,13 +45,14 @@ class MapChunkMerger
 
 		//var result = reduceArray(m);
 	 //   trace("RESULT : " + result);
+	 
 	    return m;
 	}
 		
     private static function chooseChunk(reqType:Array<String>)
 	{
 		var tChunk = new MapChunk(seed);
-		if (tChunk.get_type() == FlxG.random.getObject(reqType))
+		if (tChunk.get_type() == seed.getObject(reqType))
 		{
 			CHUNKS.push(tChunk);
 		}
@@ -54,6 +61,21 @@ class MapChunkMerger
 			chooseChunk(reqType);
 		}
 	}
+	
+	private static function getLevelObjects(map:TiledMap, layer:String):Array<TiledObject>
+	{
+		
+		if ((map != null) && (map.getLayer(layer) != null))
+		{
+			var objLayer:TiledObjectLayer = cast map.getLayer(layer);
+			trace("Object layer " + layer + " found");
+			return objLayer.objects;
+		}
+		else
+		    trace("Object layer " + layer + " not found");
+	        return [];
+	}
+	
 	private static function curateChunks()
 	{
 		while (CHUNKS.length < Reg.LEVEL_SIZE)
@@ -65,7 +87,7 @@ class MapChunkMerger
 
 		else
 			{
-			switch CHUNKS[CHUNKS.length-1].get_type()
+			switch FlxArrayUtil.last(CHUNKS).get_type()
 			{
 				case "A" : chooseChunk(["A", "B", "C", "D"]);
 					
@@ -101,6 +123,7 @@ class MapChunkMerger
 		Reg.CURRENT_SEED = seed.currentSeed;
 		}
 	}
+	
 	private static function formatArray(chunk:MapChunk):Array<Array<Int>>
 	{
 		var newArray:Array<Array<Int>> = new Array<Array<Int>>();
@@ -140,7 +163,14 @@ class MapChunkMerger
 		
 		return ret;
 	}
-
-
 	
-}
+	
+	// get, set
+	
+	public static function get_RAWCHUNKS():Array<MapChunk> 
+	{
+		return RAWCHUNKS;
+	}
+	
+	}
+

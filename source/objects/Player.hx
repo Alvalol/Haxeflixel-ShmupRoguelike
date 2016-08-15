@@ -47,7 +47,7 @@ class Player extends FlxSprite
 	public function new(x:Float, y:Float) 
 	{
 		super(x,y);
-		HP = 3; //3
+		HP = 99; //3
 		MAX_HP = 3;
 		
 		loadGraphic(AssetPaths.player__png, true, 16, 8);

@@ -58,6 +58,19 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		Font.registerFont (__ASSET__assets_data_pixel_font_ttf);
 		
 		
@@ -85,6 +98,19 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -605,6 +631,19 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__assets_data_pixel_font_ttf);
 		
 		
@@ -632,10 +671,36 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
+		path.set ("assets/data/mapchunks/legend.txt", "assets/data/mapchunks/legend.txt");
+		type.set ("assets/data/mapchunks/legend.txt", AssetType.TEXT);
 		path.set ("assets/data/mapchunks/level_1/a-0.tmx", "assets/data/mapchunks/level_1/a-0.tmx");
 		type.set ("assets/data/mapchunks/level_1/a-0.tmx", AssetType.TEXT);
 		path.set ("assets/data/mapchunks/level_1/a-1.tmx", "assets/data/mapchunks/level_1/a-1.tmx");
 		type.set ("assets/data/mapchunks/level_1/a-1.tmx", AssetType.TEXT);
+		path.set ("assets/data/mapchunks/level_1/b-0.tmx", "assets/data/mapchunks/level_1/b-0.tmx");
+		type.set ("assets/data/mapchunks/level_1/b-0.tmx", AssetType.TEXT);
+		path.set ("assets/data/mapchunks/level_1/b-1.tmx", "assets/data/mapchunks/level_1/b-1.tmx");
+		type.set ("assets/data/mapchunks/level_1/b-1.tmx", AssetType.TEXT);
+		path.set ("assets/data/mapchunks/level_1/c-0.tmx", "assets/data/mapchunks/level_1/c-0.tmx");
+		type.set ("assets/data/mapchunks/level_1/c-0.tmx", AssetType.TEXT);
+		path.set ("assets/data/mapchunks/level_1/c-1.tmx", "assets/data/mapchunks/level_1/c-1.tmx");
+		type.set ("assets/data/mapchunks/level_1/c-1.tmx", AssetType.TEXT);
+		path.set ("assets/data/mapchunks/level_1/d-0.tmx", "assets/data/mapchunks/level_1/d-0.tmx");
+		type.set ("assets/data/mapchunks/level_1/d-0.tmx", AssetType.TEXT);
+		path.set ("assets/data/mapchunks/level_1/d-1.tmx", "assets/data/mapchunks/level_1/d-1.tmx");
+		type.set ("assets/data/mapchunks/level_1/d-1.tmx", AssetType.TEXT);
+		path.set ("assets/data/mapchunks/level_1/e-0.tmx", "assets/data/mapchunks/level_1/e-0.tmx");
+		type.set ("assets/data/mapchunks/level_1/e-0.tmx", AssetType.TEXT);
+		path.set ("assets/data/mapchunks/level_1/e-1.tmx", "assets/data/mapchunks/level_1/e-1.tmx");
+		type.set ("assets/data/mapchunks/level_1/e-1.tmx", AssetType.TEXT);
+		path.set ("assets/data/mapchunks/level_1/m-0.tmx", "assets/data/mapchunks/level_1/m-0.tmx");
+		type.set ("assets/data/mapchunks/level_1/m-0.tmx", AssetType.TEXT);
+		path.set ("assets/data/mapchunks/level_1/m-1.tmx", "assets/data/mapchunks/level_1/m-1.tmx");
+		type.set ("assets/data/mapchunks/level_1/m-1.tmx", AssetType.TEXT);
+		path.set ("assets/data/mapchunks/level_1/s-0.tmx", "assets/data/mapchunks/level_1/s-0.tmx");
+		type.set ("assets/data/mapchunks/level_1/s-0.tmx", AssetType.TEXT);
+		path.set ("assets/data/mapchunks/level_1/s-1.tmx", "assets/data/mapchunks/level_1/s-1.tmx");
+		type.set ("assets/data/mapchunks/level_1/s-1.tmx", AssetType.TEXT);
 		path.set ("assets/data/pixel-font.ttf", "assets/data/pixel-font.ttf");
 		type.set ("assets/data/pixel-font.ttf", AssetType.FONT);
 		path.set ("assets/images/bigEnemies.png", "assets/images/bigEnemies.png");
@@ -685,10 +750,49 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#elseif html5
 		
 		var id;
+		id = "assets/data/mapchunks/legend.txt";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
 		id = "assets/data/mapchunks/level_1/a-0.tmx";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
 		id = "assets/data/mapchunks/level_1/a-1.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/mapchunks/level_1/b-0.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/mapchunks/level_1/b-1.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/mapchunks/level_1/c-0.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/mapchunks/level_1/c-1.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/mapchunks/level_1/d-0.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/mapchunks/level_1/d-1.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/mapchunks/level_1/e-0.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/mapchunks/level_1/e-1.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/mapchunks/level_1/m-0.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/mapchunks/level_1/m-1.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/mapchunks/level_1/s-0.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/mapchunks/level_1/s-1.tmx";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
 		id = "assets/data/pixel-font.ttf";
@@ -779,6 +883,19 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		
@@ -1552,6 +1669,19 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends null { }
@@ -1560,6 +1690,19 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

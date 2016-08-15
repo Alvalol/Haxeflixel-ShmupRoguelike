@@ -1,4 +1,4 @@
-package objects;
+package objects.gamesys;
 import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
@@ -8,20 +8,33 @@ import states.MenuState;
 class Goal extends FlxSprite
 {
 
-	public function new(x:Float,y:Float) 
+	public function new(x:Float) 
 	{
-		super(x, y);
+		super(x, 0);
 		solid = true;
 		immovable = true;
-		makeGraphic(2, FlxG.height * 2, FlxColor.TRANSPARENT);
+		makeGraphic(10, FlxG.height * 2, FlxColor.TRANSPARENT);
 	}
 	
-	public function reach(player:Player)
+	override public function update(elapsed:Float):Void 
+	{
+		collisions();
+		super.update(elapsed);
+	}
+	
+	private function collisions()
+	{
+		if (FlxG.overlap(this, Reg.PS.player))
+		{
+			reach(Reg.PS.player);
+		}
+	}
+	private function reach(player:Player)
 	{
 		solid = false;
 		Reg.pause = true;
 		trace("YOU WIN");
-		//FlxG.switchState(new MenuState() );		
+		FlxG.switchState(new MenuState() );		
 	}
 	
 }
