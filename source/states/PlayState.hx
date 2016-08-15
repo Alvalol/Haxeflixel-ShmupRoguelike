@@ -66,7 +66,7 @@ class PlayState extends FlxState
 		Reg.pause = false;
 
 		// init gameplay elements
-		player = new Player(20, FlxG.height / 2);
+		player = new Player(10, FlxG.height / 2);
 		enemies = new FlxTypedGroup<Enemy>();
 		hazards = new FlxTypedGroup<Hazard>();
 		blocks = new FlxTypedGroup<HazardBlock>();

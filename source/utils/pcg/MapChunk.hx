@@ -29,8 +29,8 @@ class MapChunk
 	
 		chunkData = mainLayer.tileArray;
 		type = mainLayer.properties.get("type");
-		chunkWidth = tileFile.tileHeight;
-		chunkHeight = tileFile.tileWidth;
+		chunkWidth = Std.int(tileFile.fullWidth / tileFile.tileWidth);
+		chunkHeight = Std.int(tileFile.fullHeight / tileFile.tileHeight);
 		
 		// possibilities to manipulate the raw array data before sending it to the game
 	}
@@ -39,7 +39,7 @@ class MapChunk
 	{
 		var dir:String = "assets/data/mapchunks/level_" + Std.string(Reg.currentLevel) + "/";
 		var dirContent:Array<String> = FileSystem.readDirectory(dir);
-		
+	
 		var chosenFile:TiledMap = new TiledMap(dir + randomizer.getObject(dirContent)); // this is the important part. It chooses the file here.
 		return chosenFile;
 	}

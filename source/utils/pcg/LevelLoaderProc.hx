@@ -26,14 +26,12 @@ class LevelLoaderProc
 	public function loadGeneratedLevel():FlxTilemap
 	{
         var loadedMap = new FlxTilemap();
-		var generatedMap:Array<Int> = cast MapChunkMerger.populateCurrentMap();
+		var generatedMap:Array<Array<Int>> = cast MapChunkMerger.populateCurrentMap();
 
-		//trace("Clean array size : " + cleanArray.length);
 
-	   loadedMap.loadMapFromArray(generatedMap, 12, 20, FlxTileFrames.fromBitmapAddSpacesAndBorders(FlxGraphic.fromAssetKey(AssetPaths.solid__png), 
-	   new FlxPoint(8,8), new FlxPoint(1,1), new FlxPoint(1,1), null),  8, 8);
-	
+	   loadedMap.loadMapFrom2DArray(generatedMap, FlxTileFrames.fromBitmapAddSpacesAndBorders(FlxGraphic.fromAssetKey(AssetPaths.solid__png), 
+	   new FlxPoint(8, 8), new FlxPoint(1, 1), new FlxPoint(1, 1), null),  8, 8);
+	   
 	   return loadedMap;
-		
 	}
 }

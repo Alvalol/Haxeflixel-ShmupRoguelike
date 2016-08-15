@@ -16,10 +16,10 @@ class AssetData {
 		
 		if (!initialized) {
 			
-			path.set ("assets/data/mapchunks/level_1/0-0.tmx", "assets/data/mapchunks/level_1/0-0.tmx");
-			type.set ("assets/data/mapchunks/level_1/0-0.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
-			path.set ("assets/data/mapchunks/level_1/0-1.tmx", "assets/data/mapchunks/level_1/0-1.tmx");
-			type.set ("assets/data/mapchunks/level_1/0-1.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/mapchunks/level_1/a-0.tmx", "assets/data/mapchunks/level_1/a-0.tmx");
+			type.set ("assets/data/mapchunks/level_1/a-0.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/mapchunks/level_1/a-1.tmx", "assets/data/mapchunks/level_1/a-1.tmx");
+			type.set ("assets/data/mapchunks/level_1/a-1.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/data/pixel-font.ttf", "assets/data/pixel-font.ttf");
 			type.set ("assets/data/pixel-font.ttf", Reflect.field (AssetType, "font".toUpperCase ()));
 			path.set ("assets/images/bigEnemies.png", "assets/images/bigEnemies.png");

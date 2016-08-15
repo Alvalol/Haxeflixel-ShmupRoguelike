@@ -632,10 +632,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
-		path.set ("assets/data/mapchunks/level_1/0-0.tmx", "assets/data/mapchunks/level_1/0-0.tmx");
-		type.set ("assets/data/mapchunks/level_1/0-0.tmx", AssetType.TEXT);
-		path.set ("assets/data/mapchunks/level_1/0-1.tmx", "assets/data/mapchunks/level_1/0-1.tmx");
-		type.set ("assets/data/mapchunks/level_1/0-1.tmx", AssetType.TEXT);
+		path.set ("assets/data/mapchunks/level_1/a-0.tmx", "assets/data/mapchunks/level_1/a-0.tmx");
+		type.set ("assets/data/mapchunks/level_1/a-0.tmx", AssetType.TEXT);
+		path.set ("assets/data/mapchunks/level_1/a-1.tmx", "assets/data/mapchunks/level_1/a-1.tmx");
+		type.set ("assets/data/mapchunks/level_1/a-1.tmx", AssetType.TEXT);
 		path.set ("assets/data/pixel-font.ttf", "assets/data/pixel-font.ttf");
 		type.set ("assets/data/pixel-font.ttf", AssetType.FONT);
 		path.set ("assets/images/bigEnemies.png", "assets/images/bigEnemies.png");
@@ -685,10 +685,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#elseif html5
 		
 		var id;
-		id = "assets/data/mapchunks/level_1/0-0.tmx";
+		id = "assets/data/mapchunks/level_1/a-0.tmx";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
-		id = "assets/data/mapchunks/level_1/0-1.tmx";
+		id = "assets/data/mapchunks/level_1/a-1.tmx";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
 		id = "assets/data/pixel-font.ttf";
