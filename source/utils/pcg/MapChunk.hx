@@ -28,7 +28,7 @@ class MapChunk
 		var mainLayer:TiledTileLayer = cast tileFile.getLayer("main");
 	
 		chunkData = mainLayer.tileArray;
-		type = mainLayer.properties.get("type");
+		type = tileFile.properties.get("type");
 		chunkWidth = Std.int(tileFile.fullWidth / tileFile.tileWidth);
 		chunkHeight = Std.int(tileFile.fullHeight / tileFile.tileHeight);
 		

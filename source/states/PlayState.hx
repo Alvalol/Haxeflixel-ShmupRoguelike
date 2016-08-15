@@ -64,8 +64,10 @@ class PlayState extends FlxState
 	{
 		Reg.PS = this;
 		Reg.pause = false;
+	
 
 		// init gameplay elements
+
 		player = new Player(10, FlxG.height / 2);
 		enemies = new FlxTypedGroup<Enemy>();
 		hazards = new FlxTypedGroup<Hazard>();
@@ -169,6 +171,7 @@ class PlayState extends FlxState
 		trace("blocks " + blocks.length);
 		trace("_entities " + _entities.length);
 		trace("effects " + effects.length);
+		trace("MASTER SEED : " + Reg.CURRENT_SEED);
 		
 	    }
 	}
