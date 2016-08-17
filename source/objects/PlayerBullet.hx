@@ -66,7 +66,7 @@ class PlayerBullet extends FlxSprite
 		  }
 	  }
 
-	if (FlxG.collide(Reg.PS.map.loadedMap, this))
+	if (FlxG.collide(Reg.PS.map, this))
 	{
 		kill();
 		createNoHit();

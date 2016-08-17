@@ -71,7 +71,7 @@ class EnemyBlob extends Enemy
 	
 	private function boundaries()
 	{
-		if (FlxG.collide(Reg.PS.map.loadedMap, this))
+		if (FlxG.collide(Reg.PS.map, this))
 		{
 		velocity.set(this.velocity.x * -1, this.velocity.y * -1);	
 		}
@@ -92,7 +92,7 @@ class EnemyBlob extends Enemy
 	
 	private function move()
 	{
-		boundaries();
+		//boundaries();
 		velocity.set(FlxG.random.float(-MOVE_SPEED/4, MOVE_SPEED/4), FlxG.random.float( -MOVE_SPEED/4, MOVE_SPEED/4));
 	}
 }

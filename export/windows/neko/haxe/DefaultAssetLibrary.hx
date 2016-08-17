@@ -71,6 +71,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
 		Font.registerFont (__ASSET__assets_data_pixel_font_ttf);
 		
 		
@@ -98,6 +101,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -644,6 +650,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__assets_data_pixel_font_ttf);
 		
 		
@@ -701,6 +710,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/data/mapchunks/level_1/s-0.tmx", AssetType.TEXT);
 		path.set ("assets/data/mapchunks/level_1/s-1.tmx", "assets/data/mapchunks/level_1/s-1.tmx");
 		type.set ("assets/data/mapchunks/level_1/s-1.tmx", AssetType.TEXT);
+		path.set ("assets/data/mapchunks/level_2/a2-0.tmx", "assets/data/mapchunks/level_2/a2-0.tmx");
+		type.set ("assets/data/mapchunks/level_2/a2-0.tmx", AssetType.TEXT);
+		path.set ("assets/data/mapchunks/level_2/a2-1.tmx", "assets/data/mapchunks/level_2/a2-1.tmx");
+		type.set ("assets/data/mapchunks/level_2/a2-1.tmx", AssetType.TEXT);
+		path.set ("assets/data/mapchunks/level_2/s2-1.tmx", "assets/data/mapchunks/level_2/s2-1.tmx");
+		type.set ("assets/data/mapchunks/level_2/s2-1.tmx", AssetType.TEXT);
 		path.set ("assets/data/pixel-font.ttf", "assets/data/pixel-font.ttf");
 		type.set ("assets/data/pixel-font.ttf", AssetType.FONT);
 		path.set ("assets/images/bigEnemies.png", "assets/images/bigEnemies.png");
@@ -795,6 +810,15 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/data/mapchunks/level_1/s-1.tmx";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
+		id = "assets/data/mapchunks/level_2/a2-0.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/mapchunks/level_2/a2-1.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
+		id = "assets/data/mapchunks/level_2/s2-1.tmx";
+		path.set (id, id);
+		type.set (id, AssetType.TEXT);
 		id = "assets/data/pixel-font.ttf";
 		path.set (id, id);
 		type.set (id, AssetType.FONT);
@@ -883,6 +907,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -1682,6 +1709,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends null { }
@@ -1690,6 +1720,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
+
+
 
 
 

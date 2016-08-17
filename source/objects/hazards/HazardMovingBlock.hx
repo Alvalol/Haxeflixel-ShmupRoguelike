@@ -38,7 +38,7 @@ class HazardMovingBlock extends Hazard
 	
 	override private function collisions()
 	{
-		if (FlxG.collide(this, Reg.PS.map.loadedMap))
+		if (FlxG.collide(this, Reg.PS.map))
 			direction *=-1;
 		
 		super.collisions();

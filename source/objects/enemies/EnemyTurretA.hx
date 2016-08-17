@@ -63,19 +63,19 @@ class EnemyTurretA extends Enemy
 	
 	private function checkForBlock()
 	{
-		var tileTop = Reg.PS.map.loadedMap.getTile(tx, ty - 1);
-		var tileBottom = Reg.PS.map.loadedMap.getTile(tx, ty + 1);
+		var tileTop = Reg.PS.map.getTile(tx, ty - 1);
+		var tileBottom = Reg.PS.map.getTile(tx, ty + 1);
 	
 		if (flipY)
 		{
-		if (!overlapsAt(x, y - 1, Reg.PS.map.loadedMap))
+		if (!overlapsAt(x, y - 1, Reg.PS.map))
 		{
 		if (!overlapsAt(x, y - 1, Reg.PS.blocks)) kill();
 		}
 		}
 	    else
 		{
-			if (!overlapsAt(x, y + 1, Reg.PS.map.loadedMap))
+			if (!overlapsAt(x, y + 1, Reg.PS.map))
 			{
 			if (!overlapsAt(x, y + 1, Reg.PS.blocks)) kill();
 		}
@@ -144,7 +144,7 @@ class EnemyTurretA extends Enemy
 	
 	private function adjustFlip()
 	{
-		if (Reg.PS.map.loadedMap.getTile(tx, ty - 1) != 0 || overlapsAt(x, y - 1, Reg.PS.blocks))
+		if (Reg.PS.map.getTile(tx, ty - 1) != 0 || overlapsAt(x, y - 1, Reg.PS.blocks))
 		{
 			flipY = true;
 		}

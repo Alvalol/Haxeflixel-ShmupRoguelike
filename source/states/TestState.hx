@@ -35,7 +35,6 @@ import objects.enemies.enemyobjects.EnemyExplosiveExplosion;
 
 import flixel.FlxG;
 import utils.pcg.LevelLoaderProc;
-import utils.pcg.LevelEnemies;
 
 
 class TestState extends FlxState

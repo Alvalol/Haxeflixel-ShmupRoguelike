@@ -40,7 +40,7 @@ class HazardBullet extends FlxSprite
 		}
 		else
 		{
-		target = new FlxPoint(x, Reg.PS.map.loadedMap.height);
+		target = new FlxPoint(x, Reg.PS.map.height);
 		}
 	}
 	
@@ -60,7 +60,7 @@ class HazardBullet extends FlxSprite
 			kill();
 		}
 		
-		if (!isOnScreen() || FlxG.collide(Reg.PS.map.loadedMap, this))
+		if (!isOnScreen() || FlxG.collide(Reg.PS.map, this))
 		{
 			createNoHit();
 			kill();

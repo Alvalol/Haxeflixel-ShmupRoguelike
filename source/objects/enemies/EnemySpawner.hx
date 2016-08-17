@@ -15,20 +15,23 @@ class EnemySpawner extends Enemy
 	private var justSpawned = false;
 	private var tx:Int;
 	private var ty:Int;
+	private var flipped:Bool;
 
     // Make it so that the spawner can spawn any sort of enemy.
 	
-	public function new(x:Float,y:Float) 
+	public function new(x:Float,y:Float, _flipped:Bool) 
 	{
 		super(x-8, y);
 		makeGraphic(16, 16, FlxColor.RED);
 		HP = 7;
 	    tx = Std.int(x / 8); 
         ty = Std.int(y / 8);
+		flipped = _flipped;
 		immovable = true;
 		
-		centerOrigin();
+		//centerOrigin();
 		adjustFlip();
+
 		adjustPlacement();
 		minions = new FlxTypedSpriteGroup<Enemy>();
 	}
@@ -75,18 +78,23 @@ class EnemySpawner extends Enemy
 	
 	private function adjustPlacement()
 	{
-		if (flipY)
+		if (!flipY)
 		{
-			y -= 4;
+		y -= 15;
 		}
 		else
 		{
-			y -= 12;
+		y -= 8;
 		}
+
 	}
 	private function adjustFlip()
 	{	
-		if (Reg.PS.map.loadedMap.getTile(tx,ty-1) != 0) // not accurate enough
+		if (flipped)
+		{
 			flipY = true;
+		}
+		
+		
 	}
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="2">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="35">
  <properties>
   <property name="type" value="S"/>
  </properties>
@@ -12,6 +12,36 @@
   </data>
  </layer>
  <objectgroup name="objects">
-  <object id="1" name="player" type="player" gid="6" x="8.18182" y="32" width="8" height="8"/>
+  <object id="1" name="player" type="player" gid="6" x="8.43182" y="44.5" width="8" height="8"/>
+ </objectgroup>
+ <objectgroup name="hazards">
+  <object id="3" type="block" gid="2" x="24" y="40" width="8" height="8"/>
+  <object id="4" type="block" gid="2" x="32" y="40" width="8" height="8"/>
+  <object id="5" type="block" gid="2" x="24" y="32" width="8" height="8"/>
+  <object id="6" type="block" gid="2" x="32" y="32" width="8" height="8"/>
+  <object id="11" type="block" gid="2" x="24" y="56" width="8" height="8"/>
+  <object id="12" type="block" gid="2" x="24" y="48" width="8" height="8"/>
+  <object id="13" type="block" gid="2" x="32" y="56" width="8" height="8"/>
+  <object id="14" type="block" gid="2" x="32" y="48" width="8" height="8"/>
+  <object id="15" type="block" gid="2" x="24.125" y="72" width="8" height="8"/>
+  <object id="16" type="block" gid="2" x="24.125" y="64" width="8" height="8"/>
+  <object id="17" type="block" gid="2" x="32.125" y="72" width="8" height="8"/>
+  <object id="18" type="block" gid="2" x="32.125" y="64" width="8" height="8"/>
+  <object id="19" type="block" gid="2" x="8" y="72" width="8" height="8"/>
+  <object id="20" type="block" gid="2" x="8" y="64" width="8" height="8"/>
+  <object id="21" type="block" gid="2" x="16" y="72" width="8" height="8"/>
+  <object id="22" type="block" gid="2" x="16" y="64" width="8" height="8"/>
+  <object id="23" type="block" gid="2" x="8" y="24" width="8" height="8"/>
+  <object id="24" type="block" gid="2" x="8" y="16" width="8" height="8"/>
+  <object id="25" type="block" gid="2" x="16" y="24" width="8" height="8"/>
+  <object id="26" type="block" gid="2" x="16" y="16" width="8" height="8"/>
+  <object id="27" type="block" gid="2" x="24" y="24" width="8" height="8"/>
+  <object id="28" type="block" gid="2" x="24" y="16" width="8" height="8"/>
+  <object id="29" type="block" gid="2" x="32" y="24" width="8" height="8"/>
+  <object id="30" type="block" gid="2" x="32" y="16" width="8" height="8"/>
+  <object id="31" type="block" gid="2" x="0" y="24" width="8" height="8"/>
+  <object id="32" type="block" gid="2" x="0" y="16" width="8" height="8"/>
+  <object id="33" type="block" gid="2" x="0" y="72" width="8" height="8"/>
+  <object id="34" type="block" gid="2" x="0" y="64" width="8" height="8"/>
  </objectgroup>
 </map>

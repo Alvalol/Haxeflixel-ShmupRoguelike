@@ -12,12 +12,12 @@
   </data>
  </layer>
  <objectgroup name="objects" offsetx="9.97727" offsety="5.09091">
-  <object id="4" name="player" type="player" gid="6" x="8.20455" y="104.511" width="8" height="8"/>
+  <object id="4" name="player" type="player" gid="6" x="7.84091" y="80.1477" width="8" height="8"/>
  </objectgroup>
  <objectgroup name="hazards">
-  <object id="6" type="block" gid="2" x="60.1818" y="36.3636" width="8" height="8"/>
-  <object id="7" type="block" gid="2" x="72.5455" y="96.1818" width="8" height="8"/>
-  <object id="8" type="block" gid="2" x="36" y="147.455" width="8" height="8"/>
-  <object id="9" type="block" gid="2" x="26.9091" y="52" width="8" height="8"/>
+  <object id="6" type="block" gid="2" x="56" y="64" width="8" height="8"/>
+  <object id="7" type="block" gid="2" x="56" y="80" width="8" height="8"/>
+  <object id="8" type="block" gid="2" x="40" y="96" width="8" height="8"/>
+  <object id="9" type="block" gid="2" x="40" y="80" width="8" height="8"/>
  </objectgroup>
 </map>

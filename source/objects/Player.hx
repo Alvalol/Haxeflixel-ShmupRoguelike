@@ -40,6 +40,7 @@ class Player extends FlxSprite
 	public var MAX_POSSIBLE_HP:Int = 10; //? Not sure. Needs playtest.
 	
 	private var _cooldown:Float = 0;
+	private var _invinsible:Bool = false;
 	
 	public var SHOT_MOD:Int;
 	public var MAX_SHOTMOD:Int = 1;
@@ -47,7 +48,7 @@ class Player extends FlxSprite
 	public function new(x:Float, y:Float) 
 	{
 		super(x,y);
-		HP = 99; //3
+		HP = 10; //3
 		MAX_HP = 3;
 		
 		loadGraphic(AssetPaths.player__png, true, 16, 8);
@@ -73,20 +74,28 @@ class Player extends FlxSprite
 		{
 		collisions();
 		}
+		
+		cheat();
+		
 		basicChecks(elapsed);		
 		if(!Reg.pause)
 		    super.update(elapsed);
 	}
 		
+	
+	private function cheat()
+	{
+			HP = 1;
+	}
 	private function collisions()
 	{
 			   						
 		if (alive)
 		{
-		   if (FlxG.collide(Reg.PS.map.loadedMap, this))
+		   if (FlxG.collide(Reg.PS.map, this))
 		   {
 			damage();
-			FlxObject.separate(this, Reg.PS.map.loadedMap);
+			FlxObject.separate(this, Reg.PS.map);
 		   }
 		   if (x <= FlxG.camera.scroll.x)
 		   {
@@ -105,7 +114,7 @@ class Player extends FlxSprite
 			_cooldown -= elapsed * 4;
 		}
 	
-		if (HP <= 0)
+		if (HP <= 0 && !_invinsible)
 		   kill();
 	}
 	private function move()

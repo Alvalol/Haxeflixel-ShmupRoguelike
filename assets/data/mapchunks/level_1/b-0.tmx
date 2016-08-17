@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="2">
  <properties>
   <property name="type" value="B"/>
  </properties>
@@ -12,4 +12,7 @@
   </data>
  </layer>
  <objectgroup name="objects"/>
+ <objectgroup name="enemies">
+  <object id="1" name="flyingLtoR" type="flyingLtoR" gid="9" x="61.5" y="66" width="8" height="8"/>
+ </objectgroup>
 </map>

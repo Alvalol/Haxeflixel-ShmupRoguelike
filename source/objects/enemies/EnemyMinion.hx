@@ -67,7 +67,7 @@ class EnemyMinion extends Enemy
 	  if (directionChanged)
 	  {
 		  // should die if hits a wall
-		if (FlxG.overlap(Reg.PS.blocks, this) || (FlxG.collide(Reg.PS.map.loadedMap, this)))
+		if (FlxG.overlap(Reg.PS.blocks, this) || (FlxG.collide(Reg.PS.map, this)))
 		   kill();
 	  }
 		   

@@ -33,12 +33,11 @@ import objects.enemies.enemyobjects.EnemyExplosiveExplosion;
 
 import flixel.FlxG;
 import utils.pcg.LevelLoaderProc;
-import utils.pcg.LevelEnemies;
 
 
 class PlayState extends FlxState
 {
-	public var map:LevelLoaderProc;
+	public var map:FlxTilemap;
 	public var hazards:FlxTypedGroup<Hazard>;
 	public var player(default, null):Player;
 	public var PBullets:FlxTypedGroup<PlayerBullet>;
@@ -82,16 +81,12 @@ class PlayState extends FlxState
 		_entities = new FlxGroup();
 		
 		FlxG.mouse.visible = false; // must always be set to false pls
-		 
-		map = new LevelLoaderProc();
-		
-      	cameraSetup();
-		
-		items.clear();
-		coins.clear();
-		enemies.clear();
+		map = LevelLoaderProc.loadGeneratedLevel();
+
 		addGameplayElements();
 
+
+      	cameraSetup();
 		super.create();
 	}
 	
@@ -103,7 +98,7 @@ class PlayState extends FlxState
 		displayTracers();
 		gameControls();
 
-		LevelEnemies.populateEnemies(map.loadedMap);
+//		LevelEnemies.populateEnemies(map.loadedMap);
 
 		FlxSpriteUtil.bound(player, 
 		                    FlxG.camera.scroll.x, 
@@ -114,7 +109,7 @@ class PlayState extends FlxState
 	
 	private function addGameplayElements()
 	{		
-		add(map.loadedMap);
+		add(map);
 		_entities.add(EExplosions);
 		_entities.add(blocks);	
 		_entities.add(coins);
@@ -141,7 +136,7 @@ class PlayState extends FlxState
 		FlxCamera.defaultCameras = [_gameCamera];
 		_hud = new HUD();
 		_hud.setCamera(_hudCamera);
-		_gameCamera.setScrollBoundsRect(0, 0, map.loadedMap.width, map.loadedMap.height, true);
+		_gameCamera.setScrollBoundsRect(0, 0, map.width, map.height, true);
 		//FlxG.camera.antialiasing = false;
 		_gameCamera.pixelPerfectRender = false;	
 		
@@ -164,7 +159,7 @@ class PlayState extends FlxState
 		
 		trace("SCROLLER : " + Reg.SCROLLER_ON);	
 		trace("items : " + items.length);
-		trace("enemies : " + enemies.length);
+		trace("enemies : " + enemies);
 		trace("eBullets : " +EBullets.length);
 		trace("PBullets : " + PBullets.length);
 	    trace("coins  " + coins.length);

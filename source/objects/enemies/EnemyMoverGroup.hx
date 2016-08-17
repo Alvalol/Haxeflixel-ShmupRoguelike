@@ -25,7 +25,7 @@ class EnemyMoverGroup extends FlxSprite
 		if (randomEn == 0)
 		{
 		chainedGroup = cast new FlxTypedGroup<EnemyMover>();
-		var chosenPattern = FlxG.random.getObject(patterns);
+		var chosenPattern = FlxG.random.getObject(patterns); // must be seeded!!!
 		
 		for (i in 0...chainedGroupSize)
 		{

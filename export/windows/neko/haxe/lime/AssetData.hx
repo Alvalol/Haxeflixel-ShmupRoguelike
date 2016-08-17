@@ -46,6 +46,12 @@ class AssetData {
 			type.set ("assets/data/mapchunks/level_1/s-0.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/data/mapchunks/level_1/s-1.tmx", "assets/data/mapchunks/level_1/s-1.tmx");
 			type.set ("assets/data/mapchunks/level_1/s-1.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/mapchunks/level_2/a2-0.tmx", "assets/data/mapchunks/level_2/a2-0.tmx");
+			type.set ("assets/data/mapchunks/level_2/a2-0.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/mapchunks/level_2/a2-1.tmx", "assets/data/mapchunks/level_2/a2-1.tmx");
+			type.set ("assets/data/mapchunks/level_2/a2-1.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/mapchunks/level_2/s2-1.tmx", "assets/data/mapchunks/level_2/s2-1.tmx");
+			type.set ("assets/data/mapchunks/level_2/s2-1.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/data/pixel-font.ttf", "assets/data/pixel-font.ttf");
 			type.set ("assets/data/pixel-font.ttf", Reflect.field (AssetType, "font".toUpperCase ()));
 			path.set ("assets/images/bigEnemies.png", "assets/images/bigEnemies.png");

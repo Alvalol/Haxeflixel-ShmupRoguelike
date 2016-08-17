@@ -28,7 +28,7 @@ class Scroller extends FlxSprite
 	   {   
 		   default : MOVE_SPEED = 15; 		maxVelocity.set(MOVE_SPEED, MOVE_SPEED);
 		   case 2 : MOVE_SPEED = 20; 		maxVelocity.set(MOVE_SPEED, MOVE_SPEED);
-		   case 1 : MOVE_SPEED = 30;		maxVelocity.set(MOVE_SPEED, MOVE_SPEED);
+		   case 1 : MOVE_SPEED = 50;		maxVelocity.set(MOVE_SPEED, MOVE_SPEED); //should be 30
 	   }
 	   
 	   
