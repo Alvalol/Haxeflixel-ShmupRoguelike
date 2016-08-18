@@ -85,12 +85,12 @@ class Enemy extends FlxSprite
 	{
 		// Make the drop system a bit better than this. Have items have a probability.
 		
-		var itemRoll = FlxG.random.int(0,100);
+		var itemRoll = Reg.CURRENT_SEED.int(0,100);
 		//trace(itemRoll);
 		if (itemRoll < 15)
 		{
 			//trace(itemRoll);
-			var tObject:Item =	FlxG.random.getObject(list);			
+			var tObject:Item =	Reg.CURRENT_SEED.getObject(list);			
 			Reg.PS.items.add(tObject);
 		}
 		else

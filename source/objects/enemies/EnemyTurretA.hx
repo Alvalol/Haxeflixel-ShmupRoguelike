@@ -34,13 +34,16 @@ class EnemyTurretA extends Enemy
 	private var typeRoll:Int;
 	private var type:Int;
 	
-	public function new(x:Float, y:Float, flip:Bool) 
+	public function new(x:Float, y:Float, _flipped:Bool) 
 	{
 		super(x, y); // this causes an issue if turret is on ceiling... needs to use ceiling instance variable.
 		HP = 3;
-		typeRoll = FlxG.random.int(0, 100);
+		typeRoll = Reg.CURRENT_SEED.int(0, 100);
         tx = Std.int(x / 8); // tx, ty here because it never changes anyway
         ty = Std.int(y / 8);
+		flipY = _flipped;
+		
+		adjustPlacement();
 		
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		animation.add("idle", [0,1], 6, true);
@@ -49,14 +52,14 @@ class EnemyTurretA extends Enemy
 		
 		immovable = true;
 		solid = true;
-		adjustFlip();
+
 		chooseType();
 	}
 
 	override public function update(elapsed:Float)
 	{
 		animateToShoot();	
-		checkForBlock();
+	//	checkForBlock();
 		super.update(elapsed);
 	}
 	
@@ -142,15 +145,18 @@ class EnemyTurretA extends Enemy
 		super.kill();
 	}
 	
-	private function adjustFlip()
-	{
-		if (Reg.PS.map.getTile(tx, ty - 1) != 0 || overlapsAt(x, y - 1, Reg.PS.blocks))
-		{
-			flipY = true;
-		}
 
+	private function adjustPlacement()
+	{
+		if (flipY)
+		{
+			y += 10;
+		}
+		else
+		{
+			y -= 8;
+		}
 	}
-	
 		
 	private function chooseType()	
 	{

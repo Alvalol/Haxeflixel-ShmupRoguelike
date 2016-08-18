@@ -55,7 +55,7 @@ class EnemyExplosive extends Enemy
 	private function reachedScrollX()
 	{
 
-		if (x < FlxG.camera.scroll.x - width)
+		if (x <= FlxG.camera.scroll.x - width + 10)
 		{
 			var bomb = new EnemyExplosiveExplosion(x,y);
 			    Reg.PS.EExplosions.add(bomb);

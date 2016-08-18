@@ -21,13 +21,3 @@ S : Special : Level starting block
 
 E : Special : End of level 
     Can only be placed at the end of the level.
-
-
-
-
-
-
-------------------
-
-1. Checking for the current type to choose next chunk.
-2

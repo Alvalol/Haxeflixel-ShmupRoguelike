@@ -18,7 +18,6 @@ class MapChunkMerger
 	private static var CHUNKS:Array<MapChunk>;
 	private static var RAWCHUNKS:Array<MapChunk>;
 	private static var levelHeight:Int;
-	private static var seed;
 	
 	public static function populateCurrentMap():Array<Dynamic>
 	{
@@ -26,7 +25,7 @@ class MapChunkMerger
 		makeSeed();
 
 		CHUNKS = new Array<MapChunk>();
-		levelHeight = new MapChunk(seed).get_chunkHeight();
+		levelHeight = new MapChunk(Reg.CURRENT_SEED).get_chunkHeight();
 		
 		curateChunks();
 		
@@ -51,8 +50,8 @@ class MapChunkMerger
 		
     private static function chooseChunk(reqType:Array<String>)
 	{
-		var tChunk = new MapChunk(seed);
-		if (tChunk.get_type() == seed.getObject(reqType))
+		var tChunk = new MapChunk(Reg.CURRENT_SEED);
+		if (tChunk.get_type() == Reg.CURRENT_SEED.getObject(reqType))
 		{
 			CHUNKS.push(tChunk);
 		}
@@ -84,6 +83,7 @@ class MapChunkMerger
 		{
 				chooseChunk(["S"]);
 		}
+		
 
 		else
 			{
@@ -99,28 +99,27 @@ class MapChunkMerger
 					
 				case "M" : chooseChunk(["A", "B", "C", "D"]); // PLACEHOLDER
 					
-				case "S" : chooseChunk(["A", "B", "C", "D"]); // SAME
+				case "S" : chooseChunk(["A", "B", "C", "D", "M"]); // SAME
 					
 				case "E" : trace("DONE");
 			}
 			}
-			
-		
+
 		}
-		chooseChunk(["E"]);
+			
+		chooseChunk(["E"]);		
+
 		
 	}
 	private static function makeSeed()
 	{
 		if (Reg.SEEDED)
 		{
-		 seed = new FlxRandom(FlxG.random.int(0, FlxMath.MAX_VALUE_INT)); 
-		 Reg.CURRENT_SEED = seed.currentSeed;
+		 Reg.CURRENT_SEED = new FlxRandom(FlxG.random.int(0, FlxMath.MAX_VALUE_INT)); 
 		}
 		else
 		{
-		seed = new FlxRandom(Reg.masterSeed);
-		Reg.CURRENT_SEED = seed.currentSeed;
+		Reg.CURRENT_SEED = new FlxRandom(Reg.masterSeed);
 		}
 	}
 	

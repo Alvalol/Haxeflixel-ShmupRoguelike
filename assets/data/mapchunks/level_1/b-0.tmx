@@ -13,6 +13,6 @@
  </layer>
  <objectgroup name="objects"/>
  <objectgroup name="enemies">
-  <object id="1" name="flyingLtoR" type="flyingLtoR" gid="9" x="61.5" y="66" width="8" height="8"/>
+  <object id="1" name="flyingLtoR" type="flyingLtoR" gid="9" x="64.0455" y="63.8182" width="8" height="8"/>
  </objectgroup>
 </map>

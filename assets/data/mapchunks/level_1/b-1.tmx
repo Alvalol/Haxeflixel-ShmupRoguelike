@@ -13,7 +13,7 @@
  </layer>
  <objectgroup name="objects"/>
  <objectgroup name="enemies">
-  <object id="1" name="ground" type="ground" gid="4" x="31.3333" y="31.6667" width="8" height="8"/>
-  <object id="2" name="ground" type="ground" gid="1073741828" x="32" y="88.125" width="8" height="8"/>
+  <object id="1" name="ground" type="ground" gid="4" x="32" y="32" width="8" height="8"/>
+  <object id="2" name="ground" type="ground" gid="1073741828" x="31.9091" y="88.0341" width="8" height="8"/>
  </objectgroup>
 </map>

@@ -6,12 +6,24 @@ import flixel.addons.editors.tiled.TiledObjectLayer;
 import flixel.math.FlxPoint;
 import flixel.tile.FlxTilemap;
 import objects.Player;
+import objects.enemies.Enemy;
 import objects.enemies.EnemyBlob;
+import objects.enemies.EnemyChaser;
+import objects.enemies.EnemyExplosive;
 import objects.enemies.EnemyLeft;
+import objects.enemies.EnemyMover;
 import objects.enemies.EnemyMoverGroup;
+import objects.enemies.EnemyMultishotDeath;
+import objects.enemies.EnemyShooter;
 import objects.enemies.EnemySpawner;
+import objects.enemies.EnemyTurretA;
+import objects.enemies.EnemyWorm;
 import objects.gamesys.Goal;
 import objects.hazards.HazardBlock;
+import objects.hazards.HazardLaser;
+import objects.hazards.HazardMovingBlock;
+import objects.hazards.HazardProximityShooter;
+import objects.hazards.HazardRotator;
 import utils.pcg.MapChunkMerger;
 
 
@@ -64,19 +76,46 @@ class ObjectPlacement
 			
 			   switch enemy.type
 			   {
-				   case "ground" : Reg.PS.enemies.add(new EnemySpawner(pos.x, pos.y, enemy.flippedVertically));
-	   
-			       case "flyingRtoL": 	
-										var enGroup = new EnemyMoverGroup(pos.x, pos.y);
-										for (minion in enGroup.chainedGroup)
-										{
-										Reg.PS.enemies.add(minion);
-			                            }
-				      
-				   case "flyingLtoR": Reg.PS.enemies.add(new EnemyLeft(pos.x, pos.y));
 				   
-				   case "freeMovement": Reg.PS.enemies.add(new EnemyBlob(pos.x, pos.y, 16));
-				   
+				   // general enemy types
+				    case "ground" : 
+					   var groundEnemies:Array<Enemy> = [new EnemySpawner(pos.x, pos.y, enemy.flippedVertically),
+					                                     new EnemyTurretA(pos.x, pos.y, enemy.flippedVertically),
+														 new EnemyWorm(pos.x, pos.y, enemy.flippedVertically)];
+														 
+					   Reg.PS.enemies.add(chooseEnemy(groundEnemies));
+
+				    case "flyingLtoR":
+					   var flyingLtoR:Array<Enemy> = [new EnemyExplosive(pos.x, pos.y), 
+					                                  new EnemyLeft(pos.y,pos.y)];
+					   
+				       Reg.PS.enemies.add(chooseEnemy(flyingLtoR));
+					   
+					   
+				    case "freeMovement": 
+					   
+					   var freeMovement:Array<Enemy> = [new EnemyBlob(pos.x, pos.y, 16), 
+					                                    new EnemyChaser(pos.x, pos.y), 
+														new EnemyMultishotDeath(pos.x,pos.y)];
+				       Reg.PS.enemies.add(chooseEnemy(freeMovement)); 
+					   
+				     case "flyingRtoL": 
+						var enGroup = new EnemyMoverGroup(pos.x, pos.y);
+						for (minion in enGroup.chainedGroup)
+							{
+							   Reg.PS.enemies.add(minion);
+			                }
+							
+							
+					//specific enemies
+					
+					case "blob" : Reg.PS.enemies.add (new EnemyBlob(pos.x, pos.y, 16));
+					case "chaser" : Reg.PS.enemies.add(new EnemyChaser(pos.x, pos.y));
+					case "enemyLeft" : Reg.PS.enemies.add(new EnemyLeft(pos.y, pos.y));
+					case "enemyMultishot" : Reg.PS.enemies.add(new EnemyMultishotDeath(pos.x, pos.y));
+					case "enemySpawner" : Reg.PS.enemies.add(new EnemySpawner(pos.x, pos.y, enemy.flippedVertically));
+					case "enemyTurret" : Reg.PS.enemies.add(new EnemyTurretA(pos.x, pos.y, enemy.flippedVertically));
+					case "enemyWorm" : Reg.PS.enemies.add(new EnemyWorm(pos.x, pos.y,enemy.flippedVertically));
 			   }
 			   
 		}
@@ -89,6 +128,14 @@ class ObjectPlacement
 			  switch hazard.type
 			  {
 				  case "block" : Reg.PS.blocks.add(new HazardBlock(pos.x, pos.y));
+				  
+				  case "laser" : Reg.PS.hazards.add(new HazardLaser(pos.x, pos.y));
+				  
+				  case "movingBlock" : Reg.PS.hazards.add(new HazardMovingBlock(pos.x, pos.y, true));
+				  // there should be a property in the object (tiled) setting if it moves horizontally or vertically
+				  
+				  case "proximity" : Reg.PS.hazards.add(new HazardProximityShooter(pos.x, pos.y));
+				  
 			  }
 		}
 					
@@ -103,6 +150,11 @@ class ObjectPlacement
 
 		
     
+	private static function chooseEnemy(enemy:Array<Enemy>):Enemy
+	{
+		var chosenEnemy = Reg.CURRENT_SEED.getObject(enemy);
+		return chosenEnemy;
+	}
 	
 	public static function getLevelObjects(map:TiledMap, layer:String):Array<TiledObject>
 	{

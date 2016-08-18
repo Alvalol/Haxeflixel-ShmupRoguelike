@@ -75,6 +75,7 @@ class Player extends FlxSprite
 		collisions();
 		}
 		
+		if (_invinsible)
 		cheat();
 		
 		basicChecks(elapsed);		
@@ -87,6 +88,7 @@ class Player extends FlxSprite
 	{
 			HP = 1;
 	}
+	
 	private function collisions()
 	{
 			   						

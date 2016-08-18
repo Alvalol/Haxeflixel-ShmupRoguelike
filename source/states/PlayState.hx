@@ -166,7 +166,7 @@ class PlayState extends FlxState
 		trace("blocks " + blocks.length);
 		trace("_entities " + _entities.length);
 		trace("effects " + effects.length);
-		trace("MASTER SEED : " + Reg.CURRENT_SEED);
+		trace("MASTER SEED : " + Reg.CURRENT_SEED.initialSeed);
 		
 	    }
 	}

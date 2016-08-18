@@ -22,14 +22,20 @@ class EnemyWorm extends Enemy
 	private var tweenOptions:TweenOptions;
 	private var SHOOT_SPEED = -150;
 	private var justShot = false;
+	private var flipFactor:Int;
 
-	public function new(x:Float, y:Float)
+	
+	// needs to be fixed
+	public function new(x:Float, y:Float, _flipped:Bool)
 	{
-		super(x, y + 6);
+		super(x, y);
 		HP = 1;
 		makeGraphic(8, 16, FlxColor.LIME);
 		tweenOptions = {type : FlxTween.PINGPONG, loopDelay:2, onComplete:resetShot};
 		startAnimation();
+		flipY = _flipped;
+		setFactor();
+		adjustPlacement();
 		
 		#if !FLX_NO_DEBUG 
 		Tracker.addProfile(new TrackerProfile(EnemyWorm, ["aboveGround", "waiting"], [FlxSprite, FlxTween]));
@@ -50,11 +56,25 @@ class EnemyWorm extends Enemy
 			justShot = false;	
 	}
 
+	
+	private function setFactor()
+	{
+		if (flipY)
+		{
+			flipFactor = -1;
+		}
+		else
+		{
+			flipFactor = 1;
+		}
+		
+	}
 	private function shoot()
 	{
 		if (animationTween.percent >= 0.90 && !animationTween.backward && !justShot)
 		{
 		var tang = 70;
+		
 		for (i in 0...3)
 		{
 		    var eb:EnemyBullet = Reg.PS.EBullets.recycle();
@@ -62,7 +82,7 @@ class EnemyWorm extends Enemy
 		        eb = new EnemyBullet(x, y);
 				
 			eb.velocity.set(FlxVelocity.velocityFromAngle(tang, SHOOT_SPEED).x,
-			FlxVelocity.velocityFromAngle(tang, SHOOT_SPEED).y);
+			FlxVelocity.velocityFromAngle(tang, SHOOT_SPEED  * flipFactor).y);
 			tang += 20;
 			eb.scale.set(0.5, 0.5);
 			Reg.PS.EBullets.add(eb);
@@ -71,9 +91,28 @@ class EnemyWorm extends Enemy
 		}
 	}
 	
+	private function adjustPlacement()
+	{
+		if (flipY)
+		{
+			y -= 16;
+		}
+		else
+		{
+			y += 32;
+		}
+	}
+	
 	private function startAnimation(?tween:FlxTween)
 	{
-		animationTween = FlxTween.linearMotion(this, x, y, x, y - height, 25, false, tweenOptions);
+		if (flipY)
+		{
+		animationTween = FlxTween.linearMotion(this, x, y, x, y + height , 25, false, tweenOptions);
+		}
+		else
+		{
+	    animationTween = FlxTween.linearMotion(this, x, y, x, y - height , 25, false, tweenOptions);		
+		}
 	}
 	
 }
