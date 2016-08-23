@@ -43,7 +43,7 @@ class EnemyTurretA extends Enemy
         ty = Std.int(y / 8);
 		flipY = _flipped;
 		
-		adjustPlacement();
+		//adjustPlacement();
 		
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		animation.add("idle", [0,1], 6, true);
@@ -59,7 +59,7 @@ class EnemyTurretA extends Enemy
 	override public function update(elapsed:Float)
 	{
 		animateToShoot();	
-	//	checkForBlock();
+		checkForBlock();
 		super.update(elapsed);
 	}
 	
@@ -150,7 +150,7 @@ class EnemyTurretA extends Enemy
 	{
 		if (flipY)
 		{
-			y += 10;
+			y -=8;
 		}
 		else
 		{

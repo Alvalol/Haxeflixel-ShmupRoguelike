@@ -31,12 +31,17 @@ class EnemyWorm extends Enemy
 		super(x, y);
 		HP = 1;
 		makeGraphic(8, 16, FlxColor.LIME);
+		
+		flipY = _flipped;
+	    adjustPlacement();
+		
 		tweenOptions = {type : FlxTween.PINGPONG, loopDelay:2, onComplete:resetShot};
 		startAnimation();
-		flipY = _flipped;
+
 		setFactor();
-		adjustPlacement();
 		
+		
+		animationTween.active = active;	
 		#if !FLX_NO_DEBUG 
 		Tracker.addProfile(new TrackerProfile(EnemyWorm, ["aboveGround", "waiting"], [FlxSprite, FlxTween]));
 		FlxG.console.registerObject("EnemyWorm", this);
@@ -47,7 +52,6 @@ class EnemyWorm extends Enemy
 	override public function update(elapsed:Float) 
 	{
 		shoot();
-		animationTween.active = active;		
 		super.update(elapsed);
 	}
 	
@@ -93,13 +97,13 @@ class EnemyWorm extends Enemy
 	
 	private function adjustPlacement()
 	{
-		if (flipY)
+		if (!flipY)
 		{
-			y -= 16;
+		y += 8;
 		}
 		else
 		{
-			y += 32;
+		y -= 16;
 		}
 	}
 	

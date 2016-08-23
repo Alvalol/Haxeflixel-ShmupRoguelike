@@ -46,6 +46,8 @@ class AssetData {
 			type.set ("assets/data/mapchunks/level_1/s-0.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/data/mapchunks/level_1/s-1.tmx", "assets/data/mapchunks/level_1/s-1.tmx");
 			type.set ("assets/data/mapchunks/level_1/s-1.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/data/mapchunks/level_1/x-0.tmx", "assets/data/mapchunks/level_1/x-0.tmx");
+			type.set ("assets/data/mapchunks/level_1/x-0.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/data/mapchunks/level_2/a2-0.tmx", "assets/data/mapchunks/level_2/a2-0.tmx");
 			type.set ("assets/data/mapchunks/level_2/a2-0.tmx", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/data/mapchunks/level_2/a2-1.tmx", "assets/data/mapchunks/level_2/a2-1.tmx");

@@ -23,6 +23,7 @@ class MapChunk
 	public function new(_randomizer:FlxRandom)
 	{
 	 makeChunk(_randomizer);
+
 	}
 	
 	private function makeChunk(_randomizer:FlxRandom)
@@ -44,9 +45,17 @@ class MapChunk
 	{
 		var dir:String = "assets/data/mapchunks/level_" + Std.string(Reg.currentLevel) + "/";
 		var dirContent:Array<String> = FileSystem.readDirectory(dir);
-	
-		var chosenFile:TiledMap = new TiledMap(dir + randomizer.getObject(dirContent)); // this is the important part. It chooses the file here.
-		return chosenFile;
+	z
+	    if (!Reg.SANDBOX)
+		{
+		    var chosenFile:TiledMap = new TiledMap(dir + randomizer.getObject(dirContent)); // this is the important part. It chooses the file here.
+		    return chosenFile;
+		}
+		else
+		{
+		    var chosenFile:TiledMap = new TiledMap(dir + "x-0.tmx");	
+		    return chosenFile;
+		}
 	}
 	
 

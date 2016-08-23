@@ -79,9 +79,13 @@ class MapChunkMerger
 	{
 		while (CHUNKS.length < Reg.LEVEL_SIZE)
 		{		
-		if (CHUNKS.length == 0)
+		if (CHUNKS.length == 0 && !Reg.SANDBOX)
 		{
 				chooseChunk(["S"]);
+		}
+		else if (Reg.SANDBOX)
+		{
+			chooseChunk(["X"]);
 		}
 		
 
@@ -102,6 +106,8 @@ class MapChunkMerger
 				case "S" : chooseChunk(["A", "B", "C", "D", "M"]); // SAME
 					
 				case "E" : trace("DONE");
+				
+				case "X" : chooseChunk(["X","A", "B", "C", "D", "M"]);
 			}
 			}
 

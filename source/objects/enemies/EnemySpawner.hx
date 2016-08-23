@@ -31,7 +31,7 @@ class EnemySpawner extends Enemy
 		
 		//centerOrigin();
 
-		adjustPlacement();
+	   adjustPlacement();
 		minions = new FlxTypedSpriteGroup<Enemy>();
 	}
 	
@@ -77,15 +77,10 @@ class EnemySpawner extends Enemy
 	
 	private function adjustPlacement()
 	{
-		if (flipY)
+		if (!flipY)
 		{
 		y -= 8;
 		}
-		else
-		{
-		y -= 16;
-		}
-
 	}
 
 		
