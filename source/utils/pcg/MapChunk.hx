@@ -45,7 +45,7 @@ class MapChunk
 	{
 		var dir:String = "assets/data/mapchunks/level_" + Std.string(Reg.currentLevel) + "/";
 		var dirContent:Array<String> = FileSystem.readDirectory(dir);
-	z
+	
 	    if (!Reg.SANDBOX)
 		{
 		    var chosenFile:TiledMap = new TiledMap(dir + randomizer.getObject(dirContent)); // this is the important part. It chooses the file here.

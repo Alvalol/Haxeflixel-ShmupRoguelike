@@ -9,7 +9,7 @@ class Reg
 	public static var DEBUG = false; // set to TRUE if testing a new enemy or feature
 	public static var currentLevel:Int = 1;
 	
-	public static var LEVEL_SIZE:Int = 25;
+	public static var LEVEL_SIZE:Int = 10;
 	public static var SEEDED:Bool = true;
 	public static var masterSeed:Int = 1806916156; // set seed to wtv from 0 to 2147483647.
 	public static var pause:Bool = false;

@@ -79,44 +79,46 @@ class MapChunkMerger
 	{
 		while (CHUNKS.length < Reg.LEVEL_SIZE)
 		{		
-		if (CHUNKS.length == 0 && !Reg.SANDBOX)
-		{
-				chooseChunk(["S"]);
-		}
-		else if (Reg.SANDBOX)
-		{
-			chooseChunk(["X"]);
-		}
 		
-
-		else
-			{
+		if (!Reg.SANDBOX)
+		{
+			
+		if (CHUNKS.length == 0)
+		{
+				chooseChunk(["start"]);
+				
 			switch FlxArrayUtil.last(CHUNKS).get_type()
 			{
-				case "A" : chooseChunk(["A", "B", "C", "D"]);
+				case "openChunk" : chooseChunk(["openChunk", "leftWall", "rightWall", "bothWalls"]);
 					
-		        case "B" : chooseChunk(["A", "B", "C", "D"]);
+		        case "leftWall" : chooseChunk(["openChunk", "leftWall", "rightWall", "bothWalls"]);
 					
-				case "C" : chooseChunk(["A","C"]);
+				case "rightWall" : chooseChunk(["openChunk","bothWalls"]);
 				
-				case "D" : chooseChunk(["A"]);
+				case "bothWalls" : chooseChunk(["openChunk"]);
 					
-				case "M" : chooseChunk(["A", "B", "C", "D"]); // PLACEHOLDER
+				case "miniBoss" : chooseChunk(["openChunk", "leftWall", "rightWall", "bothWalls"]); // PLACEHOLDER
 					
-				case "S" : chooseChunk(["A", "B", "C", "D", "M"]); // SAME
+				case "start" : chooseChunk(["openChunk", "leftWall", "rightWall", "bothWalls", "miniBoss"]); // SAME
 					
-				case "E" : trace("DONE");
-				
-				case "X" : chooseChunk(["X","A", "B", "C", "D", "M"]);
-			}
-			}
+				case "exit" : trace("DONE");
 
+			}
 		}
+		
 			
-		chooseChunk(["E"]);		
+			chooseChunk(["exit"]);
+		}
+		else
+		{
+			Reg.LEVEL_SIZE = 1;
+			chooseChunk(["sandbox"]);
+		}
+	}
+	}
 
 		
-	}
+	
 	private static function makeSeed()
 	{
 		if (Reg.SEEDED)

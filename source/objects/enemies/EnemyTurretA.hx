@@ -145,8 +145,7 @@ class EnemyTurretA extends Enemy
 		super.kill();
 	}
 	
-
-	private function adjustPlacement()
+     	private function adjustPlacement()
 	{
 		if (flipY)
 		{
