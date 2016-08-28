@@ -117,7 +117,7 @@ class MapChunkMerger
 		
 	}
 			
-if(CHUNKS.length == Reg.LEVEL_SIZE)
+    if(CHUNKS.length == Reg.LEVEL_SIZE)
 {
 			chooseChunk(["exit"]);
 }
