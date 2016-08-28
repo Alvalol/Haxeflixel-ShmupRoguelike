@@ -21,6 +21,7 @@ import objects.hazards.HazardBullet;
 import objects.items.Item;
 import flixel.addons.effects.FlxTrail;
 import openfl.system.System;
+import utils.controls.Gamepad;
 
 import objects.enemies.EnemyBullet;
 import objects.Player;
@@ -56,6 +57,8 @@ class PlayState extends FlxState
 	private var _hud:HUD;
 	private var _gameCamera:FlxCamera;
 	private var _hudCamera:FlxCamera;
+	
+	private var _gamePad:Gamepad;
 
 	private var tracers:Bool = false;
 	
@@ -64,7 +67,6 @@ class PlayState extends FlxState
 		Reg.PS = this;
 		Reg.pause = false;
 	
-
 		// init gameplay elements
 
 		player = new Player(10, FlxG.height / 2);
@@ -79,6 +81,8 @@ class PlayState extends FlxState
 		EExplosions = new FlxTypedGroup<EnemyExplosiveExplosion>();
 		HBullets= new FlxTypedGroup<HazardBullet>();
 		_entities = new FlxGroup();
+		
+		_gamePad = new Gamepad();
 		
 		FlxG.mouse.visible = false; // must always be set to false pls
 		map = LevelLoaderProc.loadGeneratedLevel();
