@@ -13,7 +13,7 @@ class Goal extends FlxSprite
 		super(x, 0);
 		solid = true;
 		immovable = true;
-		makeGraphic(10, FlxG.height * 2, FlxColor.TRANSPARENT);
+		makeGraphic(10, FlxG.height * 2, FlxColor.RED);
 	}
 	
 	override public function update(elapsed:Float):Void 

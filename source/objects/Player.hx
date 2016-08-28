@@ -21,7 +21,7 @@ class Player extends FlxSprite
 	private static inline var DECELERATION:Int = 800;
 	public  var HOR_MOVE_SPEED:Int = 50;
 	public var VERT_MOVE_SPEED:Int = 60;
-	public var MAX_HOR_MOVE_SPEED:Int = 90;
+	public var MAX_HOR_MOVE_SPEED:Int = 100;
 	public var MAX_VERT_MOVE_SPEED:Int = 100;
 	
 	public var MAGNET:Int = 30;
@@ -33,14 +33,14 @@ class Player extends FlxSprite
 	public var MAX_RANGE:Float = 2.0;
 	
 	private static inline var MAX_BULLETS:Int = 10;
-	private static inline var BULLET_OFFSET:Int = 3;
+	private static inline var BULLET_OFFSET:Int = 7;
 	
 	public var HP:Int;
 	public var MAX_HP:Int;
 	public var MAX_POSSIBLE_HP:Int = 10; //? Not sure. Needs playtest.
 	
 	private var _cooldown:Float = 0;
-	private var _invinsible:Bool = false;
+	private var _invinsible:Bool = true;
 	
 	public var SHOT_MOD:Int;
 	public var MAX_SHOTMOD:Int = 1;
@@ -125,7 +125,6 @@ class Player extends FlxSprite
 		move_right();
 		move_down();
 		move_left();
-
 	}
 	
 	private function resetAccel()

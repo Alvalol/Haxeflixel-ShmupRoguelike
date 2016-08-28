@@ -44,7 +44,6 @@ class MapChunkMerger
 
 		//var result = reduceArray(m);
 	 //   trace("RESULT : " + result);
-	 
 	    return m;
 	}
 		
@@ -78,7 +77,7 @@ class MapChunkMerger
 	private static function curateChunks()
 	{
 		while (CHUNKS.length < Reg.LEVEL_SIZE)
-		{		
+		{
 		
 		if (!Reg.SANDBOX)
 		{
@@ -86,7 +85,10 @@ class MapChunkMerger
 		if (CHUNKS.length == 0)
 		{
 				chooseChunk(["start"]);
-				
+		}
+		else
+		{
+
 			switch FlxArrayUtil.last(CHUNKS).get_type()
 			{
 				case "openChunk" : chooseChunk(["openChunk", "leftWall", "rightWall", "bothWalls"]);
@@ -102,19 +104,19 @@ class MapChunkMerger
 				case "start" : chooseChunk(["openChunk", "leftWall", "rightWall", "bothWalls", "miniBoss"]); // SAME
 					
 				case "exit" : trace("DONE");
-
 			}
 		}
-		
-			
-			chooseChunk(["exit"]);
 		}
-		else
-		{
+	else{
+		
 			Reg.LEVEL_SIZE = 1;
 			chooseChunk(["sandbox"]);
 		}
+		
 	}
+			
+			chooseChunk(["exit"]);
+
 	}
 
 		

@@ -58,6 +58,8 @@ class AssetData {
 			type.set ("assets/data/pixel-font.ttf", Reflect.field (AssetType, "font".toUpperCase ()));
 			path.set ("assets/images/bigEnemies.png", "assets/images/bigEnemies.png");
 			type.set ("assets/images/bigEnemies.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/cursor8.png", "assets/images/cursor8.png");
+			type.set ("assets/images/cursor8.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/enemies.png", "assets/images/enemies.png");
 			type.set ("assets/images/enemies.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/explosion.png", "assets/images/explosion.png");
