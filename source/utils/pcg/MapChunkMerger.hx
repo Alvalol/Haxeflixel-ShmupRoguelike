@@ -50,6 +50,7 @@ class MapChunkMerger
     private static function chooseChunk(reqType:Array<String>)
 	{
 		var tChunk = new MapChunk(Reg.CURRENT_SEED);
+		// there has to be a better way than this
 		if (tChunk.get_type() == Reg.CURRENT_SEED.getObject(reqType))
 		{
 			CHUNKS.push(tChunk);
@@ -86,6 +87,7 @@ class MapChunkMerger
 		{
 				chooseChunk(["start"]);
 		}
+		
 		else
 		{
 
@@ -115,7 +117,10 @@ class MapChunkMerger
 		
 	}
 			
+if(CHUNKS.length == Reg.LEVEL_SIZE)
+{
 			chooseChunk(["exit"]);
+}
 
 	}
 
@@ -137,7 +142,7 @@ class MapChunkMerger
 	{
 		var newArray:Array<Array<Int>> = new Array<Array<Int>>();
 		
-		for (i in 0...chunk.get_chunkData().length)
+		for (i in 0...chunk.get_chunkData().length +1)
 		{
 			
 			if (i % chunk.get_chunkWidth() == 0)

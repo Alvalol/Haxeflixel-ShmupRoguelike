@@ -102,7 +102,7 @@ class PlayState extends FlxState
 
 		FlxSpriteUtil.bound(player, 
 		                    FlxG.camera.scroll.x, 
-							FlxG.camera.scroll.x + FlxG.camera.width * 2,
+							FlxG.camera.scroll.x + FlxG.camera.width,
 							FlxG.camera.scroll.y,
 							FlxG.camera.scroll.y + FlxG.camera.height);	
 	}

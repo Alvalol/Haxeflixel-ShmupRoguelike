@@ -34,6 +34,7 @@ class ObjectPlacement
 	public static function loadLevelObjects(currentLevel:FlxTilemap)
 	{
 		
+	//	Goes through each layer of the current loaded level and checks for objects. This is basically an array that contains the XML files. (RAWCHUNKS)
 	var RAWCHUNKS = MapChunkMerger.get_RAWCHUNKS();
 	var chunkIndex = 0;
 	
@@ -165,7 +166,6 @@ class ObjectPlacement
 		}
 		else
 		{
-		   // trace("Object layer " + layer + " not found");
 	        return [];
 		}
 	}
