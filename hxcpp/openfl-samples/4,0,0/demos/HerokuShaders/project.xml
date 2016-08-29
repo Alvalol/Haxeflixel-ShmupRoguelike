@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Heroku Shaders" package="org.openfl.samples.herokushaders" version="1.0.0" company="OpenFL" />
+	<app main="Main" path="Export" file="HerokuShaders" />
+	<window require-shaders="true" />
+	
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	
+	<assets path="Assets" rename="assets" />
+	
+</project>

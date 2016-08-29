@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Playing Sound" package="org.openfl.samples.playingsound" version="1.0.0" company="OpenFL" />
+	<app main="Main" path="Export" file="PlayingSound" />
+	
+	<window background="#777777" />
+	
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	<haxelib name="actuate" />
+	
+	<assets path="Assets" rename="assets" />
+	
+</project>

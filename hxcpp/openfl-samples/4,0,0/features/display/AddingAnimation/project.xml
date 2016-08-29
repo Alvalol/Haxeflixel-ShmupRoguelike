@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Adding Animation" package="org.openfl.samples.addinganimation" version="1.0.0" company="OpenFL" />
+	<app main="Main" path="Export" file="AddingAnimation" />
+	
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	<haxelib name="actuate" />
+	
+	<assets path="Assets" rename="assets" />
+	
+</project>

@@ -1,0 +1,11 @@
+{
+  "name": "layout",
+  "url": "http://github.com/openfl/layout",
+  "license": "MIT",
+  "tags": ["cpp", "flash", "neko", "js"],
+  "description": "Flexible system for fluid resizing layouts",
+  "version": "1.2.1",
+  "releasenote": "Fixed possible stack overflow",
+  "contributors": [ "singmajesty" ],
+  "dependencies": {}
+}

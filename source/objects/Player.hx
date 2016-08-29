@@ -4,7 +4,6 @@ import flixel.FlxSprite;
 import flixel.FlxObject;
 import flixel.FlxG;
 import flixel.FlxSubState;
-import flixel.input.gamepad.FlxGamepad;
 import flixel.util.FlxColor;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxTimer;
@@ -41,17 +40,15 @@ class Player extends FlxSprite
 	public var MAX_POSSIBLE_HP:Int = 10; //? Not sure. Needs playtest.
 	
 	private var _cooldown:Float = 0;
-	private var _invinsible:Bool = false;
+	private var _invinsible:Bool = true;
 	
 	public var SHOT_MOD:Int;
 	public var MAX_SHOTMOD:Int = 1;
 	
-	private var gamepad:FlxGamepad;
-	
 	public function new(x:Float, y:Float) 
 	{
 		super(x,y);
-		HP = 10; //3
+		HP = 3; //3
 		MAX_HP = 3;
 		
 		loadGraphic(AssetPaths.player__png, true, 16, 8);
@@ -67,8 +64,6 @@ class Player extends FlxSprite
 		drag.x = DECELERATION;
 		drag.y = DECELERATION;
 		
-		gamepad = FlxG.gamepads.lastActive;
-		
 		maxVelocity.set(HOR_MOVE_SPEED, VERT_MOVE_SPEED);
 	}
 	
@@ -83,15 +78,6 @@ class Player extends FlxSprite
 		if (_invinsible)
 		cheat();
 		
-		if (gamepad != null)
-		{
-			updateGameInput(gamepad);
-		}
-		else
-		    return null;
-			
-		
-		
 		basicChecks(elapsed);		
 		if(!Reg.pause)
 		    super.update(elapsed);
@@ -104,11 +90,13 @@ class Player extends FlxSprite
 	}
 	
 	private function collisions()
-	{		   						
+	{
+			   						
 		if (alive)
 		{
 		   if (FlxG.collide(Reg.PS.map, this))
 		   {
+			
 			damage();
 			FlxObject.separate(this, Reg.PS.map);
 		   }
@@ -123,9 +111,6 @@ class Player extends FlxSprite
 	{
 		if (alive)
 		{
-		    resetAccel();
-		    move();
-		    shoot();
 			_cooldown -= elapsed * 4;
 		}
 	
@@ -140,51 +125,30 @@ class Player extends FlxSprite
 		move_left();
 	}
 	
-	private function resetAccel()
+	public function resetAccel()
 	{
 		acceleration.x = 0;
 		acceleration.y = 0;		
 	}
 		
-	
-   	public function updateGameInput(gamepad:FlxGamepad):Void
-	{
-	  if (gamepad.pressed.A || gamepad.pressed.RIGHT_SHOULDER || gamepad.pressed.RIGHT_TRIGGER)
-	  {
-          shoot();
-
-	  }
-	  
-	  if (gamepad.pressed.B || gamepad.pressed.LEFT_TRIGGER)
-	  {
-		  trace("Pressed B or LEFT TRIGGER");
-	  }
-	  
-	  if (gamepad.pressed.START) Reg.pause = !Reg.pause;
-	}
-	
 	public function move_up()
 	{
-		if (FlxG.keys.anyPressed(Keyboard.upKeys))
 			acceleration.y -= ACCELERATION;
 	}
 	
 	public function move_right()
 	{
-		if (FlxG.keys.anyPressed(Keyboard.rightKeys))
 		    acceleration.x += ACCELERATION;	
 	}
 	
 	
 	public function move_down()
 	{
-		if (FlxG.keys.anyPressed(Keyboard.downKeys))
 		  acceleration.y += ACCELERATION;
 	}
 
 	public function move_left()
 	{
-		if (FlxG.keys.anyPressed(Keyboard.leftKeys))
 		    acceleration.x -= ACCELERATION;
 	}
 	

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/><link href="../../bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet"/><script src="../../jquery-1.9.1.min.js"></script><script src="../../bootstrap/js/bootstrap.min.js"></script><link href="../../styles.css" rel="stylesheet"/><script type="text/javascript">var dox = {rootPath: "../../",platforms: ["Linux","Mac","Android","Windows","iOS","Flash","BlackBerry","Firefox","HTML5","Neko"]};</script><script type="text/javascript" src="../..//nav.js"></script><script type="text/javascript" src="../..//index.js"></script><link rel="icon" href="../..//favicon.ico" type="image/x-icon"></link><title>openfl.sensors.Accelerometer - OpenFL API Documentation</title></head><body><div class="container">        <div class="row-fluid">            <div class="span3">              <div class="well sidebar-nav">                <form class="form-search" id="searchForm">                  <div class="input-prepend input-block-level">                    <span class="add-on"><i class="icon-search"></i></span>                    <input id="search" type="text" placeholder="Search" autocomplete="off"/>                  </div>                </form>                <div id="nav"></div>              </div>            </div>            <div class="span9"><div class="page-header">                                <h4><small>package openfl.sensors</small></h4>    <h1>            <small>class</small>            openfl.sensors.Accelerometer        </h1>                <h4>            <small>extends</small> <a class="type" title="The EventDispatcher class is the base class for all classes that dispatch events." href="../../openfl/events/EventDispatcher.html">EventDispatcher</a>        </h4>                <p class="availability">Available on all platforms</p>                </div><div class="body">        <div class="doc doc-main">            <div class="indent">                <p>The Accelerometer class dispatches events based on activity detected by the
+device's motion sensor. This data represents the device's location or
+movement along a 3-dimensional axis. When the device moves, the sensor
+detects this movement and returns acceleration data. The Accelerometer
+class provides methods to query whether or not accelerometer is supported,
+and also to set the rate at which acceleration events are dispatched.</p><p><b>Note:</b> Use the <code>Accelerometer.isSupported</code> property to
+test the runtime environment for the ability to use this feature. While the
+Accelerometer class and its members are accessible to the Runtime Versions
+listed for each API entry, the current environment for the runtime
+determines the availability of this feature. For example, you can compile
+code using the Accelerometer class properties for Flash Player 10.1, but
+you need to use the <code>Accelerometer.isSupported</code> property to test
+for the availability of the Accelerometer feature in the current deployment
+environment for the Flash Player runtime. If
+<code>Accelerometer.isSupported</code> is <code>true</code> at runtime,
+then Accelerometer support currently exists.</p><p><i>AIR profile support:</i> This feature is supported only on mobile
+devices. It is not supported on desktop or AIR for TV devices. See <a
+href="http://help.adobe.com/en_US/air/build/WS144092a96ffef7cc16ddeea2126bb46b82f-8000.html">
+AIR Profile Support</a> for more information regarding API support across
+multiple profiles. </p>
+<p>@event status Dispatched when an accelerometer changes its status.</p>
+<p>              <p><b>Note:</b> On some devices, the accelerometer is always
+              available. On such devices, an Accelerometer object never
+              dispatches a <code>status</code> event.</p>
+@event update The <code>update</code> event is dispatched in response to
+              updates from the accelerometer sensor. The event is
+              dispatched in the following circumstances:</p>
+<p>              <p>
+              <ul>
+                <li>When a new listener function is attached through
+              <code>addEventListener()</code>, this event is delivered once
+              to all the registered listeners for providing the current
+              value of the accelerometer.</li>
+                <li>Whenever accelerometer updates are obtained from the
+              platform at device determined intervals.</li>
+                <li>Whenever the application misses a change in the
+              accelerometer(for example, the runtime is resuming after
+              being idle).</li>
+              </ul>
+              </p></p>            </div>        </div>                                                                                                                <h3 class="section">Constructor</h3>        <div class="fields">                                                                                                                                    <div class="field"><a name="new"></a><h3><p>        <code><a href="#new"><span class="identifier">new</span></a> ()        </code></p></h3><div class="doc"><p>Creates a new Accelerometer instance.</p></div></div>                                                                                                    </div>                                                                                                                                                                            <h3 class="section">Properties</h3>        <div class="fields">                                                                                        <div class="field"><a name="muted"></a><h3><p>                    <span class="label">read only</span>                                <code><a href="#muted"><span class="identifier">muted</span></a>:<a class="type" title="The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a>        </code></p></h3><div class="doc"><p>Specifies whether the user has denied access to the accelerometer
+(<code>true</code>) or allowed access(<code>false</code>). When this
+value changes, a <code>status</code> event is dispatched.</p></div></div>                                                                                                                                                                                                                                                                </div>                                                                                                                                            <h3 class="section">Methods</h3>        <div class="fields">                                                                                                                                                                                                                                        <div class="field"><a name="setRequestedUpdateInterval"></a><h3><p>        <code><a href="#setRequestedUpdateInterval"><span class="identifier">setRequestedUpdateInterval</span></a> (interval:<a class="type" title="The standard Int type." href="../../Int.html">Int</a>):<a class="type" title="The standard Void type." href="../../Void.html">Void</a>        </code></p></h3><div class="doc"><p>The <code>setRequestedUpdateInterval</code> method is used to set the
+desired time interval for updates. The time interval is measured in
+milliseconds. The update interval is only used as a hint to conserve the
+battery power. The actual time between acceleration updates may be greater
+or lesser than this value. Any change in the update interval affects all
+registered listeners. You can use the Accelerometer class without calling
+the <code>setRequestedUpdateInterval()</code> method. In this case, the
+application receives updates based on the device's default interval.</p>    <p class="javadoc">Parameters:</p>            <div class="indent inline-content">            <code>interval</code> <p>The requested update interval. If <code>interval</code> is
+set to 0, then the minimum supported update interval is
+used.</p>        </div>        <p class="javadoc">Throws:</p>            <div class="indent inline-content">            <code>ArgumentError</code> <p>The specified <code>interval</code> is less than
+zero.</p>        </div>    </div></div>                                                        </div>                                                                                    <h3 class="section">Static properties</h3>        <div class="fields">                                                                                        <div class="field"><a name="isSupported"></a><h3><p><span class="label">static</span>                    <span class="label">read only</span>                            <span class="label">write only</span>                <code><a href="#isSupported"><span class="identifier">isSupported</span></a>:<a class="type" title="The standard Boolean type, which can either be true or false." href="../../Bool.html">Bool</a>        </code></p></h3><div class="doc"><p>The <code>isSupported</code> property is set to <code>true</code> if the
+accelerometer sensor is available on the device, otherwise it is set to
+<code>false</code>.</p></div></div>                                                        </div>                                                            </div></div>        </div></div>    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script></body></html>

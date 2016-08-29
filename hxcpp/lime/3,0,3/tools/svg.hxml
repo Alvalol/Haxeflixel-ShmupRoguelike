@@ -1,0 +1,8 @@
+-main SVGExport
+-neko ../svg.n
+-D lime
+-cp ..
+-lib openfl
+-lib svg
+-D lime_cairo
+--remap flash:openfl

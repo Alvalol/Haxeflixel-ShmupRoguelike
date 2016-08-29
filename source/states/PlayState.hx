@@ -2,7 +2,9 @@ package states;
 
 import flixel.FlxG;
 import flixel.FlxObject;
+import flixel.FlxSubState;
 import flixel.addons.effects.FlxTrail;
+import flixel.graphics.FlxGraphic;
 import flixel.group.FlxGroup;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.FlxSprite;
@@ -21,6 +23,8 @@ import objects.hazards.HazardBullet;
 import objects.items.Item;
 import flixel.addons.effects.FlxTrail;
 import openfl.system.System;
+import substates.PauseState;
+import utils.controls.Gamepad;
 //import utils.controls.Gamepad;
 import flixel.input.gamepad.FlxGamepad;
 
@@ -52,6 +56,7 @@ class PlayState extends FlxState
 	public var items(default, null):FlxTypedGroup<Item>;
 	public var coins:FlxTypedGroup <CoinItem>;
 	private var _entities:FlxGroup;
+	private var pauseScreen:PauseState;
 
 	private var _scroller(default, null):Scroller;
 	
@@ -61,7 +66,7 @@ class PlayState extends FlxState
 	
 	private var gamepad:FlxGamepad;
 
-	private var tracers:Bool = false;
+	private var tracers:Bool = true;
 	
 	override public function create():Void
 	{
@@ -69,7 +74,7 @@ class PlayState extends FlxState
 		Reg.pause = false;
 	
 		// init gameplay elements
-
+		persistentUpdate = true;
 		player = new Player(10, FlxG.height / 2);
 		enemies = new FlxTypedGroup<Enemy>();
 		hazards = new FlxTypedGroup<Hazard>();
@@ -89,31 +94,21 @@ class PlayState extends FlxState
 
 		addGameplayElements();
 
-
       	cameraSetup();
 		super.create();
 	}
 	
+
 	override public function update(elapsed:Float):Void
 	{
-		if(!Reg.pause)
+		if (!Reg.pause)
 		super.update(elapsed);
-
 		
+
+		controlPauseScreen();
+		Gamepad.checkForGamepad();
+		Gamepad.updateGameInputs();
 		displayTracers();
-		gameControls();
-		
-		/*gamepad = FlxG.gamepads.lastActive;
-		if (gamepad != null)
-		{
-			updateGameInput(gamepad);
-		}
-		else
-		{
-			return null;
-		}*/
-
-//		LevelEnemies.populateEnemies(map.loadedMap);
 
 		FlxSpriteUtil.bound(player, 
 		                    FlxG.camera.scroll.x, 
@@ -121,7 +116,7 @@ class PlayState extends FlxState
 							FlxG.camera.scroll.y,
 							FlxG.camera.scroll.y + FlxG.camera.height);	
 	}
-	
+
 	private function addGameplayElements()
 	{		
 		add(map);
@@ -139,6 +134,21 @@ class PlayState extends FlxState
 		add(player);	
 	}
 	
+	
+	private function controlPauseScreen()
+	{
+		if (Reg.pause)
+		{
+			openSubState(new PauseState());
+			_gameCamera.set_active(false);
+		}
+		else
+		{
+			closeSubState();
+			_gameCamera.set_active(true);
+		}
+		
+	}
 	private function cameraSetup()
 	{	
 		_gameCamera = new FlxCamera();
@@ -159,16 +169,7 @@ class PlayState extends FlxState
 		add(_scroller);
 		add(_hud);
 	}
-	
-	
-	
-	private function gameControls()
-	{
-		if (FlxG.keys.justPressed.P) Reg.pause = !Reg.pause;
 
-		if (FlxG.keys.justPressed.ESCAPE) System.exit(0);	
-		if (FlxG.keys.justPressed.R) FlxG.resetState();
-	}
 	
 	private function displayTracers()
 	{
@@ -185,9 +186,9 @@ class PlayState extends FlxState
 		trace("_entities " + _entities.length);
 		trace("effects " + effects.length);
 		trace("MASTER SEED : " + Reg.CURRENT_SEED.initialSeed);
+		trace(Reg.pause);
 		
 	    }
 	}
 	
 }
-

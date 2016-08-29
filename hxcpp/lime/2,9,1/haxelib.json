@@ -1,0 +1,10 @@
+{
+	"name": "lime",
+	"url": "https://github.com/openfl/lime",
+	"license": "MIT",
+	"tags": [],
+	"description": "A flexible lightweight layer for Haxe cross-platform developers",
+	"version": "2.9.1",
+	"releasenote": "Added drag/drop and maximize support, other fixes and improvements",
+	"contributors": [ "singmajesty" ]
+}

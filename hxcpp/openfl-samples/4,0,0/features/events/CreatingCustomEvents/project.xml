@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	
+	<meta title="Creating Custom Events" package="org.openfl.samples.creatingcustomevents" version="1.0.0" company="OpenFL" />
+	<app main="Main" path="Export" file="CreatingCustomEvents" />
+	
+	<source path="Source" />
+	
+	<haxelib name="openfl" />
+	
+</project>

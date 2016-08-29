@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension>
+	
+	<haxelib name="actuate" if="setup" />
+	<haxelib name="box2d" if="setup" />
+	<haxelib name="layout" if="setup" />
+	<haxelib name="swf" if="setup" />
+	
+	<sample path="demos" />
+	
+	<sample path="libraries/swf" />
+	<sample path="libraries/box2d" />
+	<sample path="libraries/actuate" />
+	
+	<sample path="features/text" />
+	<sample path="features/media" />
+	<sample path="features/events" />
+	<sample path="features/display" />
+	
+</extension>

@@ -1,8 +1,12 @@
 package;
 
+import flixel.input.gamepad.FlxGamepad;
+import utils.controls.Keyboard;
+import openfl.system.System;
 import flixel.math.FlxRandom;
+import flixel.FlxG;
 import states.PlayState;
-import states.TestState;
+
 class Reg
 {
 	public static var PS:PlayState;
@@ -14,6 +18,8 @@ class Reg
 	public static var masterSeed:Int = 0; // set seed to wtv from 0 to 2147483647.
 	public static var pause:Bool = false;
 	public static var CURRENT_SEED:FlxRandom;
+	
+
 	
 	public static var score:Int = 0;
 	public static var availableItems:Array<Int> = [2, 3, 4, 5]; // hacky af and not implemented
