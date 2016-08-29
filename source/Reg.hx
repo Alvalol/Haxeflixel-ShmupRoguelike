@@ -1,5 +1,7 @@
 package;
 
+import de.polygonal.ds.ListSet;
+
 import flixel.input.gamepad.FlxGamepad;
 import utils.controls.Keyboard;
 import openfl.system.System;
@@ -18,6 +20,8 @@ class Reg
 	public static var masterSeed:Int = 0; // set seed to wtv from 0 to 2147483647.
 	public static var pause:Bool = false;
 	public static var CURRENT_SEED:FlxRandom;
+	
+	public static var CHUNK_THEMES:ListSet<String> = new ListSet<String>();
 	
 
 	
