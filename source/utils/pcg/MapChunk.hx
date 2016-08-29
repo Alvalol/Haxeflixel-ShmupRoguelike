@@ -21,17 +21,30 @@ class MapChunk
 	private var randomizer:FlxRandom;
 	private var tileFile:TiledMap;
 	private var tileWidth(get, null):Int;
-	
-	// new code
-	
 
+	private var allLevelChunksFiles:Array<TiledMap>;
+	
+/*
+ * Level creation : 
+
+. Scan the level folder and create an Array of raw TMX files.
+
+-> Choose initial theme. 
+-> Choose initial theme length (5-10)
+   -> If current level length is 0 -> Place start chunk
+   -> Place chunks by checking exit type of i-1 to place i.
+
+-> Once initial theme length has been reached -> Choose new theme.
+   - >  Place chunks by checking exit type of i-1 to place i.
+Once theme length has been reached : choose new theme until level is fully created.
+*/
 	public function new(_randomizer:FlxRandom)
 	{
 	 makeChunk(_randomizer);
 	}
 	
 	
-	public static function organizeTMXfiles():Map<String, Array<TiledMap>>
+	private function organizeTMXfiles():Map<String, Array<TiledMap>>
 	{
 		var allTMXfiles = getAllTMXFiles();
 
@@ -73,11 +86,12 @@ class MapChunk
 		}
 
 		return allTMXfiles;
+
 	}
 	
 	private function makeChunk(_randomizer:FlxRandom)
 	{
-		randomizer = _randomizer;
+		/*randomizer = _randomizer;
 		tileFile = chooseChunkFile();
 		var mainLayer:TiledTileLayer = cast tileFile.getLayer("main");
 	
@@ -85,33 +99,32 @@ class MapChunk
 		type = tileFile.properties.get("type");
 		chunkWidth = Std.int(tileFile.fullWidth / tileFile.tileWidth);
 		chunkHeight = Std.int(tileFile.fullHeight / tileFile.tileHeight);
-		tileWidth = tileFile.tileWidth;
+		tileWidth = tileFile.tileWidth;*/
 	
 		// possibilities to manipulate the raw array data before sending it to the game
 	}
 	
-	private function chooseChunkFile():TiledMap
+	private function getAllChunkFiles()
 	{
 		var dir:String = "assets/data/mapchunks/level_" + Std.string(Reg.currentLevel) + "/";
 		var dirContent:Array<String> = FileSystem.readDirectory(dir);
+		trace(dirContent);
 	
 	    if (!Reg.SANDBOX)
 		{
-			
-		    var chosenFile:TiledMap = new TiledMap(dir + randomizer.getObject(dirContent)); // this is the important part. It chooses the file here.
-		    return chosenFile;
+			for (i in dirContent)
+			{
+		    if(i != "x-0.tmx")
+		     allLevelChunksFiles.push(new TiledMap(dir + i));
+			}
 		}
 		else
 		{
-		    var chosenFile:TiledMap = new TiledMap(dir + "x-0.tmx");	
-		    return chosenFile;
+		  allLevelChunksFiles.push(new TiledMap(dir + "x-0.tmx"));	
 		}
 	}
 	
-
-	
 	// get, set
-	
 	public function get_chunkData():Array<Int> 
 	{
 		return chunkData;

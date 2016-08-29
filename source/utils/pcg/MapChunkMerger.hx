@@ -40,10 +40,6 @@ class MapChunkMerger
 		}
 		
 		var m = concatArray(populatedMap);
-		//trace("concatArray : " + m);
-
-		//var result = reduceArray(m);
-	 //   trace("RESULT : " + result);
 	    return m;
 	}
 		
