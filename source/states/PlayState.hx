@@ -21,7 +21,8 @@ import objects.hazards.HazardBullet;
 import objects.items.Item;
 import flixel.addons.effects.FlxTrail;
 import openfl.system.System;
-import utils.controls.Gamepad;
+//import utils.controls.Gamepad;
+import flixel.input.gamepad.FlxGamepad;
 
 import objects.enemies.EnemyBullet;
 import objects.Player;
@@ -58,7 +59,7 @@ class PlayState extends FlxState
 	private var _gameCamera:FlxCamera;
 	private var _hudCamera:FlxCamera;
 	
-	private var _gamePad:Gamepad;
+	private var gamepad:FlxGamepad;
 
 	private var tracers:Bool = false;
 	
@@ -82,7 +83,6 @@ class PlayState extends FlxState
 		HBullets= new FlxTypedGroup<HazardBullet>();
 		_entities = new FlxGroup();
 		
-		_gamePad = new Gamepad();
 		
 		FlxG.mouse.visible = false; // must always be set to false pls
 		map = LevelLoaderProc.loadGeneratedLevel();
@@ -99,8 +99,19 @@ class PlayState extends FlxState
 		if(!Reg.pause)
 		super.update(elapsed);
 
+		
 		displayTracers();
 		gameControls();
+		
+		/*gamepad = FlxG.gamepads.lastActive;
+		if (gamepad != null)
+		{
+			updateGameInput(gamepad);
+		}
+		else
+		{
+			return null;
+		}*/
 
 //		LevelEnemies.populateEnemies(map.loadedMap);
 
@@ -149,9 +160,12 @@ class PlayState extends FlxState
 		add(_hud);
 	}
 	
+	
+	
 	private function gameControls()
 	{
 		if (FlxG.keys.justPressed.P) Reg.pause = !Reg.pause;
+
 		if (FlxG.keys.justPressed.ESCAPE) System.exit(0);	
 		if (FlxG.keys.justPressed.R) FlxG.resetState();
 	}

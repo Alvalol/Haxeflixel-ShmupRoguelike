@@ -4,11 +4,12 @@ import flixel.FlxSprite;
 import flixel.FlxObject;
 import flixel.FlxG;
 import flixel.FlxSubState;
+import flixel.input.gamepad.FlxGamepad;
 import flixel.util.FlxColor;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxTimer;
 import objects.PlayerBullet;
-import utils.controls.Gamepad;
+
 import flixel.util.FlxSpriteUtil;
 import utils.controls.Keyboard;
 import flixel.math.FlxVelocity;
@@ -40,10 +41,12 @@ class Player extends FlxSprite
 	public var MAX_POSSIBLE_HP:Int = 10; //? Not sure. Needs playtest.
 	
 	private var _cooldown:Float = 0;
-	private var _invinsible:Bool = true;
+	private var _invinsible:Bool = false;
 	
 	public var SHOT_MOD:Int;
 	public var MAX_SHOTMOD:Int = 1;
+	
+	private var gamepad:FlxGamepad;
 	
 	public function new(x:Float, y:Float) 
 	{
@@ -64,6 +67,8 @@ class Player extends FlxSprite
 		drag.x = DECELERATION;
 		drag.y = DECELERATION;
 		
+		gamepad = FlxG.gamepads.lastActive;
+		
 		maxVelocity.set(HOR_MOVE_SPEED, VERT_MOVE_SPEED);
 	}
 	
@@ -78,6 +83,15 @@ class Player extends FlxSprite
 		if (_invinsible)
 		cheat();
 		
+		if (gamepad != null)
+		{
+			updateGameInput(gamepad);
+		}
+		else
+		    return null;
+			
+		
+		
 		basicChecks(elapsed);		
 		if(!Reg.pause)
 		    super.update(elapsed);
@@ -90,8 +104,7 @@ class Player extends FlxSprite
 	}
 	
 	private function collisions()
-	{
-			   						
+	{		   						
 		if (alive)
 		{
 		   if (FlxG.collide(Reg.PS.map, this))
@@ -133,6 +146,23 @@ class Player extends FlxSprite
 		acceleration.y = 0;		
 	}
 		
+	
+   	public function updateGameInput(gamepad:FlxGamepad):Void
+	{
+	  if (gamepad.pressed.A || gamepad.pressed.RIGHT_SHOULDER || gamepad.pressed.RIGHT_TRIGGER)
+	  {
+          shoot();
+
+	  }
+	  
+	  if (gamepad.pressed.B || gamepad.pressed.LEFT_TRIGGER)
+	  {
+		  trace("Pressed B or LEFT TRIGGER");
+	  }
+	  
+	  if (gamepad.pressed.START) Reg.pause = !Reg.pause;
+	}
+	
 	public function move_up()
 	{
 		if (FlxG.keys.anyPressed(Keyboard.upKeys))
@@ -161,11 +191,11 @@ class Player extends FlxSprite
 	
 	
 	//********** needs to be reworked completely to support different types of "weapons"  *************
-	private function shoot()
+	public function shoot()
 	{
 		var ang = 10;
 		
-		if (FlxG.keys.anyPressed(Keyboard.actionKeys) && Reg.PS.PBullets.countLiving() < MAX_BULLETS && _cooldown <= 0) 
+		if (Reg.PS.PBullets.countLiving() < MAX_BULLETS && _cooldown <= 0) 
 		{
 			var pb:PlayerBullet =  new PlayerBullet(x, y);
 

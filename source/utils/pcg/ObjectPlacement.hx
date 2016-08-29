@@ -45,7 +45,7 @@ class ObjectPlacement
 		{
 			var pos = new FlxPoint(chunkIndex * (chunk.get_chunkWidth() * chunk.get_tileWidth()) + object.x , object.y);
 			
-		    if (chunk.get_type() == "S")
+		    if (chunk.get_type() == "start")
 			{
 				if (object.type == "player")
 				{
@@ -57,7 +57,7 @@ class ObjectPlacement
 				}
 			}
 			
-			if (chunk.get_type() == "E")
+			if (chunk.get_type() == "exit")
 		{
 			if (object.type == "goal")
 			{
@@ -79,7 +79,7 @@ class ObjectPlacement
 			   {
 				   
 				   // general enemy types
-				    case "ground" : 
+				    case "ground": 
 					   var groundEnemies:Array<Enemy> = [new EnemySpawner(pos.x, pos.y, enemy.flippedVertically),
 					                                     new EnemyTurretA(pos.x, pos.y, enemy.flippedVertically),
 														 new EnemyWorm(pos.x, pos.y, enemy.flippedVertically)];
@@ -94,7 +94,6 @@ class ObjectPlacement
 					   
 					   
 				    case "freeMovement": 
-					   
 					   var freeMovement:Array<Enemy> = [new EnemyBlob(pos.x, pos.y, 16), 
 					                                    new EnemyChaser(pos.x, pos.y), 
 														new EnemyMultishotDeath(pos.x,pos.y)];
@@ -140,11 +139,7 @@ class ObjectPlacement
 			  }
 		}
 					
-	
-		    
-			
-			
-			
+
 		chunkIndex++;
 	}// end for loop
 	}

@@ -108,7 +108,13 @@ class MapChunkMerger
 				case "exit" : trace("DONE");
 			}
 		}
+		
+		    if(CHUNKS.length == Reg.LEVEL_SIZE)
+{
+			chooseChunk(["exit"]);
+}
 		}
+		
 	else{
 		
 			Reg.LEVEL_SIZE = 1;
@@ -117,11 +123,6 @@ class MapChunkMerger
 		
 	}
 			
-    if(CHUNKS.length == Reg.LEVEL_SIZE)
-{
-			chooseChunk(["exit"]);
-}
-
 	}
 
 		

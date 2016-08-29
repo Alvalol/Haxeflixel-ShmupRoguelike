@@ -6,7 +6,7 @@ class Scroller extends FlxSprite
 {
 	
 	private static inline var ACCELERATION:Int = 2;
-	private var MOVE_SPEED:Int = 15;
+	private var MOVE_SPEED:Int = 20;
 
 	public function new(x:Float,y:Float)
 	{
@@ -22,19 +22,11 @@ class Scroller extends FlxSprite
 	   acceleration.x += ACCELERATION;	   
 	   y = Reg.PS.player.y;
 	   
-	 if (Reg.SCROLLER_ON)
-	   {
-	   switch Reg.PS.player.HP
-	   {   
-		   default : MOVE_SPEED = 15; 		maxVelocity.set(MOVE_SPEED, MOVE_SPEED);
-		   case 2 : MOVE_SPEED = 20; 		maxVelocity.set(MOVE_SPEED, MOVE_SPEED);
-		   case 1 : MOVE_SPEED = 50;		maxVelocity.set(MOVE_SPEED, MOVE_SPEED); //should be 30
-	   }
-	   
-	   
+	   //Find a better way to implement acceleration. Do not base it on HP
 	   if(!Reg.pause)
 	   super.update(elapsed);
-    }
+       }
+	
 	   
-	   }
+	   
 }
