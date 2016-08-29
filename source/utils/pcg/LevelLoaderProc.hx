@@ -29,7 +29,11 @@ class LevelLoaderProc
 	   new FlxPoint(8, 8), new FlxPoint(1, 1), new FlxPoint(1, 1), null),  8, 8);
 	   
 	   ObjectPlacement.loadLevelObjects(loadedMap);
+<<<<<<< HEAD
 	  
+=======
+	   
+>>>>>>> 60f71933e76b35fb48013ea403000b28d682e217
 	   return loadedMap;
 	}
 }
