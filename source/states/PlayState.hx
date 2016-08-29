@@ -66,7 +66,9 @@ class PlayState extends FlxState
 	
 	private var gamepad:FlxGamepad;
 
-	private var tracers:Bool = true;
+	private var tracers:Bool = false;
+	
+	private var lerpSpeed:Float = 0.1;
 	
 	override public function create():Void
 	{
@@ -140,12 +142,16 @@ class PlayState extends FlxState
 		if (Reg.pause)
 		{
 			openSubState(new PauseState());
-			_gameCamera.set_active(false);
+			_gameCamera.followLerp = 0.0;
+			
+
+
 		}
 		else
 		{
-			closeSubState();
-			_gameCamera.set_active(true);
+	     	closeSubState();
+			_gameCamera.followLerp = lerpSpeed;
+
 		}
 		
 	}
@@ -165,7 +171,7 @@ class PlayState extends FlxState
 		//FlxG.camera.antialiasing = false;
 		_gameCamera.pixelPerfectRender = false;	
 		
-		_gameCamera.follow(_scroller, FlxCameraFollowStyle.TOPDOWN_TIGHT, 0.01);
+		_gameCamera.follow(_scroller, FlxCameraFollowStyle.TOPDOWN_TIGHT, lerpSpeed);
 		add(_scroller);
 		add(_hud);
 	}
@@ -175,7 +181,6 @@ class PlayState extends FlxState
 	{
 		if (tracers)
 		{
-		
 		trace("SCROLLER : " + Reg.SCROLLER_ON);	
 		trace("items : " + items.length);
 		trace("enemies : " + enemies);
@@ -186,7 +191,6 @@ class PlayState extends FlxState
 		trace("_entities " + _entities.length);
 		trace("effects " + effects.length);
 		trace("MASTER SEED : " + Reg.CURRENT_SEED.initialSeed);
-		trace(Reg.pause);
 		
 	    }
 	}

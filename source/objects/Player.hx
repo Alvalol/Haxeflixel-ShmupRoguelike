@@ -24,7 +24,7 @@ class Player extends FlxSprite
 	public var MAX_HOR_MOVE_SPEED:Int = 100;
 	public var MAX_VERT_MOVE_SPEED:Int = 100;
 	
-	public var MAGNET:Int = 30;
+	public var MAGNET:Int = 60;
 	public var MAX_MAGNET:Int = 300;
 	public var MAGNET_FORCE:Int = 40;
 	public var MAX_MAGNET_FORCE:Int = 100;
@@ -40,7 +40,7 @@ class Player extends FlxSprite
 	public var MAX_POSSIBLE_HP:Int = 10; //? Not sure. Needs playtest.
 	
 	private var _cooldown:Float = 0;
-	private var _invinsible:Bool = true;
+	private var _invinsible:Bool = false;
 	
 	public var SHOT_MOD:Int;
 	public var MAX_SHOTMOD:Int = 1;

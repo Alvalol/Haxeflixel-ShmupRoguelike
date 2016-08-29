@@ -48,6 +48,7 @@ class MapChunk
 	
 	    if (!Reg.SANDBOX)
 		{
+			
 		    var chosenFile:TiledMap = new TiledMap(dir + randomizer.getObject(dirContent)); // this is the important part. It chooses the file here.
 		    return chosenFile;
 		}

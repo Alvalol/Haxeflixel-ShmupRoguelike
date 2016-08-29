@@ -30,8 +30,8 @@ class CoinItem extends Item
 		
 	override public function update(elapsed:Float)
 	{
-		magnetize();
-		angle += rotspeed;
+	 magnetize();
+	 angle += rotspeed;
 
 		if (magnetized)
 		move();
@@ -48,20 +48,14 @@ class CoinItem extends Item
 	
 	private function magnetize()
 	{
-		if (FlxMath.distanceBetween(this,Reg.PS.player) < Reg.PS.player.MAGNET && magnetized == false )
+		if (FlxMath.absInt(FlxMath.distanceBetween(this,Reg.PS.player)) < Reg.PS.player.MAGNET )
 			magnetized = true;	
-		else
-		    magnetized = false;
 	}
 
 	private function move()
 	{
-		angle += velocity.x/10;
-		if (FlxMath.distanceBetween(Reg.PS.player, this) < Reg.PS.player.MAGNET)
-		{
-	
-		FlxVelocity.accelerateTowardsObject(this, Reg.PS.player, Reg.PS.player.MAGNET_FORCE, Reg.PS.player.MAGNET_FORCE * 2);
-		}
+		FlxVelocity.accelerateTowardsObject(this, Reg.PS.player, Reg.PS.player.MAGNET * 100, Reg.PS.player.MAGNET_FORCE * 200);
+
 	}
 	
 	private function noOverlapping()
