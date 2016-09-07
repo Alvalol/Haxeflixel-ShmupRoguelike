@@ -12,9 +12,34 @@ import flixel.addons.editors.tiled.TiledMap;
 
 import utils.pcg.MapChunk;
 
+
 class MapChunkMerger
 {
 	
+	private static var CURRENT_THEME;
+	private static var CURRENT_RANGE;
+	private static var RAWCHUNKS;
+	private static var CHUNKS:Array<TiledMap> = []; // chunks as TiledMaps
+	
+	public static function placeChunk()
+	{
+		RAWCHUNKS = new MapChunk().get_allTMXfilesOrganized();
+		CHUNKS = new Array<TiledMap>();
+		if (CHUNKS.length == 0)
+		{
+			CURRENT_THEME = "start";
+			CURRENT_RANGE = 1;
+		}
+		
+		trace(RAWCHUNKS.keys());
+		//	trace(RAWCHUNKS.toString();//["start"][FlxG.random.int(0,RAWCHUNKS["start"])]);
+		//	CHUNKS.push(CHUNKS.push(startChunk));
+		}
+}
+	
+	
+	
+/*
 	private static var CHUNKS:Array<MapChunk>;
 	private static var RAWCHUNKS:Array<MapChunk>;
 	private static var levelHeight:Int;
@@ -183,5 +208,6 @@ class MapChunkMerger
 		return RAWCHUNKS;
 	}
 	
-	}
 
+	}
+	*/
