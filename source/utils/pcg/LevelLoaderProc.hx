@@ -22,7 +22,7 @@ class LevelLoaderProc
 	{
 		
         var loadedMap:FlxTilemap = new FlxTilemap();
-		MapChunkMerger.placeChunk();
+		MapChunkMerger.flowChunk();
 	//	var generatedMap:Array<Array<Int>> = cast MapChunkMerger.populateCurrentMap();
 
 

@@ -23,7 +23,6 @@ class MapChunk
 	private var tileFile:TiledMap;
 
 	private var allLevelChunksFiles:Array<TiledMap>;
-	private var allTMXfilesOrganized(get, null):Map<String, Array<TiledMap>>;
 	
 /*
  * Level creation : 
@@ -40,12 +39,10 @@ class MapChunk
 Once theme length has been reached : choose new theme until level is fully created.
 */
 
-	public function new()
-	{
-		allTMXfilesOrganized = organizeTMXfiles();
-	}
+
+	private static var allTMXfilesOrganized = organizeTMXfiles();
 	
-	private function organizeTMXfiles():Map<String, Array<TiledMap>>
+	private static function organizeTMXfiles():Map<String, Array<TiledMap>>
 	{
 		var allTMXfiles = getAllTMXFiles();
 		var allChunksMap = new Map<String, Array<TiledMap>>(); // empty map
@@ -66,7 +63,7 @@ Once theme length has been reached : choose new theme until level is fully creat
 		return allChunksMap; //a map of all TMX files organized by type.
 	}
 	
-	private function getAllTMXFiles():Array<TiledMap>
+	private static function getAllTMXFiles():Array<TiledMap>
 	{
 		var allTMXfiles:Array<TiledMap> = new Array<TiledMap>();
 		var dir:String = "assets/data/mapchunks/level_" + Std.string(Reg.currentLevel) + "/";
@@ -108,7 +105,7 @@ Once theme length has been reached : choose new theme until level is fully creat
 		}
 	}
 	
-	public function get_allTMXfilesOrganized():Map<String, Array<TiledMap>> 
+	public static function get_allTMXfilesOrganized():Map<String, Array<TiledMap>> 
 	{
 		return allTMXfilesOrganized;
 	}
