@@ -44,6 +44,10 @@ Once theme length has been reached : choose new theme until level is fully creat
 	
 	private static function organizeTMXfiles():Map<String, Array<TiledMap>>
 	{
+		/*
+		  Uses getAllTMXFiles(); and then organizes all of them using the property "type" as a key into a Map.
+		  So, it contains [key,Array<TiledMap>], where the TiledMaps are all the ones we caught in the level_CURRENT_LEVEL folder.
+		 */
 		var allTMXfiles = getAllTMXFiles();
 		var allChunksMap = new Map<String, Array<TiledMap>>(); // empty map
 		
@@ -65,6 +69,9 @@ Once theme length has been reached : choose new theme until level is fully creat
 	
 	private static function getAllTMXFiles():Array<TiledMap>
 	{
+		/*
+		 Pulls all the files in the level_CURRENT_LEVEL folder and returns them as an Array<TiledMap>
+		 */
 		var allTMXfiles:Array<TiledMap> = new Array<TiledMap>();
 		var dir:String = "assets/data/mapchunks/level_" + Std.string(Reg.currentLevel) + "/";
 		var dirContent:Array<String> = FileSystem.readDirectory(dir);
@@ -73,7 +80,10 @@ Once theme length has been reached : choose new theme until level is fully creat
 		{
 		for (chunk in dirContent)
 		{
+			if (chunk != "x-0.tmx") // Don't get the sandbox unless in sandbox
+			{
 			allTMXfiles.push(new TiledMap(dir +  chunk));
+			}
 		}
 		}
 	    else
@@ -84,7 +94,14 @@ Once theme length has been reached : choose new theme until level is fully creat
 		return allTMXfiles;
 
 	}
+
+	public static function get_allTMXfilesOrganized():Map<String, Array<TiledMap>> 
+	{
+		return allTMXfilesOrganized;
+	}
+}
 	
+	/*
 	private function getAllChunkFiles()
 	{
 		var dir:String = "assets/data/mapchunks/level_" + Std.string(Reg.currentLevel) + "/";
@@ -105,9 +122,4 @@ Once theme length has been reached : choose new theme until level is fully creat
 		}
 	}
 	
-	public static function get_allTMXfilesOrganized():Map<String, Array<TiledMap>> 
-	{
-		return allTMXfilesOrganized;
-	}
-	
-}
+	*/

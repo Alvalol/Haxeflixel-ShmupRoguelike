@@ -18,7 +18,7 @@ class MapChunkMerger
 	
 	private static var CURRENT_THEME;
 	private static var CURRENT_RANGE;
-	private static var RAWCHUNKS:Map<String, Array<TiledMap>>;
+	private static var TMXORGANIZED:Map<String, Array<TiledMap>>;
 	private static var CHUNKS:Array<TiledMap> = []; // chunks as TiledMaps
 	private static var MAX_LEVEL_SIZE:Int = 50;
 	private static var THEME_LIST:Array<String> = [];
@@ -26,15 +26,18 @@ class MapChunkMerger
 	
 	public static function flowChunk()
 	{
-		RAWCHUNKS = MapChunk.get_allTMXfilesOrganized();
+		TMXORGANIZED = MapChunk.get_allTMXfilesOrganized();
 		
 		// making an array of keys that are in the RAWCHUNKS. To keep it separated + can't iterate over keys ?
-		for (key in RAWCHUNKS.keys())
+		for (key in TMXORGANIZED.keys())
 		{
 			THEME_LIST.push(key);
 		}
+		trace(THEME_LIST);
 
-	
+
+    }	
+}
 	// A) I HAVE ALL FILES ORGANIZED IN RAWCHUNKS. JUST NEED [THEME] TO CALL THAT GROUP. Can access each object by key. 
 	// B) WHAT IS THE OUTPUT I NEED : AN ARRAY OF ALL TMX, AND AN ARRAY OF ALL TMX'S DATA CONCATENATED AND ALL THAT
 	// C) THE PROGRAM WILL GO THROUGH A SERIES OF TESTS TO CHOOSE THE CHUNKS TO PUT INTO THE ARRAY (THE ARRAY OF TMX)
@@ -47,7 +50,7 @@ class MapChunkMerger
 	// 2. If the range is less than its max (VAR), insert chunk into CHUNKS. Increase counter by 1.
 	// 3. If the range has reached its max (VAR), change theme. Reset RANGE.
 
-}
+
 /*
 	private static var CHUNKS:Array<MapChunk>;
 	private static var RAWCHUNKS:Array<MapChunk>;
