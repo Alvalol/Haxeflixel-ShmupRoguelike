@@ -3,7 +3,7 @@
  <properties>
   <property name="L" type="int" value="2"/>
   <property name="R" type="int" value="2"/>
-  <property name="type" value="start"/>
+  <property name="type" value="tunnel"/>
  </properties>
  <tileset firstgid="1" name="tiles" tilewidth="8" tileheight="8" tilecount="24" columns="6">
   <image source="../../../images/tiles.png" width="48" height="32"/>

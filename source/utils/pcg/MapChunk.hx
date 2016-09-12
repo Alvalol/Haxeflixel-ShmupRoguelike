@@ -23,22 +23,6 @@ class MapChunk
 	private var tileFile:TiledMap;
 
 	private var allLevelChunksFiles:Array<TiledMap>;
-	
-/*
- * Level creation : 
-
-. Scan the level folder and create an Array of raw TMX files.
-
--> Choose initial theme. 
--> Choose initial theme length (5-10)
-   -> If current level length is 0 -> Place start chunk
-   -> Place chunks by checking exit type of i-1 to place i.
-
--> Once initial theme length has been reached -> Choose new theme.
-   - >  Place chunks by checking exit type of i-1 to place i.
-Once theme length has been reached : choose new theme until level is fully created.
-*/
-
 
 	private static var allTMXfilesOrganized = organizeTMXfiles();
 	
@@ -54,7 +38,7 @@ Once theme length has been reached : choose new theme until level is fully creat
 		for (file in allTMXfiles)
 		{	
 			//check if the map contains that key, if it doesn't just push an array with that one element.
-			if (!allChunksMap.exists(file.properties.get("type")) || allChunksMap.exists(file.properties.get("type")) == null)
+			if (!allChunksMap.exists(file.properties.get("type")))// || allChunksMap.exists(file.properties.get("type")) == null)
 			{
 			allChunksMap.set(file.properties.get("type"), [file]);
 			}
