@@ -35,17 +35,16 @@ class ObjectPlacement
 	{
 		
 	//	Goes through each layer of the current loaded level and checks for objects. This is basically an array that contains the XML files. (RAWCHUNKS)
-	var RAWCHUNKS = MapChunkMerger.get_RAWCHUNKS();
+	var RAWCHUNKS = MapChunkMerger.get_CHUNKS();
 	var chunkIndex = 0;
 	
 	for (chunk in RAWCHUNKS) 
-	{
-		
-		for (object in getLevelObjects(chunk.get_tileFile(), "objects"))
+	{		
+		for (object in getLevelObjects(chunk, "objects"))
 		{
-			var pos = new FlxPoint(chunkIndex * (chunk.get_chunkWidth() * chunk.get_tileWidth()) + object.x , object.y);
+			var pos = new FlxPoint(chunkIndex * (chunk.fullWidth * chunk.tileWidth) + object.x , object.y);
 			
-		    if (chunk.get_type() == "start")
+		    if (chunk.properties.get("type") == "start")
 			{
 				if (object.type == "player")
 				{
@@ -57,7 +56,7 @@ class ObjectPlacement
 				}
 			}
 			
-			if (chunk.get_type() == "exit")
+			if (chunk.properties.get("type") == "exit")
 		{
 			if (object.type == "goal")
 			{
@@ -70,9 +69,9 @@ class ObjectPlacement
 		}
 		}
 		
-		for (enemy in getLevelObjects(chunk.get_tileFile(), "enemies"))
+		for (enemy in getLevelObjects(chunk, "enemies"))
 		{
-			var pos = new FlxPoint((chunkIndex * (chunk.get_chunkWidth() * chunk.get_tileWidth()))
+			var pos = new FlxPoint(chunkIndex * (chunk.fullWidth * chunk.tileWidth)
 			  + enemy.x , enemy.y);
 			
 			   switch enemy.type
@@ -120,9 +119,9 @@ class ObjectPlacement
 			   
 		}
 		
-		for (hazard in getLevelObjects(chunk.get_tileFile(), "hazards"))
+		for (hazard in getLevelObjects(chunk, "hazards"))
 		{
-			var pos = new FlxPoint((chunkIndex * (chunk.get_chunkWidth() * chunk.get_tileWidth()))
+			var pos = new FlxPoint((chunkIndex * (chunk.fullWidth * chunk.tileWidth))
 			  + hazard.x , hazard.y);
 			  
 			  switch hazard.type

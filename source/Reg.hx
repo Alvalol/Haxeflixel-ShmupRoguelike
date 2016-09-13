@@ -14,7 +14,7 @@ class Reg
 	public static var currentLevel:Int = 1;
 	
 	public static var LEVEL_SIZE:Int = 20;
-	public static var SEEDED:Bool = true;
+	public static var SEEDED:Bool = false;
 	public static var masterSeed:Int = 0; // set seed to wtv from 0 to 2147483647.
 	public static var pause:Bool = false;
 	public static var CURRENT_SEED:FlxRandom;	
