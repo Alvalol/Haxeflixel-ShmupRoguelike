@@ -40,7 +40,7 @@ class Player extends FlxSprite
 	public var MAX_POSSIBLE_HP:Int = 10; //? Not sure. Needs playtest.
 	
 	private var _cooldown:Float = 0;
-	private var _invinsible:Bool = false;
+	public var invinsible:Bool = true;
 	
 	public var SHOT_MOD:Int;
 	public var MAX_SHOTMOD:Int = 1;
@@ -75,7 +75,7 @@ class Player extends FlxSprite
 		collisions();
 		}
 		
-		if (_invinsible)
+		if (invinsible)
 		cheat();
 		
 		basicChecks(elapsed);		
@@ -114,7 +114,7 @@ class Player extends FlxSprite
 			_cooldown -= elapsed * 4;
 		}
 	
-		if (HP <= 0 && !_invinsible)
+		if (HP <= 0 && !invinsible)
 		   kill();
 	}
 	private function move()

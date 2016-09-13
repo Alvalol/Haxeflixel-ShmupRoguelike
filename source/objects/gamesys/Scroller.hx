@@ -20,8 +20,16 @@ class Scroller extends FlxSprite
 	override public function update(elapsed:Float)
 	{
 
-	   acceleration.x += ACCELERATION;	   
+		if (Reg.PS.player.invinsible) 
+		{
+		acceleration.x += ACCELERATION * 100;
+		maxVelocity.set(MOVE_SPEED * 10, MOVE_SPEED * 10);
+		}
+		else{
+		acceleration.x += ACCELERATION;	   }
+	   
 	   y = Reg.PS.player.y;
+	   
 	   //Find a better way to implement acceleration. Do not base it on HP	   
 	   if (!Reg.pause)
 		   super.update(elapsed);
