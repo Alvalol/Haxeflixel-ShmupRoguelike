@@ -47,7 +47,7 @@ class PlayState extends FlxState
 	public var map:FlxTilemap;
 	public var hazards:FlxTypedGroup<Hazard>;
 	public var player(default, null):Player;
-	public var PBullets:FlxTypedGroup<PlayerBullet>;// j
+	public var PBullets:FlxTypedGroup<PlayerBullet>;
 	public var EBullets:FlxTypedGroup<EnemyBullet>;
 	public var blocks:FlxTypedGroup<HazardBlock>;
 	public var effects:FlxSpriteGroup;
@@ -75,8 +75,8 @@ class PlayState extends FlxState
 	{
 		Reg.PS = this;
 		Reg.pause = false;
-		MapChunkMerger.makeSeed();
-	
+		
+		trace(Reg.CURRENT_SEED);
 		// init gameplay elements
 		persistentUpdate = true;
 		player = new Player(10, FlxG.height / 2);

@@ -20,16 +20,14 @@ class LevelLoaderProc
 	
 	public static function loadGeneratedLevel():FlxTilemap
 	{
-		
-        var loadedMap:FlxTilemap = new FlxTilemap();
-	
+	    var loadedMap:FlxTilemap = new FlxTilemap();
 		var generatedMap:Array<Array<Int>> = MapChunkMerger.makeCleanArray();
 	
-       loadedMap.loadMapFrom2DArray(generatedMap, FlxTileFrames.fromBitmapAddSpacesAndBorders(FlxGraphic.fromAssetKey(AssetPaths.solid__png), 
-	   new FlxPoint(8, 8), new FlxPoint(1, 1), new FlxPoint(1, 1), null),  8, 8);
+        loadedMap.loadMapFrom2DArray(generatedMap, FlxTileFrames.fromBitmapAddSpacesAndBorders(FlxGraphic.fromAssetKey(AssetPaths.solid__png), 
+	    new FlxPoint(8, 8), new FlxPoint(1, 1), new FlxPoint(1, 1), null),  8, 8);
 	  
-       ObjectPlacement.loadLevelObjects(loadedMap); // NEEDS TO BE FIXED AND CHANGED (getting properties under new generation thingy)
+        ObjectPlacement.loadLevelObjects(loadedMap); // NEEDS TO BE FIXED AND CHANGED (getting properties under new generation thingy)
 
-	   return loadedMap;
+	    return loadedMap;
 	}
 }

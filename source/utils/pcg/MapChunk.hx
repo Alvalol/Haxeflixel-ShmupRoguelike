@@ -33,18 +33,18 @@ class MapChunk
 		  So, it contains [key,Array<TiledMap>], where the TiledMaps are all the ones we caught in the level_CURRENT_LEVEL folder.
 		 */
 		var allTMXfiles = getAllTMXFiles();
-		var allChunksMap = new Map<String, Array<TiledMap>>(); // empty map
+		var allChunksMap = new Map<String, Array<TiledMap>>(); 
 		
 		for (file in allTMXfiles)
 		{	
 			//check if the map contains that key, if it doesn't just push an array with that one element.
 			if (!allChunksMap.exists(file.properties.get("type")))// || allChunksMap.exists(file.properties.get("type")) == null)
 			{
-			allChunksMap.set(file.properties.get("type"), [file]);
+				allChunksMap.set(file.properties.get("type"), [file]);
 			}
 			else
 			{
-            allChunksMap[file.properties.get("type")].push(file);
+				allChunksMap[file.properties.get("type")].push(file);
 			}
 		}
 		
@@ -62,21 +62,20 @@ class MapChunk
 		
 		if (!Reg.SANDBOX)
 		{
-		for (chunk in dirContent)
-		{
-			if (chunk != "x-0.tmx") // Don't get the sandbox unless in sandbox
+			for (chunk in dirContent)
 			{
-			allTMXfiles.push(new TiledMap(dir +  chunk));
+				if (chunk != "x-0.tmx") // Don't get the sandbox unless in sandbox mode
+				{
+				allTMXfiles.push(new TiledMap(dir +  chunk));
+				}
 			}
-		}
 		}
 	    else
 		{
 			allTMXfiles.push(new TiledMap(dir + "x-0.tmx"));
 		}
-
+		
 		return allTMXfiles;
-
 	}
 
 	public static function get_allTMXfilesOrganized():Map<String, Array<TiledMap>> 

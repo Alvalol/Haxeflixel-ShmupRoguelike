@@ -2,6 +2,7 @@ package utils.controls;
 import flixel.FlxG;
 import flixel.input.gamepad.FlxGamepad;
 import openfl.system.System;
+import utils.pcg.MapChunkMerger;
 
 class Gamepad
 {

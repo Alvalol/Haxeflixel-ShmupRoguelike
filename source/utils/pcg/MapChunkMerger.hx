@@ -21,10 +21,13 @@ class MapChunkMerger
 	private static var CHUNKS:Array<TiledMap> = []; // chunks as TiledMaps.
 	private static var CHUNKDATA:Array<Dynamic>; // the chunk data that will be loaded in the levelloaderproc.hx
 	private static var USEDTHEMES:Array<String>; // all the used themes so far in level generation. Might be useful to check to avoid repetition.
-	private static var MAX_LEVEL_SIZE:Int = 3;
+	private static var MAX_LEVEL_SIZE:Int = 20;
 	private static var TYPE_LIST:Array<String> = [];
 	private static var CHUNK_HEIGHT = 0;
 	private static var CHUNK_WIDTH = 0;
+	private static var MIN_GROUP_RANGE = 6;
+	private static var MAX_GROUP_RANGE = 12;
+	
 	
 	public static function makeCleanArray():Array<Array<Int>>
 	{
@@ -44,17 +47,16 @@ class MapChunkMerger
 		    CHUNKDATA.push(formattedChunk);
 		}
 		
-		for (chunk in CHUNKS)
+	/*	for (chunk in CHUNKS)
 		{
 			trace(chunk.properties.get("type"));
-		}
+		}*/
 
 		var m = concatArray(CHUNKDATA);
 		return m;
 	}
 	
-	
-		private static function formatArray(chunk:Array<Int>,chunkWidth:Int,chunkHeight:Int):Array<Array<Int>>
+	private static function formatArray(chunk:Array<Int>,chunkWidth:Int,chunkHeight:Int):Array<Array<Int>>
 	{
 		var newArray:Array<Array<Int>> = new Array<Array<Int>>();
 		
@@ -95,17 +97,12 @@ class MapChunkMerger
 	}
 	
 	
-	/*part of the SELECTION LOGIC
-	 * NOT RELATED TO CLEANING UP CHUNKS AND PREPARING THEM FOR LEVEL.
-	*/
-	
 	public static function flowChunk()
 	{
 		/*
 		Main function where we choose the chunks and we follow step by step the procedure.
 		*/
 		TMXORGANIZED = MapChunk.get_allTMXfilesOrganized(); // all TMX files organized by their type.
-
 
 		// making an array of keys that are in the RAWCHUNKS. To keep it separated + can't iterate over keys ?
 		for (key in TMXORGANIZED.keys())
@@ -115,14 +112,13 @@ class MapChunkMerger
 			TYPE_LIST.push(key);
 			}
 		}
-
+		
 		while (CHUNKS.length < MAX_LEVEL_SIZE)
 		{
 		if (CHUNKS.length == 0)
 		{
 			CHUNKS.push(Reg.CURRENT_SEED.getObject(TMXORGANIZED["start"]));
-			CURRENT_TYPE = Reg.CURRENT_SEED.getObject(TYPE_LIST);
-			CURRENT_RANGE = Reg.CURRENT_SEED.int(6, 12);
+			changeTypeAndRange();
 		}
 		else
 		{
@@ -131,41 +127,57 @@ class MapChunkMerger
 		}
 		
 		CHUNKS[MAX_LEVEL_SIZE] = Reg.CURRENT_SEED.getObject(TMXORGANIZED["exit"]);
-
 		
     }
 	
 	private static function createChunkGroup(type:String, amount:Int)
 	{
 		var chunkGroup:Array<TiledMap> = new Array<TiledMap>();
+		
 		if (chunkGroup.length == 0)
 		{
-			CHUNKS.push(Reg.CURRENT_SEED.getObject(TMXORGANIZED[type]));
+			chunkGroup.push(Reg.CURRENT_SEED.getObject(TMXORGANIZED[type]));
 		}
-		else
+		
+		// this makes sure that we never go over max_level range and adjusts amount (CURRENT_RANGE)
+		// so that the new chunks will fit in the level ;)
+		if (amount + CHUNKS.length > MAX_LEVEL_SIZE)
+		{
+			amount = MAX_LEVEL_SIZE - CHUNKS.length;
+		}
+		
+		
+		
+		while (chunkGroup.length < amount)
 		{
 			switch CURRENT_TYPE // add a case here if there is a new theme for the levels
 			{	
 				case "tunnel" :
 					{
-						if (chunkGroup.length == 0)
+						// here should be logic for L and R
+						if (chunkGroup.length < amount)
 						{
-							CHUNKS.push(Reg.CURRENT_SEED.getObject(TMXORGANIZED["tunnel"]));
+							chunkGroup.push(Reg.CURRENT_SEED.getObject(TMXORGANIZED["tunnel"]));
 						}
-						else
-						{
-							CHUNKS.push(Reg.CURRENT_SEED.getObject(TMXORGANIZED["tunnel"]));
-						}
-						
 					}
-				case "open" : 
 					
+				case "open" : 
 					{
-						CHUNKS.push(Reg.CURRENT_SEED.getObject(TMXORGANIZED["open"]));
-					}
-			}
+						if (chunkGroup.length < amount)
+						{
+							chunkGroup.push(Reg.CURRENT_SEED.getObject(TMXORGANIZED["open"]));
+						}
+			        }
 		}
-		
+	    }
+			for (chunk in chunkGroup) { CHUNKS.push(chunk); }
+			
+			changeTypeAndRange();
+			
+			if (CHUNKS.length < MAX_LEVEL_SIZE)
+			{
+			createChunkGroup(CURRENT_TYPE, CURRENT_RANGE); // my first recursive function that is actually useful :)
+			}
 	}
 	
 	public static function makeSeed()
@@ -181,6 +193,12 @@ class MapChunkMerger
 	}
 	
 
+	private static function changeTypeAndRange()
+	{
+			CURRENT_TYPE = Reg.CURRENT_SEED.getObject(TYPE_LIST);
+			CURRENT_RANGE = Reg.CURRENT_SEED.int(MIN_GROUP_RANGE, MAX_GROUP_RANGE);
+	}
+	
 	private static function getLevelObjects(map:TiledMap, layer:String):Array<TiledObject>
 	{
 		
