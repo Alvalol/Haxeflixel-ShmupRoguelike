@@ -1,8 +1,0 @@
--main CommandLineTools
--neko tools.n
--D lime-curl
--D lime
--cp ..
--lib format
-#-lib svg
--D optional_cffi

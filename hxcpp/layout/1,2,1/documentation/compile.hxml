@@ -1,5 +1,0 @@
--swf all.swf
---no-output
--xml ../haxedoc.xml
--cp ../
-ImportAll

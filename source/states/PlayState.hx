@@ -47,7 +47,7 @@ class PlayState extends FlxState
 	public var map:FlxTilemap;
 	public var hazards:FlxTypedGroup<Hazard>;
 	public var player(default, null):Player;
-	public var PBullets:FlxTypedGroup<PlayerBullet>;//
+	public var PBullets:FlxTypedGroup<PlayerBullet>;// j
 	public var EBullets:FlxTypedGroup<EnemyBullet>;
 	public var blocks:FlxTypedGroup<HazardBlock>;
 	public var effects:FlxSpriteGroup;

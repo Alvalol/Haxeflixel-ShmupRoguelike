@@ -1,7 +1,0 @@
-Enemy types :
-
-
-1. Ground-ceiling enemies : Spawner, TurretA, Worm.
-2. Flying enemies (right to left) Mover, shooter, triangle
-3. Flying enemies (left to right) EnemiyExplosive
-4. Flying enemies (free movement) : Blob, Chaser.

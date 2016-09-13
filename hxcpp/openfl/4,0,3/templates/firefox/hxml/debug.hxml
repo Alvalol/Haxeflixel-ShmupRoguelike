@@ -1,6 +1,0 @@
--main ApplicationMain ::HAXE_FLAGS::
--js ::OUTPUT_FILE::
--cp ::OUTPUT_DIR::/haxe
--D firefoxos
--D html5
--debug
