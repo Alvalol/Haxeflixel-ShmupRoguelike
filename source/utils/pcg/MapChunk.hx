@@ -84,26 +84,3 @@ class MapChunk
 		return allTMXfilesOrganized;
 	}
 }
-	
-	/*
-	private function getAllChunkFiles()
-	{
-		var dir:String = "assets/data/mapchunks/level_" + Std.string(Reg.currentLevel) + "/";
-		var dirContent:Array<String> = FileSystem.readDirectory(dir);
-		trace(dirContent);
-	
-	    if (!Reg.SANDBOX)
-		{
-			for (i in dirContent)
-			{
-		    if(i != "x-0.tmx")
-		     allLevelChunksFiles.push(new TiledMap(dir + i));
-			}
-		}
-		else
-		{
-		  allLevelChunksFiles.push(new TiledMap(dir + "x-0.tmx"));	
-		}
-	}
-	
-	*/

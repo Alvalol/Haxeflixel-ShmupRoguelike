@@ -15,14 +15,13 @@ import utils.pcg.MapChunk;
 
 class MapChunkMerger
 {
-	
 	private static var CURRENT_TYPE:String;
 	private static var CURRENT_RANGE;
 	private static var TMXORGANIZED:Map<String, Array<TiledMap>>;
 	private static var CHUNKS:Array<TiledMap> = []; // chunks as TiledMaps.
 	private static var CHUNKDATA:Array<Dynamic>; // the chunk data that will be loaded in the levelloaderproc.hx
 	private static var USEDTHEMES:Array<String>; // all the used themes so far in level generation. Might be useful to check to avoid repetition.
-	private static var MAX_LEVEL_SIZE:Int = 50;
+	private static var MAX_LEVEL_SIZE:Int = 3;
 	private static var TYPE_LIST:Array<String> = [];
 	private static var CHUNK_HEIGHT = 0;
 	private static var CHUNK_WIDTH = 0;
@@ -43,6 +42,11 @@ class MapChunkMerger
 			
 			var formattedChunk:Array<Array<Int>> = cast formatArray(layer.tileArray, CHUNK_WIDTH, CHUNK_HEIGHT);
 		    CHUNKDATA.push(formattedChunk);
+		}
+		
+		for (chunk in CHUNKS)
+		{
+			trace(chunk.properties.get("type"));
 		}
 
 		var m = concatArray(CHUNKDATA);
@@ -100,8 +104,6 @@ class MapChunkMerger
 		/*
 		Main function where we choose the chunks and we follow step by step the procedure.
 		*/
-		 
-		makeSeed();
 		TMXORGANIZED = MapChunk.get_allTMXfilesOrganized(); // all TMX files organized by their type.
 
 
@@ -113,7 +115,7 @@ class MapChunkMerger
 			TYPE_LIST.push(key);
 			}
 		}
-		
+
 		while (CHUNKS.length < MAX_LEVEL_SIZE)
 		{
 		if (CHUNKS.length == 0)
@@ -127,7 +129,8 @@ class MapChunkMerger
 			createChunkGroup(CURRENT_TYPE, CURRENT_RANGE);
 		}
 		}
-		//CHUNKS[MAX_LEVEL_SIZE] = Reg.CURRENT_SEED.getObject(TMXORGANIZED["exit"]); last chunk code.
+		
+		CHUNKS[MAX_LEVEL_SIZE] = Reg.CURRENT_SEED.getObject(TMXORGANIZED["exit"]);
 
 		
     }
@@ -142,20 +145,19 @@ class MapChunkMerger
 		else
 		{
 			switch CURRENT_TYPE // add a case here if there is a new theme for the levels
-			{
-				
+			{	
 				case "tunnel" :
 					{
 						if (chunkGroup.length == 0)
 						{
 							CHUNKS.push(Reg.CURRENT_SEED.getObject(TMXORGANIZED["tunnel"]));
 						}
+						else
 						{
 							CHUNKS.push(Reg.CURRENT_SEED.getObject(TMXORGANIZED["tunnel"]));
 						}
 						
 					}
-					
 				case "open" : 
 					
 					{
@@ -166,7 +168,7 @@ class MapChunkMerger
 		
 	}
 	
-		private static function makeSeed()
+	public static function makeSeed()
 	{
 		if (Reg.SEEDED)
 		{
@@ -178,8 +180,7 @@ class MapChunkMerger
 		}
 	}
 	
-	
-	
+
 	private static function getLevelObjects(map:TiledMap, layer:String):Array<TiledObject>
 	{
 		

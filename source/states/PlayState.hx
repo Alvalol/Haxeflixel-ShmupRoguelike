@@ -25,6 +25,7 @@ import flixel.addons.effects.FlxTrail;
 import openfl.system.System;
 import substates.PauseState;
 import utils.controls.Gamepad;
+import utils.pcg.MapChunkMerger;
 //import utils.controls.Gamepad;
 import flixel.input.gamepad.FlxGamepad;
 
@@ -46,7 +47,7 @@ class PlayState extends FlxState
 	public var map:FlxTilemap;
 	public var hazards:FlxTypedGroup<Hazard>;
 	public var player(default, null):Player;
-	public var PBullets:FlxTypedGroup<PlayerBullet>;
+	public var PBullets:FlxTypedGroup<PlayerBullet>;//
 	public var EBullets:FlxTypedGroup<EnemyBullet>;
 	public var blocks:FlxTypedGroup<HazardBlock>;
 	public var effects:FlxSpriteGroup;
@@ -74,6 +75,7 @@ class PlayState extends FlxState
 	{
 		Reg.PS = this;
 		Reg.pause = false;
+		MapChunkMerger.makeSeed();
 	
 		// init gameplay elements
 		persistentUpdate = true;
@@ -95,7 +97,6 @@ class PlayState extends FlxState
 		map = LevelLoaderProc.loadGeneratedLevel();
 
 		addGameplayElements();
-
       	cameraSetup();
 		super.create();
 	}

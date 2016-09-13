@@ -13,6 +13,7 @@ class Goal extends FlxSprite
 		super(x, 0);
 		solid = true;
 		immovable = true;
+		visible = true;
 		makeGraphic(10, FlxG.height * 2, FlxColor.RED);
 
 	}

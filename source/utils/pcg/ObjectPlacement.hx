@@ -61,6 +61,7 @@ class ObjectPlacement
 			if (object.type == "goal")
 			{
 				Reg.PS.add(new Goal(pos.x));
+			//	trace("Placed the goal at" + pos.x, "at chunk : " + RAWCHUNKS.indexOf(chunk));
 			}
 			else
 			{
