@@ -75,8 +75,7 @@ class PlayState extends FlxState
 	{
 		Reg.PS = this;
 		Reg.pause = false;
-		MapChunkMerger.makeSeed();
-
+//		MapChunkMerger.makeSeed();
 		// init gameplay elements
 		persistentUpdate = true;
 		player = new Player(10, FlxG.height / 2);
@@ -142,9 +141,7 @@ class PlayState extends FlxState
 		{
 			openSubState(new PauseState());
 			_gameCamera.followLerp = 0.0;
-			
-
-
+	
 		}
 		else
 		{

@@ -57,7 +57,7 @@ class MapChunk
 		 Pulls all the files in the level_CURRENT_LEVEL folder and returns them as an Array<TiledMap>
 		 */
 		var allTMXfiles:Array<TiledMap> = new Array<TiledMap>();
-		var dir:String = "assets/data/mapchunks/level_" + Std.string(Reg.currentLevel) + "/";
+		var dir:String = "assets/data/mapchunks/level_" + Reg.currentLevel + "/";
 		var dirContent:Array<String> = FileSystem.readDirectory(dir);
 		
 		if (!Reg.SANDBOX)

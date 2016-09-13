@@ -21,6 +21,7 @@ class MenuState extends FlxState
 		
 	    var startgame = new FlxButton(FlxG.width / 2 - 45 , FlxG.height / 2 - 10, 
 		"START GAME", startGame);
+		startgame.screenCenter();
 		add(startgame);
 	}
 

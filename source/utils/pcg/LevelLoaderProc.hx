@@ -21,6 +21,7 @@ class LevelLoaderProc
 	public static function loadGeneratedLevel():FlxTilemap
 	{
 	    var loadedMap:FlxTilemap = new FlxTilemap();
+		MapChunkMerger.makeSeed();
 		var generatedMap:Array<Array<Int>> = MapChunkMerger.makeCleanArray();
 	
         loadedMap.loadMapFrom2DArray(generatedMap, FlxTileFrames.fromBitmapAddSpacesAndBorders(FlxGraphic.fromAssetKey(AssetPaths.solid__png), 

@@ -31,6 +31,8 @@ class MapChunkMerger
 	
 	public static function makeCleanArray():Array<Array<Int>>
 	{
+
+		CHUNKS = []; // thanks Gamma11
 		flowChunk();
 		CHUNKDATA = new Array<Array<Int>>();
 		
@@ -47,11 +49,6 @@ class MapChunkMerger
 		    CHUNKDATA.push(formattedChunk);
 		}
 		
-	/*	for (chunk in CHUNKS)
-		{
-			trace(chunk.properties.get("type"));
-		}*/
-
 		var m = concatArray(CHUNKDATA);
 		return m;
 	}
@@ -155,9 +152,16 @@ class MapChunkMerger
 				case "tunnel" :
 					{
 						// here should be logic for L and R
-						if (chunkGroup.length < amount)
+						if (chunkGroup.length == 0)
 						{
-							chunkGroup.push(Reg.CURRENT_SEED.getObject(TMXORGANIZED["tunnel"]));
+			            	chunkGroup.push(Reg.CURRENT_SEED.getObject(TMXORGANIZED["tunnel"]));				
+						}
+						else
+						{
+							var exitType = chunkGroup[chunkGroup.length - 1].properties.get("R");
+							var possibleChunks = TMXORGANIZED["tunnel"].filter(function(map) return map.properties.get("L") == exitType);
+							
+							chunkGroup.push(Reg.CURRENT_SEED.getObject(possibleChunks));
 						}
 					}
 					
