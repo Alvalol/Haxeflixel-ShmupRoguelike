@@ -75,8 +75,8 @@ class PlayState extends FlxState
 	{
 		Reg.PS = this;
 		Reg.pause = false;
-		
-		trace(Reg.CURRENT_SEED);
+		MapChunkMerger.makeSeed();
+
 		// init gameplay elements
 		persistentUpdate = true;
 		player = new Player(10, FlxG.height / 2);
@@ -100,14 +100,12 @@ class PlayState extends FlxState
       	cameraSetup();
 		super.create();
 	}
-	
 
 	override public function update(elapsed:Float):Void
 	{
 		if (!Reg.pause)
 		super.update(elapsed);
 		
-
 		controlPauseScreen();
 		Gamepad.checkForGamepad();
 		Gamepad.updateGameInputs();
