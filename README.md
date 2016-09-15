@@ -4,7 +4,7 @@
 
 Untitled Roguelite Shmup is a game made with Haxe and Haxeflixel.
 
-The game is being developer by [@theotheralvaro](twitter.com/theotheralvaro)
+The game is being developed by [@theotheralvaro](twitter.com/theotheralvaro)
 
 ## Installation
 
@@ -25,7 +25,8 @@ polygonal-printf: [1.0.2-beta]
 ```
 
 ## Development
-To keep track of the development, you can always follow the [devlog on Tigsource](https://forums.tigsource.com/index.php?topic=57162). I also stream on [Livecoding](livecoding.tv/alvalol) and [Twitch](http://twitch.tv/Alvaro_As) simultaneously.
+To keep track of the development, you can always follow the [devlog on Tigsource](https://forums.tigsource.com/index.php?topic=57162) or on the [Haxeflixel forums](http://forum.haxeflixel.com/topic/166/untitled-shmup-roguelite/9)  
+I also stream on [Livecoding](livecoding.tv/alvalol) and [Twitch](http://twitch.tv/Alvaro_As) simultaneously.  
 
 ## Support 
 
