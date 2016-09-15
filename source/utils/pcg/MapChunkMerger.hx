@@ -20,14 +20,13 @@ class MapChunkMerger
 	private static var TMXORGANIZED:Map<String, Array<TiledMap>>;
 	private static var CHUNKS:Array<TiledMap> = []; // chunks as TiledMaps.
 	private static var CHUNKDATA:Array<Dynamic>; // the chunk data that will be loaded in the levelloaderproc.hx
+	private static var MAX_LEVEL_SIZE:Int = 5;
 	private static var USEDTHEMES:Array<String>; // all the used themes so far in level generation. Might be useful to check to avoid repetition.
-	private static var MAX_LEVEL_SIZE:Int = 500;
 	private static var TYPE_LIST:Array<String> = [];
 	private static var CHUNK_HEIGHT = 0;
 	private static var CHUNK_WIDTH = 0;
 	private static var MIN_GROUP_RANGE = 6;
 	private static var MAX_GROUP_RANGE = 12;
-	//
 	
 	public static function makeCleanArray():Array<Array<Int>>
 	{

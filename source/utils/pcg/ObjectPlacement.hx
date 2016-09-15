@@ -3,6 +3,7 @@ import flixel.FlxG;
 import flixel.addons.editors.tiled.TiledMap;
 import flixel.addons.editors.tiled.TiledObject;
 import flixel.addons.editors.tiled.TiledObjectLayer;
+import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.tile.FlxTilemap;
 import objects.Player;
@@ -43,7 +44,7 @@ class ObjectPlacement
 	{		
 		for (object in getLevelObjects(chunk, "objects"))
 		{
-			var pos = new FlxPoint(chunkIndex * (chunk.fullWidth * chunk.tileWidth) + object.x , object.y);
+			var pos = new FlxPoint(chunkIndex * (chunk.fullWidth) + object.x , object.y);
 			
 		    if (chunk.properties.get("type") == "start")
 			{
@@ -61,24 +62,22 @@ class ObjectPlacement
 		    {
 			if (object.type == "goal")
 			{
+				var pos = new FlxPoint(chunkIndex * (chunk.fullWidth) + object.x , object.y);
 				Reg.PS.add(new Goal(pos.x));
-			//	trace("Placed the goal at" + pos.x, "at chunk : " + RAWCHUNKS.indexOf(chunk));
 			}
 			else
 			{
 				trace("No GOAL found for this level");
 			}
-		}
+		    }
 		}
 		
 		for (enemy in getLevelObjects(chunk, "enemies"))
 		{
-			var pos = new FlxPoint(chunkIndex * (chunk.fullWidth * chunk.tileWidth)
-			  + enemy.x , enemy.y);
-			
-			   switch enemy.type
-			   {
-				   
+			var pos = new FlxPoint(chunkIndex * (chunk.fullWidth) + enemy.x , enemy.y);
+				trace(enemy.flippedVertically);
+		    switch enemy.type
+			   {		   
 				   // general enemy types
 				    case "ground": 
 					   var groundEnemies:Array<Enemy> = [new EnemySpawner(pos.x, pos.y, enemy.flippedVertically),
@@ -110,8 +109,8 @@ class ObjectPlacement
 							
 					//Specific enemies
 					
-					case "blob" : Reg.PS.enemies.add (new EnemyBlob(pos.x, pos.y, 16));
-					case "chaser" : Reg.PS.enemies.add(new EnemyChaser(pos.x, pos.y));
+					case "enemyBlob" : Reg.PS.enemies.add (new EnemyBlob(pos.x, pos.y, 16));
+					case "enemyChaser" : Reg.PS.enemies.add(new EnemyChaser(pos.x, pos.y));
 					case "enemyLeft" : Reg.PS.enemies.add(new EnemyLeft(pos.y, pos.y));
 					case "enemyMultishot" : Reg.PS.enemies.add(new EnemyMultishotDeath(pos.x, pos.y));
 					case "enemySpawner" : Reg.PS.enemies.add(new EnemySpawner(pos.x, pos.y, enemy.flippedVertically));
@@ -123,8 +122,8 @@ class ObjectPlacement
 		
 		for (hazard in getLevelObjects(chunk, "hazards"))
 		{
-			var pos = new FlxPoint((chunkIndex * (chunk.fullWidth * chunk.tileWidth))
-			  + hazard.x , hazard.y);
+			var pos = new FlxPoint(chunkIndex * (chunk.fullWidth) + hazard.x,hazard.y);//((chunkIndex * (chunk.fullWidth * chunk.tileWidth))
+			  
 			  
 			  switch hazard.type
 			  {
@@ -146,7 +145,7 @@ class ObjectPlacement
 	}
 
 		
-    
+
 	private static function chooseEnemy(enemy:Array<Enemy>):Enemy
 	{
 		var chosenEnemy = Reg.CURRENT_SEED.getObject(enemy);

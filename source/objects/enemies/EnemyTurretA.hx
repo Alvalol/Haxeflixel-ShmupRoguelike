@@ -44,6 +44,7 @@ class EnemyTurretA extends Enemy
         ty = Std.int(y / 8);
 		
 		flipY = _flipped;
+		adjustPlacement();
 		
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		animation.add("idle", [0,1], 6, true);
@@ -145,17 +146,17 @@ class EnemyTurretA extends Enemy
 		super.kill();
 	}
 	
-     	private function adjustPlacement()
+      private function adjustPlacement()
 	{
 		// There has to be a better way to do this. Hacky and ugly.
 		
 		if (flipY)
 		{
-			y -=8;
+			y +=height;
 		}
 		else
 		{
-			y -= 8;
+			y -= height;
 		}
 	}
 		
