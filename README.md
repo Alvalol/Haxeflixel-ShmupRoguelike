@@ -14,19 +14,14 @@ The game is being developer by [@theotheralvaro](twitter.com/theotheralvaro)
 In order for the project to run and allow you to contribute, you must make sure you have the following ```haxelib list```. Use ```haxelib install {name}```.
 
 ```
-actuate: [1.8.6]
-box2d: [1.2.3]
 flixel-addons: [2.0.0]
 flixel-tools: [1.1.3]
-flixel-ui: [2.0.0]
 flixel: [4.0.1]
 hxcpp: [3.3.49]
-layout: [1.2.1]
 lime: [2.9.1]
 openfl: [3.6.1]
 polygonal-ds: [1.4.1]
 polygonal-printf: [1.0.2-beta]
-swf: [2.2.0]
 ```
 
 ## Development
