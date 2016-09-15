@@ -36,14 +36,14 @@ class EnemyTurretA extends Enemy
 	
 	public function new(x:Float, y:Float, _flipped:Bool) 
 	{
-		super(x, y); // this causes an issue if turret is on ceiling... needs to use ceiling instance variable.
+		super(x, y); 
 		HP = 3;
 		typeRoll = Reg.CURRENT_SEED.int(0, 100);
-        tx = Std.int(x / 8); // tx, ty here because it never changes anyway
-        ty = Std.int(y / 8);
-		flipY = _flipped;
 		
-		//adjustPlacement();
+        tx = Std.int(x / 8); 
+        ty = Std.int(y / 8);
+		
+		flipY = _flipped;
 		
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		animation.add("idle", [0,1], 6, true);
@@ -66,6 +66,7 @@ class EnemyTurretA extends Enemy
 	
 	private function checkForBlock()
 	{
+		// TODO : Unsure if this is necessary anymore. Verify when enemies are reimplemented in game. 
 		var tileTop = Reg.PS.map.getTile(tx, ty - 1);
 		var tileBottom = Reg.PS.map.getTile(tx, ty + 1);
 	
@@ -85,8 +86,7 @@ class EnemyTurretA extends Enemy
 		}
 	}
 	
-	
-	
+
 	override function collisions() 
 	{	
 		super.collisions();
@@ -147,6 +147,8 @@ class EnemyTurretA extends Enemy
 	
      	private function adjustPlacement()
 	{
+		// There has to be a better way to do this. Hacky and ugly.
+		
 		if (flipY)
 		{
 			y -=8;

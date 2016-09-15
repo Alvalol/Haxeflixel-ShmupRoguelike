@@ -31,19 +31,21 @@ class GameOverSubState extends FlxState
 		_textScore.text =  StringTools.lpad(
 		Std.string(Reg.score), "0", 5);
 		
-	forEachOfType(FlxText, function(member)
-	{
-		member.setFormat(AssetPaths.pixel_font__ttf, 8, FlxColor.WHITE, FlxTextBorderStyle.OUTLINE, 0xffffffff);
-	});	
+		forEachOfType(FlxText, function(member)
+		{
+			member.setFormat(AssetPaths.pixel_font__ttf, 8, FlxColor.WHITE, FlxTextBorderStyle.OUTLINE, 0xffffffff);
+		});	
 	
-	add(_text);
-	add(_textScore);
-	add(_restartButton);
+		add(_text);
+		add(_textScore);
+		add(_restartButton);
+		
 	}
 	
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		
 		if (FlxG.keys.anyJustPressed(["ENTER"]))
 		    onClick();
 	}

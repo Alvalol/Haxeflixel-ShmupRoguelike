@@ -28,8 +28,6 @@ class Hazard extends FlxSprite
 		{
 			interact(Reg.PS.player);
 		}
-		
-
 	}
 	
 	private function basicChecks()
@@ -51,7 +49,7 @@ class Hazard extends FlxSprite
 		}
 	}
 	
-		private function interact(player:Player)
+	private function interact(player:Player)
 	{
 			player.damage();
 	}

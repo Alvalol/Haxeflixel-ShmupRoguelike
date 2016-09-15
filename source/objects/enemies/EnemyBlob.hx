@@ -12,6 +12,8 @@ import objects.items.HealthItem;
 
 class EnemyBlob extends Enemy
 {
+	/* Boundaries() needs to be re-designed. It's not very functional right now so I'm not using it.
+	 */
 	var roll:Int;
 	var rolled:Bool;
 	var delayDirection:Float = 0.2;
@@ -62,7 +64,8 @@ class EnemyBlob extends Enemy
 	
 	private function reroll()
 	{
-	new FlxTimer().start(delayDirection, function(_)
+		// This is dumb as well, sort of a silly function to give it a "shaky" effect.
+	    new FlxTimer().start(delayDirection, function(_)
 		{
 		 rolled = false;
 	     roll  = FlxG.random.int(0, 100);	
@@ -92,7 +95,6 @@ class EnemyBlob extends Enemy
 	
 	private function move()
 	{
-		//boundaries();
 		velocity.set(FlxG.random.float(-MOVE_SPEED/4, MOVE_SPEED/4), FlxG.random.float( -MOVE_SPEED/4, MOVE_SPEED/4));
 	}
 }

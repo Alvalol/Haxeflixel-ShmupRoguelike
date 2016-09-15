@@ -21,7 +21,6 @@ class Enemy extends FlxSprite
 	
 	override public function update(elapsed:Float) 
 	{
-
 		basicChecks();
 		collisions();
 		
@@ -70,7 +69,7 @@ class Enemy extends FlxSprite
 	
 	private function interact(player:Player)
 	{
-		damage(); // or kill()? 
+		damage(); 
 		player.damage();
 		FlxObject.separate(this, player);
 	}
@@ -78,18 +77,16 @@ class Enemy extends FlxSprite
 	public function damage()
 	{
 		HP--;
-		//make it flash or something if it has more than 1 HP obviously.
+		//Implement flashing on hit
 	}
 	
 	private function dropItem(list:Array<Item>)
 	{
-		// Make the drop system a bit better than this. Have items have a probability.
+		// Drop system must be reworked from the ground up and be implemented in a nicer way. This is a placeholder.
 		
 		var itemRoll = Reg.CURRENT_SEED.int(0,100);
-		//trace(itemRoll);
 		if (itemRoll < 15)
 		{
-			//trace(itemRoll);
 			var tObject:Item =	Reg.CURRENT_SEED.getObject(list);			
 			Reg.PS.items.add(tObject);
 		}

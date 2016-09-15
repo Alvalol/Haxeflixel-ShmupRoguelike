@@ -10,7 +10,7 @@ class SpeedItem extends Item
 	public function new(x:Float, y:Float) 
 	{
 	    super(x, y);
-	    lifespan = 4;
+	    _lifespan = 4;
 	    loadGraphic(AssetPaths.items__png, true, 8,8);
 		animation.add("static", [4]);
 		animation.play("static");
@@ -25,6 +25,7 @@ class SpeedItem extends Item
 				player.VERT_MOVE_SPEED += 10;
 				player.maxVelocity.set(player.HOR_MOVE_SPEED, player.VERT_MOVE_SPEED);
 			}
+			
 		super.interact(player);
 		
 	}

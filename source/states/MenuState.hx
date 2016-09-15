@@ -7,6 +7,7 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import utils.controls.Gamepad;
+import utils.testing.TestState;
 
 class MenuState extends FlxState
 {
@@ -18,9 +19,7 @@ class MenuState extends FlxState
 		cursor.loadGraphic(AssetPaths.cursor__png, false, 8, 8);
 		FlxG.mouse.load(cursor.pixels, 4);
 		
-		
-	    var startgame = new FlxButton(FlxG.width / 2 - 45 , FlxG.height / 2 - 10, 
-		"START GAME", startGame);
+	    var startgame = new FlxButton(FlxG.width / 2 - 45 , FlxG.height / 2 - 10, "START GAME", startGame);
 		startgame.screenCenter();
 		add(startgame);
 	}
@@ -34,9 +33,7 @@ class MenuState extends FlxState
 		    startGame();
 			
 		if (Gamepad.GAMEPAD != null && (Gamepad.GAMEPAD.justPressed.A || Gamepad.GAMEPAD.justPressed.START))
-		{
-				startGame();
-		}
+			startGame();
 			
 		super.update(elapsed);
 			

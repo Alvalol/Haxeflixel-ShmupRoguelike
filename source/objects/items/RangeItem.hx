@@ -11,7 +11,7 @@ class RangeItem extends Item
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
-		lifespan = 4;
+		_lifespan = 4;
 	    loadGraphic(AssetPaths.items__png, true, 8,8);
 		animation.add("static", [5]);
 		animation.play("static");

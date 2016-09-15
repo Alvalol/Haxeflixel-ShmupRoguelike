@@ -12,11 +12,11 @@ import flixel.math.FlxMath;
 class EnemyMinion extends Enemy
 {
 	public var Spawner:EnemySpawner;
+	public var direction:Float;
+	private var trailCreated:Bool = false;
+	private var bTrail:FlxTrail;
 	private var changeDirectionDelay:Float = FlxG.random.float(1.5, 2);
 	private var directionChanged:Bool;
-	public var direction:Float;
-	private var trailAdded:Bool = false;
-	private var bTrail:FlxTrail;
 	
 	public function new(x:Float,y:Float) 
 	{
@@ -24,7 +24,6 @@ class EnemyMinion extends Enemy
 		makeGraphic(8, 8, FlxColor.ORANGE);
 		HP = 1;
 		changeDirection();
-	//	solid = true;
 		bTrail = new FlxTrail(this, null, 3, 2, 0.5, 0.05);
 	}
 	
@@ -83,10 +82,10 @@ class EnemyMinion extends Enemy
 	{
 		velocity.x =  -120;
 		
-		if (!trailAdded)
+		if (!trailCreated)
 		{
 		Reg.PS.effects.add(bTrail);
-		trailAdded = true;
+		trailCreated = true;
 		}
 	}
 	

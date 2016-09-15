@@ -18,12 +18,17 @@ import flixel.addons.editors.tiled.TiledObject;
 import flixel.addons.editors.tiled.TiledObjectLayer;
 import flixel.tile.FlxTilemap;
 
-import states.TestState;
+import utils.testing.TestState;
 
 
 class StaticLevelLoader
 {
-	public static function loadLevel(state:states.TestState, level:String) {
+	/*
+	 * This class is still on the project for personal reference and does not serve any particular purpose in the game at the moment. Feel free to delete it. 
+	 * 
+	 */
+	
+	public static function loadLevel(state:utils.testing.TestState, level:String) {
 		
 		var tiledMap = new TiledMap("assets/data/" + level + ".tmx");
 		var mainLayer:TiledTileLayer = cast tiledMap.getLayer("main");

@@ -11,16 +11,17 @@ import flixel.math.FlxVelocity;
 
 class Item extends FlxSprite
 {
-	// Maybe each item has its own drop % modifier, so that it will make some items more rare, and not only based on enemy types that can drop them.
+	
 	private var _appeared:Bool = false;
-	private var lifespan:Int;
+	private var _lifespan:Int;
 
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
 		loadGraphic(AssetPaths.items__png, false, 8, 8);
-		width = 8;
-		height = 8;
+		setSize(8, 8);
+	//	width = 8;
+	//	height = 8;
 	}
 	
 	override public function update(elapsed:Float)
@@ -32,30 +33,30 @@ class Item extends FlxSprite
 	
 	private function collisions()
 	{
-		   if (FlxG.overlap(Reg.PS.player, this))
-		   {
-			interact(Reg.PS.player);   
-		   }
+		if (FlxG.overlap(Reg.PS.player, this))
+		{
+		    interact(Reg.PS.player);   
+		}
 	}
 	
 	private function basicChecks()
 	{
 		if (!inWorldBounds())
 			exists = false;
-		
 					
         if (isOnScreen()) {
         if (!_appeared) 
              _appeared = true;
                           }
-         else {
+         else 
+		 {
            if (_appeared)
             kill();
 		 }
 			
 		if (_appeared)
 		{
-		new FlxTimer().start(lifespan, function(_)
+		new FlxTimer().start(_lifespan, function(_)
 		{
 			FlxSpriteUtil.flicker(this,1, 0.05, true, false, onTimedOut);
 		}, 1);
@@ -76,7 +77,7 @@ class Item extends FlxSprite
 	public function interact(player:Player)
 	{
 		kill();
-		Reg.score += 50;
+		Reg.score += 50; // TODO : Item score should be dynamic and dependent on the item itself.
 	}
 	
 }

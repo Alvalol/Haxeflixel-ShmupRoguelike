@@ -1,4 +1,4 @@
-package states;
+package utils.testing;
 
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -36,6 +36,8 @@ import objects.enemies.enemyobjects.EnemyExplosiveExplosion;
 import flixel.FlxG;
 import utils.pcg.LevelLoaderProc;
 
+/* This is not in use anymore. Feel free to delete. 
+ */
 
 class TestState extends FlxState
 {

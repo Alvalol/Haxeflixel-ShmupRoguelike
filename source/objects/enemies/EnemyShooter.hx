@@ -10,13 +10,17 @@ import objects.items.HealthItem;
 
 class EnemyShooter extends Enemy
 {
+	/*
+	 * This enemy is not properly implemented yet. Should be fixed before added to the game 
+	*/
+	
 	private var MOVE_SPEED:Int = 50;
 	private var SHOOT_SPEED:Int = -100;
 	private var movedHorizontal = false;
 	private var movedVertically = false;
 	private var delay:Float = 0.8;
 	private var justShot = false;
-	private var fact:Int = FlxG.random.sign(50);
+	private var factor:Int = FlxG.random.sign(50);
 	private var directionChanged = false;
 	
 	public function new(x:Float, y:Float) 
@@ -34,7 +38,7 @@ class EnemyShooter extends Enemy
 		trace("moved h : " + movedHorizontal);
 		trace("moved v : " + movedVertically);
 		trace("justshot : " + justShot);
-		trace("factor : " + fact);
+		trace("factor : " + factor);
 		trace("-----------------------");
 		super.update(elapsed);
 	}
@@ -65,7 +69,7 @@ class EnemyShooter extends Enemy
 	
 	private function verticalMove()
 	{
-		velocity.y = MOVE_SPEED * fact;
+		velocity.y = MOVE_SPEED * factor;
 
 		if (!directionChanged)
 		{
@@ -80,7 +84,7 @@ class EnemyShooter extends Enemy
 	
 	private function changeDirection(timer:FlxTimer)
 	{
-		fact *= -1;
+		factor *= -1;
 		directionChanged = !directionChanged;
 		triggerDirectionChange();
 	}

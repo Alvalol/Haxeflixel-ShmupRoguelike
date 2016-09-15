@@ -27,20 +27,16 @@ class HazardProximityShooter extends Hazard
 		super.update(elapsed);
 	}
 	
-	
-	
 	private function proximity()
 	{
 		if (FlxMath.absInt(Std.int(x))  - Std.int(Reg.PS.player.x) < 10 && !shot)
-		{
 			shoot();
-		}
 	}
 	
 	private function shoot()
 	{
-			var hb:HazardBullet = new HazardBullet(x+2, y);
-			Reg.PS.HBullets.add(hb);		
-			shot = true;
+		var hb:HazardBullet = new HazardBullet(x+2, y);
+		Reg.PS.HBullets.add(hb);		
+		shot = true;
 	}
 }

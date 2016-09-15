@@ -18,20 +18,18 @@ class EnemyExplosive extends Enemy
 	{
 		super(x, y);
 		HP = 1;
-//		makeGraphic(8, 8, FlxColor.YELLOW);
 		immovable = true;
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		animation.add("idle", [8,9,10,11], 12, true);
         animation.play("idle");
 	}
 	
-	
 	override public function update(elapsed:Float)
 	{
 		if (_appeared)
 		{
 		move();
-		reachedScrollX();
+		reachedScrollx();
 		}
 		
 		super.update(elapsed);	
@@ -52,7 +50,7 @@ class EnemyExplosive extends Enemy
 	}
 	
 	
-	private function reachedScrollX()
+	private function reachedScrollx()
 	{
 
 		if (x <= FlxG.camera.scroll.x - width + 10)

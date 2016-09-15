@@ -7,6 +7,7 @@ import flixel.FlxSprite;
 
 class HazardLaser extends Hazard
 {
+	
 	private var counter:Int = FlxG.random.int(0,20);
 	private var maxCounter:Int = 300;
 	private var tactive:Bool = false;
@@ -63,12 +64,9 @@ class HazardLaser extends Hazard
 		}
 	}
 	
-	
 	private function appear()
 	{
-
 		counter += 2;
 	}
-	
 	
 }

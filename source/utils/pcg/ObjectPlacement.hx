@@ -35,6 +35,7 @@ class ObjectPlacement
 	{
 		
 	//	Goes through each layer of the current loaded level and checks for objects. This is basically an array that contains the XML files. (RAWCHUNKS)
+	
 	var RAWCHUNKS = MapChunkMerger.get_CHUNKS();
 	var chunkIndex = 0;
 	
@@ -57,7 +58,7 @@ class ObjectPlacement
 			}
 			
 			if (chunk.properties.get("type") == "exit")
-		{
+		    {
 			if (object.type == "goal")
 			{
 				Reg.PS.add(new Goal(pos.x));
@@ -107,7 +108,7 @@ class ObjectPlacement
 			                }
 							
 							
-					//specific enemies
+					//Specific enemies
 					
 					case "blob" : Reg.PS.enemies.add (new EnemyBlob(pos.x, pos.y, 16));
 					case "chaser" : Reg.PS.enemies.add(new EnemyChaser(pos.x, pos.y));

@@ -16,7 +16,7 @@ class EnemyMultishotDeath extends Enemy
 	
 	private var justShot:Bool;
 	private var shootDelay:Float = 0.25;
-	private var ang:Int = 180;
+	private var _angle:Int = 180;
 	private var bulletSpeed = 80;
 
 	public function new(x:Float, y:Float) 
@@ -49,8 +49,8 @@ class EnemyMultishotDeath extends Enemy
 		justShot = true;
 		var eb = new EnemyBullet(x, y);
 
-		ang += 30;
-		eb.velocity.set(FlxVelocity.velocityFromAngle(ang, bulletSpeed).x,FlxVelocity.velocityFromAngle(ang, bulletSpeed).y);
+		_angle += 30;
+		eb.velocity.set(FlxVelocity.velocityFromAngle(_angle, bulletSpeed).x,FlxVelocity.velocityFromAngle(_angle, bulletSpeed).y);
 		eb.scale.set(0.5, 0.5);
 		Reg.PS.EBullets.add(eb);
 					

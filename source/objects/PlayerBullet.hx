@@ -19,9 +19,10 @@ class PlayerBullet extends FlxSprite
 	{
 		super(x, y);
 		loadGraphic(AssetPaths.items__png, true, 8, 8);
-		height = 2; // weird collision
-		width = 8;
+		setSize(8, 2);
+		
 		centerOffsets();
+		
 		animation.add("static", [16]);
 		animation.play("static");
 	}
@@ -43,19 +44,23 @@ class PlayerBullet extends FlxSprite
 			
 		}
 		// I feel like there is something I'm doing wrong here. Must ask.
-		for(block in Reg.PS.blocks){
-		if (FlxG.overlap(this, block))
+		
+		for (block in Reg.PS.blocks)
 		{
-				var newCoin:CoinItem =  Reg.PS.coins.recycle();	
-				if (newCoin == null) 
-				newCoin = new CoinItem(x, y);
-				
-			    newCoin.reset(x , y);
-				Reg.PS.coins.add(newCoin);
-			    kill();
-				block.kill();
+			
+			if (FlxG.overlap(this, block))
+			{
+					var newCoin:CoinItem =  Reg.PS.coins.recycle();	
+					if (newCoin == null) 
+					newCoin = new CoinItem(x, y);
+					
+					newCoin.reset(x , y);
+					Reg.PS.coins.add(newCoin);
+					kill();
+					block.kill();
+			}
 		}
-	}
+		
 	
 	  for (hazard in Reg.PS.hazards)
 	  {
@@ -66,12 +71,12 @@ class PlayerBullet extends FlxSprite
 		  }
 	  }
 
-	if (FlxG.collide(Reg.PS.map, this))
-	{
+	  if (FlxG.collide(Reg.PS.map, this))
+	  {
 		kill();
-		createNoHit();
-		
-	}
+		createNoHit();	
+	  }
+	  
 	}
 
 
@@ -82,10 +87,9 @@ class PlayerBullet extends FlxSprite
 	
 	override public function revive()
 	{		
-		new FlxTimer().start(Reg.PS.player.RANGE, function(_)
-		{
-	    kill();
-		}, 1);
+		new FlxTimer().start(Reg.PS.player.RANGE, function(_) 
+		{ kill(); }, 1);
+		
 		super.revive();
 	}
 
@@ -97,7 +101,6 @@ class PlayerBullet extends FlxSprite
 	
 	override public function kill()
 	{ 
-	   // Reg.PS.PBullets.remove(this, true);
 		super.kill();
 	}
 }

@@ -13,7 +13,7 @@ class CoinItem extends Item
 {
 	public var magnetized:Bool;
 	private var bTrail:FlxTrail;
-	private var rotspeed:Int = 5;
+	private var rotationSpeed:Int = 5;
 
 	public function new(x:Float,y:Float) 
 	{
@@ -22,7 +22,7 @@ class CoinItem extends Item
 		makeGraphic(t,t, FlxColor.WHITE);
 		offset.set( -4, -4);
 		centerOffsets();
-		lifespan = 4;
+		_lifespan = 4;
 
         bTrail = new FlxTrail(this, null, 10, 1, 0.5, 0.05);
 		Reg.PS.effects.add(bTrail);
@@ -30,8 +30,8 @@ class CoinItem extends Item
 		
 	override public function update(elapsed:Float)
 	{
-	 magnetize();
-	 angle += rotspeed;
+		magnetize();
+		angle += rotationSpeed;
 
 		if (magnetized)
 		move();
@@ -71,7 +71,7 @@ class CoinItem extends Item
 	
 	override public function kill()
 	{
-		lifespan = 4;
+		_lifespan = 4;
 		Reg.PS.coins.remove(this, true);
 		Reg.PS.effects.remove(bTrail, true);
 		super.kill();

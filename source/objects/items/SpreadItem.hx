@@ -7,6 +7,9 @@ import flixel.FlxG;
 
 class SpreadItem extends Item
 {
+	/* This item does not currently function correctly. And I'm planning on implementing a "stack weapon" system where effects stack. So please ignore it for the moment.
+	 */
+	
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);

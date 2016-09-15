@@ -15,7 +15,6 @@ class Goal extends FlxSprite
 		immovable = true;
 		visible = true;
 		makeGraphic(10, FlxG.height * 2, FlxColor.RED);
-
 	}
 	
 	override public function update(elapsed:Float):Void 
@@ -28,15 +27,15 @@ class Goal extends FlxSprite
 	{
 		if (FlxG.overlap(this, Reg.PS.player))
 		{
-			reach(Reg.PS.player);
+			reached(Reg.PS.player);
 		}
 	}
-	private function reach(player:Player)
+	private function reached(player:Player)
 	{
 		solid = false;
 		Reg.pause = true;
 		trace("YOU WIN");
-		FlxG.switchState(new MenuState() );		
+		FlxG.switchState(new MenuState());	// placeholder as there is only one level in the game currently.
 	}
 	
 }

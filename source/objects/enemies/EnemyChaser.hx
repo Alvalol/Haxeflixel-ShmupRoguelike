@@ -14,7 +14,7 @@ class EnemyChaser extends Enemy
 {
 	private var MOVE_SPEED = 30;
 	private var bTrail:FlxTrail;
-	private var trailed:Bool = false;
+	private var trailCreated:Bool = false;
 
 	public function new(x:Float, y:Float) 
 	{
@@ -27,10 +27,10 @@ class EnemyChaser extends Enemy
 	override public function update(elapsed:Float) 
 	{
 		move();
-		if (_appeared && !trailed)
+		if (_appeared && !trailCreated)
 		{
 			createTrail();
-			trailed = true;
+			trailCreated = true;
 		}
 		
 		super.update(elapsed);

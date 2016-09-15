@@ -16,22 +16,20 @@ class EnemySpawner extends Enemy
 	private var tx:Int;
 	private var ty:Int;
 
-
-    // Make it so that the spawner can spawn any sort of enemy.
+    // Feature idea : make it so that the spawner can spawn any sort of enemy.
 	
 	public function new(x:Float,y:Float, _flipped:Bool) 
 	{
 		super(x-8, y);
 		makeGraphic(16, 16, FlxColor.RED);
 		HP = 7;
+		
 	    tx = Std.int(x / 8); 
         ty = Std.int(y / 8);
 	    set_flipY(_flipped);
-		immovable = true;
 		
-		//centerOrigin();
-
-	   adjustPlacement();
+		immovable = true;
+	    adjustPlacement();
 		minions = new FlxTypedSpriteGroup<Enemy>();
 	}
 	
@@ -44,7 +42,7 @@ class EnemySpawner extends Enemy
 			justSpawned = true;
 			spawn();
 			}
-			
+
 			addMinions();
 		}
 		
@@ -83,6 +81,4 @@ class EnemySpawner extends Enemy
 		}
 	}
 
-		
-	
 }

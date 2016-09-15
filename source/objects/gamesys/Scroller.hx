@@ -19,23 +19,16 @@ class Scroller extends FlxSprite
 	
 	override public function update(elapsed:Float)
 	{
-
-		if (Reg.PS.player.invinsible) 
-		{
-		acceleration.x += ACCELERATION * 100;
-		maxVelocity.set(MOVE_SPEED * 10, MOVE_SPEED * 10);
-		}
-		else{
-		acceleration.x += ACCELERATION;	   }
+	   acceleration.x += ACCELERATION;	
 	   
 	   y = Reg.PS.player.y;
 	   
-	   //Find a better way to implement acceleration. Do not base it on HP	   
+	   /*TODO : Implement speed variation based on a combo feature. If the player has a high combo, the game slows down. If the player has a low combo,
+		* the game goes faster (as he most likely isn't close to enemies, so we bring him towards them to keep the game's rhytm high
+		*/
+	   
 	   if (!Reg.pause)
 		   super.update(elapsed);
 	 }
-    
-	
-	   
-	   
+ 
 }

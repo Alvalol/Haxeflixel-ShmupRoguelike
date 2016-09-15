@@ -16,6 +16,7 @@ class EnemyExplosiveExplosion extends FlxSprite
 		{
 			kill();
 		}, 1);
+		
 	}
 	
 	override public function update(elapsed:Float)

@@ -14,7 +14,6 @@ class EnemyLeft extends Enemy
 	private var factor:Int = 0;
 	private var updatedPosition:Bool = false;
 	
-	
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
@@ -28,7 +27,7 @@ class EnemyLeft extends Enemy
 	
 	override public function update(elapsed:Float) 
 	{
-		reposition();
+		forcePosition();
 		
 		if (_appeared)
 		{
@@ -38,7 +37,7 @@ class EnemyLeft extends Enemy
 		super.update(elapsed);
 	}
 	
-	private function reposition()
+	private function forcePosition()
 	{		
 		if (x - FlxG.camera.scroll.x < FlxG.width && !updatedPosition)
 		{
@@ -56,6 +55,6 @@ class EnemyLeft extends Enemy
 	
 	private function move()
 	{
-		x += MOVE_SPEED;
+		x += MOVE_SPEED; // might be useful to implement proper movement using Haxeflixel's features...
 	}
 }

@@ -8,7 +8,7 @@ class Gamepad
 {
 public static var GAMEPAD:FlxGamepad;
 
-// This needs to be re-implemented properly!!!
+// TODO : This needs to be re-implemented properly!!!
 
 	public static function checkForGamepad()
 	{
@@ -57,7 +57,7 @@ public static var GAMEPAD:FlxGamepad;
 		if(GAMEPAD.justPressed.GUIDE)
 		{
 			System.exit(0);
-		}// obvious debug
+		}
 		
 		if (GAMEPAD.pressed.BACK)
 		{

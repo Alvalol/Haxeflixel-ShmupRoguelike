@@ -11,9 +11,8 @@ import objects.effects.NoHit;
 
 class HazardBullet extends FlxSprite
 {
-
-	var target:FlxPoint; 
-	var BULLET_SPEED = 140;
+	private var target:FlxPoint; 
+	private var BULLET_SPEED = 140;
 	
 	public function new(x:Float, y:Float) 
 	{
@@ -26,7 +25,6 @@ class HazardBullet extends FlxSprite
 	{
 		move();
 		collisions();
-		//trace(this);
 		
 		if(!Reg.pause)
 		super.update(elapsed);
@@ -46,14 +44,12 @@ class HazardBullet extends FlxSprite
 	
 	private function move()
 	{
-
 		FlxVelocity.moveTowardsPoint(this, target, BULLET_SPEED, 0);
 	}
 	
 	
 	private function collisions()
-	{
-		
+	{	
 		if (FlxG.overlap(this, Reg.PS.blocks))
 		{
             createNoHit();
@@ -70,7 +66,6 @@ class HazardBullet extends FlxSprite
 		{
 			interact(Reg.PS.player);
 		}
-		
 	}
 	
 	private function createNoHit()

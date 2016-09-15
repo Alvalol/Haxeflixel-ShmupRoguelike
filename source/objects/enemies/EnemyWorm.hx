@@ -23,9 +23,9 @@ class EnemyWorm extends Enemy
 	private var SHOOT_SPEED = -150;
 	private var justShot = false;
 	private var flipFactor:Int;
-
 	
-	// needs to be fixed
+	// TODO : This enemy doesn't work correctly in the game yet. Must be checked and fixed before including it in templates.
+	
 	public function new(x:Float, y:Float, _flipped:Bool)
 	{
 		super(x, y);
@@ -39,9 +39,8 @@ class EnemyWorm extends Enemy
 		startAnimation();
 
 		setFactor();
-		
-		
 		animationTween.active = active;	
+		
 		#if !FLX_NO_DEBUG 
 		Tracker.addProfile(new TrackerProfile(EnemyWorm, ["aboveGround", "waiting"], [FlxSprite, FlxTween]));
 		FlxG.console.registerObject("EnemyWorm", this);
@@ -60,7 +59,6 @@ class EnemyWorm extends Enemy
 			justShot = false;	
 	}
 
-	
 	private function setFactor()
 	{
 		if (flipY)
@@ -70,9 +68,9 @@ class EnemyWorm extends Enemy
 		else
 		{
 			flipFactor = 1;
-		}
-		
+		}	
 	}
+	
 	private function shoot()
 	{
 		if (animationTween.percent >= 0.90 && !animationTween.backward && !justShot)

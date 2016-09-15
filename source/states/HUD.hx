@@ -11,6 +11,7 @@ import flixel.FlxG;
 
 class HUD extends FlxSpriteGroup
 {
+	
 	static inline var OFFSET:Int = 4;
 	private var _textScore:FlxText;
 	private var _currentHealth:FlxText;
@@ -25,12 +26,10 @@ class HUD extends FlxSpriteGroup
 		add(_textScore);
 		add(_currentHealth);
 		
-		
-				forEachOfType(FlxText, function(member)
+		forEachOfType(FlxText, function(member)
 		{
 			member.setFormat(AssetPaths.pixel_font__ttf, 8, FlxColor.fromRGB(255,255,255,5) ,
-			                FlxTextBorderStyle.OUTLINE, FlxColor.fromRGB(0,0,0,200));
-							
+			                 FlxTextBorderStyle.OUTLINE, FlxColor.fromRGB(0,0,0,200));				
 	    });
 		
 		_textScore.alignment = FlxTextAlign.LEFT;
@@ -58,4 +57,5 @@ class HUD extends FlxSpriteGroup
 			member.cameras = [cam];
 		});
 	}
+	
 }

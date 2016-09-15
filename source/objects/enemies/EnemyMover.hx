@@ -13,11 +13,10 @@ import flixel.math.FlxMath;
 
 class EnemyMover extends Enemy
 {
-	private var sinfact:Float = 0;
+	private var sinFactor:Float = 0;
 	public var factor:Int = 0;
 	private var MOVE_SPEED:Float = 0.5;
 	private var bTrail:FlxTrail;
-	
 
 	public function new(x:Float, y:Float) 
 	{
@@ -26,7 +25,6 @@ class EnemyMover extends Enemy
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		animation.add("idle", [16]);
         animation.play("idle");
-       // scale = new FlxPoint(1.5, 1.5);
 		createTrail();
 	}
 	
@@ -39,7 +37,7 @@ class EnemyMover extends Enemy
 		super.update(elapsed);		
 	}
 	
-		private function createTrail()
+    private function createTrail()
 	{
         bTrail = new FlxTrail(this,null,4,1,0.4,0.05);
 		Reg.PS.effects.add(bTrail);
@@ -56,8 +54,8 @@ class EnemyMover extends Enemy
 	
 	private function move()
 	{
-		sinfact += factor * .02 * Math.PI;
-		y += Math.sin(sinfact);
+		sinFactor += factor * .02 * Math.PI;
+		y += Math.sin(sinFactor);
 		x -= MOVE_SPEED;	
 	}
 	

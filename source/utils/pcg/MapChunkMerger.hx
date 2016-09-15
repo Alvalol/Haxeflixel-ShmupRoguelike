@@ -32,7 +32,7 @@ class MapChunkMerger
 	public static function makeCleanArray():Array<Array<Int>>
 	{
 
-		CHUNKS = []; // thanks Gamma11
+		CHUNKS = [];
 		flowChunk();
 		CHUNKDATA = new Array<Array<Int>>();
 		
@@ -49,11 +49,6 @@ class MapChunkMerger
 		    CHUNKDATA.push(formattedChunk);
 		}
 		
-		for (chunk in CHUNKS)
-		{
-			trace(chunk.properties.get("type"));
-			trace(chunk.properties.get("L"), chunk.properties.get("R"));
-		}
 		var m = concatArray(CHUNKDATA);
 		return m;
 	}
@@ -62,7 +57,7 @@ class MapChunkMerger
 	{
 		var newArray:Array<Array<Int>> = new Array<Array<Int>>();
 		
-		for (i in 0...chunk.length)// +1?
+		for (i in 0...chunk.length)
 		{
 			if (i % CHUNK_WIDTH == 0)
 			{
@@ -104,6 +99,7 @@ class MapChunkMerger
 		/*
 		Main function where we choose the chunks and we follow step by step the procedure.
 		*/
+		
 		TMXORGANIZED = MapChunk.get_allTMXfilesOrganized(); // all TMX files organized by their type.
 
 		// making an array of keys that are in the RAWCHUNKS. To keep it separated + can't iterate over keys ?
@@ -143,12 +139,11 @@ class MapChunkMerger
 		
 		// this makes sure that we never go over max_level range and adjusts amount (CURRENT_RANGE)
 		// so that the new chunks will fit in the level ;)
+		
 		if (amount + CHUNKS.length > MAX_LEVEL_SIZE)
 		{
 			amount = MAX_LEVEL_SIZE - CHUNKS.length;
 		}
-		
-		
 		
 		while (chunkGroup.length < amount)
 		{
@@ -184,28 +179,22 @@ class MapChunkMerger
 			changeTypeAndRange();
 			
 			if (CHUNKS.length < MAX_LEVEL_SIZE)
-			{
-			createChunkGroup(CURRENT_TYPE, CURRENT_RANGE); // my first recursive function that is actually useful :)
-			}
+			    createChunkGroup(CURRENT_TYPE, CURRENT_RANGE); // my first recursive function that is actually useful :)
 	}
 	
 	public static function makeSeed()
 	{
 		if (Reg.SEEDED)
-		{
-		 Reg.CURRENT_SEED = new FlxRandom(FlxG.random.int(0, FlxMath.MAX_VALUE_INT)); 
-		}
+		    Reg.CURRENT_SEED = new FlxRandom(FlxG.random.int(0, FlxMath.MAX_VALUE_INT)); 
 		else
-		{
-		Reg.CURRENT_SEED = new FlxRandom(Reg.masterSeed);
-		}
+		   Reg.CURRENT_SEED = new FlxRandom(Reg.masterSeed);
 	}
 	
 
 	private static function changeTypeAndRange()
 	{
-			CURRENT_TYPE = Reg.CURRENT_SEED.getObject(TYPE_LIST);
-			CURRENT_RANGE = Reg.CURRENT_SEED.int(MIN_GROUP_RANGE, MAX_GROUP_RANGE);
+		CURRENT_TYPE = Reg.CURRENT_SEED.getObject(TYPE_LIST);
+		CURRENT_RANGE = Reg.CURRENT_SEED.int(MIN_GROUP_RANGE, MAX_GROUP_RANGE);
 	}
 	
 	private static function getLevelObjects(map:TiledMap, layer:String):Array<TiledObject>

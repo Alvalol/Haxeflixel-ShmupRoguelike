@@ -5,6 +5,8 @@ import flixel.FlxG;
 
 class HazardRotator extends FlxSprite
 {
+	/* This works in tandem with Hazard component. But it is not well implemented yet. So until then, do not use in level templates.
+	 */
 	
 	private var rotspeed:Int = 10;
 	var comp1:HazardComponent;
@@ -21,16 +23,12 @@ class HazardRotator extends FlxSprite
 		
 		compGroup.add(comp1);
 		compGroup.add(comp2);
-		
-		for (i in compGroup)
-		{
-			i.angularVelocity = 20;
-		}		
+		setGroupAngularVelocity(20);
+
 	}
 	
 	override public function update(elapsed:Float):Void 
 	{
-
 		for (i in compGroup)
 		{
 		if (FlxG.pixelPerfectOverlap(i, Reg.PS.player))
@@ -38,6 +36,13 @@ class HazardRotator extends FlxSprite
 			Reg.PS.player.damage();
 		}
 		}
-		
+	}
+	
+	private function setGroupAngularVelocity(amount:Int)
+	{
+		for (i in compGroup)
+		{
+			i.angularVelocity = amount;
+		}		
 	}
 }

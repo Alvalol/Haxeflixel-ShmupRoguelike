@@ -6,19 +6,18 @@ import flixel.FlxG;
 
 class MagnetItem extends Item
 {
-	
-	// This item needs to be calibrated properly pls.
+	// TODO : This item needs to be calibrated properly as the player cannot see its effect as of yet.
 
 	public function new(x:Float, y:Float)
 	{
 		super(x, y);
-		lifespan = 4;
+		_lifespan = 4;
 		loadGraphic(AssetPaths.items__png, true, 8,8);
 		animation.add("static", [3]);
 		animation.play("static");
 	}
 	
-		override public function update(elapsed:Float)
+	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
 	}

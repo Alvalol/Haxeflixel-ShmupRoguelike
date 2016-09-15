@@ -15,21 +15,23 @@ class EnemyTriangle extends Enemy
 {
 
 	private var MOVE_SPEED:Int = 50;
-	public var ang:Int = 120;
+	private var _angle:Int = 120;
 	private var delay:Float = 1.2;
 	private var bTrail:FlxTrail;
-	
 	
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
 		HP = 1;
+		
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		animation.add("idle", [16]);
         animation.play("idle");
 		triggerAngleChange();
+		
 		createTrail();
-		color = 0x00FF80;
+		
+		color = 0x00FF80; //placeholder while there is no asset for this enemy
 	}
 	
 	override public function update(elapsed:Float) 
@@ -40,7 +42,7 @@ class EnemyTriangle extends Enemy
 	
 	private function move()
 	{
-		velocity.set(FlxVelocity.velocityFromAngle(ang, MOVE_SPEED).x, FlxVelocity.velocityFromAngle(ang, MOVE_SPEED).y);
+		velocity.set(FlxVelocity.velocityFromAngle(_angle, MOVE_SPEED).x, FlxVelocity.velocityFromAngle(_angle, MOVE_SPEED).y);
 	}
 	
 	private function triggerAngleChange()
@@ -50,14 +52,15 @@ class EnemyTriangle extends Enemy
 	
 	private function changeAngle(timer:FlxTimer)
 	{
-		if (ang >= 240)
+		if (_angle >= 240)
 		{
-			ang = 110;
+			_angle = 110;
 		}
 		else
 		{
-			ang = 240;
+			_angle = 240;
 		}
+		
 		triggerAngleChange();
 	}
 	

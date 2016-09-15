@@ -26,7 +26,6 @@ import openfl.system.System;
 import substates.PauseState;
 import utils.controls.Gamepad;
 import utils.pcg.MapChunkMerger;
-//import utils.controls.Gamepad;
 import flixel.input.gamepad.FlxGamepad;
 
 import objects.enemies.EnemyBullet;
@@ -44,6 +43,7 @@ import utils.pcg.LevelLoaderProc;
 
 class PlayState extends FlxState
 {
+	
 	public var map:FlxTilemap;
 	public var hazards:FlxTypedGroup<Hazard>;
 	public var player(default, null):Player;
@@ -60,6 +60,7 @@ class PlayState extends FlxState
 	private var pauseScreen:PauseState;
 
 	private var _scroller(default, null):Scroller;
+	private var _scrollerOffset:Int = 120;
 	
 	private var _hud:HUD;
 	private var _gameCamera:FlxCamera;
@@ -75,7 +76,8 @@ class PlayState extends FlxState
 	{
 		Reg.PS = this;
 		Reg.pause = false;
-//		MapChunkMerger.makeSeed();
+
+		
 		// init gameplay elements
 		persistentUpdate = true;
 		player = new Player(10, FlxG.height / 2);
@@ -147,15 +149,15 @@ class PlayState extends FlxState
 		{
 	     	closeSubState();
 			_gameCamera.followLerp = lerpSpeed;
-
-		}
-		
+		}	
 	}
+	
+	
 	private function cameraSetup()
 	{	
 		_gameCamera = new FlxCamera();
 		_hudCamera = new FlxCamera();
-		_scroller = new Scroller(player.x + 120, player.y);
+		_scroller = new Scroller(player.x + _scrollerOffset, player.y); 
 		
 		FlxG.cameras.reset(_gameCamera);
 		FlxG.cameras.add(_hudCamera);
@@ -163,11 +165,11 @@ class PlayState extends FlxState
 		FlxCamera.defaultCameras = [_gameCamera];
 		_hud = new HUD();
 		_hud.setCamera(_hudCamera);
-		_gameCamera.setScrollBoundsRect(0, 0, map.width, map.height, true);
-		//FlxG.camera.antialiasing = false;
-		_gameCamera.pixelPerfectRender = false;	
 		
+		_gameCamera.setScrollBoundsRect(0, 0, map.width, map.height, true);
+		_gameCamera.pixelPerfectRender = false;	
 		_gameCamera.follow(_scroller, FlxCameraFollowStyle.TOPDOWN_TIGHT, lerpSpeed);
+		
 		add(_scroller);
 		add(_hud);
 	}
@@ -175,6 +177,7 @@ class PlayState extends FlxState
 	
 	private function displayTracers()
 	{
+		// Don't use trace and implement the actual debugging tools that Haxeflixel provides.
 		if (tracers)
 		{
 		trace("SCROLLER : " + Reg.SCROLLER_ON);	
@@ -187,7 +190,6 @@ class PlayState extends FlxState
 		trace("_entities " + _entities.length);
 		trace("effects " + effects.length);
 		trace("MASTER SEED : " + Reg.CURRENT_SEED.initialSeed);
-		
 	    }
 	}
 	

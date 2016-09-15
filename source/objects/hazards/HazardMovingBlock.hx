@@ -16,7 +16,6 @@ class HazardMovingBlock extends Hazard
 		makeGraphic(8, 8, FlxColor.WHITE);
 		centerOffsets();
 		horizontal = hor;
-		
 	}
 	
 	override public function update(elapsed:Float):Void 
