@@ -27,7 +27,7 @@ class MapChunkMerger
 	private static var CHUNK_WIDTH = 0;
 	private static var MIN_GROUP_RANGE = 6;
 	private static var MAX_GROUP_RANGE = 12;
-	
+	//
 	
 	public static function makeCleanArray():Array<Array<Int>>
 	{
