@@ -33,4 +33,4 @@ I also stream on [Livecoding](livecoding.tv/alvalol) and [Twitch](http://twitch.
 Any questions or concerns can be adressed via the [Issue tracker](https://github.com/Alvalol/Haxeflixel-ShmupRoguelike/issues). Ping me on [Twitter](twitter.com/theotheralvaro) if you have an urgent question.
 
 Made with Haxeflixel.
-(http://i.imgur.com/XPvbpyc.png)
+![Haxeflixel logo](http://i.imgur.com/XPvbpyc.png)
