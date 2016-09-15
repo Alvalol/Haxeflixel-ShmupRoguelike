@@ -32,13 +32,14 @@ class MapChunk
 		  Uses getAllTMXFiles(); and then organizes all of them using the property "type" as a key into a Map.
 		  So, it contains [key,Array<TiledMap>], where the TiledMaps are all the ones we caught in the level_CURRENT_LEVEL folder.
 		 */
+		  
 		var allTMXfiles = getAllTMXFiles();
 		var allChunksMap = new Map<String, Array<TiledMap>>(); 
 		
 		for (file in allTMXfiles)
 		{	
 			//check if the map contains that key, if it doesn't just push an array with that one element.
-			if (!allChunksMap.exists(file.properties.get("type")))// || allChunksMap.exists(file.properties.get("type")) == null)
+			if (!allChunksMap.exists(file.properties.get("type")))// ||b allChunksMap.exists(file.properties.get("type")) == null)
 			{
 				allChunksMap.set(file.properties.get("type"), [file]);
 			}
