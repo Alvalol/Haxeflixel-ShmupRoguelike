@@ -13,7 +13,8 @@ The game is being developer by [@theotheralvaro](twitter.com/theotheralvaro)
 
 In order for the project to run and allow you to contribute, you must make sure you have the following ```haxelib list```. Use ```haxelib install {name}```.
 
-```actuate: [1.8.6]
+```
+actuate: [1.8.6]
 box2d: [1.2.3]
 flixel-addons: [2.0.0]
 flixel-demos: [2.1.0]
