@@ -18,12 +18,18 @@ import flixel.tile.FlxTilemap;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxSpriteUtil;
+import lime.system.Display;
 import objects.hazards.Hazard;
 import objects.hazards.HazardBullet;
 import objects.items.Item;
 import flixel.addons.effects.FlxTrail;
+import openfl.display.BitmapData;
+import openfl.filesystem.File;
+import openfl.system.ApplicationDomain;
 import openfl.system.System;
+import openfl.utils.ByteArray;
 import substates.PauseState;
+import sys.io.FileOutput;
 import utils.controls.Gamepad;
 import utils.pcg.MapChunkMerger;
 import flixel.input.gamepad.FlxGamepad;
@@ -36,10 +42,13 @@ import objects.enemies.Enemy;
 import objects.items.CoinItem;
 import objects.hazards.HazardBlock;
 import objects.enemies.enemyobjects.EnemyExplosiveExplosion;
+import sys.io.FileOutput;
 
 import flixel.FlxG;
 import utils.pcg.LevelLoaderProc;
+import haxe.io.Bytes;
 
+import openfl.display.PNGEncoderOptions;
 
 class PlayState extends FlxState
 {
@@ -113,6 +122,7 @@ class PlayState extends FlxState
 		Gamepad.checkForGamepad();
 		Gamepad.updateGameInputs();
 		Gamepad.checkForExit();
+	//	getMiniMap();
 		displayTracers();
 
 		FlxSpriteUtil.bound(player, 
@@ -122,6 +132,38 @@ class PlayState extends FlxState
 							FlxG.camera.scroll.y + FlxG.camera.height);	
 	}
 
+	
+	public function getMiniMap(wallColor:Int = 0xFFFF0000, openColor:Int = 0xFFFFFFFF):Void
+	{
+		var minimap:FlxSprite = new FlxSprite();
+		var bData:BitmapData;
+		
+		minimap.makeGraphic(map.widthInTiles, map.heightInTiles, 0xFFFF0000);
+		bData = new BitmapData(map.widthInTiles, map.heightInTiles);
+		for (i in 0...map.widthInTiles)
+		{
+			for (j in 0...map.heightInTiles)
+			{
+				if (map.getTile(i, j) > 0) // Is collision tile
+				{
+					bData.setPixel(i, j, openColor);
+					
+				}
+				else bData.setPixel(i, j, wallColor); // Else
+			}
+		}
+		
+		minimap.pixels = bData;
+		
+		minimap.setGraphicSize(250);
+		minimap.screenCenter();
+		minimap.visible = true;
+		minimap.scrollFactor.set(0, 0);
+		
+		add(minimap);
+	}
+	
+	
 	private function addGameplayElements()
 	{		
 		add(map);
