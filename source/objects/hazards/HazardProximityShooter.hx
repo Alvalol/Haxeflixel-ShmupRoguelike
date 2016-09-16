@@ -7,7 +7,7 @@ import flixel.util.FlxColor;
 import flixel.math.FlxMath;
 import flixel.math.FlxVelocity;
 
-
+//
 class HazardProximityShooter extends Hazard
 {
 	
