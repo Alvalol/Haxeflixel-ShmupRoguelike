@@ -91,8 +91,9 @@ class EnemyMinion extends Enemy
 	
 	override public function kill() 
 	{
-	    var drops:Array<Item> = [];
-		dropItem(drops);
+	    drops = [];
+	    dropRate = [1.0];
+		dropItem(drops,dropRate);
 		Spawner.minions.remove(this);
 		Reg.PS.effects.remove(bTrail);
 		super.kill();

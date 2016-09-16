@@ -15,7 +15,7 @@ class HazardProximityShooter extends Hazard
 
 	public function new(x:Float,y:Float) 
 	{
-		super(x-4, y);
+		super(x-4, y-8);
 		immovable = true;
 		solid = true;
 		makeGraphic(8, 8, FlxColor.BROWN);

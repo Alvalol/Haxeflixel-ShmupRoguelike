@@ -39,7 +39,8 @@ class EnemyExplosive extends Enemy
 		override public function kill():Void
 	{	
 		drops = [new HealthItem(x, y)];
-		dropItem(drops);
+		dropRate = [1.0];
+		dropItem(drops,dropRate);
 		super.kill();
 	}
 	

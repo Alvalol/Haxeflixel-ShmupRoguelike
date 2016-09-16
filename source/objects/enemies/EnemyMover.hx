@@ -45,8 +45,9 @@ class EnemyMover extends Enemy
 	
 	override public function kill():Void
 	{	
-		drops = [new HealthItem(x, y),new RangeItem(x,y)];
-		dropItem(drops);
+		drops = [new HealthItem(x, y), new RangeItem(x, y)];
+		dropRate = [0.1, 0.9];
+		dropItem(drops, dropRate);
 		Reg.PS.effects.remove(bTrail);
 		super.kill();
 	}

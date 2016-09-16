@@ -72,6 +72,8 @@ class PlayState extends FlxState
 	
 	private var lerpSpeed:Float = 0.1;
 	
+	public var canQuit = false;
+	
 	override public function create():Void
 	{
 		Reg.PS = this;
@@ -110,6 +112,7 @@ class PlayState extends FlxState
 		controlPauseScreen();
 		Gamepad.checkForGamepad();
 		Gamepad.updateGameInputs();
+		Gamepad.checkForExit();
 		displayTracers();
 
 		FlxSpriteUtil.bound(player, 
@@ -136,23 +139,24 @@ class PlayState extends FlxState
 		add(player);	
 	}
 	
-	
+
 	private function controlPauseScreen()
 	{
 		if (Reg.pause)
 		{
 			openSubState(new PauseState());
 			_gameCamera.followLerp = 0.0;
+			canQuit = true;
 	
 		}
 		else
 		{
 	     	closeSubState();
 			_gameCamera.followLerp = lerpSpeed;
+			canQuit = false;
 		}	
 	}
-	
-	
+
 	private function cameraSetup()
 	{	
 		_gameCamera = new FlxCamera();

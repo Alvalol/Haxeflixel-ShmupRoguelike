@@ -6,6 +6,7 @@ import utils.pcg.MapChunkMerger;
 
 class Gamepad
 {
+	
 public static var GAMEPAD:FlxGamepad;
 
 // TODO : This needs to be re-implemented properly!!!
@@ -13,11 +14,25 @@ public static var GAMEPAD:FlxGamepad;
 	public static function checkForGamepad()
 	{
 		GAMEPAD = FlxG.gamepads.lastActive;
+	}	
+		
+    public static function checkForExit()
+	{
+		if (Reg.PS.canQuit)
+		{
+			if (FlxG.keys.justPressed.Q)
+			{
+				System.exit(0);
+			}
+			if (GAMEPAD != null && GAMEPAD.justPressed.BACK)
+			{//ugly but good until I rework on this whole mess.
+				System.exit(0);
+			}
+		}
 	}
 	
 	public static function updateGameInputs()
 	{
-
 		if (GAMEPAD != null)
 		{
 			
@@ -56,7 +71,7 @@ public static var GAMEPAD:FlxGamepad;
 		
 		if(GAMEPAD.justPressed.GUIDE)
 		{
-			System.exit(0);
+			Reg.pause = !Reg.pause;
 		}
 		
 		if (GAMEPAD.pressed.BACK)
@@ -105,11 +120,13 @@ public static var GAMEPAD:FlxGamepad;
 		
 		if( FlxG.keys.justPressed.ESCAPE)
 		{
-			System.exit(0);
-		}// obvious debug
+			Reg.pause = !Reg.pause;
+		}
+		
 		
 		if ( FlxG.keys.justPressed.R)
 		{
+		// obvious debug
 			FlxG.resetState();
 		}
 			
@@ -118,7 +135,6 @@ public static var GAMEPAD:FlxGamepad;
 			Reg.PS.player.resetAccel();
 		}
 		
+
 	}
-		
-	
 }

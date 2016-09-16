@@ -12,7 +12,9 @@ class Enemy extends FlxSprite
 {
 	private var HP:Int;
 	private var _appeared:Bool = false;
+	
 	private var drops:Array<Item>;
+	private var dropRate:Array<Float>;
 	
 	public function new(x:Float, y:Float) 
 	{
@@ -80,14 +82,14 @@ class Enemy extends FlxSprite
 		//Implement flashing on hit
 	}
 	
-	private function dropItem(list:Array<Item>)
+	private function dropItem(list:Array<Item>,rate:Array<Float>)
 	{
 		// Drop system must be reworked from the ground up and be implemented in a nicer way. This is a placeholder.
 		
 		var itemRoll = Reg.CURRENT_SEED.int(0,100);
 		if (itemRoll < 15)
 		{
-			var tObject:Item =	Reg.CURRENT_SEED.getObject(list);			
+			var tObject:Item =	Reg.CURRENT_SEED.getObject(list,rate);			
 			Reg.PS.items.add(tObject);
 		}
 		else

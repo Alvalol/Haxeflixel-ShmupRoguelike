@@ -6,6 +6,7 @@ import flixel.util.FlxColor;
 import utils.controls.Gamepad;
 import utils.controls.Keyboard;
 import flixel.FlxCamera;
+import openfl.system.System;
 
 
 /**
@@ -15,24 +16,23 @@ import flixel.FlxCamera;
 class PauseState extends FlxSubState
 {
 	
-	var pauseText:FlxText;
+
 
 	override public function create():Void 
 	{
 		super.create();
 		set_bgColor(0xE6000000);
-		pauseText = new FlxText(FlxG.width / 2 - 50, FlxG.height / 2 - 20, 0, "PAUSED"); // offset 
+		var pauseText = new FlxText(FlxG.width / 2 - 50, FlxG.height / 2 - 20, 0, "PAUSED"); // offset 
+		var messageText = new FlxText(FlxG.width / 2 - 80, FlxG.height / 2 + 5, "PRESS Q OR BACK TO QUIT");
+		add(messageText);
 		add(pauseText);
 		pauseText.scrollFactor.set(0, 0);
-		
-						forEachOfType(FlxText, function(member)
-		{
-			member.setFormat(AssetPaths.pixel_font__ttf, 12, FlxColor.fromRGB(255,255,255,5) ,
-			                FlxTextBorderStyle.OUTLINE, FlxColor.fromRGB(0,0,0,250));
-							
-	    });
+		messageText.scrollFactor.set(0, 0);
+		pauseText.setFormat(AssetPaths.pixel_font__ttf, 12, FlxColor.fromRGB(255,255,255,5) ,
+			                FlxTextBorderStyle.OUTLINE, FlxColor.fromRGB(0, 0, 0, 250));
+	    messageText.setFormat(AssetPaths.pixel_font__ttf, 8, FlxColor.fromRGB(255,255,255,5) ,
+			                FlxTextBorderStyle.OUTLINE, FlxColor.fromRGB(0, 0, 0, 250));
 		
 	}
-
 	
 }

@@ -75,7 +75,7 @@ class ObjectPlacement
 		for (enemy in getLevelObjects(chunk, "enemies"))
 		{
 			var pos = new FlxPoint(chunkIndex * (chunk.fullWidth) + enemy.x , enemy.y);
-				trace(enemy.flippedVertically);
+			
 		    switch enemy.type
 			   {		   
 				   // general enemy types
@@ -122,16 +122,16 @@ class ObjectPlacement
 		
 		for (hazard in getLevelObjects(chunk, "hazards"))
 		{
-			var pos = new FlxPoint(chunkIndex * (chunk.fullWidth) + hazard.x,hazard.y);//((chunkIndex * (chunk.fullWidth * chunk.tileWidth))
-			  
-			  
+			var pos = new FlxPoint(chunkIndex * (chunk.fullWidth) + hazard.x,hazard.y);//((chunkIndex * (chunk.fullWidth * chunk.tileWidth))	  
+					  
 			  switch hazard.type
 			  {
+					  
 				  case "block" : Reg.PS.blocks.add(new HazardBlock(pos.x, pos.y));
 				  
 				  case "laser" : Reg.PS.hazards.add(new HazardLaser(pos.x, pos.y));
 				  
-				  case "movingBlock" : Reg.PS.hazards.add(new HazardMovingBlock(pos.x, pos.y, true));
+				  case "movingBlock" : Reg.PS.hazards.add(new HazardMovingBlock(pos.x, pos.y,hazard.flippedVertically));
 				  // there should be a property in the object (tiled) setting if it moves horizontally or vertically
 				  
 				  case "proximity" : Reg.PS.hazards.add(new HazardProximityShooter(pos.x, pos.y));

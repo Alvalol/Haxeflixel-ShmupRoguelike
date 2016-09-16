@@ -113,8 +113,9 @@ class EnemyShooter extends Enemy
 	
 	override public function kill():Void
 	{
-		var drops:Array<Item> = [new HealthItem(x, y)];
-		dropItem(drops);
+		drops = [new HealthItem(x, y)];
+		dropRate = [1.0];
+		dropItem(drops,dropRate);
 		Reg.SCROLLER_ON = true;
 		super.kill();
 	}

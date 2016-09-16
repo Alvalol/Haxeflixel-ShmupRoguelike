@@ -5,6 +5,7 @@ import flixel.addons.effects.FlxTrail;
 import flixel.util.FlxColor;
 import flixel.FlxObject;
 import flixel.FlxSprite;
+import objects.items.CoinItem;
 import objects.items.Item;
 import objects.items.RangeItem;
 import flixel.math.FlxVelocity;
@@ -52,8 +53,9 @@ class EnemyChaser extends Enemy
 	
 	override public function kill() 
 	{
-		var drops:Array<Item> = [new RangeItem(x,y)];
-		dropItem(drops);
+		drops = [new RangeItem(x, y)];
+		dropRate = [1.0];
+		dropItem(drops,dropRate);
 		Reg.PS.effects.remove(bTrail);
 		super.kill();
 	}

@@ -73,17 +73,17 @@ class EnemyTurretA extends Enemy
 	
 		if (flipY)
 		{
-		if (!overlapsAt(x, y - 1, Reg.PS.map))
-		{
-		if (!overlapsAt(x, y - 1, Reg.PS.blocks)) kill();
-		}
-		}
-	    else
-		{
-			if (!overlapsAt(x, y + 1, Reg.PS.map))
+			if (!overlapsAt(x, y - 2, Reg.PS.map))
 			{
-			if (!overlapsAt(x, y + 1, Reg.PS.blocks)) kill();
+			if (!overlapsAt(x, y - 2, Reg.PS.blocks)) kill();
+			}
 		}
+		else
+			{
+				if (!overlapsAt(x, y + 1, Reg.PS.map))
+				{
+				if (!overlapsAt(x, y + 1, Reg.PS.blocks)) kill();
+			}
 		}
 	}
 	
@@ -141,8 +141,9 @@ class EnemyTurretA extends Enemy
 	
 	override public function kill():Void
 	{
-		var drops:Array<Item> = [new HealthItem(x,y), new SpeedItem(x,y), new HealthMaxItem(x,y), new MagnetItem(x,y), new RangeItem(x,y)];
-		dropItem(drops);
+	    drops = [new HealthItem(x, y), new SpeedItem(x, y), new HealthMaxItem(x, y), new MagnetItem(x, y), new RangeItem(x, y)];
+		dropRate = [0.2,0.3,0.01,0.5,0.3];
+		dropItem(drops,dropRate);
 		super.kill();
 	}
 	

@@ -12,6 +12,6 @@
   </data>
  </layer>
  <objectgroup name="objects">
-  <object id="1" name="GOAL" type="goal" gid="8" x="72" y="80" width="8" height="8"/>
+  <object id="1" name="GOAL" type="goal" gid="8" x="80" y="16" width="8" height="8"/>
  </objectgroup>
 </map>

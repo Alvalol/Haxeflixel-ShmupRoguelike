@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="43">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="47">
  <properties>
   <property name="type" value="open"/>
  </properties>
@@ -13,12 +13,12 @@
  </layer>
  <objectgroup name="objects"/>
  <objectgroup name="hazards">
-  <object id="39" type="block" gid="2" x="40" y="48" width="8" height="8"/>
-  <object id="40" type="block" gid="2" x="24" y="48" width="8" height="8"/>
-  <object id="41" type="block" gid="2" x="32" y="48" width="8" height="8"/>
-  <object id="42" name="Enemy" type="enemyTurret" gid="1073741828" x="32" y="56" width="8" height="8"/>
+  <object id="39" type="block" gid="2" x="56" y="48" width="8" height="8"/>
+  <object id="40" type="block" gid="2" x="40" y="48" width="8" height="8"/>
+  <object id="41" type="block" gid="2" x="48" y="48" width="8" height="8"/>
  </objectgroup>
  <objectgroup name="enemies">
-  <object id="35" name="Enemy" type="enemyTurret" gid="4" x="32" y="40" width="8" height="8"/>
+  <object id="35" name="Enemy" type="enemyTurret" gid="4" x="48" y="40" width="8" height="8"/>
+  <object id="46" name="Enemy" type="enemyTurret" gid="1073741828" x="48" y="56" width="8" height="8"/>
  </objectgroup>
 </map>

@@ -39,7 +39,8 @@ class EnemyMultishotDeath extends Enemy
 	override public function kill()
 	{
 		drops = [new HealthItem(x, y)];
-		dropItem(drops);
+		dropRate = [1.0];
+		dropItem(drops,dropRate);
 		deathShot();
 		super.kill();
 	}
