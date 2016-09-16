@@ -10,19 +10,7 @@ The game is being developed by [@theotheralvaro](twitter.com/theotheralvaro)
 
 1) Follow the installation steps for [Haxe and Haxeflixel here](http://haxeflixel.com/documentation/getting-started/)  
 2) Clone the repository on your computer  
-
-In order for the project to run and allow you to contribute, you must make sure you have the following ```haxelib list```. Use ```haxelib install {name}```.
-
-```
-flixel-addons: [2.0.0]
-flixel-tools: [1.1.3]
-flixel: [4.0.1]
-hxcpp: [3.3.49]
-lime: [2.9.1]
-openfl: [3.6.1]
-polygonal-ds: [1.4.1]
-polygonal-printf: [1.0.2-beta]
-```
+3) Run the command ```haxelib install dependencies.hxml"
 
 ## Development
 To keep track of the development, you can always follow the [devlog on Tigsource](https://forums.tigsource.com/index.php?topic=57162) or on the [Haxeflixel forums](http://forum.haxeflixel.com/topic/166/untitled-shmup-roguelite/).  

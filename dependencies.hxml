@@ -1,0 +1,8 @@
+-lib flixel-addons:2.0.0
+-lib flixel-tools:1.1.3
+-lib flixel:4.0.1
+-lib hxcpp:3.3.49
+-lib lime:2.9.1
+-lib openfl:3.6.1
+-lib polygonal-ds:1.4.1
+-lib polygonal-printf:1.0.2-beta
