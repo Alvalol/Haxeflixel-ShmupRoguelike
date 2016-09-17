@@ -15,9 +15,9 @@ class MenuState extends FlxState
 	{
 		super.create();
 			
-	    var cursor = new FlxSprite();
-		cursor.loadGraphic(AssetPaths.cursor__png, false, 8, 8);
-		FlxG.mouse.load(cursor.pixels, 4);
+	//    var cursor = new FlxSprite();
+		//cursor.loadGraphic(AssetPaths.cursor__png, false, 8, 8);
+	//	FlxG.mouse.load(cursor.pixels, 4);
 		
 	    var startgame = new FlxButton(FlxG.width / 2 - 45 , FlxG.height / 2 - 10, "START GAME", startGame);
 		startgame.screenCenter();

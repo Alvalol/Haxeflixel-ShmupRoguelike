@@ -20,7 +20,7 @@ class MapChunkMerger
 	private static var TMXORGANIZED:Map<String, Array<TiledMap>>;
 	private static var CHUNKS:Array<TiledMap> = []; // chunks as TiledMaps.
 	private static var CHUNKDATA:Array<Dynamic>; // the chunk data that will be loaded in the levelloaderproc.hx
-	private static var MAX_LEVEL_SIZE:Int = 20;
+	private static var MAX_LEVEL_SIZE:Int = 50;
 	private static var USEDTHEMES:Array<String>; // all the used themes so far in level generation. Might be useful to check to avoid repetition.
 	private static var TYPE_LIST:Array<String> = [];
 	private static var CHUNK_HEIGHT = 0;
@@ -146,13 +146,20 @@ class MapChunkMerger
 		
 		while (chunkGroup.length < amount)
 		{
-			switch CURRENT_TYPE // add a case here if there is a new theme for the levels
+			switch CURRENT_TYPE
 			{	
 				case "tunnel" :
 					{
-						// here should be logic for L and R
+						// tunnel bug is still there.
 						if (chunkGroup.length == 0)
 						{
+						if (CHUNKS[CHUNKS.length-1].properties.get("type") == "tunnel")
+						{
+							var exitType = CHUNKS[CHUNKS.length-1].properties.get("R");
+					        var possibleChunks = TMXORGANIZED["tunnel"].filter(function(map) return map.properties.get("L") == exitType);
+							chunkGroup.push(Reg.CURRENT_SEED.getObject(possibleChunks));
+						}
+						else
 			            	chunkGroup.push(Reg.CURRENT_SEED.getObject(TMXORGANIZED["tunnel"]));				
 						}
 						else
@@ -176,6 +183,8 @@ class MapChunkMerger
 			for (chunk in chunkGroup) { CHUNKS.push(chunk); }
 			
 			changeTypeAndRange();
+
+
 			
 			if (CHUNKS.length < MAX_LEVEL_SIZE)
 			    createChunkGroup(CURRENT_TYPE, CURRENT_RANGE); // my first recursive function that is actually useful :)

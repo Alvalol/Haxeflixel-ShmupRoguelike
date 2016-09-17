@@ -33,6 +33,7 @@ import sys.io.FileOutput;
 import utils.controls.Gamepad;
 import utils.pcg.MapChunkMerger;
 import flixel.input.gamepad.FlxGamepad;
+import flixel.addons.display.FlxBackdrop;
 
 import objects.enemies.EnemyBullet;
 import objects.Player;
@@ -77,11 +78,13 @@ class PlayState extends FlxState
 	
 	private var gamepad:FlxGamepad;
 
-	private var tracers:Bool = false;
+	private var tracers:Bool = true;
 	
 	private var lerpSpeed:Float = 0.1;
 	
 	public var canQuit = false;
+	
+	private var backDrop:FlxBackdrop;
 	
 	override public function create():Void
 	{
@@ -105,8 +108,9 @@ class PlayState extends FlxState
 		_entities = new FlxGroup();
 		
 		
-		FlxG.mouse.visible = false; // must always be set to false pls
+		FlxG.mouse.visible = true; // must always be set to false pls
 		map = LevelLoaderProc.loadGeneratedLevel();
+		backDrop = new FlxBackdrop(AssetPaths.background__png, 0.01, 0.01, true, true);
 
 		addGameplayElements();
       	cameraSetup();
@@ -122,8 +126,9 @@ class PlayState extends FlxState
 		Gamepad.checkForGamepad();
 		Gamepad.updateGameInputs();
 		Gamepad.checkForExit();
-	//	getMiniMap();
 		displayTracers();
+		
+				//getMiniMap();
 
 		FlxSpriteUtil.bound(player, 
 		                    FlxG.camera.scroll.x, 
@@ -166,6 +171,7 @@ class PlayState extends FlxState
 	
 	private function addGameplayElements()
 	{		
+		add(backDrop);
 		add(map);
 		_entities.add(EExplosions);
 		_entities.add(blocks);	
