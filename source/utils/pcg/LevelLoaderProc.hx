@@ -24,8 +24,8 @@ class LevelLoaderProc
 		MapChunkMerger.makeSeed();
 		var generatedMap:Array<Array<Int>> = MapChunkMerger.makeCleanArray();
 	
-        loadedMap.loadMapFrom2DArray(generatedMap, FlxTileFrames.fromBitmapAddSpacesAndBorders(FlxGraphic.fromAssetKey(AssetPaths.solid__png), 
-	    new FlxPoint(8, 8), new FlxPoint(1, 1), new FlxPoint(1, 1), null),  8, 8);
+        loadedMap.loadMapFrom2DArray(generatedMap, FlxTileFrames.fromBitmapAddSpacesAndBorders(FlxGraphic.fromAssetKey(AssetPaths.tileset__png), 
+	    new FlxPoint(8, 8), new FlxPoint(1, 1), new FlxPoint(1, 1), null),  8, 8, AUTO);
 	  
         ObjectPlacement.loadLevelObjects(loadedMap); 
 

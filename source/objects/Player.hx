@@ -53,14 +53,14 @@ class Player extends FlxSprite
 		HP = 3; 
 		MAX_HP = 3;
 		
-		loadGraphic(AssetPaths.player__png, true, 16, 8);
+		loadGraphic(AssetPaths.player__png, true, 8, 8);
 		
 		SHOT_MOD = 0; // related to the old weapon system. Will not be necessary in the future.
 	
 		setSize(4, 4);
 		
 		centerOffsets();
-		animation.add("move", [0,1,2]);
+		animation.add("move", [0,1],12);
 		animation.play("move");
 		
 		drag.x = DECELERATION;
@@ -80,6 +80,13 @@ class Player extends FlxSprite
 		
 		if(!Reg.pause)
 		    super.update(elapsed);
+			
+		if (FlxG.random.int(0,100) > 40)
+		{
+		var tracePlayer = new objects.effects.PlayerTrace(x - 8, y-2);
+		Reg.PS.effects.add(tracePlayer);
+		}
+		trace(elapsed);
 	}
 		
 	

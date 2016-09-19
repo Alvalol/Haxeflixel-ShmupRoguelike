@@ -7,6 +7,7 @@ import flixel.math.FlxPoint;
 import flixel.addons.effects.FlxTrail;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import objects.effects.NewBullEffect;
 import objects.effects.NoHit;
 import objects.enemies.Enemy;
 import objects.items.CoinItem;
@@ -18,11 +19,12 @@ class PlayerBullet extends FlxSprite
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
-		loadGraphic(AssetPaths.items__png, true, 8, 8);
-		setSize(8, 2);
+		makeGraphic(8, 1, FlxColor.WHITE);
 		
 		centerOffsets();
 		
+		var newBullAnim = new NewBullEffect(x+6,y-1);
+		Reg.PS.effects.add(newBullAnim);
 		animation.add("static", [16]);
 		animation.play("static");
 	}

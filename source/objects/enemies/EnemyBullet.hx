@@ -17,7 +17,7 @@ class EnemyBullet extends FlxSprite
 	{
 		super(x, y);
 		loadGraphic(AssetPaths.items__png, true, 8, 8);
-		animation.add("idle", [14, 15], 8, true); // looping the animation gives it an interesting wobbly effect which might be desirable for some enemies.
+		animation.add("idle", [22,23], 8, true); // looping the animation gives it an interesting wobbly effect which might be desirable for some enemies.
 		animation.play("idle");
 		width = 8;
 		height = 8;

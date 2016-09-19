@@ -78,7 +78,7 @@ class PlayState extends FlxState
 	
 	private var gamepad:FlxGamepad;
 
-	private var tracers:Bool = true;
+	private var tracers:Bool = false;
 	
 	private var lerpSpeed:Float = 0.1;
 	
@@ -173,11 +173,11 @@ class PlayState extends FlxState
 	{		
 		add(backDrop);
 		add(map);
+
 		_entities.add(EExplosions);
 		_entities.add(blocks);	
 		_entities.add(coins);
 		_entities.add(items);
-		_entities.add(effects);
 		_entities.add(EBullets);
 		_entities.add(hazards);
 		_entities.add(enemies);
@@ -185,6 +185,8 @@ class PlayState extends FlxState
 		_entities.add(HBullets);
 		add(_entities);
 		add(player);	
+		_entities.add(effects);
+		
 	}
 	
 

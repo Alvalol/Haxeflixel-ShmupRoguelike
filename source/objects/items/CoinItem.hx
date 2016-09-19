@@ -19,20 +19,22 @@ class CoinItem extends Item
 	{
 		super(x, y);
 		var t = FlxG.random.int(2, 5);
-		makeGraphic(t,t, FlxColor.WHITE);
-		offset.set( -4, -4);
+		loadGraphic(AssetPaths.cube__png, true, 16, 16);
+		animation.add("idle", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15], 10);
+		animation.play("idle");
+		scale.set(FlxG.random.float(0.5, 1), FlxG.random.float(0.5, 1));
+		offset.set( -8, -8);
 		centerOffsets();
 		_lifespan = 4;
 
-        bTrail = new FlxTrail(this, null, 10, 1, 0.5, 0.05);
+       bTrail = new FlxTrail(this, null, 2,0, 0.1, 0.02);
 		Reg.PS.effects.add(bTrail);
 	}
 		
 	override public function update(elapsed:Float)
 	{
 		magnetize();
-		angle += rotationSpeed;
-
+	
 		if (magnetized)
 		move();
 		else
@@ -73,7 +75,7 @@ class CoinItem extends Item
 	{
 		_lifespan = 4;
 		Reg.PS.coins.remove(this, true);
-		Reg.PS.effects.remove(bTrail, true);
+	//	Reg.PS.effects.remove(bTrail, true);
 		super.kill();
 	}
 	

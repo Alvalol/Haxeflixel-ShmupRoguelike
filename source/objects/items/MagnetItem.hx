@@ -13,7 +13,7 @@ class MagnetItem extends Item
 		super(x, y);
 		_lifespan = 4;
 		loadGraphic(AssetPaths.items__png, true, 8,8);
-		animation.add("static", [3]);
+		animation.add("move", [2,3,4,5,6,7,8],12);
 		animation.play("static");
 	}
 	
