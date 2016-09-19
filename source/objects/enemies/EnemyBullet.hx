@@ -12,6 +12,7 @@ class EnemyBullet extends FlxSprite
 
 	private var bTrail:FlxTrail;
 	private var noHit:NoHit;
+	private var creatednoHit = false;
 	
 	public function new(x:Float,y:Float) 
 	{
@@ -27,7 +28,7 @@ class EnemyBullet extends FlxSprite
 	
 	private function createTrail()
 	{
-        bTrail = new FlxTrail(this, null, 10, 1, 0.3, 0.05);
+        bTrail = new FlxTrail(this, null, 15, 1, 0.3, 0.05);
 		Reg.PS.effects.add(bTrail);
 	}
 	
@@ -71,14 +72,18 @@ class EnemyBullet extends FlxSprite
 	private function createNoHit()
 	{
         noHit = new NoHit(x, y);
+		creatednoHit = true;
 		Reg.PS.effects.add(noHit);
 	}
 	
-	override public function kill():Void
+	override public function kill()
 	{	
 	Reg.PS.EBullets.remove(this, true);
 	Reg.PS.effects.remove(bTrail, true);
+	if(creatednoHit)
+	{
 	Reg.PS.effects.remove(noHit, true);
+	}
 	super.kill();
 	}
 	

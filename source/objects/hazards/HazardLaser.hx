@@ -1,5 +1,6 @@
 package objects.hazards;
 import flixel.FlxG;
+import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.FlxObject;
@@ -11,10 +12,16 @@ class HazardLaser extends Hazard
 	private var counter:Int = FlxG.random.int(0,20);
 	private var maxCounter:Int = 300;
 	private var tactive:Bool = false;
+	private var tweenOptions:TweenOptions;
+	
+	private var animationTween:FlxTween;
+	
 
 	public function new(x:Float, y:Float) 
 	{
-		super(x, y- 8);
+		super(x, y - 8);
+		startAnimation();
+		
 		makeGraphic(2, FlxG.height, FlxColor.YELLOW);
 	}
 	
@@ -22,9 +29,25 @@ class HazardLaser extends Hazard
 	 {
 		switchingStates();
 		solid = tactive;
+		if (tactive && !animationTween.active)
+	
+		{tweenOptions = {type : FlxTween.PINGPONG, loopDelay:2};
+		animationTween.active =  active;
+		}
 		super.update(elapsed);
      }
 	 
+	 	private function startAnimation(?tween:FlxTween)
+	{
+		if (flipY)
+		{
+		animationTween = FlxTween.linearMotion(this, x, y, x, y + height , 25, false, tweenOptions);
+		}
+		else
+		{
+	    animationTween = FlxTween.linearMotion(this, x, y, x, y - height , 25, false, tweenOptions);		
+		}
+	}
 	private function switchingStates()
 	{
 		if (_appeared && counter < maxCounter)
