@@ -1,8 +1,8 @@
-# Untitled Roguelite Shmup
+# Gemini Bird
 
 ![N|Solid](http://i.imgur.com/SV75s2y.png)
 
-Untitled Roguelite Shmup is a game made with Haxe and Haxeflixel.
+Gemini Bird is a game made with Haxe and Haxeflixel.
 
 The game is being developed by [@theotheralvaro](twitter.com/theotheralvaro)
 
