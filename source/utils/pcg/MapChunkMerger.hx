@@ -131,7 +131,7 @@ class MapChunkMerger
 	{
 		var chunkGroup:Array<TiledMap> = new Array<TiledMap>();
 		
-		if (chunkGroup.length == 0)
+		if (chunkGroup.length == 0 && CURRENT_TYPE != "tunnel")
 		{
 			chunkGroup.push(Reg.CURRENT_SEED.getObject(TMXORGANIZED[type]));
 		}

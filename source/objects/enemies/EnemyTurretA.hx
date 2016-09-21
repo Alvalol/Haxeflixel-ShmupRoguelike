@@ -110,7 +110,8 @@ class EnemyTurretA extends Enemy
 	
 	private function shoot():EnemyBullet
 	{
-		var eb:EnemyBullet = Reg.PS.EBullets.recycle();
+		
+		var eb:EnemyBullet = Reg.PS.EBullets.recycle(EnemyBullet);
 	    if (eb == null)
 		    eb = new EnemyBullet(x, y);
         
@@ -118,10 +119,12 @@ class EnemyTurretA extends Enemy
 		{	
 			eb.reset(x , y - 1 );
 			eb.velocity.y = -SHOOT_SPEED;
+			eb.set_angle(0);
 		}
 		else
 		{
 			eb.reset(x, y + 1 );
+			eb.set_angle(180);
 			eb.velocity.y = SHOOT_SPEED;			
 		}
 
@@ -134,6 +137,7 @@ class EnemyTurretA extends Enemy
 		{
 		var aim = new FlxPoint(Reg.PS.player.x, Reg.PS.player.y);
 		FlxVelocity.moveTowardsPoint(eb, aim, SHOOT_SPEED, 0);
+		
 		}
 		
 		return eb;

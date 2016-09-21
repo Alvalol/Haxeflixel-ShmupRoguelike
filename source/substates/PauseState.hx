@@ -28,7 +28,7 @@ class PauseState extends FlxSubState
 		add(pauseText);
 		pauseText.scrollFactor.set(0, 0);
 		messageText.scrollFactor.set(0, 0);
-		pauseText.setFormat(AssetPaths.pixel_font__ttf, 12, FlxColor.fromRGB(255,255,255,5) ,
+		pauseText.setFormat(AssetPaths.pixel_font__ttf, 8, FlxColor.fromRGB(255,255,255,5) ,
 			                FlxTextBorderStyle.OUTLINE, FlxColor.fromRGB(0, 0, 0, 250));
 	    messageText.setFormat(AssetPaths.pixel_font__ttf, 8, FlxColor.fromRGB(255,255,255,5) ,
 			                FlxTextBorderStyle.OUTLINE, FlxColor.fromRGB(0, 0, 0, 250));

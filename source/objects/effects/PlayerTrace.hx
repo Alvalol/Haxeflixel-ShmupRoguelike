@@ -9,6 +9,8 @@ class PlayerTrace extends FlxSprite
 {
 	
 	private var bTrail:FlxTrail;
+	private var lifespan = 1;
+	
 	public function new(x:Float,y:Float) 
 	{
 		super(x, y);

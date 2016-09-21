@@ -13,7 +13,9 @@ class SpreadItem extends Item
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
-		makeGraphic(8, 8, FlxColor.YELLOW);
+		loadGraphic(AssetPaths.items__png, true, 8,8);
+		animation.add("static", [2,3,4,5,6,7,8],12);
+		animation.play("static");
 	}
 	
 	override public function interact(player:Player)

@@ -1,6 +1,6 @@
 # Untitled Roguelite Shmup
 
-![N|Solid](https://camo.githubusercontent.com/64a99cce38429474e80e0d6a1cad8ffa2e24524c/687474703a2f2f692e696d6775722e636f6d2f6e366232426a362e676966)
+![N|Solid](http://i.imgur.com/SV75s2y.png)
 
 Untitled Roguelite Shmup is a game made with Haxe and Haxeflixel.
 

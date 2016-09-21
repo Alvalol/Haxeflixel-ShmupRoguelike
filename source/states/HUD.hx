@@ -42,7 +42,7 @@ class HUD extends FlxSpriteGroup
 		Std.string(Reg.score), "0", 5);
 		
 
-		_currentHealth.text = (Reg.PS.player.HP +  ":" + Reg.PS.player.MAX_HP);
+		_currentHealth.text = (Reg.PS.player.HP +  "on" + Reg.PS.player.MAX_HP);
 		
 		if(!Reg.pause)
 		super.update(elapsed);

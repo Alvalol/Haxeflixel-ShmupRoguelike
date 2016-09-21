@@ -15,6 +15,7 @@ import objects.items.CoinItem;
 class PlayerBullet extends FlxSprite
 {
 	private static inline var MOVE_SPEED = 250;
+	var newBullAnim = new NewBullEffect(0, 0);
 	
 	public function new(x:Float, y:Float) 
 	{
@@ -22,9 +23,9 @@ class PlayerBullet extends FlxSprite
 		makeGraphic(8, 1, FlxColor.WHITE);
 		
 		centerOffsets();
-		
-		var newBullAnim = new NewBullEffect(x+6,y-1);
+				
 		Reg.PS.effects.add(newBullAnim);
+
 		animation.add("static", [16]);
 		animation.play("static");
 	}
@@ -32,6 +33,7 @@ class PlayerBullet extends FlxSprite
 	override public function update(elapsed:Float)
 	{
 	    collisions();
+
 		move();
 	
 		if(!Reg.pause)
@@ -91,7 +93,7 @@ class PlayerBullet extends FlxSprite
 	{		
 		new FlxTimer().start(Reg.PS.player.RANGE, function(_) 
 		{ kill(); }, 1);
-		
+		newBullAnim.reset(x-2 , y-1);
 		super.revive();
 	}
 

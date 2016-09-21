@@ -13,7 +13,9 @@ class HazardMovingBlock extends Hazard
 	public function new(x:Float, y:Float, hor:Bool) 
 	{
 		super(x, y);
-		makeGraphic(8, 8, FlxColor.WHITE);
+		loadGraphic(AssetPaths.hazards__png, true, 8, 8);
+		animation.add("static", [1]);
+		animation.play("static");
 		centerOffsets();
 		horizontal = hor;
 	}

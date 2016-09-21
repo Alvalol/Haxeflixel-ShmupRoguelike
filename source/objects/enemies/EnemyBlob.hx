@@ -29,7 +29,7 @@ class EnemyBlob extends Enemy
 		tsize = _tsize;
 		roll = FlxG.random.int(0, 100);
 		loadGraphic(AssetPaths.bigEnemies__png, true, 16, 16);
-		animation.add("idle", [0]);
+		animation.add("idle", [0,1],30);
 		animation.play("idle");
 		setGraphicSize(Std.int(tsize), Std.int(tsize));
 	}

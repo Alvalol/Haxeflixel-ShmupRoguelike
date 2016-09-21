@@ -114,6 +114,7 @@ class PlayState extends FlxState
 
 		addGameplayElements();
       	cameraSetup();
+		//getMiniMap();
 		super.create();
 	}
 
@@ -128,7 +129,7 @@ class PlayState extends FlxState
 		Gamepad.checkForExit();
 		displayTracers();
 		
-				//getMiniMap();
+		//getMiniMap();
 
 		FlxSpriteUtil.bound(player, 
 		                    FlxG.camera.scroll.x, 
@@ -136,7 +137,6 @@ class PlayState extends FlxState
 							FlxG.camera.scroll.y,
 							FlxG.camera.scroll.y + FlxG.camera.height);	
 	}
-
 	
 	public function getMiniMap(wallColor:Int = 0xFFFF0000, openColor:Int = 0xFFFFFFFF):Void
 	{

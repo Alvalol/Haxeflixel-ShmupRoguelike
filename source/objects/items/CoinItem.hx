@@ -27,7 +27,7 @@ class CoinItem extends Item
 		centerOffsets();
 		_lifespan = 4;
 
-       bTrail = new FlxTrail(this, null, 2,0, 0.1, 0.02);
+        bTrail = new FlxTrail(this, null, 2,0, 0.1, 0.02);
 		Reg.PS.effects.add(bTrail);
 	}
 		

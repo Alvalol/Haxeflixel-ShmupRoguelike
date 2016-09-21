@@ -12,7 +12,7 @@ class HealthItem extends Item
 		super(x, y);
 		_lifespan = 4;
 		loadGraphic(AssetPaths.items__png, true, 8,8);
-		animation.add("move", [7,8,9,10,11], 12);
+		animation.add("move", [9,10,11,12,13], 12);
 		animation.play("move");
 	}
 	

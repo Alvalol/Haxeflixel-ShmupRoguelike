@@ -35,7 +35,7 @@ class Player extends FlxSprite
 	public var MAX_RANGE:Float = 2.0;
 	
 	private static inline var MAX_BULLETS:Int = 10;
-	private static inline var BULLET_OFFSET:Int = 7;
+	private static inline var BULLET_OFFSET:Int = 8;
 	
 	public var HP:Int;
 	public var MAX_HP:Int;
@@ -60,7 +60,7 @@ class Player extends FlxSprite
 		setSize(4, 4);
 		
 		centerOffsets();
-		animation.add("move", [0,1],12);
+		animation.add("move", [0,1,1,1,0],12);
 		animation.play("move");
 		
 		drag.x = DECELERATION;
@@ -80,13 +80,13 @@ class Player extends FlxSprite
 		
 		if(!Reg.pause)
 		    super.update(elapsed);
-			
+		/*	
 		if (FlxG.random.int(0,100) > 40)
 		{
 		var tracePlayer = new objects.effects.PlayerTrace(x - 8, y-2);
 		Reg.PS.effects.add(tracePlayer);
 		}
-		trace(elapsed);
+		*/
 	}
 		
 	
@@ -158,16 +158,21 @@ class Player extends FlxSprite
 	// TODO : Complete reimplementation to support different types of "weapons"  
 	public function shoot()
 	{
+		if (!Reg.pause)
+		{
 		var ang = 10;
+		FlxG.camera.shake(0.0015, 0.025);
 		
 		if (Reg.PS.PBullets.countLiving() < MAX_BULLETS && _cooldown <= 0) 
 		{
-			var pb:PlayerBullet =  new PlayerBullet(x, y);
+			
+			var pb =  Reg.PS.PBullets.recycle(PlayerBullet);
+			if(pb == null) new PlayerBullet(x, y);
 
 			switch SHOT_MOD {
 			case 0:
 			{
-				pb.reset(x + BULLET_OFFSET, y + 2 );
+				pb.reset(x + BULLET_OFFSET, y + 1 );
 				Reg.PS.PBullets.add(pb);
 				_cooldown = .4;
 			}
@@ -184,6 +189,7 @@ class Player extends FlxSprite
 				_cooldown = .2;
 			}
 			}
+		}
 		}
 	}
 	

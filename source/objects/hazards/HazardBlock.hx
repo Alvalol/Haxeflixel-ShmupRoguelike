@@ -13,6 +13,7 @@ class HazardBlock extends Hazard
 		loadGraphic(AssetPaths.solid__png, true, 8, 8);
 		animation.add("static", [1]);
 		animation.play("static");
+		color = Reg.CURRENT_SEED.getObject([0xFFFFFFFF]);
 		immovable = true;
 		solid = true;
 	}

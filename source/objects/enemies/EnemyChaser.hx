@@ -21,7 +21,9 @@ class EnemyChaser extends Enemy
 	{
 		super(x, y);
 		HP = 1;
-		makeGraphic(8, 8, FlxColor.LIME);
+		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
+		animation.add("idle", [12,13],10);
+		animation.play("idle");
 
 	}
 	
@@ -47,7 +49,7 @@ class EnemyChaser extends Enemy
 	
 	private function createTrail()
 	{
-        bTrail = new FlxTrail(this, null, 10, 2, 0.75, 0.09);
+        bTrail = new FlxTrail(this, null, 20, 2, 0.75, 0.25);
 		Reg.PS.effects.add(bTrail);
 	}
 	

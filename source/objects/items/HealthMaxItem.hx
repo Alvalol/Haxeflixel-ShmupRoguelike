@@ -13,9 +13,9 @@ class HealthMaxItem extends Item
 		super(x, y);
 		_lifespan = 4;
 		loadGraphic(AssetPaths.items__png, true, 8,8);
-		animation.add("move", [2,3,4,5,6,7,8],12);
+		animation.add("static", [2,3,4,5,6,7,8],12);
 		animation.play("static");
-//		color = ;
+		color = new FlxColor(0xFF00FF00);
 	}
 	
 	override function interact(player:Player)

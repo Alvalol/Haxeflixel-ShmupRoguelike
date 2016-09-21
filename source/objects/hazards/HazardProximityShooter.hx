@@ -18,7 +18,9 @@ class HazardProximityShooter extends Hazard
 		super(x-4, y-8);
 		immovable = true;
 		solid = true;
-		makeGraphic(8, 8, FlxColor.BROWN);
+		loadGraphic(AssetPaths.hazards__png, true, 8,8);
+		animation.add("idle", [0]);
+		animation.play("idle");
 	}
 	
 	override public function update(elapsed:Float) 
