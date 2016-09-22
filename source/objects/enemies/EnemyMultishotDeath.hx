@@ -48,10 +48,12 @@ class EnemyMultishotDeath extends Enemy
 	private function shoot()
 	{
 		justShot = true;
+		
 		var eb = Reg.PS.EBullets.recycle(EnemyBullet);
 		
 		if (eb == null)
 		var eb = new EnemyBullet(x, y);
+		eb.reset(x, y);
 		
 
 		_angle += 30;
@@ -74,6 +76,7 @@ class EnemyMultishotDeath extends Enemy
 			var eb = Reg.PS.EBullets.recycle(EnemyBullet);
 			if (eb == null)
 			var eb = new EnemyBullet(x, y);
+			eb.reset(x, y);
 		
 			eb.velocity.set(FlxVelocity.velocityFromAngle(tang, bulletSpeed).x,FlxVelocity.velocityFromAngle(tang, bulletSpeed).y);
 			tang += 45;

@@ -29,7 +29,6 @@ import openfl.system.ApplicationDomain;
 import openfl.system.System;
 import openfl.utils.ByteArray;
 import substates.PauseState;
-import sys.io.FileOutput;
 import utils.controls.Gamepad;
 import utils.pcg.MapChunkMerger;
 import flixel.input.gamepad.FlxGamepad;
@@ -43,7 +42,6 @@ import objects.enemies.Enemy;
 import objects.items.CoinItem;
 import objects.hazards.HazardBlock;
 import objects.enemies.enemyobjects.EnemyExplosiveExplosion;
-import sys.io.FileOutput;
 
 import flixel.FlxG;
 import utils.pcg.LevelLoaderProc;
@@ -138,7 +136,7 @@ class PlayState extends FlxState
 							FlxG.camera.scroll.y + FlxG.camera.height);	
 	}
 	
-	public function getMiniMap(wallColor:Int = 0xFFFF0000, openColor:Int = 0xFFFFFFFF):Void
+	public function getMiniMap(wallColor:Int = 0xFFFF00FF, openColor:Int = 0xFFFFFFFF):Void
 	{
 		var minimap:FlxSprite = new FlxSprite();
 		var bData:BitmapData;

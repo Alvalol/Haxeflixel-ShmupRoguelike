@@ -46,7 +46,7 @@ class GameOverSubState extends FlxState
 	{
 		super.update(elapsed);
 		
-		if (FlxG.keys.anyJustPressed(["ENTER"]))
+		if (FlxG.keys.anyJustPressed([ENTER]))
 		    onClick();
 	}
 	

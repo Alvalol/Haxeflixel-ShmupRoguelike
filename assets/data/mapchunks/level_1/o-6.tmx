@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="35">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="40">
  <properties>
   <property name="type" value="open"/>
  </properties>
@@ -18,4 +18,8 @@
  </layer>
  <objectgroup name="objects"/>
  <objectgroup name="hazards"/>
+ <objectgroup name="enemies">
+  <object id="35" type="freeMovement" gid="4" x="48" y="64" width="8" height="8"/>
+  <object id="37" type="flyingLtoR" gid="4" x="48" y="96" width="8" height="8"/>
+ </objectgroup>
 </map>

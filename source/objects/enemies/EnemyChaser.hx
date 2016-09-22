@@ -57,8 +57,10 @@ class EnemyChaser extends Enemy
 	{
 		drops = [new RangeItem(x, y)];
 		dropRate = [1.0];
-		dropItem(drops,dropRate);
+		dropItem(drops, dropRate);
+		if (trailCreated)
 		Reg.PS.effects.remove(bTrail);
+		
 		super.kill();
 	}
 }

@@ -44,7 +44,7 @@ class EnemyTurretA extends Enemy
         ty = Std.int(y / 8);
 		
 		flipY = _flipped;
-		adjustPlacement();
+	//	adjustPlacement();
 		
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		animation.add("idle", [0,1], 6, true);

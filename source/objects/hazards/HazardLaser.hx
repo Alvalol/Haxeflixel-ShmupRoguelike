@@ -34,6 +34,7 @@ class HazardLaser extends Hazard
 		{tweenOptions = {type : FlxTween.PINGPONG, loopDelay:2};
 		animationTween.active =  active;
 		}
+		
 		super.update(elapsed);
      }
 	 

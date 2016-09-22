@@ -5,8 +5,8 @@ import flixel.util.FlxColor;
 class Scroller extends FlxSprite
 {
 	
-	private static inline var ACCELERATION:Int = 2;
-	private var MOVE_SPEED:Int = 20;
+	private static inline var ACCELERATION:Int = 4;
+	private var MOVE_SPEED:Int = 40;
 
 	public function new(x:Float,y:Float)
 	{
