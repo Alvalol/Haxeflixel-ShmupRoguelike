@@ -126,7 +126,7 @@ class PlayState extends FlxState
 		Gamepad.updateGameInputs();
 		Gamepad.checkForExit();
 		displayTracers();
-		
+		updateCam();
 		//getMiniMap();
 
 		FlxSpriteUtil.bound(player, 
@@ -221,12 +221,23 @@ class PlayState extends FlxState
 		_gameCamera.setScrollBoundsRect(0, 0, map.width, map.height, true);
 		_gameCamera.pixelPerfectRender = false;	
 		_gameCamera.follow(_scroller, FlxCameraFollowStyle.TOPDOWN_TIGHT, lerpSpeed);
+
 		
 		add(_scroller);
 		add(_hud);
 	}
 
-	
+	private function updateCam()
+	{
+		if (Reg.PS.player.x <_scroller.x)
+		{
+		_gameCamera.follow(_scroller, FlxCameraFollowStyle.TOPDOWN_TIGHT, lerpSpeed);
+		}
+		else
+		{
+		_gameCamera.follow(Reg.PS.player, FlxCameraFollowStyle.TOPDOWN_TIGHT, lerpSpeed);
+		}
+	}
 	private function displayTracers()
 	{
 		// Don't use trace and implement the actual debugging tools that Haxeflixel provides.

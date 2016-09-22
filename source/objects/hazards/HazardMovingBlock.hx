@@ -10,7 +10,7 @@ class HazardMovingBlock extends Hazard
 	private var MOVE_SPEED:Float = 0.5;
 	private var horizontal:Bool;
 	
-	public function new(x:Float, y:Float, hor:Bool) 
+		public function new(x:Float, y:Float, hor:Bool) 
 	{
 		super(x, y);
 		loadGraphic(AssetPaths.hazards__png, true, 8, 8);

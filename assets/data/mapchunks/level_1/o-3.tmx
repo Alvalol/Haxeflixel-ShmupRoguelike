@@ -54,6 +54,5 @@
  <objectgroup name="enemies">
   <object id="35" type="enemyTurret" gid="4" x="64" y="136" width="8" height="8"/>
   <object id="48" type="enemyTurret" gid="4" x="24" y="136" width="8" height="8"/>
-  <object id="49" type="enemyTurret" gid="4" x="44.75" y="135.75" width="8" height="8"/>
  </objectgroup>
 </map>

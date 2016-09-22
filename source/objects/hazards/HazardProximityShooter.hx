@@ -25,6 +25,7 @@ class HazardProximityShooter extends Hazard
 	
 	override public function update(elapsed:Float) 
 	{
+		if (isOnScreen())
 		proximity();
 		super.update(elapsed);
 	}
