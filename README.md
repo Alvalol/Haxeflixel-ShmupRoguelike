@@ -4,7 +4,9 @@
 
 Gemini Bird is a game made with Haxe and Haxeflixel.
 
-The game is being developed by [@theotheralvaro](twitter.com/theotheralvaro)
+The game is being developed by [@theotheralvaro](http://twitter.com/theotheralvaro)
+
+You can try it out [here](https://drive.google.com/open?id=0By79FfszQd8wT1BpT3BxWW1qZjQ) -> the highest build number is the most recent one.
 
 ## Installation
 

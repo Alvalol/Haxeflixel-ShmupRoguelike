@@ -74,7 +74,7 @@ class ObjectPlacement
 		for (enemy in getLevelObjects(chunk, "enemies"))
 		{
 			var pos = new FlxPoint(chunkIndex * (chunk.fullWidth) + enemy.x , enemy.y);
-			if(FlxMath.absInt(FlxMath.distanceToPoint(Reg.PS.player,pos)) < 10){
+			//if(FlxMath.absInt(FlxMath.distanceToPoint(Reg.PS.player,pos)) < 10)
 		    switch enemy.type
 			   {		   
 				   // general enemy types
@@ -122,14 +122,14 @@ class ObjectPlacement
 
 					case "enemyWorm" : Reg.PS.enemies.add(new EnemyWorm(pos.x, pos.y,enemy.flippedVertically));
 			   }
-		}
+		
 			   
 		}
 		
 		for (hazard in getLevelObjects(chunk, "hazards"))
 		{
 			var pos = new FlxPoint(chunkIndex * (chunk.fullWidth) + hazard.x,hazard.y);//((chunkIndex * (chunk.fullWidth * chunk.tileWidth))	  
-			if (FlxMath.absInt(FlxMath.distanceToPoint(Reg.PS.player, pos)) < 10){
+		//	if (FlxMath.absInt(FlxMath.distanceToPoint(Reg.PS.player, pos)) < 10){
 
 			  switch hazard.type
 			  {
@@ -144,7 +144,7 @@ class ObjectPlacement
 				  case "proximity" : Reg.PS.hazards.add(new HazardProximityShooter(pos.x, pos.y));
 				  
 			  }
-		}
+		
 		}
 					
 

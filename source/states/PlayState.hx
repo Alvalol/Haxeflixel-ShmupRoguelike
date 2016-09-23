@@ -46,7 +46,7 @@ import objects.enemies.enemyobjects.EnemyExplosiveExplosion;
 import flixel.FlxG;
 import utils.pcg.LevelLoaderProc;
 import haxe.io.Bytes;
-
+import utils.pcg.ObjectPlacement;
 import openfl.display.PNGEncoderOptions;
 
 class PlayState extends FlxState
@@ -120,7 +120,8 @@ class PlayState extends FlxState
 	{
 		if (!Reg.pause)
 		super.update(elapsed);
-		
+		        
+
 		controlPauseScreen();
 		Gamepad.checkForGamepad();
 		Gamepad.updateGameInputs();
