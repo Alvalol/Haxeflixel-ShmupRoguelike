@@ -7,7 +7,7 @@ import flixel.FlxG;
 class Explosion extends FlxSprite
 {
 
-	private var _scale = FlxG.random.float(0.5,1.5);
+	private var _scale = FlxG.random.float(2,2.5);
 	
 	public function new(x:Float,y:Float) 
 	{
@@ -22,8 +22,9 @@ class Explosion extends FlxSprite
 	{
 		if (animation.curAnim.curFrame == 3 && isOnScreen())
 		{
-			kill();
 			Reg.PS.effects.remove(this, true);
+			kill();
+
 		}
 		
 		if(!Reg.pause)

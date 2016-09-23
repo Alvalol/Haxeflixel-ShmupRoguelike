@@ -9,10 +9,11 @@ class HazardBlock extends Hazard
 
 	public function new(x:Float,y:Float)
 	{
-		super(x, y);
+		super(x, y-8);
 		loadGraphic(AssetPaths.solid__png, true, 8, 8);
 		animation.add("static", [1]);
 		animation.play("static");
+	//	centerOrigin();
 		color = Reg.CURRENT_SEED.getObject([0xFFFFFFFF]);
 		immovable = true;
 		solid = true;

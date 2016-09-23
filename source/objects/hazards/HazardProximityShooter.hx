@@ -15,8 +15,9 @@ class HazardProximityShooter extends Hazard
 
 	public function new(x:Float,y:Float) 
 	{
-		super(x-4, y-8);
+		super(x-8, y-8);
 		immovable = true;
+		
 		solid = true;
 		loadGraphic(AssetPaths.hazards__png, true, 8,8);
 		animation.add("idle", [0]);
@@ -25,20 +26,19 @@ class HazardProximityShooter extends Hazard
 	
 	override public function update(elapsed:Float) 
 	{
-		if (isOnScreen())
 		proximity();
 		super.update(elapsed);
 	}
 	
 	private function proximity()
 	{
-		if (FlxMath.absInt(Std.int(x))  - Std.int(Reg.PS.player.x) < 10 && !shot)
+		if (FlxMath.absInt(Std.int(x))  - Std.int(Reg.PS.player.x) < 10 && !shot && isOnScreen())
 			shoot();
 	}
 	
 	private function shoot()
 	{
-		var hb:HazardBullet = new HazardBullet(x+2, y);
+		var hb:HazardBullet = new HazardBullet(x, y);
 		Reg.PS.HBullets.add(hb);		
 		shot = true;
 	}

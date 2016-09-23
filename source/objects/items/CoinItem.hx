@@ -75,7 +75,7 @@ class CoinItem extends Item
 	{
 		_lifespan = 4;
 		Reg.PS.coins.remove(this, true);
-	//	Reg.PS.effects.remove(bTrail, true);
+	    Reg.PS.effects.remove(bTrail, true);
 		super.kill();
 	}
 	

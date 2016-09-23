@@ -6,14 +6,14 @@ class Scroller extends FlxSprite
 {
 	
 	private static inline var ACCELERATION:Int = 4;
-	private var MOVE_SPEED:Int = 30;
+	private var MOVE_SPEED:Int = 40;
 
 	public function new(x:Float,y:Float)
 	{
 		super(x,y);
 	    makeGraphic(4, 4, FlxColor.RED);
 		alpha = .5;
-		visible = true;
+		visible = false;
 		maxVelocity.set(MOVE_SPEED, MOVE_SPEED);
 	}
 	

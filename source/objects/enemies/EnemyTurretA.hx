@@ -33,6 +33,7 @@ class EnemyTurretA extends Enemy
 	private var ty:Int;
 	private var typeRoll:Int;
 	private var type:Int;
+	private var adjusted:Bool = false;
 	
 	public function new(x:Float, y:Float, _flipped:Bool) 
 	{
@@ -44,7 +45,6 @@ class EnemyTurretA extends Enemy
         ty = Std.int(y / 8);
 		
 		flipY = _flipped;
-	//	adjustPlacement();
 		
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		animation.add("idle", [0,1], 6, true);
@@ -60,33 +60,23 @@ class EnemyTurretA extends Enemy
 	override public function update(elapsed:Float)
 	{
 		animateToShoot();	
-		checkForBlock();
+		killWithExplosion();
+		if (!adjusted)
+		{
+		adjustPlacement();
+		adjusted = true;
+		}
 		super.update(elapsed);
 	}
 	
 	
-	private function checkForBlock()
+			private function killWithExplosion()
 	{
-		// TODO : Unsure if this is necessary anymore. Verify when enemies are reimplemented in game. 
-		var tileTop = Reg.PS.map.getTile(tx, ty - 1);
-		var tileBottom = Reg.PS.map.getTile(tx, ty + 1);
-	
-		if (flipY)
+		if (FlxG.overlap(this, Reg.PS.effects))
 		{
-			if (!overlapsAt(x, y - 2, Reg.PS.map))
-			{
-			if (!overlapsAt(x, y - 2, Reg.PS.blocks)) kill();
-			}
-		}
-		else
-			{
-				if (!overlapsAt(x, y + 1, Reg.PS.map))
-				{
-				if (!overlapsAt(x, y + 1, Reg.PS.blocks)) kill();
-			}
+			kill();
 		}
 	}
-	
 
 	override function collisions() 
 	{	
@@ -154,15 +144,9 @@ class EnemyTurretA extends Enemy
       private function adjustPlacement()
 	{
 		// There has to be a better way to do this. Hacky and ugly.
-		
-		if (flipY)
-		{
-			y +=height;
-		}
-		else
-		{
-			y -= height;
-		}
+			y -=height;
+
+
 	}
 		
 	private function chooseType()	

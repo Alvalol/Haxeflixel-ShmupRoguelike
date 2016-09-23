@@ -28,7 +28,7 @@ class EnemyBullet extends FlxSprite
 	
 	private function createTrail()
 	{
-        bTrail = new FlxTrail(this, null, 15, 1, 0.3, 0.05);
+        bTrail = new FlxTrail(this, null, 5, 5, 0.75, 0.25);
 		Reg.PS.effects.add(bTrail);
 	}
 	
@@ -78,6 +78,7 @@ class EnemyBullet extends FlxSprite
 	
 	override public function kill()
 	{	
+	
 	Reg.PS.EBullets.remove(this, true);
 	Reg.PS.effects.remove(bTrail, true);
 	if(creatednoHit)

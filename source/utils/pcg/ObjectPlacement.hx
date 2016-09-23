@@ -81,8 +81,12 @@ class ObjectPlacement
 				   // general enemy types
 				    case "ground": 
 					   var groundEnemies:Array<Enemy> = [new EnemySpawner(pos.x, pos.y, enemy.flippedVertically),
-					                                     new EnemyTurretA(pos.x, pos.y, enemy.flippedVertically),
 														 new EnemyWorm(pos.x, pos.y, enemy.flippedVertically)];
+										// new EnemyTurretA(pos.x, pos.y, enemy.flippedVertically),
+						
+						
+														 
+														 
 														 
 					   Reg.PS.enemies.add(chooseEnemy(groundEnemies));
 
@@ -109,12 +113,14 @@ class ObjectPlacement
 							
 					//Specific enemies
 					
-					case "enemyBlob" : Reg.PS.enemies.add (new EnemyBlob(pos.x, pos.y, 16));
+					case "enemyBlob" : Reg.PS.enemies.add (new EnemyBlob(pos.x, pos.y, 32));
 					case "enemyChaser" : Reg.PS.enemies.add(new EnemyChaser(pos.x, pos.y));
 					case "enemyLeft" : Reg.PS.enemies.add(new EnemyLeft(pos.y, pos.y));
 					case "enemyMultishot" : Reg.PS.enemies.add(new EnemyMultishotDeath(pos.x, pos.y));
 					case "enemySpawner" : Reg.PS.enemies.add(new EnemySpawner(pos.x, pos.y, enemy.flippedVertically));
-					case "enemyTurret" : Reg.PS.enemies.add(new EnemyTurretA(pos.x, pos.y, enemy.flippedVertically));
+					
+     				case "enemyTurret" : Reg.PS.enemies.add(new EnemyTurretA(pos.x, pos.y, enemy.flippedVertically));		
+
 					case "enemyWorm" : Reg.PS.enemies.add(new EnemyWorm(pos.x, pos.y,enemy.flippedVertically));
 			   }
 			   

@@ -76,7 +76,7 @@ class PlayState extends FlxState
 	
 	private var gamepad:FlxGamepad;
 
-	private var tracers:Bool = false;
+	private var tracers:Bool = true;
 	
 	private var lerpSpeed:Float = 0.1;
 	
@@ -106,13 +106,13 @@ class PlayState extends FlxState
 		_entities = new FlxGroup();
 		
 		
-		FlxG.mouse.visible = true; // must always be set to false pls
+		FlxG.mouse.visible = false; // must always be set to false pls
 		map = LevelLoaderProc.loadGeneratedLevel();
 		backDrop = new FlxBackdrop(AssetPaths.background__png, 0.01, 0.01, true, true);
 
 		addGameplayElements();
       	cameraSetup();
-		//getMiniMap();
+      //getMiniMap();
 		super.create();
 	}
 
@@ -126,8 +126,8 @@ class PlayState extends FlxState
 		Gamepad.updateGameInputs();
 		Gamepad.checkForExit();
 		displayTracers();
-		updateCam();
-		//getMiniMap();
+		//updateCam();
+	
 
 		FlxSpriteUtil.bound(player, 
 		                    FlxG.camera.scroll.x, 
@@ -235,9 +235,10 @@ class PlayState extends FlxState
 		}
 		else
 		{
-		_gameCamera.follow(Reg.PS.player, FlxCameraFollowStyle.TOPDOWN_TIGHT, lerpSpeed);
+		_gameCamera.follow(Reg.PS.player, FlxCameraFollowStyle.TOPDOWN, lerpSpeed);
 		}
 	}
+	
 	private function displayTracers()
 	{
 		// Don't use trace and implement the actual debugging tools that Haxeflixel provides.

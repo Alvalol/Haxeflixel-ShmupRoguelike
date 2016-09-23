@@ -18,7 +18,9 @@ class HazardBullet extends FlxSprite
 	{
 		super(x, y);
 		checkPlayer();
-		makeGraphic(4, 4, FlxColor.WHITE);
+		loadGraphic(AssetPaths.items__png, true, 8, 8);
+		animation.add("idle", [22,23], 8, true); // looping the animation gives it an interesting wobbly effect which might be desirable for some enemies.
+		animation.play("idle");
 	}
 	
 	override public function update(elapsed:Float):Void 

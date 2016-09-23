@@ -112,4 +112,6 @@ class Enemy extends FlxSprite
 		alive = false;
 	    exists = false;
 	}	
+	
+
 }

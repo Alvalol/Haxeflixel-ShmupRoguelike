@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="45">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="47">
  <properties>
   <property name="L" type="int" value="1"/>
   <property name="R" type="int" value="3"/>
@@ -19,5 +19,8 @@
   </data>
  </layer>
  <objectgroup name="objects"/>
- <objectgroup name="hazards"/>
+ <objectgroup name="hazards">
+  <object id="45" type="movingBlock" gid="1073741828" x="40" y="56" width="8" height="8"/>
+  <object id="46" type="movingBlock" gid="1073741828" x="48" y="104" width="8" height="8"/>
+ </objectgroup>
 </map>

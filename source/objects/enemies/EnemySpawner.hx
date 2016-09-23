@@ -75,10 +75,7 @@ class EnemySpawner extends Enemy
 	
 	private function adjustPlacement()
 	{
-		if (!flipY)
-		{
-		y -= 8;
-		}
+		y -= height;
 	}
 
 }

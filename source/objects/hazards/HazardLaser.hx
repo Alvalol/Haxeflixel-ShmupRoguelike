@@ -19,7 +19,7 @@ class HazardLaser extends Hazard
 
 	public function new(x:Float, y:Float) 
 	{
-		super(x, y - 8);
+		super(x+2, y - 8);
 		startAnimation();
 		
 		makeGraphic(2, FlxG.height, FlxColor.YELLOW);

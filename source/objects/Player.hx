@@ -26,12 +26,12 @@ class Player extends FlxSprite
 	public var MAX_HOR_MOVE_SPEED:Int = 100;
 	public var MAX_VERT_MOVE_SPEED:Int = 100;
 	
-	public var MAGNET:Int = 60;
+	public var MAGNET:Int = 0;
 	public var MAX_MAGNET:Int = 300;
-	public var MAGNET_FORCE:Int = 40;
+	public var MAGNET_FORCE:Int = 0;
 	public var MAX_MAGNET_FORCE:Int = 100;
 	
-	public var RANGE:Float = 0.1;
+	public var RANGE:Float = 0.2;
 	public var MAX_RANGE:Float = 2.0;
 	
 	private static inline var MAX_BULLETS:Int = 10;
@@ -41,7 +41,7 @@ class Player extends FlxSprite
 	public var MAX_HP:Int;
 	public var MAX_POSSIBLE_HP:Int = 10; //? Not sure. Needs playtest.
 	
-	private var _cooldown:Float = 0;
+	private var _cooldown:Float = 0.5;
 	public var invinsible:Bool = false;
 	
 	public var SHOT_MOD:Int;
@@ -80,13 +80,13 @@ class Player extends FlxSprite
 		
 		if(!Reg.pause)
 		    super.update(elapsed);
-		/*	
-		if (FlxG.random.int(0,100) > 40)
+		
+		if (FlxG.random.int(0,100) > 40 && (acceleration.x != 0  || acceleration.y != 0))
 		{
-		var tracePlayer = new objects.effects.PlayerTrace(x - 8, y-2);
-		Reg.PS.effects.add(tracePlayer);
+	//	var tracePlayer = new objects.effects.PlayerTrace(x - 8, y-2);
+		//Reg.PS.effects.add(tracePlayer);
 		}
-		*/
+		
 	}
 		
 	
@@ -174,7 +174,7 @@ class Player extends FlxSprite
 			{
 				pb.reset(x + BULLET_OFFSET, y + 1 );
 				Reg.PS.PBullets.add(pb);
-				_cooldown = .4;
+				_cooldown = 0.5;
 			}
 			
 			case 1:

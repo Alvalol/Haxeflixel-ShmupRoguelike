@@ -42,14 +42,14 @@ class EnemyChaser extends Enemy
 	
 	private function move()
 	{
-		angle += 5;
+	//	angle += 5;
 		var aim = new FlxPoint(Reg.PS.player.x, Reg.PS.player.y);
 		FlxVelocity.moveTowardsPoint(this, aim, MOVE_SPEED, 0);	
 	}
 	
 	private function createTrail()
 	{
-        bTrail = new FlxTrail(this, null, 20, 2, 0.75, 0.25);
+        bTrail = new FlxTrail(this, null, 20, 5, 0.75, 0.05);
 		Reg.PS.effects.add(bTrail);
 	}
 	

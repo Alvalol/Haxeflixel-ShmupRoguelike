@@ -95,14 +95,8 @@ class EnemyWorm extends Enemy
 	
 	private function adjustPlacement()
 	{
-		if (!flipY)
-		{
-		y += 8;
-		}
-		else
-		{
-		y -= 16;
-		}
+		if (flipY)
+		y -= 24;
 	}
 	
 	private function startAnimation(?tween:FlxTween)
