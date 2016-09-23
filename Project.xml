@@ -2,7 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="untitled shmup" file="untitled shmup" main="Main" version="0.0.1" company="Alvarop" />
+	<app title="Gemini Bird" file="Gemini Bird" main="Main" version="0.0.1" company="Alvarop" />
 
 	<!--The flixel preloader is not accurate in Chrome. You can use it regularly if you embed the swf into a html file
 		or you can set the actual size of your file manually at "FlxPreloaderBase-onUpdate-bytesTotal"-->
@@ -80,4 +80,6 @@
 	<!-- _________________________________ Custom _______________________________ -->
 
 	<!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
+	<icon path="assets/images/icon.ico" />	
+
 </project>
