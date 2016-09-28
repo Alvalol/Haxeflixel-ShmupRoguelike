@@ -8,6 +8,7 @@ import flixel.util.FlxColor;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxTimer;
 import objects.PlayerBullet;
+import objects.weapon.Weapon;
 
 import flixel.util.FlxSpriteUtil;
 import utils.controls.Keyboard;
@@ -161,7 +162,6 @@ class Player extends FlxSprite
 		if (!Reg.pause)
 		{
 		var ang = 10;
-		FlxG.camera.shake(0.0015, 0.025);
 		
 		if (Reg.PS.PBullets.countLiving() < MAX_BULLETS && _cooldown <= 0) 
 		{
