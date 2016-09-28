@@ -1,9 +1,13 @@
 package utils.pcg;
+import flash.display.BlendMode;
 import flixel.FlxG;
 import flixel.addons.editors.tiled.TiledMap;
 import flixel.addons.editors.tiled.TiledObject;
 import flixel.addons.editors.tiled.TiledObjectLayer;
+import flixel.group.FlxGroup;
+import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxMath;
+import flixel.FlxSprite;
 import flixel.math.FlxPoint;
 import flixel.tile.FlxTilemap;
 import objects.Player;
@@ -20,6 +24,8 @@ import objects.enemies.EnemySpawner;
 import objects.enemies.EnemyTurretA;
 import objects.enemies.EnemyWorm;
 import objects.gamesys.Goal;
+import objects.hazards.Hazard;
+import objects.hazards.HazardBlock;
 import objects.hazards.HazardBlock;
 import objects.hazards.HazardLaser;
 import objects.hazards.HazardMovingBlock;
@@ -28,16 +34,23 @@ import objects.hazards.HazardRotator;
 import utils.pcg.MapChunkMerger;
 
 
-
 class ObjectPlacement
-{
-	
+{	
+	public static var minDistanceToEnemy:Int = 256;
+	public static var allLevelEnemies:Array<Enemy>; 
+	public static var allLevelHazards:Array<Hazard>;
+	public static var allLevelBlocks:Array<HazardBlock>;
 	public static function loadLevelObjects(currentLevel:FlxTilemap)
 	{
 		
 	//	Goes through each layer of the current loaded level and checks for objects. This is basically an array that contains the XML files. (RAWCHUNKS)
 	
 	var RAWCHUNKS = MapChunkMerger.get_CHUNKS();
+	
+	allLevelEnemies = new Array<Enemy>();
+	allLevelHazards = new Array<Hazard>();
+	allLevelBlocks = new Array<HazardBlock>();
+	
 	var chunkIndex = 0;
 	
 	for (chunk in RAWCHUNKS) 
@@ -69,12 +82,12 @@ class ObjectPlacement
 				trace("No GOAL found for this level");
 			}
 		    }
+			
 		}
 		
 		for (enemy in getLevelObjects(chunk, "enemies"))
 		{
 			var pos = new FlxPoint(chunkIndex * (chunk.fullWidth) + enemy.x , enemy.y);
-			//if(FlxMath.absInt(FlxMath.distanceToPoint(Reg.PS.player,pos)) < 10)
 		    switch enemy.type
 			   {		   
 				   // general enemy types
@@ -82,66 +95,70 @@ class ObjectPlacement
 					   var groundEnemies:Array<Enemy> = [new EnemySpawner(pos.x, pos.y, enemy.flippedVertically),
 														 new EnemyWorm(pos.x, pos.y, enemy.flippedVertically)];
 										// new EnemyTurretA(pos.x, pos.y, enemy.flippedVertically),
-						
-						
-														 
-														 
-														 
-					   Reg.PS.enemies.add(chooseEnemy(groundEnemies));
+								
+						allLevelEnemies.push(chooseEnemy(groundEnemies));								 
+					 // placeEnemy(pos, (chooseEnemy(groundEnemies)));		
+					//   trace("Placed ground enemies");
+					  // Reg.PS.enemies.add(chooseEnemy(groundEnemies));
 
 				    case "flyingLtoR":
 					   var flyingLtoR:Array<Enemy> = [new EnemyExplosive(pos.x, pos.y), 
 					                                  new EnemyLeft(pos.y,pos.y)];
-					   
-				       Reg.PS.enemies.add(chooseEnemy(flyingLtoR));
+					  
+						allLevelEnemies.push(chooseEnemy(flyingLtoR));
+					//  placeEnemy(pos, (chooseEnemy(flyingLtoR)));	
+					 //  trace("Placed flyingLtoR");
+				      // Reg.PS.enemies.add(chooseEnemy(flyingLtoR));
 					   
 					   
 				    case "freeMovement": 
 					   var freeMovement:Array<Enemy> = [new EnemyBlob(pos.x, pos.y, 16), 
 					                                    new EnemyChaser(pos.x, pos.y), 
-														new EnemyMultishotDeath(pos.x,pos.y)];
-				       Reg.PS.enemies.add(chooseEnemy(freeMovement)); 
+														new EnemyMultishotDeath(pos.x, pos.y)];
+					 allLevelEnemies.push(chooseEnemy(freeMovement));
+					 //placeEnemy(pos, (chooseEnemy(freeMovement)));	
+					 // trace("Placed freeMovement");
+				    //  Reg.PS.enemies.add(chooseEnemy(freeMovement)); 
 					   
 				     case "flyingRtoL": 
 						var enGroup = new EnemyMoverGroup(pos.x, pos.y);
 						for (minion in enGroup.chainedGroup)
 							{
-							   Reg.PS.enemies.add(minion);
+							   //Reg.PS.enemies.add(minion);
+							   allLevelEnemies.push(minion);
 			                }
 							
 							
 					//Specific enemies
 					
-					case "enemyBlob" : Reg.PS.enemies.add (new EnemyBlob(pos.x, pos.y, 32));
-					case "enemyChaser" : Reg.PS.enemies.add(new EnemyChaser(pos.x, pos.y));
-					case "enemyLeft" : Reg.PS.enemies.add(new EnemyLeft(pos.y, pos.y));
-					case "enemyMultishot" : Reg.PS.enemies.add(new EnemyMultishotDeath(pos.x, pos.y));
-					case "enemySpawner" : Reg.PS.enemies.add(new EnemySpawner(pos.x, pos.y, enemy.flippedVertically));
-					
-     				case "enemyTurret" : Reg.PS.enemies.add(new EnemyTurretA(pos.x, pos.y, enemy.flippedVertically));		
-
-					case "enemyWorm" : Reg.PS.enemies.add(new EnemyWorm(pos.x, pos.y,enemy.flippedVertically));
+					case "enemyBlob" : allLevelEnemies.push(new EnemyBlob(pos.x, pos.y, 32));
+					case "enemyChaser" :  allLevelEnemies.push(new EnemyChaser(pos.x, pos.y));
+					case "enemyLeft" :  allLevelEnemies.push(new EnemyLeft(pos.y, pos.y));
+					case "enemyMultishot" :  allLevelEnemies.push(new EnemyMultishotDeath(pos.x, pos.y));
+					case "enemySpawner" :  allLevelEnemies.push(new EnemySpawner(pos.x, pos.y, enemy.flippedVertically));
+     				case "enemyTurret" :  allLevelEnemies.push(new EnemyTurretA(pos.x, pos.y, enemy.flippedVertically));		
+					case "enemyWorm" :  allLevelEnemies.push(new EnemyWorm(pos.x, pos.y,enemy.flippedVertically));
 			   }
-		
+			
 			   
 		}
 		
 		for (hazard in getLevelObjects(chunk, "hazards"))
 		{
 			var pos = new FlxPoint(chunkIndex * (chunk.fullWidth) + hazard.x,hazard.y);//((chunkIndex * (chunk.fullWidth * chunk.tileWidth))	  
-		//	if (FlxMath.absInt(FlxMath.distanceToPoint(Reg.PS.player, pos)) < 10){
+		
 
 			  switch hazard.type
 			  {
 					  
-				  case "block" : Reg.PS.blocks.add(new HazardBlock(pos.x, pos.y));
+				  case "block" : allLevelBlocks.push(new HazardBlock(pos.x, pos.y)); // allLevelBlocks because blocks can be destroyed but hazards can't
 				  
-				  case "laser" : Reg.PS.hazards.add(new HazardLaser(pos.x, pos.y));
+				  case "laser" : allLevelHazards.push(new HazardLaser(pos.x, pos.y));
 				  
-				  case "movingBlock" : Reg.PS.hazards.add(new HazardMovingBlock(pos.x, pos.y,hazard.flippedVertically));
+				  case "movingBlock" : allLevelHazards.push(new HazardMovingBlock(pos.x, pos.y,hazard.flippedVertically));
 				  // there should be a property in the object (tiled) setting if it moves horizontally or vertically
 				  
-				  case "proximity" : Reg.PS.hazards.add(new HazardProximityShooter(pos.x, pos.y));
+				  case "proximity" : allLevelHazards.push(new HazardProximityShooter(pos.x, pos.y));
 				  
 			  }
 		
@@ -152,7 +169,12 @@ class ObjectPlacement
 	}// end for loop
 	}
 
-		
+	
+	private static function placeEnemy(enemyPos:FlxPoint,enemy:Enemy)
+	{
+		if (FlxMath.distanceToPoint(Reg.PS.player, enemyPos) < minDistanceToEnemy && !enemy.isOnScreen())
+		Reg.PS.enemies.add(enemy);
+	}
 
 	private static function chooseEnemy(enemy:Array<Enemy>):Enemy
 	{

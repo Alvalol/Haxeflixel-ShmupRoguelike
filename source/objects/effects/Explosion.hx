@@ -16,15 +16,15 @@ class Explosion extends FlxSprite
 		scale.set(_scale,_scale);
 		animation.add("explosion",[0,1,2,3,3]);
 		animation.play("explosion");
+		trace("effect created", this);
 	}
 	
 	override public function update(elapsed:Float):Void 
 	{
 		if (animation.curAnim.curFrame == 3 && isOnScreen())
 		{
-			Reg.PS.effects.remove(this, true);
 			kill();
-
+			Reg.PS.effects.remove(this, true);
 		}
 		
 		if(!Reg.pause)

@@ -5,7 +5,7 @@ package objects.weapon;
 class WeaponSpread
 {
 	
-	var bulletAmount;
+	var bulletAmount:Int;
 	var bullets:Array<WeaponBullet>;
 	
 	public function new() 
@@ -17,6 +17,6 @@ class WeaponSpread
 	 * for(i in 0...bulletAmount)
 	 * {
 	 * wBullet = new WeaponBullet(x,y,angle);
-	 * 
+	 */
 	
 }

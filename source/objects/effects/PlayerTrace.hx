@@ -23,6 +23,7 @@ class PlayerTrace extends FlxSprite
 
 		createTrail();
 		bTrail.maxVelocity.set(0, -10);
+		trace("effect created", this);
 		
 	}
 	

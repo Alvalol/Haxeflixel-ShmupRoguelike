@@ -76,8 +76,6 @@ class PlayState extends FlxState
 	
 	private var gamepad:FlxGamepad;
 
-	private var tracers:Bool = true;
-	
 	private var lerpSpeed:Float = 0.1;
 	
 	public var canQuit = false;
@@ -127,8 +125,7 @@ class PlayState extends FlxState
 		Gamepad.updateGameInputs();
 		Gamepad.checkForExit();
 		displayTracers();
-		//updateCam();
-	
+		addLevelObjects();
 
 		FlxSpriteUtil.bound(player, 
 		                    FlxG.camera.scroll.x, 
@@ -151,7 +148,6 @@ class PlayState extends FlxState
 				if (map.getTile(i, j) > 0) // Is collision tile
 				{
 					bData.setPixel(i, j, openColor);
-					
 				}
 				else bData.setPixel(i, j, wallColor); // Else
 			}
@@ -167,6 +163,37 @@ class PlayState extends FlxState
 		add(minimap);
 	}
 	
+	
+	private function addLevelObjects()
+	{
+		for (enemy in ObjectPlacement.allLevelEnemies)
+		{
+		  if (FlxMath.distanceBetween(enemy, player) < ObjectPlacement.minDistanceToEnemy)
+		  {
+			  Reg.PS.enemies.add(enemy);
+
+		  }
+	    }
+		
+	    for (hazard in ObjectPlacement.allLevelHazards)
+		{
+		  if (FlxMath.distanceBetween(hazard, player) < ObjectPlacement.minDistanceToEnemy)
+		  {
+			  Reg.PS.hazards.add(hazard);
+		  }
+	    }
+		
+        for (blocks in ObjectPlacement.allLevelBlocks)
+		{
+		  if (FlxMath.distanceBetween(blocks, player) < ObjectPlacement.minDistanceToEnemy)
+		  {
+			  Reg.PS.blocks.add(blocks);
+			
+		  }
+	    }
+		
+		
+	}
 	
 	private function addGameplayElements()
 	{		
@@ -242,12 +269,11 @@ class PlayState extends FlxState
 	
 	private function displayTracers()
 	{
-		// Don't use trace and implement the actual debugging tools that Haxeflixel provides.
-		if (tracers)
-		{
-		trace("SCROLLER : " + Reg.SCROLLER_ON);	
+		#if !FLX_NO_DEBUG 
+		trace("enemies : " + enemies.length);
+			trace("SCROLLER : " + Reg.SCROLLER_ON);	
 		trace("items : " + items.length);
-		trace("enemies : " + enemies);
+
 		trace("eBullets : " +EBullets.length);
 		trace("PBullets : " + PBullets.length);
 	    trace("coins  " + coins.length);
@@ -255,7 +281,7 @@ class PlayState extends FlxState
 		trace("_entities " + _entities.length);
 		trace("effects " + effects.length);
 		trace("MASTER SEED : " + Reg.CURRENT_SEED.initialSeed);
-	    }
+	    #end
 	}
 	
 }

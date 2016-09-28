@@ -6,7 +6,7 @@ class Scroller extends FlxSprite
 {
 	
 	private static inline var ACCELERATION:Int = 4;
-	private var MOVE_SPEED:Int = 40;
+	private var MOVE_SPEED:Int = 30;
 
 	public function new(x:Float,y:Float)
 	{

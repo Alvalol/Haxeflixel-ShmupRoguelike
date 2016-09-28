@@ -105,7 +105,7 @@ class PlayerBullet extends FlxSprite
 	
 	override public function kill()
 	{ 
-		Reg.PS.PBullets.remove(this);
+		Reg.PS.PBullets.remove(this,true);
 		super.kill();
 	}
 }

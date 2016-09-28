@@ -28,7 +28,8 @@ class EnemyBullet extends FlxSprite
 	
 	private function createTrail()
 	{
-        bTrail = new FlxTrail(this, null, 5, 5, 0.75, 0.25);
+		var bTrail = Reg.PS.effects.recycle(FlxTrail);
+		if(bTrail == null) new FlxTrail(this, null, 5, 5, 0.75, 0.25);
 		Reg.PS.effects.add(bTrail);
 	}
 	
