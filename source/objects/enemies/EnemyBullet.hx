@@ -9,10 +9,8 @@ import objects.effects.NoHit;
 
 class EnemyBullet extends FlxSprite
 {
-
-	private var bTrail:FlxTrail;
-	private var noHit:NoHit;
 	private var creatednoHit = false;
+	private var bTrail:FlxTrail;	
 	
 	public function new(x:Float,y:Float) 
 	{
@@ -22,15 +20,15 @@ class EnemyBullet extends FlxSprite
 		animation.play("idle");
 		width = 8;
 		height = 8;
-		
+	
 		createTrail();
 	}
 	
 	private function createTrail()
 	{
-		var bTrail = Reg.PS.effects.recycle(FlxTrail);
-		if(bTrail == null) new FlxTrail(this, null, 5, 5, 0.75, 0.25);
-		Reg.PS.effects.add(bTrail);
+		bTrail = new FlxTrail(this, null, 5, 5, 0.75, 0.25);
+		
+		Reg.PS.trails.add(bTrail);
 	}
 	
 	override public function update(elapsed:Float):Void
@@ -72,7 +70,8 @@ class EnemyBullet extends FlxSprite
 	
 	private function createNoHit()
 	{
-        noHit = new NoHit(x, y);
+		var noHit = Reg.PS.effects.recycle(NoHit);
+        if(noHit == null) noHit = new NoHit(x, y);
 		creatednoHit = true;
 		Reg.PS.effects.add(noHit);
 	}
@@ -80,12 +79,6 @@ class EnemyBullet extends FlxSprite
 	override public function kill()
 	{	
 	
-	Reg.PS.EBullets.remove(this, true);
-	Reg.PS.effects.remove(bTrail, true);
-	if(creatednoHit)
-	{
-	Reg.PS.effects.remove(noHit, true);
-	}
 	super.kill();
 	}
 	

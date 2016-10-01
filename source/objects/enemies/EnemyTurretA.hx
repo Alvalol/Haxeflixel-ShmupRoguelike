@@ -70,7 +70,7 @@ class EnemyTurretA extends Enemy
 	}
 	
 	
-			private function killWithExplosion()
+	private function killWithExplosion()
 	{
 		if (FlxG.overlap(this, Reg.PS.effects))
 		{
@@ -101,9 +101,9 @@ class EnemyTurretA extends Enemy
 	private function shoot():EnemyBullet
 	{
 		
-		var eb:EnemyBullet = Reg.PS.EBullets.recycle(EnemyBullet);
-	    if (eb == null)
-		    eb = new EnemyBullet(x, y);
+		var eb = Reg.PS.EBullets.recycle(EnemyBullet);
+	    if (eb == null) eb = new EnemyBullet(x, y);
+	
         
 		if (!flipY)
 		{	
@@ -118,6 +118,8 @@ class EnemyTurretA extends Enemy
 			eb.velocity.y = SHOOT_SPEED;			
 		}
 
+			Reg.PS.EBullets.add(eb);
+		
 		new FlxTimer().start(shootDelay, function(_)
 		{
 	    justShot = false;

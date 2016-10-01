@@ -104,8 +104,10 @@ class Enemy extends FlxSprite
 		//?
 		Reg.PS.enemies.remove(this, true);
 		
-		if(isOnScreen()){
-		var e = new Explosion(x - 4, y - 4);
+		if (isOnScreen()){
+		var e = Reg.PS.effects.recycle(Explosion) ;
+		if (e == null) e = new Explosion(x - 4, y - 4);
+		e.reset(x - 4, y - 4);
 		Reg.PS.effects.add(e);
 		}
 		

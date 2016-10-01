@@ -20,7 +20,7 @@ class NewBullEffect extends FlxSprite
 		if (animation.curAnim.curFrame == 1 && isOnScreen())
 		{
 			kill();
-			Reg.PS.effects.remove(this, true);
+		
 		}
 	
 		if(!Reg.pause)	

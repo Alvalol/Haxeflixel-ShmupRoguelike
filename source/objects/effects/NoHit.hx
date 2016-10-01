@@ -12,7 +12,6 @@ class NoHit extends FlxSprite
 		loadGraphic(AssetPaths.nohit__png, true, 8, 8);
 		animation.add("nohit",[0,0,1,1]);
 		animation.play("nohit");
-		trace("effect created", this);
 	}
 	
 	override public function update(elapsed:Float):Void 
@@ -20,7 +19,6 @@ class NoHit extends FlxSprite
 		if (animation.curAnim.curFrame == 3 && isOnScreen())
 		{
 			kill();
-			Reg.PS.effects.remove(this, true);
 		}
 	
 		if(!Reg.pause)	

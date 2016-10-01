@@ -50,9 +50,8 @@ class EnemyMultishotDeath extends Enemy
 		justShot = true;
 		
 		var eb = Reg.PS.EBullets.recycle(EnemyBullet);
+		if (eb == null) eb = new EnemyBullet(x, y);
 		
-		if (eb == null)
-		var eb = new EnemyBullet(x, y);
 		eb.reset(x, y);
 		
 
@@ -75,7 +74,7 @@ class EnemyMultishotDeath extends Enemy
 		{
 			var eb = Reg.PS.EBullets.recycle(EnemyBullet);
 			if (eb == null)
-			var eb = new EnemyBullet(x, y);
+			eb = new EnemyBullet(x, y);
 			eb.reset(x, y);
 		
 			eb.velocity.set(FlxVelocity.velocityFromAngle(tang, bulletSpeed).x,FlxVelocity.velocityFromAngle(tang, bulletSpeed).y);

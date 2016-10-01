@@ -15,7 +15,7 @@ import objects.items.CoinItem;
 class PlayerBullet extends FlxSprite
 {
 	private static inline var MOVE_SPEED = 250;
-	var newBullAnim = new NewBullEffect(0, 0);
+	private  var newBullAnim:FlxSprite;
 	
 	public function new(x:Float, y:Float) 
 	{
@@ -23,9 +23,9 @@ class PlayerBullet extends FlxSprite
 		makeGraphic(8, 1, FlxColor.WHITE);
 		
 		centerOffsets();
-				
-		Reg.PS.effects.add(newBullAnim);
-
+	    newBullAnim = Reg.PS.effects.recycle(NewBullEffect);
+		if (newBullAnim == null) var newBullAnim = new NewBullEffect(0, 0);
+        Reg.PS.effects.add(newBullAnim);
 		animation.add("static", [16]);
 		animation.play("static");
 	}

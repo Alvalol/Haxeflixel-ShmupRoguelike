@@ -59,6 +59,7 @@ class PlayState extends FlxState
 	public var EBullets:FlxTypedGroup<EnemyBullet>;
 	public var blocks:FlxTypedGroup<HazardBlock>;
 	public var effects:FlxSpriteGroup;
+	public var trails:FlxTypedGroup<FlxTrail>;
 	public var EExplosions:FlxTypedGroup<EnemyExplosiveExplosion>;
 	public var HBullets:FlxTypedGroup<HazardBullet>;
 	public var enemies(default, null):FlxTypedGroup<Enemy>;
@@ -87,7 +88,6 @@ class PlayState extends FlxState
 		Reg.PS = this;
 		Reg.pause = false;
 
-		
 		// init gameplay elements
 		persistentUpdate = true;
 		player = new Player(10, FlxG.height / 2);
@@ -95,6 +95,7 @@ class PlayState extends FlxState
 		hazards = new FlxTypedGroup<Hazard>();
 		blocks = new FlxTypedGroup<HazardBlock>();
 		effects = new FlxSpriteGroup();
+		trails = new FlxTypedGroup<FlxTrail>();
 		coins = new FlxTypedGroup<CoinItem>();
 		items = new FlxTypedGroup<Item>();
         PBullets = new FlxTypedGroup<PlayerBullet>();
@@ -208,10 +209,12 @@ class PlayState extends FlxState
 		_entities.add(hazards);
 		_entities.add(enemies);
 		_entities.add(PBullets);
+		_entities.add(trails);
+		_entities.add(effects);
 		_entities.add(HBullets);
 		add(_entities);
 		add(player);	
-		_entities.add(effects);
+
 		
 	}
 	
