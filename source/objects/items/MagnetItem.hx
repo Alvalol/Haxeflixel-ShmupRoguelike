@@ -15,6 +15,7 @@ class MagnetItem extends Item
 		loadGraphic(AssetPaths.items__png, true, 8,8);
 		animation.add("static", [2,3,4,5,6,7,8],12);
 		animation.play("static");
+		set_name("MAGNET ACQUIRED");
 	}
 	
 	override public function update(elapsed:Float)

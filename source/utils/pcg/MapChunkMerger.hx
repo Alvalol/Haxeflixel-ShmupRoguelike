@@ -38,7 +38,7 @@ class MapChunkMerger
 		for (chunk in CHUNKS)
 		{
 			var layer:TiledTileLayer = cast chunk.getLayer("main");		
-			if (CHUNK_HEIGHT == 0 || CHUNK_HEIGHT == 0)
+			if (CHUNK_WIDTH == 0 || CHUNK_HEIGHT == 0)
 			{
 			CHUNK_WIDTH = layer.width;
 			CHUNK_HEIGHT = layer.height;
@@ -112,6 +112,7 @@ class MapChunkMerger
 		
 		while (CHUNKS.length < MAX_LEVEL_SIZE)
 		{
+			
 		if (CHUNKS.length == 0)
 		{
 			CHUNKS.push(Reg.CURRENT_SEED.getObject(TMXORGANIZED["start"]));
@@ -150,7 +151,6 @@ class MapChunkMerger
 			{	
 				case "tunnel" :
 					{
-						// tunnel bug is still there.
 						if (chunkGroup.length == 0)
 						{
 						if (CHUNKS[CHUNKS.length-1].properties.get("type") == "tunnel")

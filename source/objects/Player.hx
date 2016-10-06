@@ -172,7 +172,7 @@ class Player extends FlxSprite
 			switch SHOT_MOD {
 			case 0:
 			{
-				pb.reset(x + BULLET_OFFSET, y + 1 );
+				pb.reset(x + BULLET_OFFSET, y + 2 );
 				Reg.PS.PBullets.add(pb);
 				_cooldown = 0.5;
 			}
@@ -199,7 +199,7 @@ class Player extends FlxSprite
 		{
 		HP--;
 		FlxG.camera.shake(0.003, 0.5);
-		FlxSpriteUtil.flicker(this,1,0.05,true);
+		FlxSpriteUtil.flicker(this,2,0.05,true);
 	    }
 	}
 	

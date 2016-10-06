@@ -12,7 +12,7 @@ import objects.effects.NoHit;
 class HazardBullet extends FlxSprite
 {
 	private var target:FlxPoint; 
-	private var BULLET_SPEED = 140;
+	private var BULLET_SPEED = 80;
 	
 	public function new(x:Float, y:Float) 
 	{

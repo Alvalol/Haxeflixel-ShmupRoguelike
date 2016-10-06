@@ -112,7 +112,7 @@ class ObjectPlacement
 					   
 					   
 				    case "freeMovement": 
-					   var freeMovement:Array<Enemy> = [new EnemyBlob(pos.x, pos.y, 16), 
+					   var freeMovement:Array<Enemy> = [new EnemyBlob(pos.x, pos.y, 32), 
 					                                    new EnemyChaser(pos.x, pos.y), 
 														new EnemyMultishotDeath(pos.x, pos.y)];
 					 allLevelEnemies.push(chooseEnemy(freeMovement));
@@ -131,7 +131,7 @@ class ObjectPlacement
 							
 					//Specific enemies
 					
-					case "enemyBlob" : allLevelEnemies.push(new EnemyBlob(pos.x, pos.y, 32));
+					case "enemyBlob" : allLevelEnemies.push(new EnemyBlob(pos.x, pos.y, 16));
 					case "enemyChaser" :  allLevelEnemies.push(new EnemyChaser(pos.x, pos.y));
 					case "enemyLeft" :  allLevelEnemies.push(new EnemyLeft(pos.y, pos.y));
 					case "enemyMultishot" :  allLevelEnemies.push(new EnemyMultishotDeath(pos.x, pos.y));

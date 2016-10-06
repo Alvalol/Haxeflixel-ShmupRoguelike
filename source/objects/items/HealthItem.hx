@@ -14,6 +14,7 @@ class HealthItem extends Item
 		loadGraphic(AssetPaths.items__png, true, 8,8);
 		animation.add("move", [9,10,11,12,13], 12);
 		animation.play("move");
+		set_name("HP +1");
 	}
 	
 	override function interact(player:Player)

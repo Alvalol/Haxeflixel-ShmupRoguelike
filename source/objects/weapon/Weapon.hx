@@ -3,22 +3,22 @@ import flixel.math.FlxPoint;
 
 class Weapon
 {
-
 	var spread:WeaponSpread;
 	var range:WeaponRange;
 	
 	var pos:FlxPoint;
 	
+	private var bullet:WeaponBullet;
+	
 	public function new() 
 	{
-		spread = new WeaponSpread();
-		range = new WeaponRange();
+		// has bullets
 	}
 	
-	public function update()
+	private function shoot()
 	{
-	   pos.set(Reg.PS.player.x, Reg.PS.player.y);
+		// creates the new bullet based on properties
+		// set by the bullet's components
 	}
-	
 	
 }

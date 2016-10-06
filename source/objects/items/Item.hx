@@ -1,5 +1,6 @@
 package objects.items;
 import flixel.FlxSprite;
+import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.FlxG;
@@ -14,6 +15,9 @@ class Item extends FlxSprite
 	
 	private var _appeared:Bool = false;
 	private var _lifespan:Int;
+	private var _name:String;
+	private var text:FlxText;
+	private var createdText:Bool = false;
 
 	public function new(x:Float, y:Float) 
 	{
@@ -22,13 +26,16 @@ class Item extends FlxSprite
 		setSize(8, 8);
 	//	width = 8;
 	//	height = 8;
+	
 	}
 	
 	override public function update(elapsed:Float)
 	{
         basicChecks();
 		collisions();
+		
 		super.update(elapsed);
+		
 	}
 	
 	private function collisions()
@@ -36,8 +43,31 @@ class Item extends FlxSprite
 		if (FlxG.overlap(Reg.PS.player, this))
 		{
 		    interact(Reg.PS.player);   
+			createNameText();
 		}
 	}
+	
+	private function createNameText()
+	{
+			text = new FlxText(x-4, y, 0, _name);
+			text.setFormat(AssetPaths.pixel_font__ttf, 8, FlxColor.fromRGB(255, 255, 255, 5));
+			textTimer();
+			text.acceleration.set(0, -0.05);
+			text.moves = true;
+			text.maxVelocity.set(0, -2);
+			Reg.PS.add(text);	
+	}
+	
+	private function textTimer()
+	{
+		new FlxTimer().start(0.5, function(_) { 
+			FlxFlicker.flicker(text, 1, 0.05, false, false, function(_) {
+				                                                        kill;  
+																		     
+			}); 
+		} , 1);
+	}
+	
 	
 	private function basicChecks()
 	{
@@ -78,6 +108,11 @@ class Item extends FlxSprite
 	{
 		kill();
 		Reg.score += 50; // TODO : Item score should be dynamic and dependent on the item itself.
+	}
+	
+	function set_name(value:String):String 
+	{
+		return _name = value;
 	}
 	
 }

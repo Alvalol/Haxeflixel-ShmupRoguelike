@@ -2,11 +2,15 @@ package objects.hazards;
 import objects.Player;
 import flixel.FlxG;
 import flixel.FlxObject;
+import flixel.effects.particles.FlxEmitter;
+import flixel.util.FlxTimer;
+import flixel.util.FlxColor;
 import objects.effects.Explosion;
 
 class HazardBlock extends Hazard
 {
-
+	
+	private var emitter:FlxEmitter;
 	public function new(x:Float,y:Float)
 	{
 		super(x, y-8);
@@ -25,6 +29,33 @@ class HazardBlock extends Hazard
 	  FlxObject.separate(this, player);
 	}
 	
+	private function particleTimer()
+	{
+		new FlxTimer().start(2, killParticles, 1);
+	}
+	
+	private function killParticles(Timer:FlxTimer)
+	{
+			emitter.kill();
+			Reg.PS.emitters.remove(emitter, true);
+	}
+	
+		private function particles()
+	{
+		emitter = Reg.PS.emitters.recycle(FlxEmitter);
+		if (emitter == null)
+		emitter = new FlxEmitter();
+		
+		particleTimer();
+		emitter.setPosition(x, y);
+		emitter.alpha.set(0.5, 1);
+		emitter.makeParticles(1,1, FlxColor.WHITE, desiredParticles);
+		emitter.launchMode = FlxEmitterMode.CIRCLE;
+		emitter.lifespan.set(0.2, 3);
+		Reg.PS.emitters.add(emitter);
+		emitter.start(true, 1, desiredParticles);	
+	}
+	
 	override public function kill()
 	{
 		Reg.PS.blocks.remove(this, true);
@@ -35,6 +66,7 @@ class HazardBlock extends Hazard
 		{
 		var e = new Explosion(x - 4, y - 4);
 		Reg.PS.effects.add(e);
+		particles();
 		}
 	}
 }

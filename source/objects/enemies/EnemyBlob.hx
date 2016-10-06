@@ -20,6 +20,8 @@ class EnemyBlob extends Enemy
 	var MOVE_SPEED:Float = 50;
 	var tsize:Float = 32; 
 	var mtsize:Float = 8;	
+	
+	
 	public function new(x:Float,y:Float, _tsize:Float) 
 	{
 		super(x, y);
@@ -47,8 +49,8 @@ class EnemyBlob extends Enemy
 	
 	private function mitosis()
 	{
-		var m1 = new EnemyBlob(x + FlxG.random.int(-5,5), y + FlxG.random.int(-5,5) , tsize - 2);
-		var m2 = new EnemyBlob(x - FlxG.random.int(-5,5), y + FlxG.random.int(-5,5) , tsize - 2);
+		var m1 = new EnemyBlob(x + FlxG.random.int(-5,5), y + FlxG.random.int(-5,5) , tsize - 4);
+		var m2 = new EnemyBlob(x - FlxG.random.int(-5,5), y + FlxG.random.int(-5,5) , tsize - 4);
 		Reg.PS.enemies.add(m1);
 		Reg.PS.enemies.add(m2);
 	}

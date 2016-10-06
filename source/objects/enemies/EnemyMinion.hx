@@ -1,7 +1,6 @@
 package objects.enemies;
 
 import flixel.FlxSprite;
-import flixel.addons.effects.FlxTrail;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -13,8 +12,7 @@ class EnemyMinion extends Enemy
 {
 	public var Spawner:EnemySpawner;
 	public var direction:Float;
-	private var trailCreated:Bool = false;
-	private var bTrail:FlxTrail;
+
 	private var changeDirectionDelay:Float = FlxG.random.float(1.5, 2);
 	private var directionChanged:Bool;
 	
@@ -24,7 +22,7 @@ class EnemyMinion extends Enemy
 		makeGraphic(8, 8, FlxColor.ORANGE);
 		HP = 1;
 		changeDirection();
-		bTrail = new FlxTrail(this, null, 3, 2, 0.5, 0.05);
+
 	}
 	
 	override public function update(elapsed:Float) 
@@ -81,12 +79,6 @@ class EnemyMinion extends Enemy
 	private function moveLeft()
 	{
 		velocity.x =  -120;
-		
-		if (!trailCreated)
-		{
-		Reg.PS.effects.add(bTrail);
-		trailCreated = true;
-		}
 	}
 	
 	override public function kill() 
@@ -95,7 +87,6 @@ class EnemyMinion extends Enemy
 	    dropRate = [1.0];
 		dropItem(drops,dropRate);
 		Spawner.minions.remove(this);
-		Reg.PS.effects.remove(bTrail);
 		super.kill();
 	}
 	

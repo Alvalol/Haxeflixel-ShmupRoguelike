@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSubState;
 import flixel.addons.effects.FlxTrail;
+import flixel.effects.particles.FlxEmitter;
 import flixel.graphics.FlxGraphic;
 import flixel.group.FlxGroup;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -22,7 +23,7 @@ import lime.system.Display;
 import objects.hazards.Hazard;
 import objects.hazards.HazardBullet;
 import objects.items.Item;
-import flixel.addons.effects.FlxTrail;
+import flixel.addons.effects.FlxTrailArea;
 import openfl.display.BitmapData;
 import openfl.filesystem.File;
 import openfl.system.ApplicationDomain;
@@ -59,11 +60,11 @@ class PlayState extends FlxState
 	public var EBullets:FlxTypedGroup<EnemyBullet>;
 	public var blocks:FlxTypedGroup<HazardBlock>;
 	public var effects:FlxSpriteGroup;
-	public var trails:FlxTypedGroup<FlxTrail>;
 	public var EExplosions:FlxTypedGroup<EnemyExplosiveExplosion>;
 	public var HBullets:FlxTypedGroup<HazardBullet>;
 	public var enemies(default, null):FlxTypedGroup<Enemy>;
 	public var items(default, null):FlxTypedGroup<Item>;
+	public var emitters:FlxTypedGroup<FlxEmitter>;
 	public var coins:FlxTypedGroup <CoinItem>;
 	private var _entities:FlxGroup;
 	private var pauseScreen:PauseState;
@@ -74,6 +75,8 @@ class PlayState extends FlxState
 	private var _hud:HUD;
 	private var _gameCamera:FlxCamera;
 	private var _hudCamera:FlxCamera;
+	
+	private var trailArea:FlxTrailArea;
 	
 	private var gamepad:FlxGamepad;
 
@@ -95,23 +98,25 @@ class PlayState extends FlxState
 		hazards = new FlxTypedGroup<Hazard>();
 		blocks = new FlxTypedGroup<HazardBlock>();
 		effects = new FlxSpriteGroup();
-		trails = new FlxTypedGroup<FlxTrail>();
+
 		coins = new FlxTypedGroup<CoinItem>();
 		items = new FlxTypedGroup<Item>();
         PBullets = new FlxTypedGroup<PlayerBullet>();
 		EBullets = new FlxTypedGroup<EnemyBullet>();
 		EExplosions = new FlxTypedGroup<EnemyExplosiveExplosion>();
-		HBullets= new FlxTypedGroup<HazardBullet>();
+		HBullets = new FlxTypedGroup<HazardBullet>();
+		emitters = new FlxTypedGroup<FlxEmitter>();
 		_entities = new FlxGroup();
 		
 		
 		FlxG.mouse.visible = false; // must always be set to false pls
 		map = LevelLoaderProc.loadGeneratedLevel();
 		backDrop = new FlxBackdrop(AssetPaths.background__png, 0.01, 0.01, true, true);
-
+	
 		addGameplayElements();
       	cameraSetup();
-      //getMiniMap();
+		createTrailArea();
+      //  getMiniMap();
 		super.create();
 	}
 
@@ -127,6 +132,11 @@ class PlayState extends FlxState
 		Gamepad.checkForExit();
 		displayTracers();
 		addLevelObjects();
+		updateTrailArea();
+		trailArea.update(elapsed);
+		
+		trace(emitters.length);
+		
 
 		FlxSpriteUtil.bound(player, 
 		                    FlxG.camera.scroll.x, 
@@ -192,8 +202,6 @@ class PlayState extends FlxState
 			
 		  }
 	    }
-		
-		
 	}
 	
 	private function addGameplayElements()
@@ -202,23 +210,50 @@ class PlayState extends FlxState
 		add(map);
 
 		_entities.add(EExplosions);
-		_entities.add(blocks);	
 		_entities.add(coins);
+		_entities.add(blocks);
 		_entities.add(items);
-		_entities.add(EBullets);
 		_entities.add(hazards);
 		_entities.add(enemies);
-		_entities.add(PBullets);
-		_entities.add(trails);
 		_entities.add(effects);
+		_entities.add(emitters);
+		_entities.add(EBullets);
 		_entities.add(HBullets);
+		_entities.add(PBullets);
+		
 		add(_entities);
 		add(player);	
 
 		
 	}
 	
-
+	private function createTrailArea()
+	{
+	  trailArea = new FlxTrailArea(0, 0, FlxG.width, FlxG.height, 0.25,5, false, false);
+	  add(trailArea);
+	}
+	
+	private function updateTrailArea()
+	{
+		trailArea.setPosition(FlxG.camera.scroll.x, FlxG.camera.scroll.y);
+		
+		for (bullet in EBullets)
+		{
+		trailArea.add(bullet);
+		}
+		
+		for (hbullet in HBullets)
+		{
+			trailArea.add(hbullet);
+	    }
+		
+		for (coin in coins)
+		{
+			trailArea.add(coin);
+		}
+		
+	}
+	
 	private function controlPauseScreen()
 	{
 		if (Reg.pause)

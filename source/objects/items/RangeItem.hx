@@ -16,6 +16,7 @@ class RangeItem extends Item
 		animation.add("static", [2,3,4,5,6,7,8],12);
 		animation.play("static");
 		color = new FlxColor(0xFFFF00FF);
+		set_name("RANGE UP");
 	}
 	
 	override function interact(player:Player)

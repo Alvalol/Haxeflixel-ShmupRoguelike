@@ -16,7 +16,7 @@ class EnemyMover extends Enemy
 	private var sinFactor:Float = 0;
 	public var factor:Int = 0;
 	private var MOVE_SPEED:Float = 0.5;
-	private var bTrail:FlxTrail;
+
 
 	public function new(x:Float, y:Float) 
 	{
@@ -25,7 +25,6 @@ class EnemyMover extends Enemy
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		animation.add("idle", [16]);
         animation.play("idle");
-	//	createTrail();
 	}
 	
     override public function update(elapsed:Float)
@@ -37,19 +36,12 @@ class EnemyMover extends Enemy
 		super.update(elapsed);		
 	}
 	
-    private function createTrail()
-	{
-        bTrail = new FlxTrail(this,null,4,5,0.4,0.05);
-		Reg.PS.effects.add(bTrail);
-	}
 	
 	override public function kill():Void
 	{	
 		drops = [new HealthItem(x, y), new RangeItem(x, y)];
 		dropRate = [0.1, 0.9];
 		dropItem(drops, dropRate);
-	
-	//	Reg.PS.effects.remove(bTrail);
 		
 		super.kill();
 	}

@@ -16,6 +16,7 @@ class HealthMaxItem extends Item
 		animation.add("static", [2,3,4,5,6,7,8],12);
 		animation.play("static");
 		color = new FlxColor(0xFF00FF00);
+		set_name("MAX HP +1");
 	}
 	
 	override function interact(player:Player)

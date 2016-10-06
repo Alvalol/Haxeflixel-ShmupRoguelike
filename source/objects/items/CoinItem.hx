@@ -1,5 +1,6 @@
 package objects.items;
 import flixel.addons.effects.FlxTrail;
+import flixel.effects.particles.FlxEmitter;
 import flixel.math.FlxPoint;
 import objects.Player;
 import flixel.util.FlxColor;
@@ -14,6 +15,9 @@ class CoinItem extends Item
 	public var magnetized:Bool;
 	private var bTrail:FlxTrail;
 	private var rotationSpeed:Int = 5;
+	private var emitter:FlxEmitter;
+	private var desiredParticles:Int = 30;
+
 
 	public function new(x:Float,y:Float) 
 	{
@@ -26,6 +30,9 @@ class CoinItem extends Item
 		offset.set( -8, -8);
 		centerOffsets();
 		_lifespan = 4;
+		set_name("");
+		
+		emitter = new FlxEmitter(x,y);
 
         bTrail = new FlxTrail(this, null, 2,0, 0.1, 0.02);
 		Reg.PS.effects.add(bTrail);
@@ -82,7 +89,27 @@ class CoinItem extends Item
     override function interact(player:Player)
 	{
 	  kill();
+	 // particles();
 	  Reg.score += 5;
+	}
+	
+		private function particles()
+	{
+		// maybe add particles that go towards the score
+		
+		emitter = Reg.PS.emitters.recycle(FlxEmitter);
+		if (emitter == null)
+		emitter = new FlxEmitter();
+		
+		emitter.setPosition(x, y);
+		emitter.alpha.set(0.5, 1);
+		//emitter.acceleration.set( -10, -10);
+		emitter.velocity.set( -10, -10);
+		emitter.makeParticles(1,1, FlxColor.WHITE, desiredParticles);
+		//emitter.launchMode = FlxEmitterMode.CIRCLE;
+		emitter.lifespan.set(1, 3);
+		Reg.PS.emitters.add(emitter);
+		emitter.start(true, 0.5, desiredParticles);	
 	}
 	
 }
