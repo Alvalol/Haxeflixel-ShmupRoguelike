@@ -4,9 +4,13 @@ import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxObject;
+import objects.items.AntidoteItem;
+import objects.items.ImmunityWallItem;
 import objects.items.Item;
 import flixel.util.FlxTimer;
 import flixel.math.FlxMath;
+import objects.items.ItemsExplosiveItem;
+import objects.items.SpeedDownItem;
 
 class EnemyMinion extends Enemy
 {
@@ -83,7 +87,7 @@ class EnemyMinion extends Enemy
 	
 	override public function kill() 
 	{
-	    drops = [];
+        drops = [new ImmunityWallItem(x, y), new SpeedDownItem(x,y), new ItemsExplosiveItem(x,y), new AntidoteItem(x,y)];
 	    dropRate = [1.0];
 		dropItem(drops,dropRate);
 		Spawner.minions.remove(this);

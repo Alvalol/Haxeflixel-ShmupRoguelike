@@ -1,24 +1,26 @@
 package objects.weapon;
 import flixel.math.FlxPoint;
 
-class Weapon
+class Weapon implements IWeaponSpread implements IWeaponRange
 {
-	var spread:WeaponSpread;
-	var range:WeaponRange;
 	
-	var pos:FlxPoint;
+	var spread:IWeaponSpread;
+	var range:IWeaponRange;
 	
-	private var bullet:WeaponBullet;
-	
+	var bullets:Array<WeaponBullet>;
+
+
 	public function new() 
 	{
-		// has bullets
+		spread = new WeaponSpread();
+		range = new WeaponRange();
 	}
 	
-	private function shoot()
+	
+	public function createBullets():Array<WeaponBullet>
 	{
-		// creates the new bullet based on properties
-		// set by the bullet's components
+		bullets = spread.createBullets(); 
+		return bullets;
 	}
 	
 }

@@ -5,10 +5,13 @@ import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.addons.effects.FlxTrail;
+import objects.items.ImmunityWallItem;
 import objects.items.Item;
 import objects.items.HealthItem;
+import objects.items.ItemsExplosiveItem;
 import objects.items.RangeItem;
 import flixel.math.FlxMath;
+import objects.items.SpeedDownItem;
 
 
 class EnemyMover extends Enemy
@@ -39,8 +42,9 @@ class EnemyMover extends Enemy
 	
 	override public function kill():Void
 	{	
-		drops = [new HealthItem(x, y), new RangeItem(x, y)];
-		dropRate = [0.1, 0.9];
+		drops = [new HealthItem(x, y), new RangeItem(x, y),new ImmunityWallItem(x, y),
+		         new SpeedDownItem(x,y), new ItemsExplosiveItem(x,y)];
+		dropRate = [0.1, 0.1,0.1,0.25,0.1];
 		dropItem(drops, dropRate);
 		
 		super.kill();

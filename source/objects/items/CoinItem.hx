@@ -13,9 +13,7 @@ import flixel.FlxObject;
 class CoinItem extends Item
 {
 	public var magnetized:Bool;
-	private var bTrail:FlxTrail;
 	private var rotationSpeed:Int = 5;
-	private var emitter:FlxEmitter;
 	private var desiredParticles:Int = 30;
 
 
@@ -29,13 +27,10 @@ class CoinItem extends Item
 		scale.set(FlxG.random.float(0.5, 1), FlxG.random.float(0.5, 1));
 		offset.set( -8, -8);
 		centerOffsets();
-		_lifespan = 4;
 		set_name("");
 		
 		emitter = new FlxEmitter(x,y);
 
-        bTrail = new FlxTrail(this, null, 2,0, 0.1, 0.02);
-		Reg.PS.effects.add(bTrail);
 	}
 		
 	override public function update(elapsed:Float)
@@ -82,7 +77,7 @@ class CoinItem extends Item
 	{
 		_lifespan = 4;
 		Reg.PS.coins.remove(this, true);
-	    Reg.PS.effects.remove(bTrail, true);
+
 		super.kill();
 	}
 	
@@ -93,7 +88,7 @@ class CoinItem extends Item
 	  Reg.score += 5;
 	}
 	
-		private function particles()
+	override private function particles()
 	{
 		// maybe add particles that go towards the score
 		

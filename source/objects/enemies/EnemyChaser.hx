@@ -7,6 +7,7 @@ import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.util.FlxTimer;
 import objects.items.CoinItem;
+import objects.items.DamageUpItem;
 import objects.items.Item;
 import objects.items.RangeItem;
 import flixel.math.FlxVelocity;
@@ -50,8 +51,8 @@ class EnemyChaser extends Enemy
 	
 	override public function kill() 
 	{
-		drops = [new RangeItem(x, y)];
-		dropRate = [1.0];
+		drops = [new RangeItem(x, y), new DamageUpItem(x,y)];
+		dropRate = [0.25,0.5];
 		dropItem(drops, dropRate);
 
 		

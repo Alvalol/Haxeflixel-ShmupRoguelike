@@ -25,8 +25,13 @@ class HazardBlock extends Hazard
 	
 	override private function interact(player:Player)
 	{
-	  super.interact(player);
+		if (!Reg.PS.player.get_immuneToWalls())
+		{
 	  FlxObject.separate(this, player);
+	  Reg.PS.player.damage();
+		}
+		else
+			  FlxObject.separate(this, player);
 	}
 	
 	private function particleTimer()
@@ -58,6 +63,7 @@ class HazardBlock extends Hazard
 	
 	override public function kill()
 	{
+		FlxG.camera.shake(0.003, 0.05);
 		Reg.PS.blocks.remove(this, true);
 		alive = false;
 		exists = false;

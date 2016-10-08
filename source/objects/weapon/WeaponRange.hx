@@ -1,10 +1,10 @@
 package objects.weapon;
 
 
-class WeaponRange
+class WeaponRange implements IWeaponRange
 {
 
-	var bulletLifespan:Int;
+	var lifespan:Int;
 	
 	public function new() 
 	{

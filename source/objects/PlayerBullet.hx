@@ -20,7 +20,9 @@ class PlayerBullet extends FlxSprite
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
-		makeGraphic(8, 1, FlxColor.WHITE);
+		loadGraphic(AssetPaths.pbullet__png, false, 16, 8, false);
+		animation.add("idle", [0]);
+		animation.play("idle");
 		
 		centerOffsets();
 	    newBullAnim = Reg.PS.effects.recycle(NewBullEffect);
@@ -83,7 +85,6 @@ class PlayerBullet extends FlxSprite
 	  
 	}
 
-
 	private function move()
 	{
 		velocity.x = MOVE_SPEED;
@@ -93,7 +94,7 @@ class PlayerBullet extends FlxSprite
 	{		
 		new FlxTimer().start(Reg.PS.player.RANGE, function(_) 
 		{ kill(); }, 1);
-		newBullAnim.reset(x-2 , y-3);
+		newBullAnim.reset(x-2 , y);
 		super.revive();
 	}
 

@@ -35,20 +35,15 @@ class HazardBullet extends FlxSprite
 	private function checkPlayer()
 	{
 		if (Reg.PS.player.y < y)
-		{
 		  target = new FlxPoint(x, 0);
-		}
 		else
-		{
-		target = new FlxPoint(x, Reg.PS.map.height);
-		}
+		  target = new FlxPoint(x, Reg.PS.map.height);
 	}
 	
 	private function move()
 	{
 		FlxVelocity.moveTowardsPoint(this, target, BULLET_SPEED, 0);
 	}
-	
 	
 	private function collisions()
 	{	
@@ -67,6 +62,12 @@ class HazardBullet extends FlxSprite
 		if (FlxG.overlap(this, Reg.PS.player))
 		{
 			interact(Reg.PS.player);
+		}
+		
+		if (x >= (FlxG.camera.scroll.x + FlxG.width) || x <= FlxG.camera.scroll.x || y > FlxG.height || y <= FlxG.camera.scroll.y)
+		{
+			createNoHit();
+			kill();
 		}
 	}
 	

@@ -4,28 +4,30 @@ import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import flixel.FlxG;
 
-class HealthMaxItem extends Item
+class SpeedDownItem extends Item
 {
-	// Design wise : maybe not refill all health or this item becomes too powerful.
 
 	public function new(x:Float, y:Float) 
 	{
-		super(x, y);
+	    super(x, y);
 		loadGraphic(AssetPaths.items__png, true, 8,8);
 		animation.add("static", [2,3,4,5,6,7,8],12);
 		animation.play("static");
-		color = new FlxColor(0xFF00FF00);
-		set_name("MAX HP UP");
+		set_name("SPEED DOWN");
 	}
 	
 	override function interact(player:Player)
 	{
-		if (player.MAX_HP < player.MAX_POSSIBLE_HP)
-		{
-		player.MAX_HP ++;
-		player.HP = player.MAX_HP;
-		}
-		
+		if (player.HOR_MOVE_SPEED > 0
+		    && player.VERT_MOVE_SPEED > 0)
+			{
+				player.HOR_MOVE_SPEED -= 10;
+				player.VERT_MOVE_SPEED -= 10;
+				player.maxVelocity.set(player.HOR_MOVE_SPEED, player.VERT_MOVE_SPEED);
+			}
+			
 		super.interact(player);
+		
 	}
+	
 }

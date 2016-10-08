@@ -22,6 +22,7 @@ import flixel.util.FlxSpriteUtil;
 import lime.system.Display;
 import objects.hazards.Hazard;
 import objects.hazards.HazardBullet;
+import objects.hazards.HazardLaser;
 import objects.items.Item;
 import flixel.addons.effects.FlxTrailArea;
 import openfl.display.BitmapData;
@@ -116,7 +117,7 @@ class PlayState extends FlxState
 		addGameplayElements();
       	cameraSetup();
 		createTrailArea();
-      //  getMiniMap();
+       // getMiniMap();
 		super.create();
 	}
 
@@ -125,7 +126,6 @@ class PlayState extends FlxState
 		if (!Reg.pause)
 		super.update(elapsed);
 		        
-
 		controlPauseScreen();
 		Gamepad.checkForGamepad();
 		Gamepad.updateGameInputs();
@@ -135,8 +135,7 @@ class PlayState extends FlxState
 		updateTrailArea();
 		trailArea.update(elapsed);
 		
-		trace(emitters.length);
-		
+	//	trace(emitters.length);
 
 		FlxSpriteUtil.bound(player, 
 		                    FlxG.camera.scroll.x, 
@@ -182,7 +181,6 @@ class PlayState extends FlxState
 		  if (FlxMath.distanceBetween(enemy, player) < ObjectPlacement.minDistanceToEnemy)
 		  {
 			  Reg.PS.enemies.add(enemy);
-
 		  }
 	    }
 		
@@ -199,9 +197,9 @@ class PlayState extends FlxState
 		  if (FlxMath.distanceBetween(blocks, player) < ObjectPlacement.minDistanceToEnemy)
 		  {
 			  Reg.PS.blocks.add(blocks);
-			
 		  }
 	    }
+		
 	}
 	
 	private function addGameplayElements()
@@ -250,6 +248,12 @@ class PlayState extends FlxState
 		for (coin in coins)
 		{
 			trailArea.add(coin);
+		}
+		
+		for (hazard in hazards)
+		{
+			if (Type.getClassName(Type.getClass(hazard)).indexOf("HazardLaser") > -1)
+			trailArea.add(hazard);
 		}
 		
 	}

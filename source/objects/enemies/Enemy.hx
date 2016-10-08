@@ -1,10 +1,15 @@
 package objects.enemies;
 
+import flixel.effects.FlxFlicker;
+import flixel.math.FlxPoint;
+
 import flash.filters.GlowFilter;
 import flixel.FlxSprite;
 import flixel.addons.effects.FlxTrailArea;
 import flixel.effects.particles.FlxEmitter;
+import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.util.FlxSpriteUtil;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.util.FlxTimer;
@@ -20,25 +25,32 @@ class Enemy extends FlxSprite
 	private var drops:Array<Item>;
 	private var dropRate:Array<Float>;
 	
+	private var damageText:FlxText;
+	private var createdDamageText:Bool;
+	
 	private var desiredParticles:Int =  4;
 	
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
-
 	}
 	
 	override public function update(elapsed:Float) 
 	{
 		basicChecks();
 		collisions();
-		
+
+		if (createdDamageText)
+		{
+			damageText.velocity.y = -25;
+		}
 
 		if (!Reg.pause)
 			super.update(elapsed);
 			
 	}
 	
+
 	private function particleTimer()
 	{
 		new FlxTimer().start(2, killParticles, 1);
@@ -65,8 +77,8 @@ class Enemy extends FlxSprite
 			{
 				kill();
 			}
-				
 		}
+		
 		if (HP <= 0)
 		    kill();
 			
@@ -97,8 +109,25 @@ class Enemy extends FlxSprite
 	
 	public function damage()
 	{
-		HP--;
-		//Implement flashing on hit
+		HP -= Reg.PS.player.get_WEAPON_DMG();
+		damageText = new FlxText(x+ Reg.CURRENT_SEED.int(-1,1), y + Reg.CURRENT_SEED.int(-1,1), 0,  "-" + Reg.PS.player.get_WEAPON_DMG());
+		damageText.set_antialiasing(false);
+        damageText.setFormat(AssetPaths.smallfont__ttf, 8, FlxColor.YELLOW, FlxTextBorderStyle.SHADOW, FlxColor.BLACK);
+		textTimer();
+		createdDamageText = true;
+	    damageText.moves = true;
+
+
+		Reg.PS.add(damageText);
+	}
+	
+	private function textTimer()
+	{
+		new FlxTimer().start(0.1, function(_) { 
+			FlxSpriteUtil.fadeOut(damageText, 0.5, function(_) { 
+			destroy;
+			}); 
+		} , 1);
 	}
 	
 	private function dropItem(list:Array<Item>,rate:Array<Float>)
@@ -140,6 +169,7 @@ class Enemy extends FlxSprite
 	override public function kill()
 	{
 		//?
+		FlxG.camera.shake(0.003, 0.05);
 		Reg.PS.enemies.remove(this, true);
 		
 		if (isOnScreen()){

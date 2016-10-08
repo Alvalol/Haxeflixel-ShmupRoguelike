@@ -1,5 +1,7 @@
 package objects.hazards;
 import flixel.FlxG;
+import flixel.addons.effects.FlxTrail;
+import flixel.addons.effects.FlxTrailArea;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
@@ -12,7 +14,8 @@ class HazardLaser extends Hazard
 	private var counter:Int = FlxG.random.int(0,20);
 	private var maxCounter:Int = 300;
 	private var tactive:Bool = false;
-	private var tweenOptions:TweenOptions;
+	private var canBeActive:Bool = true;
+	private var deactivationTreshold:Int = 32;
 	
 	private var animationTween:FlxTween;
 	
@@ -20,37 +23,37 @@ class HazardLaser extends Hazard
 	public function new(x:Float, y:Float) 
 	{
 		super(x+2, y - 8);
-		startAnimation();
 		
 		makeGraphic(2, FlxG.height, FlxColor.YELLOW);
+
 	}
 	
 	override public function update(elapsed:Float):Void 
 	 {
 		switchingStates();
 		solid = tactive;
-		if (tactive && !animationTween.active)
-	
-		{tweenOptions = {type : FlxTween.PINGPONG, loopDelay:2};
-		animationTween.active =  active;
-		}
+		
+		checkForScroll();
+
 		
 		super.update(elapsed);
      }
 	 
-	 	private function startAnimation(?tween:FlxTween)
-	{
-		if (flipY)
-		{
-		animationTween = FlxTween.linearMotion(this, x, y, x, y + height , 25, false, tweenOptions);
-		}
-		else
-		{
-	    animationTween = FlxTween.linearMotion(this, x, y, x, y - height , 25, false, tweenOptions);		
-		}
-	}
+
+	 
+	 private function checkForScroll()
+	 {
+		 if (x <= FlxG.camera.scroll.x + deactivationTreshold)
+		 {
+			 tactive = false;
+			 canBeActive = false;
+		 }
+	 }
+	
 	private function switchingStates()
 	{
+		if (canBeActive)
+		{
 		if (_appeared && counter < maxCounter)
 		{
 			appear(); 
@@ -59,6 +62,7 @@ class HazardLaser extends Hazard
 	    else{
 			tactive = !tactive;
 			counter = 0;
+		}
 		}
 		
 		if (tactive)

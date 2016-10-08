@@ -4,12 +4,8 @@ import flixel.FlxSprite;
 import flixel.util.FlxColor;
 
 
-class WeaponBullet extends FlxSprite
+class WeaponBullet extends FlxSprite 
 {
-
-	var range:WeaponRange;
-	var spread:WeaponSpread;
-	
 	
 	public function new() 
 	{

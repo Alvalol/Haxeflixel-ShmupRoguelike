@@ -4,6 +4,7 @@ import flixel.FlxSprite;
 import flixel.FlxObject;
 import flixel.FlxG;
 import flixel.FlxSubState;
+import flixel.effects.particles.FlxEmitter;
 import flixel.util.FlxColor;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxTimer;
@@ -45,8 +46,13 @@ class Player extends FlxSprite
 	private var _cooldown:Float = 0.5;
 	public var invinsible:Bool = false;
 	
+	private var immuneToWalls(get, null):Bool = false;
+	
 	public var SHOT_MOD:Int;
 	public var MAX_SHOTMOD:Int = 1;
+	
+	private var WEAPON_DMG:Int = 1;
+	private var MAX_WEAPON_DMG:Int = 5;
 	
 	public function new(x:Float, y:Float) 
 	{
@@ -103,9 +109,15 @@ class Player extends FlxSprite
 		{
 		   if (FlxG.collide(Reg.PS.map, this))
 		   {
+			if (!immuneToWalls)
+			{
+
 				damage();
 				FlxObject.separate(this, Reg.PS.map);
-		    }
+		   }
+		   else
+			   FlxObject.separate(this, Reg.PS.map);
+		   }
 			
 		   if (x <= FlxG.camera.scroll.x)
 			   damage();
@@ -163,7 +175,7 @@ class Player extends FlxSprite
 		{
 		var ang = 10;
 		
-		if (Reg.PS.PBullets.countLiving() < MAX_BULLETS && _cooldown <= 0) 
+		if (Reg.PS.PBullets.countLiving() < MAX_BULLETS && _cooldown <= 0 && alive) 
 		{
 			
 			var pb =  Reg.PS.PBullets.recycle(PlayerBullet);
@@ -172,7 +184,7 @@ class Player extends FlxSprite
 			switch SHOT_MOD {
 			case 0:
 			{
-				pb.reset(x + BULLET_OFFSET, y + 2 );
+				pb.reset(x + BULLET_OFFSET, y -2);
 				Reg.PS.PBullets.add(pb);
 				_cooldown = 0.5;
 			}
@@ -203,9 +215,56 @@ class Player extends FlxSprite
 	    }
 	}
 	
+	private function deathAnimation()
+	{
+
+		var emitter = new FlxEmitter();
+		emitter.setPosition(x, y);
+		emitter.makeParticles(2,2, FlxColor.WHITE, 200);
+		emitter.launchMode = FlxEmitterMode.CIRCLE;
+		emitter.lifespan.set(0.2, 3);
+		Reg.PS.emitters.add(emitter);
+		emitter.start(true, 0.5, 200);	
+		new FlxTimer().start(2.5, function(_)
+		{
+		FlxG.switchState(new GameOverSubState());		
+		}, 1);
+		
+		
+	}
+	
 	override public function kill()
 	{
 		super.kill();
-		FlxG.switchState(new GameOverSubState());
+		deathAnimation();
+
 	}
+	
+	public function increaseWeaponDamage()
+	{
+		WEAPON_DMG++;
+	}
+	
+	public function set_immuneToWalls(value:Bool):Bool 
+	{
+		return immuneToWalls = value;
+	}
+	
+
+	public function get_MAX_WEAPON_DMG():Int 
+	{
+		return MAX_WEAPON_DMG;
+	}
+	
+	public function get_immuneToWalls():Bool 
+	{
+		return immuneToWalls;
+	}
+	
+	public function get_WEAPON_DMG():Int 
+	{
+		return WEAPON_DMG;
+	}
+	
+	
 }
