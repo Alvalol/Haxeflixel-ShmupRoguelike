@@ -1,6 +1,6 @@
 # Gemini Bird
 
-![N|Solid](http://i.imgur.com/SV75s2y.png)
+![N|Solid](http://i.imgur.com/h6HMvZH.png)
 
 Gemini Bird is a game made with Haxe and Haxeflixel.
 
