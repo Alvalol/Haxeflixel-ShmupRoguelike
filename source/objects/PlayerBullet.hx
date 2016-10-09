@@ -94,7 +94,7 @@ class PlayerBullet extends FlxSprite
 	{		
 		new FlxTimer().start(Reg.PS.player.RANGE, function(_) 
 		{ kill(); }, 1);
-		newBullAnim.reset(x-2 , y);
+	//	newBullAnim.reset(x-2 , y);
 		super.revive();
 	}
 

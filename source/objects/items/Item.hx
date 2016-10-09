@@ -67,7 +67,7 @@ class Item extends FlxSprite
 	private function damage()
 	{
 		FlxG.camera.shake(0.005, 0.025);
-		_hp -= Reg.PS.player.get_WEAPON_DMG();
+		_hp -= Reg.PS.player.get_weaponDamage();
 	}
 	
 	

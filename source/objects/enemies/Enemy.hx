@@ -109,8 +109,8 @@ class Enemy extends FlxSprite
 	
 	public function damage()
 	{
-		HP -= Reg.PS.player.get_WEAPON_DMG();
-		damageText = new FlxText(x+ Reg.CURRENT_SEED.int(-1,1), y + Reg.CURRENT_SEED.int(-1,1), 0,  "-" + Reg.PS.player.get_WEAPON_DMG());
+		HP -= Reg.PS.player.get_weaponDamage();
+		damageText = new FlxText(x+ Reg.CURRENT_SEED.int(-1,1), y + Reg.CURRENT_SEED.int(-1,1), 0,  "-" + Reg.PS.player.get_weaponDamage());
 		damageText.set_antialiasing(false);
         damageText.setFormat(AssetPaths.smallfont__ttf, 8, FlxColor.YELLOW, FlxTextBorderStyle.SHADOW, FlxColor.BLACK);
 		textTimer();

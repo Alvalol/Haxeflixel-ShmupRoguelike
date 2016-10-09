@@ -9,8 +9,8 @@ class ItemsExplosiveItem extends Item
 		//maybe this item could set a random curse on the player
 		// such as : change controls, make items explosive, make blocks explosive, speed of scroll faster, all turrets can aim towards the player.
 		// 
-		makeGraphic(8, 8, FlxColor.YELLOW);
 		super(x, y);
+		makeGraphic(8, 8, FlxColor.YELLOW);
 		set_name("YOU ARE CURSED");
 	}
 	
@@ -22,6 +22,5 @@ class ItemsExplosiveItem extends Item
 		
 		super.interact(player);
 	}
-	
 	
 }

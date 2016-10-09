@@ -5,11 +5,13 @@ import flixel.FlxObject;
 import flixel.FlxG;
 import flixel.FlxSubState;
 import flixel.effects.particles.FlxEmitter;
+import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxTimer;
 import objects.PlayerBullet;
-import objects.weapon.Weapon;
+import objects.weapons.IWeapon;
+import objects.weapons.BaseWeapon;
 
 import flixel.util.FlxSpriteUtil;
 import utils.controls.Keyboard;
@@ -46,13 +48,10 @@ class Player extends FlxSprite
 	private var _cooldown:Float = 0.5;
 	public var invinsible:Bool = false;
 	
-	private var immuneToWalls(get, null):Bool = false;
+	private var immuneToWalls(default, set):Bool = false;
 	
-	public var SHOT_MOD:Int;
-	public var MAX_SHOTMOD:Int = 1;
+	private var weapon:IWeapon;
 	
-	private var WEAPON_DMG:Int = 1;
-	private var MAX_WEAPON_DMG:Int = 5;
 	
 	public function new(x:Float, y:Float) 
 	{
@@ -60,10 +59,10 @@ class Player extends FlxSprite
 		HP = 3; 
 		MAX_HP = 3;
 		
+		weapon = new BaseWeapon(x,y);
+		
 		loadGraphic(AssetPaths.player__png, true, 8, 8);
 		
-		SHOT_MOD = 0; // related to the old weapon system. Will not be necessary in the future.
-	
 		setSize(4, 4);
 		
 		centerOffsets();
@@ -85,15 +84,19 @@ class Player extends FlxSprite
 		
 		basicChecks(elapsed);
 		
-		if(!Reg.pause)
-		    super.update(elapsed);
-		
-		if (FlxG.random.int(0,100) > 40 && (acceleration.x != 0  || acceleration.y != 0))
+		if (!Reg.pause)
 		{
-	//	var tracePlayer = new objects.effects.PlayerTrace(x - 8, y-2);
-		//Reg.PS.effects.add(tracePlayer);
+		    super.update(elapsed);
+			weapon.update_location(new FlxPoint(x,y));
 		}
+			
 		
+	/*	if (FlxG.random.int(0,100) > 40 && (acceleration.x != 0  || acceleration.y != 0))
+		{
+		var tracePlayer = new objects.effects.PlayerTrace(x - 8, y-2);
+		Reg.PS.effects.add(tracePlayer);
+		}
+		*/
 	}
 		
 	
@@ -103,8 +106,7 @@ class Player extends FlxSprite
 	}
 	
 	private function collisions()
-	{
-			   						
+	{	   						
 		if (alive)
 		{
 		   if (FlxG.collide(Reg.PS.map, this))
@@ -169,40 +171,10 @@ class Player extends FlxSprite
 	}
 	
 	// TODO : Complete reimplementation to support different types of "weapons"  
+	
 	public function shoot()
 	{
-		if (!Reg.pause)
-		{
-		var ang = 10;
-		
-		if (Reg.PS.PBullets.countLiving() < MAX_BULLETS && _cooldown <= 0 && alive) 
-		{
-			
-			var pb =  Reg.PS.PBullets.recycle(PlayerBullet);
-			if(pb == null) new PlayerBullet(x, y);
-
-			switch SHOT_MOD {
-			case 0:
-			{
-				pb.reset(x + BULLET_OFFSET, y -2);
-				Reg.PS.PBullets.add(pb);
-				_cooldown = 0.5;
-			}
-			
-			case 1:
-			{ 
-				var pb2:PlayerBullet =  new PlayerBullet(x, y);
-				pb.velocity.set(FlxVelocity.velocityFromAngle(10, 250).x, FlxVelocity.velocityFromAngle(10, 250).y);
-				pb2.velocity.set(FlxVelocity.velocityFromAngle(350, 250).x, FlxVelocity.velocityFromAngle(350, 250).y);
-				pb.angle = 10;
-				pb2.angle = 350;
-				Reg.PS.PBullets.add(pb); 
-				Reg.PS.PBullets.add(pb2);
-				_cooldown = .2;
-			}
-			}
-		}
-		}
+		weapon.shoot();
 	}
 	
 	public function damage()
@@ -240,30 +212,19 @@ class Player extends FlxSprite
 
 	}
 	
-	public function increaseWeaponDamage()
+	public function get_immuneToWalls():Bool 
 	{
-		WEAPON_DMG++;
+		return immuneToWalls;
 	}
 	
 	public function set_immuneToWalls(value:Bool):Bool 
 	{
 		return immuneToWalls = value;
 	}
-	
 
-	public function get_MAX_WEAPON_DMG():Int 
+	public function get_weaponDamage():Int
 	{
-		return MAX_WEAPON_DMG;
-	}
-	
-	public function get_immuneToWalls():Bool 
-	{
-		return immuneToWalls;
-	}
-	
-	public function get_WEAPON_DMG():Int 
-	{
-		return WEAPON_DMG;
+		return weapon.damage;
 	}
 	
 	

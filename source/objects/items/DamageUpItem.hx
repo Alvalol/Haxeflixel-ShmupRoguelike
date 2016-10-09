@@ -17,11 +17,11 @@ class DamageUpItem extends Item
 	override public function interact(player:Player)
 	{
 		kill();
-		
+		/*
 		if (Reg.PS.player.get_WEAPON_DMG() < Reg.PS.player.get_MAX_WEAPON_DMG())
 		{
 		   Reg.PS.player.increaseWeaponDamage();	
-		}
+		}*/
 		super.interact(player);
 	}
 	
