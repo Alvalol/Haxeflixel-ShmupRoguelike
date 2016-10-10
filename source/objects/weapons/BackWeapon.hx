@@ -4,7 +4,7 @@ import flixel.util.FlxTimer;
 import objects.PlayerBullet;
 
 
-class BaseWeapon implements IWeapon
+class BackWeapon implements IWeapon
 {
 	
 	public var range:Float;
@@ -16,7 +16,7 @@ class BaseWeapon implements IWeapon
 	
 	private var _coolingDown:Bool;
 	private var _bullets:Array<PlayerBullet>;
-	private var _offset:Int = 8;	
+	private var _offset:Int = 15;	
 	private var bulletSpeed:Int;
 	
 	public function new(_x:Float, _y:Float)
@@ -25,7 +25,7 @@ class BaseWeapon implements IWeapon
 		max_bullets = 10;
 		max_range = 10;
 		damage = 1;
-		bulletSpeed = 250;
+		bulletSpeed = -200;
 	}
 	
 	public function prepareShot():Array<PlayerBullet>
@@ -42,24 +42,25 @@ class BaseWeapon implements IWeapon
 		
         if (!Reg.pause)
 		{
-		var ang = 10;
+		var ang = 180;
 		
 		if (Reg.PS.PBullets.countLiving() < max_bullets && !_coolingDown && Reg.PS.player.alive) 
 		{
 			
 			var pb =  Reg.PS.PBullets.recycle(PlayerBullet);
-			if (pb == null) pb = new PlayerBullet(location.x, location.y, bulletSpeed,damage);
+			if (pb == null) pb = new PlayerBullet(location.x - _offset, location.y -1 , bulletSpeed,damage);
 
-				pb.reset(location.x + _offset, location.y -2);
+				pb.reset(location.x - _offset, location.y -1);
 				pb.set_BULLET_SPEED(bulletSpeed);
 				pb.set_damage(damage);
+				pb.angle = ang;
+				pb.scale.set(0.5, 0.5);
 				
 				Reg.PS.PBullets.add(pb);
 				_coolingDown = true;
 				new FlxTimer().start(0.15, function(_) { _coolingDown = false; }, 1);
 		}
 	}
-
 	}
 	
 	public function update_location(value:FlxPoint):Void 
@@ -82,7 +83,7 @@ class BaseWeapon implements IWeapon
 		return range;
 	}
 	
-	public function set_range(value:Float):Float 
+	public function set_range(value:Float):Float
 	{
 		return range = value;
 	}

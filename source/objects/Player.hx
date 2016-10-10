@@ -10,8 +10,10 @@ import flixel.util.FlxColor;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxTimer;
 import objects.PlayerBullet;
-import objects.weapons.IWeapon;
+import objects.effects.NoHit;
 import objects.weapons.BaseWeapon;
+import objects.weapons.IWeapon;
+import objects.weapons.BackWeapon;
 
 import flixel.util.FlxSpriteUtil;
 import utils.controls.Keyboard;
@@ -50,7 +52,9 @@ class Player extends FlxSprite
 	
 	private var immuneToWalls(default, set):Bool = false;
 	
-	private var weapon:IWeapon;
+	private var weapons:Array<IWeapon>;
+	
+	
 	
 	
 	public function new(x:Float, y:Float) 
@@ -59,14 +63,15 @@ class Player extends FlxSprite
 		HP = 3; 
 		MAX_HP = 3;
 		
-		weapon = new BaseWeapon(x,y);
+		weapons = [new BaseWeapon(x, y), new BackWeapon(x, y) ];
+
 		
 		loadGraphic(AssetPaths.player__png, true, 8, 8);
 		
 		setSize(4, 4);
 		
 		centerOffsets();
-		animation.add("move", [0,1,1,1,0],12);
+		animation.add("move", [0,1,1,1,0],16);
 		animation.play("move");
 		
 		drag.x = DECELERATION;
@@ -87,7 +92,10 @@ class Player extends FlxSprite
 		if (!Reg.pause)
 		{
 		    super.update(elapsed);
-			weapon.update_location(new FlxPoint(x,y));
+			for (weapon in weapons)
+			{
+			weapon.update_location(new FlxPoint(x, y));
+			}
 		}
 			
 		
@@ -98,7 +106,6 @@ class Player extends FlxSprite
 		}
 		*/
 	}
-		
 	
 	private function cheat()
 	{
@@ -174,7 +181,10 @@ class Player extends FlxSprite
 	
 	public function shoot()
 	{
+		for (weapon in weapons)
+		{
 		weapon.shoot();
+		}
 	}
 	
 	public function damage()
@@ -209,7 +219,6 @@ class Player extends FlxSprite
 	{
 		super.kill();
 		deathAnimation();
-
 	}
 	
 	public function get_immuneToWalls():Bool 
@@ -221,11 +230,11 @@ class Player extends FlxSprite
 	{
 		return immuneToWalls = value;
 	}
-
-	public function get_weaponDamage():Int
-	{
-		return weapon.damage;
-	}
 	
+	public function get_weapons():Array<IWeapon> 
+	{
+		return weapons;
+	}
+
 	
 }

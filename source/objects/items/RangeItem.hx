@@ -3,7 +3,7 @@ import objects.Player;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import flixel.FlxG;
-
+import objects.weapons.IWeapon;
 
 class RangeItem extends Item
 {
@@ -22,7 +22,9 @@ class RangeItem extends Item
 	{
 		if (player.RANGE < player.MAX_RANGE)
 		{
-			player.RANGE += 0.1;
+		var chosenWeapon:IWeapon = Reg.CURRENT_SEED.getObject(Reg.PS.player.get_weapons());
+		chosenWeapon.set_range(chosenWeapon.get_range() + 0.1);
+		super.interact(player);
 		}
 		
 		super.interact(player);

@@ -134,8 +134,6 @@ class PlayState extends FlxState
 		addLevelObjects();
 		updateTrailArea();
 		trailArea.update(elapsed);
-		
-	//	trace(emitters.length);
 
 		FlxSpriteUtil.bound(player, 
 		                    FlxG.camera.scroll.x, 
@@ -313,7 +311,7 @@ class PlayState extends FlxState
 	{
 		#if !FLX_NO_DEBUG 
 		trace("enemies : " + enemies.length);
-			trace("SCROLLER : " + Reg.SCROLLER_ON);	
+		trace("SCROLLER : " + Reg.SCROLLER_ON);	
 		trace("items : " + items.length);
 
 		trace("eBullets : " +EBullets.length);

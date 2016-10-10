@@ -12,18 +12,23 @@ class NewBullEffect extends FlxSprite
 		loadGraphic(AssetPaths.bulleteffect__png, true, 8, 8);
 		animation.add("idle",[0,1]);
 		animation.play("idle");
-		//trace("effect created", this);
 	}
 	
 	override public function update(elapsed:Float):Void 
 	{
 		if (animation.curAnim.curFrame == 1 && isOnScreen())
 		{
-			kill();
-		
+			visible = false;
 		}
 	
 		if(!Reg.pause)	
 		   super.update(elapsed);
+	}
+	
+	override public function kill()
+	{
+		super.kill();
+		trace("killed");
+		Reg.PS.effects.remove(this, true);
 	}
 }

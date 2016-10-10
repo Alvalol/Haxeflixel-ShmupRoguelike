@@ -30,6 +30,8 @@ class Enemy extends FlxSprite
 	
 	private var desiredParticles:Int =  4;
 	
+	private var displayDamage:String;
+	
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
@@ -95,7 +97,7 @@ class Enemy extends FlxSprite
 		if (FlxG.overlap(Reg.PS.PBullets, this))
 		{
 			damage();
-			Reg.PS.PBullets.getFirstAlive().kill();
+
 		}
 	
 	}
@@ -109,8 +111,12 @@ class Enemy extends FlxSprite
 	
 	public function damage()
 	{
-		HP -= Reg.PS.player.get_weaponDamage();
-		damageText = new FlxText(x+ Reg.CURRENT_SEED.int(-1,1), y + Reg.CURRENT_SEED.int(-1,1), 0,  "-" + Reg.PS.player.get_weaponDamage());
+		//HP -= Reg.PS.player.get_weaponDamage();
+		HP -= Reg.PS.PBullets.getFirstAlive().get_damage();
+		displayDamage = Std.string(Reg.PS.PBullets.getFirstAlive().get_damage());
+			
+		Reg.PS.PBullets.getFirstAlive().kill();
+		damageText = new FlxText(x + Reg.CURRENT_SEED.int( -1, 1), y + Reg.CURRENT_SEED.int( -1, 1), 0,  "-" + displayDamage);
 		damageText.set_antialiasing(false);
         damageText.setFormat(AssetPaths.smallfont__ttf, 8, FlxColor.YELLOW, FlxTextBorderStyle.SHADOW, FlxColor.BLACK);
 		textTimer();
@@ -135,7 +141,7 @@ class Enemy extends FlxSprite
 		// Drop system must be reworked from the ground up and be implemented in a nicer way. This is a placeholder.
 		
 		var itemRoll = Reg.CURRENT_SEED.int(0,100);
-		if (itemRoll < 15)
+		if (itemRoll < 50)
 		{
 			var tObject:Item =	Reg.CURRENT_SEED.getObject(list,rate);			
 			Reg.PS.items.add(tObject);

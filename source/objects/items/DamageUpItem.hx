@@ -1,11 +1,10 @@
 package objects.items;
 import flixel.util.FlxColor;
 import objects.Player;
+import objects.weapons.IWeapon;
 
 class DamageUpItem extends Item
 {
-	
-	
 	
 	public function new(x:Float,y:Float) 
 	{
@@ -17,11 +16,8 @@ class DamageUpItem extends Item
 	override public function interact(player:Player)
 	{
 		kill();
-		/*
-		if (Reg.PS.player.get_WEAPON_DMG() < Reg.PS.player.get_MAX_WEAPON_DMG())
-		{
-		   Reg.PS.player.increaseWeaponDamage();	
-		}*/
+		var chosenWeapon:IWeapon = Reg.CURRENT_SEED.getObject(Reg.PS.player.get_weapons());
+		chosenWeapon.set_damage(chosenWeapon.get_damage() +1);
 		super.interact(player);
 	}
 	

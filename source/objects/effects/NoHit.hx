@@ -16,12 +16,19 @@ class NoHit extends FlxSprite
 	
 	override public function update(elapsed:Float):Void 
 	{
-		if (animation.curAnim.curFrame == 3 && isOnScreen())
+		if (animation.curAnim.curFrame == 3)
 		{
 			kill();
 		}
 	
 		if(!Reg.pause)	
 		   super.update(elapsed);
+	}
+	
+	override public function kill()
+	{
+		
+		Reg.PS.effects.remove(this, true);
+		super.kill();
 	}
 }

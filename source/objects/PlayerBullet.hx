@@ -12,22 +12,22 @@ import objects.effects.NoHit;
 import objects.enemies.Enemy;
 import objects.items.CoinItem;
 
+
 class PlayerBullet extends FlxSprite
 {
-	private static inline var MOVE_SPEED = 250;
-	private  var newBullAnim:FlxSprite;
+	private var MOVE_SPEED:Int;
+	private var damage:Int;
 	
-	public function new(x:Float, y:Float) 
+	public function new(x:Float, y:Float,_moveSpeed:Int,_damage) 
 	{
 		super(x, y);
 		loadGraphic(AssetPaths.pbullet__png, false, 16, 8, false);
 		animation.add("idle", [0]);
 		animation.play("idle");
-		
+		MOVE_SPEED = _moveSpeed;
+		damage = _damage;
 		centerOffsets();
-	    newBullAnim = Reg.PS.effects.recycle(NewBullEffect);
-		if (newBullAnim == null) var newBullAnim = new NewBullEffect(0, 0);
-        Reg.PS.effects.add(newBullAnim);
+		
 		animation.add("static", [16]);
 		animation.play("static");
 	}
@@ -35,7 +35,6 @@ class PlayerBullet extends FlxSprite
 	override public function update(elapsed:Float)
 	{
 	    collisions();
-
 		move();
 	
 		if(!Reg.pause)
@@ -45,15 +44,12 @@ class PlayerBullet extends FlxSprite
 	private function collisions()
 	{
 		if (!isOnScreen())
-		{
 			kill();
-			
-		}
+
 		// I feel like there is something I'm doing wrong here. Must ask.
 		
 		for (block in Reg.PS.blocks)
-		{
-			
+		{	
 			if (FlxG.overlap(this, block))
 			{
 					var newCoin:CoinItem =  Reg.PS.coins.recycle();	
@@ -82,7 +78,6 @@ class PlayerBullet extends FlxSprite
 		kill();
 		createNoHit();	
 	  }
-	  
 	}
 
 	private function move()
@@ -90,23 +85,41 @@ class PlayerBullet extends FlxSprite
 		velocity.x = MOVE_SPEED;
 	}
 	
+	public function set_BULLET_SPEED(speed:Int)
+	{
+	    MOVE_SPEED = speed;	
+	}
+	
+	public function set_damage(_damage:Int)
+	{
+		damage = _damage;
+	}
+	
+	public function get_damage()
+	{
+		return damage;
+	}
+	
 	override public function revive()
 	{		
 		new FlxTimer().start(Reg.PS.player.RANGE, function(_) 
 		{ kill(); }, 1);
+	
 	//	newBullAnim.reset(x-2 , y);
 		super.revive();
 	}
-
 	private function createNoHit()
 	{
-		var e = new NoHit(x, y-4);
+		var e = Reg.PS.effects.recycle(NoHit);
+		if (e == null) e = new NoHit(x, y);
+		
+		e.reset(x, y - 4);
 		Reg.PS.effects.add(e);
 	}
 	
 	override public function kill()
 	{ 
-		Reg.PS.PBullets.remove(this,true);
+		Reg.PS.PBullets.remove(this, true);
 		super.kill();
 	}
 }
