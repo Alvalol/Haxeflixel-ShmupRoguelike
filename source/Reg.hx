@@ -21,7 +21,7 @@ class Reg
 	public static var availableItems:Array<Int> = [2, 3, 4, 5]; // hacky af and not implemented
     public static var SCROLLER_ON = true;
 	
-	public static var DESTRUCTIBLE_ITEMS:Bool = false;
+	public static var CURSED:Bool = false;
 	
 	public static var SANDBOX = false; // fix pls
 }

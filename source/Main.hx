@@ -3,7 +3,6 @@ package;
 import flixel.FlxGame;
 import openfl.display.Sprite;
 import states.MenuState;
-import utils.testing.TestState;
 import utils.pcg.LevelLoaderProc;
 
 class Main extends Sprite

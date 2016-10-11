@@ -8,7 +8,7 @@ import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import utils.controls.Gamepad;
 import flixel.addons.display.FlxBackdrop;
-import utils.testing.TestState;
+
 
 class MenuState extends FlxState
 {
@@ -71,14 +71,8 @@ class MenuState extends FlxState
 	
 	private function startGame():Void
     {
-		if (Reg.DEBUG)
-		{
-			FlxG.switchState(new TestState());
-		}
-		else
-		{
+
 	        FlxG.switchState(new PlayState());
-		}
     }
 
 }

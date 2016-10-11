@@ -38,7 +38,7 @@ import flixel.addons.display.FlxBackdrop;
 
 import objects.enemies.EnemyBullet;
 import objects.Player;
-import objects.PlayerBullet;
+import objects.weapons.Bullet;
 import objects.gamesys.Scroller;
 import objects.enemies.Enemy;
 import objects.items.CoinItem;
@@ -57,7 +57,7 @@ class PlayState extends FlxState
 	public var map:FlxTilemap;
 	public var hazards:FlxTypedGroup<Hazard>;
 	public var player(default, null):Player;
-	public var PBullets:FlxTypedGroup<PlayerBullet>;
+	public var PBullets:FlxTypedGroup<Bullet>;
 	public var EBullets:FlxTypedGroup<EnemyBullet>;
 	public var blocks:FlxTypedGroup<HazardBlock>;
 	public var effects:FlxSpriteGroup;
@@ -91,6 +91,8 @@ class PlayState extends FlxState
 	{
 		Reg.PS = this;
 		Reg.pause = false;
+		
+		Reg.CURSED = false;
 
 		// init gameplay elements
 		persistentUpdate = true;
@@ -99,10 +101,11 @@ class PlayState extends FlxState
 		hazards = new FlxTypedGroup<Hazard>();
 		blocks = new FlxTypedGroup<HazardBlock>();
 		effects = new FlxSpriteGroup();
+		
 
 		coins = new FlxTypedGroup<CoinItem>();
 		items = new FlxTypedGroup<Item>();
-        PBullets = new FlxTypedGroup<PlayerBullet>();
+        PBullets = new FlxTypedGroup<Bullet>();
 		EBullets = new FlxTypedGroup<EnemyBullet>();
 		EExplosions = new FlxTypedGroup<EnemyExplosiveExplosion>();
 		HBullets = new FlxTypedGroup<HazardBullet>();

@@ -1,7 +1,7 @@
 package objects.weapons;
 import flixel.math.FlxPoint;
 import flixel.util.FlxTimer;
-import objects.PlayerBullet;
+import objects.BaseBullet;
 
 
 class BaseWeapon implements IWeapon
@@ -15,7 +15,6 @@ class BaseWeapon implements IWeapon
 	public var location:FlxPoint;
 	
 	private var _coolingDown:Bool;
-	private var _bullets:Array<PlayerBullet>;
 	private var _offset:Int = 8;	
 	private var bulletSpeed:Int;
 	
@@ -26,13 +25,6 @@ class BaseWeapon implements IWeapon
 		max_range = 10;
 		damage = 1;
 		bulletSpeed = 250;
-	}
-	
-	public function prepareShot():Array<PlayerBullet>
-	{
-	   var tmpbullets = new Array<PlayerBullet>();
-	   tmpbullets.push(new PlayerBullet(location.x,location.y,bulletSpeed,damage));
-	   return tmpbullets;
 	}
 	
 	
@@ -47,8 +39,8 @@ class BaseWeapon implements IWeapon
 		if (Reg.PS.PBullets.countLiving() < max_bullets && !_coolingDown && Reg.PS.player.alive) 
 		{
 			
-			var pb =  Reg.PS.PBullets.recycle(PlayerBullet);
-			if (pb == null) pb = new PlayerBullet(location.x, location.y, bulletSpeed,damage);
+			var pb =  Reg.PS.PBullets.recycle(BaseBullet);
+			if (pb == null) pb = new BaseBullet(location.x, location.y, bulletSpeed,damage);
 
 				pb.reset(location.x + _offset, location.y -2);
 				pb.set_BULLET_SPEED(bulletSpeed);

@@ -9,11 +9,11 @@ import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxTimer;
-import objects.PlayerBullet;
 import objects.effects.NoHit;
 import objects.weapons.BaseWeapon;
 import objects.weapons.IWeapon;
 import objects.weapons.BackWeapon;
+import objects.weapons.LaserWeapon;
 
 import flixel.util.FlxSpriteUtil;
 import utils.controls.Keyboard;
@@ -54,16 +54,14 @@ class Player extends FlxSprite
 	
 	private var weapons:Array<IWeapon>;
 	
-	
-	
-	
+
 	public function new(x:Float, y:Float) 
 	{
 		super(x,y);
 		HP = 3; 
 		MAX_HP = 3;
 		
-		weapons = [new BaseWeapon(x, y), new BackWeapon(x, y) ];
+		weapons = [new BaseWeapon(x, y)];
 
 		
 		loadGraphic(AssetPaths.player__png, true, 8, 8);
@@ -234,6 +232,11 @@ class Player extends FlxSprite
 	public function get_weapons():Array<IWeapon> 
 	{
 		return weapons;
+	}
+	
+	public function add_weapon(wep:Dynamic)
+	{
+		weapons.push(wep);
 	}
 
 	

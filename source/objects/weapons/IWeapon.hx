@@ -12,7 +12,6 @@ interface IWeapon
 	
 	public var damage:Int;
   
-	public function prepareShot():Array<PlayerBullet>;
 	public function shoot():Void;
 	public function update_location(location:FlxPoint):Void;
     public function set_damage(value:Int):Int;

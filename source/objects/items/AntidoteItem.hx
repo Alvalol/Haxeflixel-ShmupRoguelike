@@ -9,13 +9,12 @@ class AntidoteItem extends Item
 		super(x, y);
 		makeGraphic(8, 8, FlxColor.GREEN);
 		set_name("YOU ARE CURED");
-		
 	}
 	
-		override public function interact(player:Player)
+	override public function interact(player:Player)
 	{
 		kill();
-		Reg.DESTRUCTIBLE_ITEMS = false;
+		Reg.CURSED = false;
 		Reg.score += 100;
 		
 		super.interact(player);

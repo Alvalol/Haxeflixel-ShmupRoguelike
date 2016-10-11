@@ -23,6 +23,7 @@ import objects.items.Item;
 import objects.Player;
 import objects.items.SpeedItem;
 import objects.items.MagnetItem;
+import objects.items.WeaponBackItem;
 
 class EnemyTurretA extends Enemy
 {
@@ -141,7 +142,7 @@ class EnemyTurretA extends Enemy
 	
 	override public function kill():Void
 	{
-	    drops = [new DamageUpItem(x,y)];
+	    drops = [new WeaponBackItem(x,y)];
 		dropRate = [1];
 		dropItem(drops,dropRate);
 		super.kill();

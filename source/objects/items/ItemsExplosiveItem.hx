@@ -17,7 +17,7 @@ class ItemsExplosiveItem extends Item
 	override public function interact(player:Player)
 	{
 		kill();
-		Reg.DESTRUCTIBLE_ITEMS = true;
+		Reg.CURSED = true;
 		Reg.score += 5;
 		
 		super.interact(player);

@@ -11,14 +11,13 @@ import objects.effects.NewBullEffect;
 import objects.effects.NoHit;
 import objects.enemies.Enemy;
 import objects.items.CoinItem;
+import objects.weapons.Bullet;
 
 
-class PlayerBullet extends FlxSprite
+class BaseBullet extends Bullet
 {
-	private var MOVE_SPEED:Int;
-	private var damage:Int;
 	
-	public function new(x:Float, y:Float,_moveSpeed:Int,_damage) 
+	public function new(x:Float, y:Float,_moveSpeed:Int,_damage:Int) 
 	{
 		super(x, y);
 		loadGraphic(AssetPaths.pbullet__png, false, 16, 8, false);
@@ -85,20 +84,7 @@ class PlayerBullet extends FlxSprite
 		velocity.x = MOVE_SPEED;
 	}
 	
-	public function set_BULLET_SPEED(speed:Int)
-	{
-	    MOVE_SPEED = speed;	
-	}
-	
-	public function set_damage(_damage:Int)
-	{
-		damage = _damage;
-	}
-	
-	public function get_damage()
-	{
-		return damage;
-	}
+
 	
 	override public function revive()
 	{		

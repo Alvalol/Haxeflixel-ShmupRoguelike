@@ -9,7 +9,6 @@ import flixel.FlxObject;
 import flixel.util.FlxSpriteUtil;
 import flixel.effects.FlxFlicker;
 import flixel.math.FlxVelocity;
-import objects.PlayerBullet;
 import objects.enemies.EnemyBullet;
 
 
@@ -41,7 +40,7 @@ class Item extends FlxSprite
         basicChecks();
 		collisions();
 		
-		if (Reg.DESTRUCTIBLE_ITEMS)
+		if (Reg.CURSED)
 		{
 			destructibleCollisions();
 			explode();
