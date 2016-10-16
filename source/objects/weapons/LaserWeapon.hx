@@ -1,5 +1,6 @@
 package objects.weapons;
 import flixel.math.FlxPoint;
+import flixel.util.FlxTimer;
 
 
 class LaserWeapon implements IWeapon
@@ -11,6 +12,11 @@ class LaserWeapon implements IWeapon
 	public var location:FlxPoint;
 	
 	public var damage:Int;
+
+	private var shot:Bool = false;
+	private var timersStarted:Bool = false;
+	
+	private var pb:Bullet;
 	
 
 	public function new(_x:Float,_y:Float) 
@@ -19,35 +25,32 @@ class LaserWeapon implements IWeapon
 		max_bullets = 1;
 		max_range = 0;
 		damage = 1;
-
 	}
 	
 	public function shoot():Void
 	{
-		// this needs to be worked out before I can actually implement it in the game
-		// Also this weapon should be of the same type as base weapon. In other words, the player shouldn't have both this weapon and the base weapon
-		//... I think.
-		
-		
-		if (!Reg.pause)
+		if (!Reg.pause && !shot)
 		{
-			var pb = Reg.PS.PBullets.recycle(LaserBullet);
-			if (pb == null)
-			var pb = new LaserBullet(location.x, location.y);
-			
-			pb.reset(location.x, location.y);
+			shot = true;
+
+			pb = new LaserBullet(location.x + 8, location.y);
 			pb.set_damage(damage);
-			
 			Reg.PS.PBullets.add(pb);
-		
+			trace("Bullet added");
 		}
 	}
 	
-	public function update_location(location:FlxPoint):Void
+	public function update_location(value:FlxPoint):Void
 	{
+		location = value;
 		
+		if (shot && !timersStarted)
+		{
+			timersStarted = true;
+			new FlxTimer().start(2, function(_) { pb.destroy(); Reg.PS.PBullets.remove(pb, true); trace("PB DESTROYED"); }, 1);
+			new FlxTimer().start(5, function(_) { shot = false; timersStarted = false; trace("VALUES RESET"); }, 1);
+		}
 	}
-	
 	
 	public function get_damage():Int 
 	{

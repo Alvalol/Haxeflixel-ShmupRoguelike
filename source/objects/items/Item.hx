@@ -30,9 +30,6 @@ class Item extends FlxSprite
 		loadGraphic(AssetPaths.items__png, false, 8, 8);
 		setSize(8, 8);
 		_hp = 5;
-	//	width = 8;
-	//	height = 8;
-	
 	}
 	
 	override public function update(elapsed:Float)
@@ -78,7 +75,6 @@ class Item extends FlxSprite
 			Reg.PS.PBullets.getFirstAlive().kill();
 		}
 	}
-	
 	
 	private function particles()
 	{

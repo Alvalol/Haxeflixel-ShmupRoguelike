@@ -61,7 +61,7 @@ class Player extends FlxSprite
 		HP = 3; 
 		MAX_HP = 3;
 		
-		weapons = [new BaseWeapon(x, y)];
+		weapons = [new LaserWeapon(x, y)];
 
 		
 		loadGraphic(AssetPaths.player__png, true, 8, 8);

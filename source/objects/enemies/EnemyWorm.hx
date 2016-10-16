@@ -40,12 +40,13 @@ class EnemyWorm extends Enemy
 
 		setFactor();
 		animationTween.active = active;	
-		
+		/*
 		#if !FLX_NO_DEBUG 
 		Tracker.addProfile(new TrackerProfile(EnemyWorm, ["aboveGround", "waiting"], [FlxSprite, FlxTween]));
 		FlxG.console.registerObject("EnemyWorm", this);
 		FlxG.debugger.track(this);
 		#end
+		*/
 	}
 	
 	override public function update(elapsed:Float) 

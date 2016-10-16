@@ -109,6 +109,7 @@ class EnemyTurretA extends Enemy
 		var eb = Reg.PS.EBullets.recycle(EnemyBullet);
 	    if (eb == null) eb = new EnemyBullet(x, y);
 	
+		eb.scale.set(1, 1);
         
 		if (!flipY)
 		{	

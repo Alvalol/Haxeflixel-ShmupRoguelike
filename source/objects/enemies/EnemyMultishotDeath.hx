@@ -53,11 +53,10 @@ class EnemyMultishotDeath extends Enemy
 		if (eb == null) eb = new EnemyBullet(x, y);
 		
 		eb.reset(x, y);
-		
+		eb.scale.set(1, 1);
 
 		_angle += 30;
 		eb.velocity.set(FlxVelocity.velocityFromAngle(_angle, bulletSpeed).x,FlxVelocity.velocityFromAngle(_angle, bulletSpeed).y);
-	//	eb.scale.set(0.5, 0.5);
 		eb.set_angle(_angle);
 		Reg.PS.EBullets.add(eb);
 					

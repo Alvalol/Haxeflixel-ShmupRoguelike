@@ -115,7 +115,13 @@ class Enemy extends FlxSprite
 		HP -= Reg.PS.PBullets.getFirstAlive().get_damage();
 		displayDamage = Std.string(Reg.PS.PBullets.getFirstAlive().get_damage());
 			
-		Reg.PS.PBullets.getFirstAlive().kill();
+		var curBullet = Reg.PS.PBullets.getFirstAlive();
+		
+		if  (!(Type.getClassName(Type.getClass(curBullet)).indexOf("LaserBullet") > -1))
+		{
+			curBullet.kill();
+		}
+
 		damageText = new FlxText(x + Reg.CURRENT_SEED.int( -1, 1), y + Reg.CURRENT_SEED.int( -1, 1), 0,  "-" + displayDamage);
 		damageText.set_antialiasing(false);
         damageText.setFormat(AssetPaths.smallfont__ttf, 8, FlxColor.YELLOW, FlxTextBorderStyle.SHADOW, FlxColor.BLACK);

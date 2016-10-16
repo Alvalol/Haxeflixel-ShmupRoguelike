@@ -11,15 +11,16 @@ class LaserBullet extends Bullet
 	public function new(x:Float,y:Float) 
 	{
 		super(x, y);
-		makeGraphic(100, 1, FlxColor.WHITE);
+		makeGraphic(300, 2, FlxColor.WHITE);
 		
 	}
 	
 	override public function update(elapsed:Float)
 	{
 		collisions();
+		set_alpha(Reg.CURRENT_SEED.float(0, 1));
+		setPosition(Reg.PS.player.x + 8, Reg.PS.player.y + 1);
 		
-		setPosition(Reg.PS.player.x, Reg.PS.player.y);
 		if (!Reg.pause)
 		    super.update(elapsed);
 	}
