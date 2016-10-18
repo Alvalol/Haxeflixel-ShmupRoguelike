@@ -20,12 +20,12 @@ class CoinItem extends Item
 	public function new(x:Float,y:Float) 
 	{
 		super(x, y);
-		var t = FlxG.random.int(2, 5);
+		var scalea = FlxG.random.float(0.4, 0.5);
+		var scaleb = FlxG.random.float(0.4, 0.5);
 		loadGraphic(AssetPaths.cube__png, true, 16, 16);
 		animation.add("idle", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15], 10);
 		animation.play("idle");
-		scale.set(FlxG.random.float(0.5, 1), FlxG.random.float(0.5, 1));
-		offset.set( -8, -8);
+		scale.set(scalea, scaleb);
 		centerOffsets();
 		set_name("");
 		
@@ -36,7 +36,7 @@ class CoinItem extends Item
 	override public function update(elapsed:Float)
 	{
 		magnetize();
-	
+	    angularVelocity = velocity.x * 2;
 		if (magnetized)
 		move();
 		else

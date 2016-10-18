@@ -23,7 +23,9 @@ class EnemyMultishotDeath extends Enemy
 	{
 		super(x, y);
 		HP = 1;
-		makeGraphic(8, 8, FlxColor.RED);
+		loadGraphic(AssetPaths.enemies__png, true, 8, 8, true);
+		animation.add("idle", [18, 19], 12, true);
+		animation.play("idle");
 	}
 	
 	override public function update(elapsed:Float) 
@@ -32,7 +34,7 @@ class EnemyMultishotDeath extends Enemy
 		{
 			shoot();
 		}
-		
+
 		super.update(elapsed);
 	}
 	
@@ -50,16 +52,17 @@ class EnemyMultishotDeath extends Enemy
 		justShot = true;
 		
 		var eb = Reg.PS.EBullets.recycle(EnemyBullet);
-		if (eb == null) eb = new EnemyBullet(x, y);
+		if (eb == null) eb = new EnemyBullet(x , y);
 		
-		eb.reset(x, y);
+		eb.reset(x + 2, y);
 		eb.scale.set(1, 1);
 
 		_angle += 30;
+		angle = _angle;
 		eb.velocity.set(FlxVelocity.velocityFromAngle(_angle, bulletSpeed).x,FlxVelocity.velocityFromAngle(_angle, bulletSpeed).y);
 		eb.set_angle(_angle);
 		Reg.PS.EBullets.add(eb);
-					
+		
 		new FlxTimer().start(shootDelay, function(_)
 		{
 	    justShot = false;

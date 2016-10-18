@@ -25,7 +25,7 @@ class EnemyTriangle extends Enemy
 		HP = 1;
 		
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
-		animation.add("idle", [16]);
+		animation.add("idle", [8]);
         animation.play("idle");
 		triggerAngleChange();
 		

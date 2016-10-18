@@ -98,7 +98,8 @@ class MapChunkMerger
 		/*
 		Main function where we choose the chunks and we follow step by step the procedure.
 		*/
-		
+		if (!Reg.SANDBOX)
+		{
 		TMXORGANIZED = MapChunk.get_allTMXfilesOrganized(); // all TMX files organized by their type.
 
 		// making an array of keys that are in the RAWCHUNKS. To keep it separated + can't iterate over keys ?
@@ -125,7 +126,7 @@ class MapChunkMerger
 		}
 		
 		CHUNKS[MAX_LEVEL_SIZE] = Reg.CURRENT_SEED.getObject(TMXORGANIZED["exit"]);
-		
+		}
     }
 	
 	private static function createChunkGroup(type:String, amount:Int)

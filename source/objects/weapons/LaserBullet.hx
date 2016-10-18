@@ -32,7 +32,7 @@ class LaserBullet extends Bullet
 		
 		for (block in Reg.PS.blocks)
 		{	
-			if (FlxG.overlap(this, block))
+			if (FlxG.overlap(this, block) && block.isOnScreen())
 			{
 					var newCoin:CoinItem =  Reg.PS.coins.recycle();	
 					if (newCoin == null) 

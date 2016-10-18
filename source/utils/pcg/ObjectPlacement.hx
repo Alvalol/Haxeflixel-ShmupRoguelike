@@ -19,6 +19,7 @@ import objects.enemies.EnemyLeft;
 import objects.enemies.EnemyMover;
 import objects.enemies.EnemyMoverGroup;
 import objects.enemies.EnemyMultishotDeath;
+import objects.enemies.EnemySatellite;
 import objects.enemies.EnemyShooter;
 import objects.enemies.EnemySpawner;
 import objects.enemies.EnemyTurretA;
@@ -112,7 +113,7 @@ class ObjectPlacement
 					   
 					   
 				    case "freeMovement": 
-					   var freeMovement:Array<Enemy> = [new EnemyBlob(pos.x, pos.y, 32), 
+					   var freeMovement:Array<Enemy> = [new EnemyBlob(pos.x, pos.y, 16), 
 					                                    new EnemyChaser(pos.x, pos.y), 
 														new EnemyMultishotDeath(pos.x, pos.y)];
 					 allLevelEnemies.push(chooseEnemy(freeMovement));
@@ -137,7 +138,8 @@ class ObjectPlacement
 					case "enemyMultishot" :  allLevelEnemies.push(new EnemyMultishotDeath(pos.x, pos.y));
 					case "enemySpawner" :  allLevelEnemies.push(new EnemySpawner(pos.x, pos.y, enemy.flippedVertically));
      				case "enemyTurret" :  allLevelEnemies.push(new EnemyTurretA(pos.x, pos.y, enemy.flippedVertically));		
-					case "enemyWorm" :  allLevelEnemies.push(new EnemyWorm(pos.x, pos.y,enemy.flippedVertically));
+					case "enemyWorm" :  allLevelEnemies.push(new EnemyWorm(pos.x, pos.y, enemy.flippedVertically));
+					case "enemySatellite" : allLevelEnemies.push(new EnemySatellite(pos.x, pos.y));
 			   }
 			
 			   

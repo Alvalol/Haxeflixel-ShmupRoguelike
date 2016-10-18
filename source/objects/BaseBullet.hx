@@ -23,12 +23,17 @@ class BaseBullet extends Bullet
 		loadGraphic(AssetPaths.pbullet__png, false, 16, 8, false);
 		animation.add("idle", [0]);
 		animation.play("idle");
+
+		width = 10;
+		height = 6;
+		scale.set(0.5, 0.5);
+		offset.set(-3, 2);
+		
 		MOVE_SPEED = _moveSpeed;
 		damage = _damage;
 		centerOffsets();
 		
-		animation.add("static", [16]);
-		animation.play("static");
+
 	}
 	
 	override public function update(elapsed:Float)

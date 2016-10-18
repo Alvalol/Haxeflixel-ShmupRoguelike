@@ -21,7 +21,9 @@ class EnemySpawner extends Enemy
 	public function new(x:Float,y:Float, _flipped:Bool) 
 	{
 		super(x-8, y);
-		makeGraphic(16, 16, FlxColor.RED);
+		loadGraphic(AssetPaths.bigEnemies__png, true, 16, 16);
+		animation.add("idle", [2,3],10);
+		animation.play("idle");
 		HP = 7;
 		
 	    tx = Std.int(x / 8); 
@@ -65,7 +67,7 @@ class EnemySpawner extends Enemy
     
 	private function spawnEnemy(Timer:FlxTimer)
 	{
-		var minion = new EnemyMinion(x+4, y);
+		var minion = new EnemyMinion(x+4, y - 1);
 		minion.Spawner = this;
 		justSpawned = false;
 		if (flipY)  minion.direction = -1;  else  minion.direction = 1;

@@ -23,7 +23,9 @@ class EnemyMinion extends Enemy
 	public function new(x:Float,y:Float) 
 	{
 		super(x, y);
-		makeGraphic(8, 8, FlxColor.ORANGE);
+		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
+		animation.add("idle", [14, 15], 16, true);
+		animation.play("idle");
 		HP = 1;
 		changeDirection();
 

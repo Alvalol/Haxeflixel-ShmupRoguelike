@@ -143,8 +143,8 @@ class EnemyTurretA extends Enemy
 	
 	override public function kill():Void
 	{
-	    drops = [new WeaponBackItem(x,y)];
-		dropRate = [1];
+	    drops = [new WeaponBackItem(x,y), new MagnetItem(x,y)];
+		dropRate = [0.5, 0.5];
 		dropItem(drops,dropRate);
 		super.kill();
 	}

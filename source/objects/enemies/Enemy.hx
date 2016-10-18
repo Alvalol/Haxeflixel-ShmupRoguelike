@@ -35,6 +35,7 @@ class Enemy extends FlxSprite
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
+		HP = 1;
 	}
 	
 	override public function update(elapsed:Float) 
@@ -75,36 +76,31 @@ class Enemy extends FlxSprite
 			{
 				 _appeared = true;
 		    }
-			if (_appeared && x <= FlxG.camera.scroll.x)
+		}
+		if (_appeared && x <= FlxG.camera.scroll.x)
 			{
 				kill();
 			}
-		}
 		
 		if (HP <= 0)
 		    kill();
-			
 	}
 	
 	
 	private function collisions()
 	{
-		if (FlxG.overlap(Reg.PS.player,this))
-		{
+		if (FlxG.overlap(Reg.PS.player,this) && !FlxSpriteUtil.isFlickering(Reg.PS.player))
 			interact(Reg.PS.player);
-		}
 		
-		if (FlxG.overlap(Reg.PS.PBullets, this))
-		{
+		if (FlxG.overlap(Reg.PS.PBullets, this) && isOnScreen())
 			damage();
 
-		}
 	
 	}
 	
 	private function interact(player:Player)
 	{
-		damage(); 
+		kill(); 
 		player.damage();
 		FlxObject.separate(this, player);
 	}

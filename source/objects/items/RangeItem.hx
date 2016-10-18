@@ -15,7 +15,7 @@ class RangeItem extends Item
 		animation.add("static", [2,3,4,5,6,7,8],12);
 		animation.play("static");
 		color = new FlxColor(0xFFFF00FF);
-		set_name("RANGE UP");
+		set_name("RANGE INCREASED");
 	}
 	
 	override function interact(player:Player)
@@ -26,7 +26,5 @@ class RangeItem extends Item
 		chosenWeapon.set_range(chosenWeapon.get_range() + 0.1);
 		super.interact(player);
 		}
-		
-		super.interact(player);
 	}
 }

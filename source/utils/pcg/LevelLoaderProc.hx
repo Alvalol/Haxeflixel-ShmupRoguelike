@@ -6,6 +6,7 @@ import flixel.tile.FlxTilemap;
 import utils.pcg.MapChunk;
 import utils.pcg.MapChunkMerger;
 import flixel.graphics.frames.FlxTileFrames;
+import openfl.Assets;
 
 import flixel.math.FlxPoint;
 
@@ -27,6 +28,8 @@ class LevelLoaderProc
 	
         loadedMap.loadMapFrom2DArray(generatedMap, FlxTileFrames.fromBitmapAddSpacesAndBorders(FlxGraphic.fromAssetKey(AssetPaths.tileset__png), 
 	    new FlxPoint(8, 8), new FlxPoint(1, 1), new FlxPoint(1, 1), null),  8, 8, AUTO);
+	
+		
 	    return loadedMap;
 	}
 }
