@@ -151,8 +151,8 @@ class ObjectPlacement
 		
 
 			  switch hazard.type
-			  {
-					  
+			  
+			  {	  
 				  case "block" : allLevelBlocks.push(new HazardBlock(pos.x, pos.y)); // allLevelBlocks because blocks can be destroyed but hazards can't
 				  
 				  case "laser" : allLevelHazards.push(new HazardLaser(pos.x, pos.y));
@@ -160,10 +160,9 @@ class ObjectPlacement
 				  case "movingBlock" : allLevelHazards.push(new HazardMovingBlock(pos.x, pos.y,hazard.flippedVertically));
 				  // there should be a property in the object (tiled) setting if it moves horizontally or vertically
 				  
-				  case "proximity" : allLevelHazards.push(new HazardProximityShooter(pos.x, pos.y));
+				  case "proximity" : allLevelHazards.push(new HazardProximityShooter(pos.x + 8, pos.y, hazard.flippedVertically));
 				  
 			  }
-		
 		}
 					
 

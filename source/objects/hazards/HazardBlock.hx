@@ -13,9 +13,10 @@ class HazardBlock extends Hazard
 	private var emitter:FlxEmitter;
 	public function new(x:Float,y:Float)
 	{
-		super(x, y-8);
+		super(x, y - 8);
+		var frame = Reg.CURRENT_SEED.int(1, 4);
 		loadGraphic(AssetPaths.solid__png, true, 8, 8);
-		animation.add("static", [1]);
+		animation.add("static", [frame]);
 		animation.play("static");
 	//	centerOrigin();
 		color = Reg.CURRENT_SEED.getObject([0xFFFFFFFF]);

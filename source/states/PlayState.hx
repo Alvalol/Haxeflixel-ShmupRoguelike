@@ -214,15 +214,17 @@ class PlayState extends FlxState
 		_entities.add(items);
 		_entities.add(hazards);
 		_entities.add(enemies);
-		_entities.add(effects);
 		_entities.add(emitters);
 		_entities.add(EBullets);
 		_entities.add(HBullets);
 		_entities.add(PBullets);
+
 		
 		add(_entities);
 		add(player);	
-
+		add(effects);
+		
+		effects.clear();
 		
 	}
 	
@@ -313,6 +315,8 @@ class PlayState extends FlxState
 	private function displayTracers()
 	{
 		#if !FLX_NO_DEBUG 
+		if (FlxG.keys.justPressed.T)
+		{
 		trace("enemies : " + enemies.length);
 		trace("SCROLLER : " + Reg.SCROLLER_ON);	
 		trace("items : " + items.length);
@@ -324,6 +328,7 @@ class PlayState extends FlxState
 		trace("_entities " + _entities.length);
 		trace("effects " + effects.length);
 		trace("MASTER SEED : " + Reg.CURRENT_SEED.initialSeed);
+		}
 	    #end
 	}
 	

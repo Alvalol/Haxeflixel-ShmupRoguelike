@@ -22,7 +22,7 @@
  </layer>
  <objectgroup name="objects"/>
  <objectgroup name="hazards">
-  <object id="35" type="proximity" gid="2" x="64" y="48" width="8" height="8"/>
-  <object id="36" type="proximity" gid="2" x="24" y="48" width="8" height="8"/>
+  <object id="35" type="proximity" gid="1073741826" x="72" y="16" width="8" height="8"/>
+  <object id="36" type="proximity" gid="1073741826" x="16" y="16" width="8" height="8"/>
  </objectgroup>
 </map>

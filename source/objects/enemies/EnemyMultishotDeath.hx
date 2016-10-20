@@ -42,8 +42,8 @@ class EnemyMultishotDeath extends Enemy
 	{
 		drops = [new HealthItem(x, y)];
 		dropRate = [1.0];
-		dropItem(drops,dropRate);
-		deathShot();
+		dropItem(drops, dropRate);
+		new FlxTimer().start(0.5, function(_) { deathShot(); }, 1);
 		super.kill();
 	}
 	

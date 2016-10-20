@@ -13,11 +13,11 @@ class HazardProximityShooter extends Hazard
 	
 	private var shot:Bool = false;
 
-	public function new(x:Float,y:Float) 
+	public function new(x:Float,y:Float, _flipped:Bool) 
 	{
 		super(x-8, y-8);
 		immovable = true;
-		
+		flipY = _flipped;
 		solid = true;
 		loadGraphic(AssetPaths.hazards__png, true, 8,8);
 		animation.add("idle", [0]);
@@ -39,7 +39,19 @@ class HazardProximityShooter extends Hazard
 	private function shoot()
 	{
 		var hb:HazardBullet = new HazardBullet(x, y);
-		Reg.PS.HBullets.add(hb);		
+	
+		if (!flipY)
+		{
+		Reg.PS.HBullets.add(hb);				
+
 		shot = true;
+		}
+		else
+		{
+			hb.velocity.y *= -1;
+			hb.angle = 90;
+			Reg.PS.HBullets.add(hb);	
+			shot = true;
+		}
 	}
 }

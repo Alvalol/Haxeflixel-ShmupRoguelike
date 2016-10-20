@@ -12,7 +12,7 @@ class MagnetItem extends Item
 	{
 		super(x, y);
 		loadGraphic(AssetPaths.items__png, true, 8,8);
-		animation.add("static", [2,3,4,5,6,7,8],12);
+		animation.add("static", [27,28,29,30,31,32,33,34],12);
 		animation.play("static");
 		set_name("MAGNET ACQUIRED");
 	}

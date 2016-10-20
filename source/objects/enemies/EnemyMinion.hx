@@ -73,6 +73,9 @@ class EnemyMinion extends Enemy
 		if (FlxG.overlap(Reg.PS.blocks, this) || (FlxG.collide(Reg.PS.map, this)))
 		   kill();
 	  }
+	  
+	  if (FlxG.collide(Reg.PS.enemies, this))
+	   kill();
 		   
 		super.collisions();
 	}

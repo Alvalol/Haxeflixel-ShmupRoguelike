@@ -10,16 +10,13 @@ class NewBullEffect extends FlxSprite
 	{
 		super(x, y);
 		loadGraphic(AssetPaths.bulleteffect__png, true, 8, 8);
-		animation.add("idle",[0,1]);
+		animation.add("idle", [0,1,2,3,4], 30);
 		animation.play("idle");
+		color = 0xFFFF00;
 	}
 	
 	override public function update(elapsed:Float):Void 
 	{
-		if (animation.curAnim.curFrame == 1 && isOnScreen())
-		{
-			visible = false;
-		}
 	
 		if(!Reg.pause)	
 		   super.update(elapsed);

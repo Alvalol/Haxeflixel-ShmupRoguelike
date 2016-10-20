@@ -22,8 +22,9 @@ class RangeItem extends Item
 	{
 		if (player.RANGE < player.MAX_RANGE)
 		{
-		var chosenWeapon:IWeapon = Reg.CURRENT_SEED.getObject(Reg.PS.player.get_weapons());
-		chosenWeapon.set_range(chosenWeapon.get_range() + 0.1);
+		//var chosenWeapon:IWeapon = Reg.CURRENT_SEED.getObject(Reg.PS.player.get_weapons());
+		//chosenWeapon.set_range(chosenWeapon.set_range(chosenWeapon.get_range() + 1));
+		player.RANGE += 0.1;
 		super.interact(player);
 		}
 	}

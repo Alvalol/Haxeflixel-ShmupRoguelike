@@ -1,7 +1,9 @@
 package objects.items;
 import flixel.FlxSprite;
 import flixel.effects.particles.FlxEmitter;
+import flixel.tweens.FlxTween;
 import flixel.text.FlxText;
+import flixel.tweens.FlxEase;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.FlxG;
@@ -21,6 +23,9 @@ class Item extends FlxSprite
 	private var _hp:Int;
 	private var text:FlxText;
 	private var createdText:Bool = false;
+    
+	private var i:Float = 0.0;
+	
 
 	private var emitter:FlxEmitter;
 
@@ -30,6 +35,10 @@ class Item extends FlxSprite
 		loadGraphic(AssetPaths.items__png, false, 8, 8);
 		setSize(8, 8);
 		_hp = 5;
+		
+		// ensures all items have a small sine animation.
+		FlxTween.tween(this,  { x : x, y : y - 5}, 0.5,
+		{ type: FlxTween.PINGPONG, ease: FlxEase.sineInOut });
 	}
 	
 	override public function update(elapsed:Float)

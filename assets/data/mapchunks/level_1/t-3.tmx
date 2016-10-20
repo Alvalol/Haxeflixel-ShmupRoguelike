@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="38">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="39">
  <properties>
   <property name="L" type="int" value="2"/>
   <property name="R" type="int" value="1"/>
@@ -26,7 +26,8 @@
  <objectgroup name="objects"/>
  <objectgroup name="hazards"/>
  <objectgroup name="enemies">
-  <object id="35" type="enemyTurret" gid="4" x="24" y="104" width="8" height="8"/>
-  <object id="37" type="freeMovement" gid="4" x="56" y="64" width="8" height="8"/>
+  <object id="35" type="enemyTurret" gid="1073741828" x="8" y="56" width="8" height="8"/>
+  <object id="37" type="freeMovement" gid="4" x="64" y="32" width="8" height="8"/>
+  <object id="38" type="enemyTurret" gid="4" x="16" y="104" width="8" height="8"/>
  </objectgroup>
 </map>

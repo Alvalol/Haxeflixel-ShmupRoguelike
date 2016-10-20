@@ -11,7 +11,7 @@ class HealthItem extends Item
 	{
 		super(x, y);
 		loadGraphic(AssetPaths.items__png, true, 8,8);
-		animation.add("move", [9,10,11,12,13], 12);
+		animation.add("move", [9,10,11,12,13,14,15,16], 12);
 		animation.play("move");
 		set_name("HEALTH");
 	}

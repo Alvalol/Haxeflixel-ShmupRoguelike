@@ -21,7 +21,6 @@
  <objectgroup name="objects"/>
  <objectgroup name="hazards"/>
  <objectgroup name="enemies">
-  <object id="36" type="flyingRtoL" gid="2" x="40" y="64" width="8" height="8"/>
-  <object id="37" type="flyingRtoL" gid="2" x="40" y="80" width="8" height="8"/>
+  <object id="36" type="flyingRtoL" gid="2" x="0" y="80" width="8" height="8"/>
  </objectgroup>
 </map>

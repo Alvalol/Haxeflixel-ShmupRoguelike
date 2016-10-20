@@ -74,6 +74,7 @@ class HazardBullet extends FlxSprite
 	private function createNoHit()
 	{
 		var e = new NoHit(x, y);
+		e.set_angle(angle);
 		Reg.PS.effects.add(e);
 	}
 	

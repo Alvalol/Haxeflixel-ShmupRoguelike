@@ -45,27 +45,10 @@ class BaseBullet extends Bullet
 		    super.update(elapsed);
 	}
 	
-	private function collisions()
-	{
-		if (!isOnScreen())
-			kill();
-
-		// I feel like there is something I'm doing wrong here. Must ask.
-		
-		for (block in Reg.PS.blocks)
-		{	
-			if (FlxG.overlap(this, block))
-			{
-					var newCoin:CoinItem =  Reg.PS.coins.recycle();	
-					if (newCoin == null) 
-					newCoin = new CoinItem(x, y);
-					
-					newCoin.reset(x , y);
-					Reg.PS.coins.add(newCoin);
-					kill();
-					block.kill();
-			}
-		}
+	override private function collisions()
+    {
+		super.collisions();
+	
 		
 	
 	  for (hazard in Reg.PS.hazards)
@@ -102,9 +85,10 @@ class BaseBullet extends Bullet
 	private function createNoHit()
 	{
 		var e = Reg.PS.effects.recycle(NoHit);
-		if (e == null) e = new NoHit(x, y);
+		if (e == null) e = new NoHit(x+1, y);
 		
-		e.reset(x, y - 4);
+		e.set_angle(this.angle);
+		e.reset(x+2, y - 4);
 		Reg.PS.effects.add(e);
 	}
 	

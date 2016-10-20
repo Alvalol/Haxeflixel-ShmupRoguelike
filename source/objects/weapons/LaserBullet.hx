@@ -25,24 +25,9 @@ class LaserBullet extends Bullet
 		    super.update(elapsed);
 	}
 	
-	private function collisions()
+   override	private function collisions()
 	{
-		
-		// I feel like there is something I'm doing wrong here. Must ask.
-		
-		for (block in Reg.PS.blocks)
-		{	
-			if (FlxG.overlap(this, block) && block.isOnScreen())
-			{
-					var newCoin:CoinItem =  Reg.PS.coins.recycle();	
-					if (newCoin == null) 
-					newCoin = new CoinItem(x, y);
-					
-					newCoin.reset(x , y);
-					Reg.PS.coins.add(newCoin);
-					block.kill();
-			}
-		}
+		super.collisions();
 		
 	}
 	

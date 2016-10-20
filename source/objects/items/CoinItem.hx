@@ -2,6 +2,7 @@ package objects.items;
 import flixel.addons.effects.FlxTrail;
 import flixel.effects.particles.FlxEmitter;
 import flixel.math.FlxPoint;
+import flixel.util.FlxTimer;
 import objects.Player;
 import flixel.util.FlxColor;
 import flixel.FlxG;
@@ -26,7 +27,6 @@ class CoinItem extends Item
 		animation.add("idle", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15], 10);
 		animation.play("idle");
 		scale.set(scalea, scaleb);
-		centerOffsets();
 		set_name("");
 		
 		emitter = new FlxEmitter(x,y);
@@ -36,16 +36,22 @@ class CoinItem extends Item
 	override public function update(elapsed:Float)
 	{
 		magnetize();
-	    angularVelocity = velocity.x * 2;
+		//move();
+		
+		
 		if (magnetized)
-		move();
+		{
+		moveToPlayer();
+		angularVelocity = velocity.x * 2;
+		}
+
 		else
 		{
 		   velocity.set(0, 0);
 		   acceleration.set(0, 0);
 		}
 		
-	    noOverlapping();
+	  //  noOverlapping();
 		
 		super.update(elapsed);
 	}
@@ -56,10 +62,11 @@ class CoinItem extends Item
 			magnetized = true;	
 	}
 
-	private function move()
-	{
-		FlxVelocity.accelerateTowardsObject(this, Reg.PS.player, Reg.PS.player.MAGNET * 100, Reg.PS.player.MAGNET_FORCE * 200);
 
+	private function moveToPlayer()
+	{
+	FlxVelocity.accelerateTowardsObject(this, Reg.PS.player, Reg.PS.player.MAGNET * 100, Reg.PS.player.MAGNET_FORCE * 200);
+ 
 	}
 	
 	private function noOverlapping()
@@ -83,7 +90,9 @@ class CoinItem extends Item
 	
     override function interact(player:Player)
 	{
-	  kill();
+		scale.set(0.1, 1.5);
+		new FlxTimer().start(0.0075, function(_) { kill(); }, 1);
+
 	 // particles();
 	  Reg.score += 5;
 	}

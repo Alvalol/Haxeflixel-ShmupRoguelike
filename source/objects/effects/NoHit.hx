@@ -10,13 +10,13 @@ class NoHit extends FlxSprite
 	{
 		super(x, y);
 		loadGraphic(AssetPaths.nohit__png, true, 8, 8);
-		animation.add("nohit",[0,0,1,1]);
+		animation.add("nohit",[1,1,2,2,3,3,4,4,5,5],80);
 		animation.play("nohit");
 	}
 	
 	override public function update(elapsed:Float):Void 
 	{
-		if (animation.curAnim.curFrame == 3)
+		if (animation.curAnim.curFrame == 9)
 		{
 			kill();
 		}

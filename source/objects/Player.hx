@@ -9,6 +9,7 @@ import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxTimer;
+import objects.effects.NewBullEffect;
 import objects.effects.NoHit;
 import objects.weapons.BaseWeapon;
 import objects.weapons.IWeapon;
@@ -51,8 +52,10 @@ class Player extends FlxSprite
 	public var invinsible:Bool = false;
 	
 	private var immuneToWalls(default, set):Bool = false;
-	
 	private var weapons:Array<IWeapon>;
+	
+	var bullEffect:NewBullEffect;
+	var addedBull:Bool = false;
 	
 
 	public function new(x:Float, y:Float) 
@@ -63,7 +66,9 @@ class Player extends FlxSprite
 		
 		weapons = [new BaseWeapon(x, y)];
 
-		
+		bullEffect = new NewBullEffect(x, y);
+		bullEffect.set_visible(false);
+		//bullEffect.scale.set(2, 2);
 		loadGraphic(AssetPaths.player__png, true, 8, 8);
 		
 		setSize(4, 4);
@@ -84,7 +89,15 @@ class Player extends FlxSprite
 		   collisions();
 		else 
 		   cheat();
-		
+		   
+		  if (!addedBull)
+		  {
+			  
+		Reg.PS.effects.add(bullEffect);
+		addedBull = true;
+		  }
+		bullEffect.setPosition(x+6, y-2);
+		  
 		basicChecks(elapsed);
 		
 		if (!Reg.pause)
@@ -179,6 +192,11 @@ class Player extends FlxSprite
 	
 	public function shoot()
 	{
+		bullEffect.set_visible(true);
+		new FlxTimer().start(0.05, function(_) { bullEffect.set_visible(false); }, 1);
+		
+		new FlxTimer().start(0.025, function(_) { FlxG.camera.shake(0.001, 0.05); }, 1);
+
 		for (weapon in weapons)
 		{
 		weapon.shoot();

@@ -158,7 +158,7 @@ class Enemy extends FlxSprite
 	
 	private function particles()
 	{
-		var partSize = Reg.CURRENT_SEED.int(1, 4);
+		var partSize = 1;
 				
 		emitter = Reg.PS.emitters.recycle(FlxEmitter);
 		if (emitter == null)
@@ -166,10 +166,9 @@ class Enemy extends FlxSprite
 		
 		particleTimer();
 		emitter.setPosition(x, y);
-		emitter.alpha.set(0.5, 1);
 		emitter.makeParticles(partSize,partSize, FlxColor.WHITE, desiredParticles);
 		emitter.launchMode = FlxEmitterMode.CIRCLE;
-		emitter.lifespan.set(0.2, 3);
+		emitter.lifespan.set(0.2, 0.5);
 		Reg.PS.emitters.add(emitter);
 		emitter.start(true, 0.5, desiredParticles);	
 	}
@@ -187,6 +186,7 @@ class Enemy extends FlxSprite
 		Reg.PS.effects.add(e);
 		particles();
 
+		trace("Enemy" + Type.typeof(this) + "dead");
 		}
 		
 		alive = false;
