@@ -27,10 +27,10 @@ class Player extends FlxSprite
 	private static inline var ACCELERATION:Int = 800;
 	private static inline var DECELERATION:Int = 800;
 	
-	public var HOR_MOVE_SPEED:Int =68;
+	public var HOR_MOVE_SPEED:Int =50;
 	public var VERT_MOVE_SPEED:Int =68;
 	
-	public var MAX_HOR_MOVE_SPEED:Int = 100;
+	public var MAX_HOR_MOVE_SPEED:Int = 80;
 	public var MAX_VERT_MOVE_SPEED:Int = 100;
 	
 	public var MAGNET:Int = 0;
@@ -51,11 +51,13 @@ class Player extends FlxSprite
 	private var _cooldown:Float = 0.5;
 	public var invinsible:Bool = false;
 	
-	private var immuneToWalls(default, set):Bool = false;
+	private var immuneToWalls(default, set):Bool = true;
 	private var weapons:Array<IWeapon>;
 	
 	var bullEffect:NewBullEffect;
 	var addedBull:Bool = false;
+	
+	var shooting:Bool = false;
 	
 
 	public function new(x:Float, y:Float) 
@@ -81,10 +83,16 @@ class Player extends FlxSprite
 		drag.y = DECELERATION;
 		
 		maxVelocity.set(HOR_MOVE_SPEED, VERT_MOVE_SPEED);
+		
 	}
 	
 	override public function update(elapsed:Float):Void
 	{	
+		if (!shooting)
+		{
+		move_right();
+		}
+		
 		if (!invinsible)
 		   collisions();
 		else 
@@ -99,6 +107,7 @@ class Player extends FlxSprite
 		bullEffect.setPosition(x+6, y-2);
 		  
 		basicChecks(elapsed);
+		
 		
 		if (!Reg.pause)
 		{
@@ -157,9 +166,9 @@ class Player extends FlxSprite
 	private function move()
 	{
 		move_up();
-		move_right();
+		//move_right();
 		move_down();
-		move_left();
+		//move_left();
 	}
 	
 	public function resetAccel()
@@ -175,7 +184,7 @@ class Player extends FlxSprite
 	
 	public function move_right()
 	{
-		    acceleration.x += ACCELERATION;	
+		    velocity.x += ACCELERATION / 40;	
 	}
 	
 	public function move_down()
@@ -185,7 +194,7 @@ class Player extends FlxSprite
 
 	public function move_left()
 	{
-		    acceleration.x -= ACCELERATION;
+		    velocity.x -= ACCELERATION / 55;
 	}
 	
 	// TODO : Complete reimplementation to support different types of "weapons"  
@@ -193,6 +202,10 @@ class Player extends FlxSprite
 	public function shoot()
 	{
 		bullEffect.set_visible(true);
+		move_left();
+		
+		shooting = true;
+		
 		new FlxTimer().start(0.05, function(_) { bullEffect.set_visible(false); }, 1);
 		
 		new FlxTimer().start(0.025, function(_) { FlxG.camera.shake(0.001, 0.05); }, 1);
@@ -250,6 +263,11 @@ class Player extends FlxSprite
 	public function get_weapons():Array<IWeapon> 
 	{
 		return weapons;
+	}
+	
+	public function set_shooting(value)
+	{
+		shooting = value;
 	}
 	
 	public function add_weapon(wep:Dynamic)

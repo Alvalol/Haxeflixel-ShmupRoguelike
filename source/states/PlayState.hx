@@ -31,9 +31,14 @@ import openfl.system.ApplicationDomain;
 import openfl.system.System;
 import openfl.utils.ByteArray;
 import substates.PauseState;
-import utils.controls.Gamepad;
-import utils.pcg.MapChunkMerger;
+
+#if desktop
 import flixel.input.gamepad.FlxGamepad;
+import utils.controls.Gamepad;
+#end
+import utils.pcg.MapChunkMerger;
+
+
 import flixel.addons.display.FlxBackdrop;
 
 import objects.enemies.EnemyBullet;
@@ -79,8 +84,10 @@ class PlayState extends FlxState
 	
 	private var trailArea:FlxTrailArea;
 	
+	#if desktop
 	private var gamepad:FlxGamepad;
-
+    #end
+	
 	private var lerpSpeed:Float = 0.1;
 	
 	public var canQuit = false;
@@ -113,7 +120,9 @@ class PlayState extends FlxState
 		_entities = new FlxGroup();
 		
 		
+		#if desktop
 		FlxG.mouse.visible = false; // must always be set to false pls
+		#end
 		map = LevelLoaderProc.loadGeneratedLevel();
 		backDrop = new FlxBackdrop(AssetPaths.background__png, 0.01, 0.01, true, true);
 	
@@ -129,10 +138,12 @@ class PlayState extends FlxState
 		if (!Reg.pause)
 		super.update(elapsed);
 		        
+		#if desktop
 		controlPauseScreen();
 		Gamepad.checkForGamepad();
 		Gamepad.updateGameInputs();
 		Gamepad.checkForExit();
+		#end
 		displayTracers();
 		addLevelObjects();
 		updateTrailArea();
@@ -314,7 +325,7 @@ class PlayState extends FlxState
 	
 	private function displayTracers()
 	{
-		#if !FLX_NO_DEBUG 
+		#if !FLX_NO_DEBUG  && desktop
 		if (FlxG.keys.justPressed.T)
 		{
 		trace("enemies : " + enemies.length);

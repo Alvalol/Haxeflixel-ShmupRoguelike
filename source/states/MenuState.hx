@@ -46,7 +46,7 @@ class MenuState extends FlxState
 		move();
 		
 		
-		
+		#if desktop
 		Gamepad.checkForGamepad();
 		
 		if (FlxG.keys.anyJustPressed(["ENTER"]))
@@ -55,6 +55,8 @@ class MenuState extends FlxState
 		if (Gamepad.GAMEPAD != null && (Gamepad.GAMEPAD.justPressed.A || Gamepad.GAMEPAD.justPressed.START))
 			startGame();
 			
+		#end 
+		
 		super.update(elapsed);
 			
 	}

@@ -4,6 +4,7 @@ import flixel.input.gamepad.FlxGamepad;
 import openfl.system.System;
 import utils.pcg.MapChunkMerger;
 
+#if desktop
 class Gamepad
 {
 	
@@ -100,7 +101,7 @@ public static var GAMEPAD:FlxGamepad;
 		{
 			Reg.PS.player.move_up();
 		}
-		
+		/*
 		if ( FlxG.keys.anyPressed(Keyboard.rightKeys))
 		{
 			Reg.PS.player.move_right();
@@ -110,6 +111,12 @@ public static var GAMEPAD:FlxGamepad;
 		if ( FlxG.keys.anyPressed(Keyboard.leftKeys))
 		{
 			Reg.PS.player.move_left();
+		}
+		*/
+	
+		if (FlxG.keys.anyJustReleased(Keyboard.actionKeys))
+		{
+			Reg.PS.player.set_shooting(false);
 		}
 		
 		if ( FlxG.keys.anyPressed(Keyboard.downKeys))
@@ -138,3 +145,4 @@ public static var GAMEPAD:FlxGamepad;
 
 	}
 }
+#end

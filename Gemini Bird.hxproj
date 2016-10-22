@@ -15,7 +15,7 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="C:\Users\Alvaro\Desktop\shmup\hxcpp\flixel\4,1,1" />
+    <class path="C:\Users\Alvaro\Desktop\shmup\hxcpp\flixel\4,2,0" />
     <class path="C:\Users\Alvaro\Desktop\shmup\hxcpp\openfl\3,6,1" />
     <class path="C:\Users\Alvaro\Desktop\shmup\hxcpp\lime\2,9,1" />
     <class path="C:\Users\Alvaro\Desktop\shmup\hxcpp\hscript\2,0,7" />
@@ -28,7 +28,7 @@
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="flixel=4.1.1&#xA;openfl=3.6.1&#xA;lime=2.9.1&#xA;hscript=2.0.7&#xA;flixel-addons=2.1.0&#xA;polygonal-ds=1.4.1&#xA;polygonal-printf=1.0.2-beta&#xA;HXCPP_QUIET&#xA;openfl-next&#xA;tools=2.9.1&#xA;FLX_NO_DEBUG&#xA;no-compilation&#xA;NAPE_RELEASE_BUILD&#xA;native&#xA;FLX_NO_TOUCH&#xA;lime-native&#xA;openfl-native&#xA;windows&#xA;desktop&#xA;display" />
+    <option directives="flixel=4.2.0&#xA;openfl=3.6.1&#xA;lime=2.9.1&#xA;hscript=2.0.7&#xA;flixel-addons=2.1.0&#xA;polygonal-ds=1.4.1&#xA;polygonal-printf=1.0.2-beta&#xA;HXCPP_QUIET&#xA;openfl-next&#xA;tools=2.9.1&#xA;FLX_NO_DEBUG&#xA;no-compilation&#xA;NAPE_RELEASE_BUILD&#xA;native&#xA;FLX_NO_TOUCH&#xA;lime-native&#xA;openfl-native&#xA;windows&#xA;desktop&#xA;display" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />

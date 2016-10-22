@@ -13,7 +13,7 @@ class Scroller extends FlxSprite
 		super(x,y);
 	    makeGraphic(4, 4, FlxColor.RED);
 		alpha = .5;
-		visible = true;
+		visible = false;
 		maxVelocity.set(MOVE_SPEED, MOVE_SPEED);
 	}
 	

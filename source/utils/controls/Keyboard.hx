@@ -1,6 +1,8 @@
 package utils.controls;
 import flixel.FlxG;
+#if desktop
 import flixel.FlxG.keys;
+#end
 import flixel.input.keyboard.FlxKey;
 
 class Keyboard
