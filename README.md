@@ -16,7 +16,7 @@ You can try it out [here](https://drive.google.com/open?id=0By79FfszQd8wT1BpT3Bx
 
 ## Development
 To keep track of the development, you can always follow the [devlog on Tigsource](https://forums.tigsource.com/index.php?topic=57162) or on the [Haxeflixel forums](http://forum.haxeflixel.com/topic/166/untitled-shmup-roguelite/).  
-I also stream on [Livecoding](livecoding.tv/alvalol) and [Twitch](http://twitch.tv/Alvaro_As) simultaneously.  
+I also stream on [Livecoding](http://livecoding.tv/alvalol) and [Twitch](http://twitch.tv/Alvaro_As) simultaneously.  
 
 ## Support 
 
