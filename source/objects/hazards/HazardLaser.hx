@@ -25,6 +25,7 @@ class HazardLaser extends Hazard
 		super(x+2, y - 8);
 		
 		makeGraphic(2, FlxG.height, FlxColor.YELLOW);
+		// add a "generator" that makes clear where the laser is located.
 
 	}
 	
@@ -66,9 +67,15 @@ class HazardLaser extends Hazard
 		}
 		
 		if (tactive)
+		{
 			alpha = 1;
+			color = FlxColor.RED;
+		}
 		else
+		{
 		    alpha = 0.1;
+			color = FlxColor.YELLOW;
+		}
 		
 	}
 	

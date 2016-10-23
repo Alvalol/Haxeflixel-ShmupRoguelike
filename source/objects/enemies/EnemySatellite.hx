@@ -55,13 +55,14 @@ class EnemySatellite extends Enemy
 	
 	private function connect(satelliteB:EnemySatellite)
 	{
+		/*
 		if (FlxMath.distanceBetween(this, satelliteB) <= 100)
 		{
 			set_connected(true);
 			satelliteB.set_connected(true);
 			tempcanvas = new FlxSprite();
-		    tempcanvas.makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT, true);
-		    Reg.PS.add(tempcanvas);
+		  //  tempcanvas.makeGraphic(FlxG.width, FlxG.height, FlxColor.TRANSPARENT, true);
+		  //  Reg.PS.add(tempcanvas);
 		}
 		else
 		{
@@ -70,6 +71,7 @@ class EnemySatellite extends Enemy
 			satelliteB.set_connected(false);
 			destroyConnection();
 		}
+		*/
 	}
 	
 	private function destroyConnection()

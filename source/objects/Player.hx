@@ -61,7 +61,8 @@ class Player extends FlxSprite
 	
 	var comboMultiplier:Float = 1;	
 	var comboTimer:FlxTimer;
-	var comboTimerDuration:Float = 3;
+	var comboTimerDuration:Float = 5;
+	public var timeLeft:Float;
 
 	public function new(x:Float, y:Float) 
 	{
@@ -77,6 +78,7 @@ class Player extends FlxSprite
 		
 		setSize(4, 4);
 		
+		
 		centerOffsets();
 		animation.add("move", [0,1,1,1,0], 16);
 		animation.play("move");
@@ -84,18 +86,19 @@ class Player extends FlxSprite
 		drag.x = DECELERATION;
 		drag.y = DECELERATION;
 		
-		comboTimer = new FlxTimer().start(comboTimerDuration);
+		
+		comboTimer = new FlxTimer().start(0, function(_) { comboMultiplier = 1;} );
 		maxVelocity.set(HOR_MOVE_SPEED, VERT_MOVE_SPEED);
+		
+		
 	}
 	
 	override public function update(elapsed:Float):Void
 	{	
 		if (!shooting)
 		move_right();
-		
-		trace("MULTIPLIER : " + comboMultiplier);
-		trace("Time left : " + comboTimer.timeLeft);
-		
+
+		timeLeft = comboTimer.timeLeft;
 		
 		if (!invinsible)
 		   collisions();
@@ -120,7 +123,6 @@ class Player extends FlxSprite
 			{
 			weapon.update_location(new FlxPoint(x, y));
 			}
-			//checkTimer();
 		}
 			
 		//displayTrace();
@@ -136,19 +138,14 @@ class Player extends FlxSprite
 		Reg.PS.effects.add(tracePlayer);
 		}
 	}
-	public function resetTimer()
+	
+	public function resetComboTimer()
 	{
 		comboTimer.reset(comboTimerDuration);
-		comboTimer.start(comboTimerDuration, function(_) { comboMultiplier = 1; });
+		//comboTimer.start(comboTimerDuration, function(_) { comboMultiplier = 1; });
+	    //comboMultiplier = 1;
 	}
 	
-	/*
-	private function checkTimer()
-	{
-		if (comboTimer.finished)
-		comboMultiplier = 1;
-	}
-	*/
 	
 	private function cheat()
 	{
@@ -253,8 +250,10 @@ class Player extends FlxSprite
 		if (!FlxSpriteUtil.isFlickering(this))
 		{
 		HP--;
+		comboMultiplier = 1;
+		comboTimer.start(0);
 		FlxG.camera.shake(0.003, 0.5);
-		FlxSpriteUtil.flicker(this,2,0.05,true);
+		FlxSpriteUtil.flicker(this, 2, 0.05, true);
 	    }
 	}
 	

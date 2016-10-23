@@ -36,7 +36,6 @@ class LaserWeapon implements IWeapon
 			pb = new LaserBullet(location.x + 8, location.y);
 			pb.set_damage(damage);
 			Reg.PS.PBullets.add(pb);
-			trace("Bullet added");
 		}
 	}
 	
@@ -47,8 +46,8 @@ class LaserWeapon implements IWeapon
 		if (shot && !timersStarted)
 		{
 			timersStarted = true;
-			new FlxTimer().start(2, function(_) { pb.destroy(); Reg.PS.PBullets.remove(pb, true); trace("PB DESTROYED"); }, 1);
-			new FlxTimer().start(5, function(_) { shot = false; timersStarted = false; trace("VALUES RESET"); }, 1);
+			new FlxTimer().start(2, function(_) { pb.destroy(); Reg.PS.PBullets.remove(pb, true); }, 1);
+			new FlxTimer().start(5, function(_) { shot = false; timersStarted = false;  }, 1);
 		}
 	}
 	

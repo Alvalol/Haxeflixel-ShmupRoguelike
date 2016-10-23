@@ -61,8 +61,8 @@ class EnemyBullet extends FlxSprite
 
 	public function interact(player:Player)
 	{
-		kill();
 		player.damage();
+		kill();
 	}
 	
 	private function createNoHit()

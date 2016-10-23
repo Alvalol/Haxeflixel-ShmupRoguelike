@@ -139,7 +139,7 @@ class ObjectPlacement
 					case "enemySpawner" :  allLevelEnemies.push(new EnemySpawner(pos.x, pos.y, enemy.flippedVertically));
      				case "enemyTurret" :  allLevelEnemies.push(new EnemyTurretA(pos.x, pos.y, enemy.flippedVertically));		
 					case "enemyWorm" :  allLevelEnemies.push(new EnemyWorm(pos.x, pos.y, enemy.flippedVertically));
-					case "enemySatellite" : allLevelEnemies.push(new EnemySatellite(pos.x, pos.y));
+			//		case "enemySatellite" : allLevelEnemies.push(new EnemySatellite(pos.x, pos.y));
 			   }
 			
 			   

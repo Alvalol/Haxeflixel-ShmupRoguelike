@@ -79,7 +79,7 @@ class PlayState extends FlxState
 	private var _scroller(default, null):Scroller;
 	private var _scrollerOffset:Int = 120;
 	
-	private var _hud:HUD;
+	public var _hud:HUD;
 	private var _gameCamera:FlxCamera;
 	private var _hudCamera:FlxCamera;
 	
@@ -146,8 +146,6 @@ class PlayState extends FlxState
 		if (!Reg.pause)
 		super.update(elapsed);
 		
-		trace(FlxG.mouse.x, FlxG.mouse.y);
-		        
 		#if desktop
 		controlPauseScreen();
 		Gamepad.checkForGamepad();
@@ -258,7 +256,7 @@ class PlayState extends FlxState
 	
 	private function createTrailArea()
 	{
-	  trailArea = new FlxTrailArea(0, 0, FlxG.width, FlxG.height, 0.5,5, false, false);
+	  trailArea = new FlxTrailArea(0, 0, FlxG.width, FlxG.height, 0.5,2, false, false);
 	  add(trailArea);
 	}
 	

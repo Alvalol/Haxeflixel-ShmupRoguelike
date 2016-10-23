@@ -98,9 +98,9 @@ class CoinItem extends Item
 	  
 	 // Scores and combo system
 	 Reg.score += 5 * Reg.PS.player.get_comboMultiplier();
-	 Reg.PS.player.set_comboMultiplier(Reg.PS.player.get_comboMultiplier() + 0.5);
+	 resetCombo();
+	 	  
 	 
-	 Reg.PS.player.resetTimer();
 	 
 	}
 	

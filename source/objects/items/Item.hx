@@ -12,6 +12,7 @@ import flixel.util.FlxSpriteUtil;
 import flixel.effects.FlxFlicker;
 import flixel.math.FlxVelocity;
 import objects.enemies.EnemyBullet;
+import states.HUD;
 
 
 class Item extends FlxSprite
@@ -25,7 +26,6 @@ class Item extends FlxSprite
 	private var createdText:Bool = false;
     
 	private var i:Float = 0.0;
-	
 
 	private var emitter:FlxEmitter;
 
@@ -193,11 +193,22 @@ class Item extends FlxSprite
 	{
 		kill();
 		Reg.score += 50; // TODO : Item score should be dynamic and dependent on the item itself.
+		resetCombo();
+	}
+
+	public function resetCombo()
+	{
+		
+		Reg.PS.player.set_comboMultiplier(Reg.PS.player.get_comboMultiplier() + 0.1);
+	    Reg.PS.player.resetComboTimer();
+		
+		Reg.PS._hud.animateHud(Reg.PS._hud.get_currentComboMod());
 	}
 	
-	function set_name(value:String):String 
+	public function set_name(value:String):String 
 	{
 		return _name = value;
 	}
+	
 	
 }

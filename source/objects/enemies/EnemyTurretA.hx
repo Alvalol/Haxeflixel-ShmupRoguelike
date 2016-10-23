@@ -65,7 +65,7 @@ class EnemyTurretA extends Enemy
 	override public function update(elapsed:Float)
 	{
 		animateToShoot();	
-		killWithExplosion();
+
 		if (!adjusted)
 		{
 		adjustPlacement();
@@ -74,19 +74,11 @@ class EnemyTurretA extends Enemy
 		super.update(elapsed);
 	}
 	
-	
-	private function killWithExplosion()
-	{
-		if (FlxG.overlap(this, Reg.PS.effects))
-		{
-			kill();
-		}
-	}
-
 	override function collisions() 
 	{	
 		super.collisions();
 	}
+	
 	
     private function animateToShoot()
 	{
@@ -143,7 +135,7 @@ class EnemyTurretA extends Enemy
 	
 	override public function kill():Void
 	{
-	    drops = [new WeaponBackItem(x, y), new HealthMaxItem(x, y), new HealthMaxItem(x, y)];
+	    drops = [new WeaponBackItem(x, y)];// , new HealthMaxItem(x, y), new HealthMaxItem(x, y)];
 		dropRate = [0.25, 0.25,0.50];
 		dropItem(drops,dropRate);
 		super.kill();
@@ -153,8 +145,6 @@ class EnemyTurretA extends Enemy
 	{
 		// There has to be a better way to do this. Hacky and ugly.
 			y -=height;
-
-
 	}
 		
 	private function chooseType()	

@@ -41,18 +41,18 @@ class Enemy extends FlxSprite
 	override public function update(elapsed:Float) 
 	{
 		basicChecks();
-		collisions();
-
+		
 		if (createdDamageText)
 		{
 			damageText.velocity.y = -25;
 		}
 
 		if (!Reg.pause)
+		{
+			collisions();
 			super.update(elapsed);
-			
-	}
-	
+		}			
+	}	
 
 	private function particleTimer()
 	{
@@ -89,7 +89,7 @@ class Enemy extends FlxSprite
 	
 	private function collisions()
 	{
-		if (FlxG.overlap(Reg.PS.player,this) && !FlxSpriteUtil.isFlickering(Reg.PS.player))
+		if (FlxG.overlap(this, Reg.PS.player) && !FlxSpriteUtil.isFlickering(Reg.PS.player))
 			interact(Reg.PS.player);
 		
 		if (FlxG.overlap(Reg.PS.PBullets, this) && isOnScreen())
@@ -99,8 +99,8 @@ class Enemy extends FlxSprite
 	
 	private function interact(player:Player)
 	{
-		kill(); 
 		player.damage();
+		kill(); 
 		FlxObject.separate(this, player);
 	}
 	
@@ -186,7 +186,7 @@ class Enemy extends FlxSprite
 		Reg.PS.effects.add(e);
 		particles();
 
-		trace("Enemy" + Type.typeof(this) + "dead");
+	//	trace("Enemy" + Type.typeof(this) + "dead");
 		}
 		
 		alive = false;

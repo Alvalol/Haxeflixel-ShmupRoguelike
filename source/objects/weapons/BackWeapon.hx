@@ -15,7 +15,7 @@ class BackWeapon implements IWeapon
 	public var location:FlxPoint;
 	
 	private var _coolingDown:Bool;
-	private var _offset:Int = 15;	
+	private var _offset:Int = 8;	
 	private var bulletSpeed:Int;
 	
 	
