@@ -9,6 +9,7 @@ import flixel.math.FlxMath;
 import utils.controls.Gamepad;
 import flixel.addons.display.FlxBackdrop;
 
+import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
 
 class MenuState extends FlxState
 {
@@ -16,6 +17,7 @@ class MenuState extends FlxState
     var background:FlxBackdrop;
 	var title:FlxSprite;
 	var i = 0.0;
+	
 	
 	override public function create():Void
 	{
@@ -38,6 +40,7 @@ class MenuState extends FlxState
 		add(options);
 		add(bars);
 	}
+	
 
 	override public function update(elapsed:Float):Void
 	{
