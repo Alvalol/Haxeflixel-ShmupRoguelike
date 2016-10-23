@@ -73,6 +73,7 @@ class PlayState extends FlxState
 	public var items(default, null):FlxTypedGroup<Item>;
 	public var emitters:FlxTypedGroup<FlxEmitter>;
 	public var coins:FlxTypedGroup <CoinItem>;
+	public var sysObjects:FlxTypedGroup<FlxSprite>;
 	private var _entities:FlxGroup;
 	private var pauseScreen:PauseState;
 
@@ -112,8 +113,9 @@ class PlayState extends FlxState
 		hazards = new FlxTypedGroup<Hazard>();
 		blocks = new FlxTypedGroup<HazardBlock>();
 		effects = new FlxSpriteGroup();
+		sysObjects = new FlxTypedGroup<FlxSprite>();
 		
-
+        Reg.score = 0;
 		barrierLeft = new Barrier(0, 0);
 		barrierRight = new Barrier(0, 0);
 
@@ -243,6 +245,7 @@ class PlayState extends FlxState
 		_entities.add(EBullets);
 		_entities.add(HBullets);
 		_entities.add(PBullets);
+		_entities.add(sysObjects);
 
 		
 		add(_entities);

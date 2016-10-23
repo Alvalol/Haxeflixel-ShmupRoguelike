@@ -76,7 +76,7 @@ class ObjectPlacement
 			if (object.type == "goal")
 			{
 				var pos = new FlxPoint(chunkIndex * (chunk.fullWidth) + object.x , object.y);
-				Reg.PS.add(new Goal(pos.x));
+				Reg.PS.sysObjects.add(new Goal(pos.x));
 			}
 			else
 			{

@@ -43,7 +43,7 @@ class EnemyMultishotDeath extends Enemy
 		drops = [new HealthItem(x, y)];
 		dropRate = [1.0];
 		dropItem(drops, dropRate);
-		new FlxTimer().start(0.5, function(_) { deathShot(); }, 1);
+		new FlxTimer().start(0.1, function(_) { deathShot(); }, 1);
 		super.kill();
 	}
 	
@@ -81,7 +81,7 @@ class EnemyMultishotDeath extends Enemy
 		
 			eb.velocity.set(FlxVelocity.velocityFromAngle(tang, bulletSpeed).x,FlxVelocity.velocityFromAngle(tang, bulletSpeed).y);
 			tang += 45;
-			eb.scale.set(0.5, 0.5);
+			eb.scale.set(0.75,0.75);
 			Reg.PS.EBullets.add(eb);
 		}
 	}
