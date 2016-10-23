@@ -38,7 +38,7 @@ class Player extends FlxSprite
 	public var MAGNET_FORCE:Int = 0;
 	public var MAX_MAGNET_FORCE:Int = 100;
 	
-	public var RANGE:Float = 0.2;
+	public var RANGE:Float = 1; // maybe
 	public var MAX_RANGE:Float = 2.0;
 	
 	private static inline var MAX_BULLETS:Int = 10;
@@ -59,6 +59,9 @@ class Player extends FlxSprite
 	
 	var shooting:Bool = false;
 	
+	var comboMultiplier:Float = 1;	
+	var comboTimer:FlxTimer;
+	var comboTimerDuration:Float = 3;
 
 	public function new(x:Float, y:Float) 
 	{
@@ -70,28 +73,29 @@ class Player extends FlxSprite
 
 		bullEffect = new NewBullEffect(x, y);
 		bullEffect.set_visible(false);
-		//bullEffect.scale.set(2, 2);
 		loadGraphic(AssetPaths.player__png, true, 8, 8);
 		
 		setSize(4, 4);
 		
 		centerOffsets();
-		animation.add("move", [0,1,1,1,0],16);
+		animation.add("move", [0,1,1,1,0], 16);
 		animation.play("move");
 		
 		drag.x = DECELERATION;
 		drag.y = DECELERATION;
 		
+		comboTimer = new FlxTimer().start(comboTimerDuration);
 		maxVelocity.set(HOR_MOVE_SPEED, VERT_MOVE_SPEED);
-		
 	}
 	
 	override public function update(elapsed:Float):Void
 	{	
 		if (!shooting)
-		{
 		move_right();
-		}
+		
+		trace("MULTIPLIER : " + comboMultiplier);
+		trace("Time left : " + comboTimer.timeLeft);
+		
 		
 		if (!invinsible)
 		   collisions();
@@ -100,10 +104,10 @@ class Player extends FlxSprite
 		   
 		  if (!addedBull)
 		  {
-			  
-		Reg.PS.effects.add(bullEffect);
-		addedBull = true;
+		   Reg.PS.effects.add(bullEffect);
+		   addedBull = true;
 		  }
+		  
 		bullEffect.setPosition(x+6, y-2);
 		  
 		basicChecks(elapsed);
@@ -116,16 +120,35 @@ class Player extends FlxSprite
 			{
 			weapon.update_location(new FlxPoint(x, y));
 			}
+			//checkTimer();
 		}
 			
+		//displayTrace();
 		
-	/*	if (FlxG.random.int(0,100) > 40 && (acceleration.x != 0  || acceleration.y != 0))
+	}
+	
+	private function displayTrace()
+	{
+		
+	  if (FlxG.random.int(0,100) > 40 && (acceleration.x != 0  || acceleration.y != 0))
 		{
 		var tracePlayer = new objects.effects.PlayerTrace(x - 8, y-2);
 		Reg.PS.effects.add(tracePlayer);
 		}
-		*/
 	}
+	public function resetTimer()
+	{
+		comboTimer.reset(comboTimerDuration);
+		comboTimer.start(comboTimerDuration, function(_) { comboMultiplier = 1; });
+	}
+	
+	/*
+	private function checkTimer()
+	{
+		if (comboTimer.finished)
+		comboMultiplier = 1;
+	}
+	*/
 	
 	private function cheat()
 	{
@@ -153,6 +176,12 @@ class Player extends FlxSprite
 		}
 	}
 	
+	public function get_comboTimer():Float
+	{
+		
+	 return comboTimer.timeLeft;
+	 
+	}
 	private function basicChecks(elapsed:Float)
 	{
 		if (alive)
@@ -201,6 +230,8 @@ class Player extends FlxSprite
 	
 	public function shoot()
 	{
+		if (!Reg.pause)
+		{
 		bullEffect.set_visible(true);
 		move_left();
 		
@@ -213,6 +244,7 @@ class Player extends FlxSprite
 		for (weapon in weapons)
 		{
 		weapon.shoot();
+		}
 		}
 	}
 	
@@ -274,6 +306,15 @@ class Player extends FlxSprite
 	{
 		weapons.push(wep);
 	}
-
+	
+	public function get_comboMultiplier():Float 
+	{
+		return comboMultiplier;
+	}
+	
+	public function set_comboMultiplier(value)
+	{
+		comboMultiplier = value;
+	}
 	
 }

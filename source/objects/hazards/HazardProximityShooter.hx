@@ -32,7 +32,7 @@ class HazardProximityShooter extends Hazard
 	
 	private function proximity()
 	{
-		if (FlxMath.absInt(Std.int(x))  - Std.int(Reg.PS.player.x) < 10 && !shot && isOnScreen())
+		if (FlxMath.absInt(Std.int(x))  - Std.int(Reg.PS.player.x) < 20 && !shot && isOnScreen())
 			shoot();
 	}
 	
@@ -46,10 +46,11 @@ class HazardProximityShooter extends Hazard
 
 		shot = true;
 		}
+		
 		else
 		{
 			hb.velocity.y *= -1;
-			hb.angle = 90;
+			hb.angle = 180;
 			Reg.PS.HBullets.add(hb);	
 			shot = true;
 		}

@@ -1,12 +1,14 @@
 package objects.gamesys;
 import flixel.FlxSprite;
 import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
 
 class Scroller extends FlxSprite
 {
 	
-	private static inline var ACCELERATION:Int = 4;
+	private static inline var ACCELERATION:Int = 2;
 	private var MOVE_SPEED:Int = 20;
+	private var SPEED_MOD:Int = 10;
 
 	public function new(x:Float,y:Float)
 	{
@@ -26,9 +28,14 @@ class Scroller extends FlxSprite
 	   /*TODO : Implement speed variation based on a combo feature. If the player has a high combo, the game slows down. If the player has a low combo,
 		* the game goes faster (as he most likely isn't close to enemies, so we bring him towards them to keep the game's rhytm high
 		*/
-	   
-	   if (!Reg.pause)
+	 if (Reg.PS.player.get_comboMultiplier() == 1)
+	  maxVelocity.set(MOVE_SPEED + SPEED_MOD, MOVE_SPEED + SPEED_MOD);
+	 
+	 else
+	  maxVelocity.set(MOVE_SPEED, MOVE_SPEED);
+	
+	  
+	  if (!Reg.pause)
 		   super.update(elapsed);
 	 }
- 
 }

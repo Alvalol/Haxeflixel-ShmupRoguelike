@@ -55,7 +55,7 @@ class BackWeapon implements IWeapon
 				pb.set_BULLET_SPEED(bulletSpeed);
 				pb.set_damage(damage);
 				pb.angle = ang;
-				pb.scale.set(0.5, 0.5);
+				pb.scale.set(0.25, 0.25);
 				
 				Reg.PS.PBullets.add(pb);
 				_coolingDown = true;

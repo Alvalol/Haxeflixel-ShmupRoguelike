@@ -94,7 +94,6 @@ class Enemy extends FlxSprite
 		
 		if (FlxG.overlap(Reg.PS.PBullets, this) && isOnScreen())
 			damage();
-
 	
 	}
 	
@@ -179,6 +178,7 @@ class Enemy extends FlxSprite
 		FlxG.camera.shake(0.003, 0.05);
 		Reg.PS.enemies.remove(this, true);
 		
+		
 		if (isOnScreen()){
 		var e = Reg.PS.effects.recycle(Explosion) ;
 		if (e == null) e = new Explosion(x - 4, y - 4);
@@ -191,6 +191,7 @@ class Enemy extends FlxSprite
 		
 		alive = false;
 	    exists = false;
+		
 	}	
 	
 

@@ -28,7 +28,7 @@ class GameOverSubState extends FlxState
 		FlxG.mouse.visible = true; // must always be set to false pls
 		#end
 		_text = new FlxText(FlxG.width / 2 - 50, 20, FlxG.width, "Game Over");
-		_textScore = new FlxText(FlxG.width/ 2 - 50, FlxG.width, FlxG.width, Reg.score);
+		_textScore = new FlxText(FlxG.width/ 2 - 50, FlxG.width, FlxG.width, Std.string(Reg.score));
 	    _restartButton = new FlxButton(FlxG.width / 2 - 60, 60, "Restart", onClick);
 		_textScore.text =  StringTools.lpad(
 		Std.string(Reg.score), "0", 5);

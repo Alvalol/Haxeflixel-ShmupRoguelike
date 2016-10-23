@@ -20,6 +20,7 @@ import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxSpriteUtil;
 import lime.system.Display;
+import objects.effects.Barrier;
 import objects.hazards.Hazard;
 import objects.hazards.HazardBullet;
 import objects.hazards.HazardLaser;
@@ -94,6 +95,9 @@ class PlayState extends FlxState
 	
 	private var backDrop:FlxBackdrop;
 	
+	private var barrierLeft:Barrier;
+	private var barrierRight:Barrier;
+	
 	override public function create():Void
 	{
 		Reg.PS = this;
@@ -110,6 +114,10 @@ class PlayState extends FlxState
 		effects = new FlxSpriteGroup();
 		
 
+		barrierLeft = new Barrier(0, 0);
+		barrierRight = new Barrier(0, 0);
+
+		
 		coins = new FlxTypedGroup<CoinItem>();
 		items = new FlxTypedGroup<Item>();
         PBullets = new FlxTypedGroup<Bullet>();
@@ -129,7 +137,7 @@ class PlayState extends FlxState
 		addGameplayElements();
       	cameraSetup();
 		createTrailArea();
-       // getMiniMap();
+      //  getMiniMap();
 		super.create();
 	}
 
@@ -137,6 +145,8 @@ class PlayState extends FlxState
 	{
 		if (!Reg.pause)
 		super.update(elapsed);
+		
+		trace(FlxG.mouse.x, FlxG.mouse.y);
 		        
 		#if desktop
 		controlPauseScreen();
@@ -148,6 +158,11 @@ class PlayState extends FlxState
 		addLevelObjects();
 		updateTrailArea();
 		trailArea.update(elapsed);
+		
+		// PLACEHOLDER	
+		barrierLeft.setPosition(FlxG.camera.scroll.x , FlxG.camera.scroll.y );
+		barrierRight.setPosition(FlxG.camera.scroll.x + FlxG.width -1 , FlxG.camera.scroll.y);
+		
 
 		FlxSpriteUtil.bound(player, 
 		                    FlxG.camera.scroll.x, 
@@ -218,6 +233,7 @@ class PlayState extends FlxState
 	{		
 		add(backDrop);
 		add(map);
+		
 
 		_entities.add(EExplosions);
 		_entities.add(coins);
@@ -234,14 +250,15 @@ class PlayState extends FlxState
 		add(_entities);
 		add(player);	
 		add(effects);
-		
+		_entities.add(barrierLeft);
+		_entities.add(barrierRight);	
 		effects.clear();
 		
 	}
 	
 	private function createTrailArea()
 	{
-	  trailArea = new FlxTrailArea(0, 0, FlxG.width, FlxG.height, 0.25,5, false, false);
+	  trailArea = new FlxTrailArea(0, 0, FlxG.width, FlxG.height, 0.5,5, false, false);
 	  add(trailArea);
 	}
 	
@@ -269,6 +286,9 @@ class PlayState extends FlxState
 			if (Type.getClassName(Type.getClass(hazard)).indexOf("HazardLaser") > -1)
 			trailArea.add(hazard);
 		}
+		
+		trailArea.add(barrierLeft);
+		trailArea.add(barrierRight);
 		
 	}
 	
@@ -325,7 +345,7 @@ class PlayState extends FlxState
 	
 	private function displayTracers()
 	{
-		#if !FLX_NO_DEBUG  && desktop
+		#if !FLX_NO_DEBUG // && desktop
 		if (FlxG.keys.justPressed.T)
 		{
 		trace("enemies : " + enemies.length);

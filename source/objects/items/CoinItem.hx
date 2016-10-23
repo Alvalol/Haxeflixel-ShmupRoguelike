@@ -92,9 +92,16 @@ class CoinItem extends Item
 	{
 		scale.set(0.1, 1.5);
 		new FlxTimer().start(0.0075, function(_) { kill(); }, 1);
+		
 
 	 // particles();
-	  Reg.score += 5;
+	  
+	 // Scores and combo system
+	 Reg.score += 5 * Reg.PS.player.get_comboMultiplier();
+	 Reg.PS.player.set_comboMultiplier(Reg.PS.player.get_comboMultiplier() + 0.5);
+	 
+	 Reg.PS.player.resetTimer();
+	 
 	}
 	
 	override private function particles()
