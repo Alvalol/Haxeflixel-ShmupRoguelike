@@ -1,5 +1,6 @@
 package objects.enemies;
 
+
 import flixel.FlxSprite;
 import flixel.input.FlxPointer;
 import flixel.math.FlxPoint;
@@ -10,6 +11,7 @@ import objects.items.HealthItem;
 import flixel.math.FlxMath;
 import flixel.math.FlxVelocity;
 import flixel.util.FlxTimer;
+import objects.items.HealthMaxItem;
 
 class EnemyMultishotDeath extends Enemy
 {
@@ -40,8 +42,8 @@ class EnemyMultishotDeath extends Enemy
 	
 	override public function kill()
 	{
-		drops = [new HealthItem(x, y)];
-		dropRate = [1.0];
+		drops = [new HealthItem(x, y), new HealthMaxItem(x,y)];
+		dropRate = [0.25,0.25];
 		dropItem(drops, dropRate);
 		new FlxTimer().start(0.1, function(_) { deathShot(); }, 1);
 		super.kill();

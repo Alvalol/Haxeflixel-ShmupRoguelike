@@ -28,6 +28,12 @@ class Item extends FlxSprite
 	private var i:Float = 0.0;
 
 	private var emitter:FlxEmitter;
+	
+	private var sinTween:FlxTween;
+	
+	private var disTimer:FlxTimer;
+	private var disTimerStarted:Bool = false;
+	
 
 	public function new(x:Float, y:Float) 
 	{
@@ -36,8 +42,13 @@ class Item extends FlxSprite
 		setSize(8, 8);
 		_hp = 5;
 		
-		// ensures all items have a small sine animation.
-		FlxTween.tween(this,  { x : x, y : y - 5}, 0.5,
+		createSinTween();
+		// ensures all items have a small sine animation.  
+	}
+	
+	private function createSinTween()
+	{
+		sinTween =  FlxTween.tween(this, { x : x, y : y - 5}, 0.5,
 		{ type: FlxTween.PINGPONG, ease: FlxEase.sineInOut });
 	}
 	
@@ -153,6 +164,12 @@ class Item extends FlxSprite
 		} , 1);
 	}
 	
+	private function resetitemDropMod()
+	{
+		Reg.itemDropMod = 0;
+	//	trace("Item Drop Mod was RESET TO 0");
+	}
+	
 	
 	private function basicChecks()
 	{
@@ -169,14 +186,20 @@ class Item extends FlxSprite
             kill();
 		 }
 			
-		if (_appeared)
-		{
-		new FlxTimer().start(_lifespan, function(_)
-		{
-			FlxSpriteUtil.flicker(this,1, 0.05, true, false, onTimedOut);
-		}, 1);
-		}	
+		if (_appeared && !disTimerStarted)
+		{	
+		startDisTimer();
+		}
 	}
+	
+	private function startDisTimer()
+	{
+		disTimerStarted = true;
+		disTimer = new FlxTimer().start(_lifespan, function(_)
+		{
+			FlxSpriteUtil.flicker(this, 1, 0.1, true, false, onTimedOut);
+		}, 1);
+	}	
 	
 	private function onTimedOut(t:FlxFlicker):Void
 	{
@@ -194,6 +217,7 @@ class Item extends FlxSprite
 		kill();
 		Reg.score += 50; // TODO : Item score should be dynamic and dependent on the item itself.
 		resetCombo();
+		resetitemDropMod();
 	}
 
 	public function resetCombo()

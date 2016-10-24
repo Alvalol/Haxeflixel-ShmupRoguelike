@@ -24,14 +24,14 @@ class BaseBullet extends Bullet
 		animation.add("idle", [0]);
 		animation.play("idle");
 
-		width = 10;
-		height = 6;
+		width = 1;
+		height = 1;
 		scale.set(0.5, 0.5);
-		offset.set(-3, 2);
+		offset.set(12, 4);
 		
 		MOVE_SPEED = _moveSpeed;
 		damage = _damage;
-		centerOffsets();
+		//centerOffsets();
 		
 
 	}
@@ -85,10 +85,10 @@ class BaseBullet extends Bullet
 	private function createNoHit()
 	{
 		var e = Reg.PS.effects.recycle(NoHit);
-		if (e == null) e = new NoHit(x+1, y);
+		if (e == null) e = new NoHit(x-6, y);
 		
 		e.set_angle(this.angle);
-		e.reset(x+2, y - 4);
+		e.reset(x-6, y - 4);
 		Reg.PS.effects.add(e);
 	}
 	

@@ -24,15 +24,8 @@ class MagnetItem extends Item
 	
 	override function interact(player:Player)
 	{
-		if (player.MAGNET < player.MAX_MAGNET)
-		{
-		player.MAGNET += 50;
-		}
-		
-		if (player.MAGNET_FORCE < player.MAX_MAGNET_FORCE)
-		{
-		     player.MAGNET_FORCE += 50;
-		}
+
+		Reg.PS.player.set_MAGNET(true);
 
 		super.interact(player);
 	}

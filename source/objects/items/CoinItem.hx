@@ -9,6 +9,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.math.FlxMath;
 import flixel.math.FlxVelocity;
+import flixel.tweens.FlxTween;
 import flixel.FlxObject;
 
 class CoinItem extends Item
@@ -20,6 +21,7 @@ class CoinItem extends Item
 
 	public function new(x:Float,y:Float) 
 	{
+		
 		super(x, y);
 		var scalea = FlxG.random.float(0.4, 0.5);
 		var scaleb = FlxG.random.float(0.4, 0.5);
@@ -27,46 +29,38 @@ class CoinItem extends Item
 		animation.add("idle", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15], 10);
 		animation.play("idle");
 		scale.set(scalea, scaleb);
-		set_name("");
-		
+		set_name("");	
 		emitter = new FlxEmitter(x,y);
-
 	}
 		
 	override public function update(elapsed:Float)
 	{
 		magnetize();
-		//move();
 		
-		
-		if (magnetized)
-		{
-		moveToPlayer();
-		angularVelocity = velocity.x * 2;
-		}
+	     if (Reg.PS.player.MAGNET && magnetized)
+			{
+			moveToPlayer();
+			sinTween.active = false;
+			angularVelocity = velocity.x * 2;
+			}
 
-		else
-		{
-		   velocity.set(0, 0);
-		   acceleration.set(0, 0);
-		}
-		
-	  //  noOverlapping();
-		
 		super.update(elapsed);
 	}
 	
 	private function magnetize()
 	{
-		if (FlxMath.absInt(FlxMath.distanceBetween(this,Reg.PS.player)) < Reg.PS.player.MAGNET )
+		if (FlxMath.absInt(FlxMath.distanceBetween(this, Reg.PS.player)) > 10 && isOnScreen())
+		{
 			magnetized = true;	
+		}
+			
 	}
 
 
 	private function moveToPlayer()
 	{
-	FlxVelocity.accelerateTowardsObject(this, Reg.PS.player, Reg.PS.player.MAGNET * 100, Reg.PS.player.MAGNET_FORCE * 200);
- 
+		trace("Move to player is being called");
+	     FlxVelocity.accelerateTowardsObject(this, Reg.PS.player, 12000, 20000);
 	}
 	
 	private function noOverlapping()
@@ -99,9 +93,14 @@ class CoinItem extends Item
 	 // Scores and combo system
 	 Reg.score += 5 * Reg.PS.player.get_comboMultiplier();
 	 resetCombo();
+	 Reg.itemDropMod += 0.5;
+	 //trace(Reg.itemDropMod);
 	 	  
-	 
-	 
+	}
+	
+	override private function resetitemDropMod()
+	{
+		// this function should not be triggered in CoinItem
 	}
 	
 	override private function particles()

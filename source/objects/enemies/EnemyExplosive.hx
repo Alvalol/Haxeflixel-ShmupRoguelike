@@ -5,6 +5,7 @@ import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxObject;
 import objects.enemies.enemyobjects.EnemyExplosiveExplosion;
+import objects.items.HealthMaxItem;
 import objects.items.Item;
 import objects.items.HealthItem;
 import flixel.math.FlxMath;
@@ -38,8 +39,8 @@ class EnemyExplosive extends Enemy
 	
 		override public function kill():Void
 	{	
-		drops = [new HealthItem(x, y)];
-		dropRate = [1.0];
+		drops = [new HealthItem(x, y), new HealthMaxItem(x,y)];
+		dropRate = [0.5,0.5];
 		dropItem(drops,dropRate);
 		super.kill();
 	}

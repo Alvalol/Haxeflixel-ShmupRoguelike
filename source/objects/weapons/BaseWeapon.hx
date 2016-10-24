@@ -42,7 +42,7 @@ class BaseWeapon implements IWeapon
 			var pb =  Reg.PS.PBullets.recycle(BaseBullet);
 			if (pb == null) pb = new BaseBullet(location.x, location.y, bulletSpeed,damage);
 
-				pb.reset(location.x + _offset, location.y -2);
+				pb.reset(location.x + _offset, location.y +2);
 				pb.set_BULLET_SPEED(bulletSpeed);
 				pb.set_damage(damage);
 				

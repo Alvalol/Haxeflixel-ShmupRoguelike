@@ -6,6 +6,10 @@ import flixel.effects.particles.FlxEmitter;
 import flixel.util.FlxTimer;
 import flixel.util.FlxColor;
 import objects.effects.Explosion;
+import objects.items.HealthItem;
+import objects.items.Item;
+import objects.items.MagnetItem;
+import objects.items.CoinItem;
 
 class HazardBlock extends Hazard
 {
@@ -28,8 +32,8 @@ class HazardBlock extends Hazard
 	{
 		if (!Reg.PS.player.get_immuneToWalls())
 		{
-	  FlxObject.separate(this, player);
-	  Reg.PS.player.damage();
+		  FlxObject.separate(this, player);
+		  Reg.PS.player.damage();
 		}
 		else
 			  FlxObject.separate(this, player);
@@ -69,6 +73,9 @@ class HazardBlock extends Hazard
 		alive = false;
 		exists = false;
 		
+		dropItem();
+		
+		
 		if (isOnScreen())
 		{
 		var e = new Explosion(x - 4, y - 4);
@@ -76,4 +83,20 @@ class HazardBlock extends Hazard
 		particles();
 		}
 	}
+	
+	private function dropItem()
+	{
+		var itemRoll = Reg.CURRENT_SEED.float(0,100);
+		if (itemRoll < 2.5)
+		{
+			var tObject:Item =	Reg.CURRENT_SEED.getObject([new HealthItem(x,y), new MagnetItem(x,y)]);			
+			Reg.PS.items.add(tObject);
+		}
+		else
+		{
+				var newCoin:CoinItem =  new CoinItem(x-4, y-4);
+				Reg.PS.coins.add(newCoin);
+		}
+	}	
+	
 }

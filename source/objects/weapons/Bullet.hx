@@ -34,12 +34,6 @@ class Bullet extends FlxSprite
 		{	
 			if (FlxG.overlap(this, block))
 			{
-					var newCoin:CoinItem =  Reg.PS.coins.recycle();	
-					if (newCoin == null) 
-					newCoin = new CoinItem(block.x -  block.width/2, block.y - block.height/2);
-					
-					newCoin.reset(block.x - block.width/2 , block.y - block.height/2);
-					Reg.PS.coins.add(newCoin);
 					kill();
 					block.kill();
 			}

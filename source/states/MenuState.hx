@@ -4,6 +4,8 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.addons.transition.Transition;
+import flixel.addons.ui.FlxButtonPlus;
+import flixel.addons.ui.FlxInputText;
 import flixel.addons.ui.FlxUIState;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
@@ -25,6 +27,9 @@ class MenuState extends FlxUIState
 	var title:FlxSprite;
 	var i = 0.0;
 	var initialized:Bool = false;
+	var seedInput:FlxInputText;
+	var seedValue:Int;
+	var startButton:FlxButton;
 	
 	override public function create():Void
 	{
@@ -37,12 +42,13 @@ class MenuState extends FlxUIState
 		title.loadGraphic(AssetPaths.title__png, false, 256, 144);
 		options.loadGraphic(AssetPaths.options__png, false, 256, 144);
 		bars.loadGraphic(AssetPaths.bars__png, false, 256, 144);
-
-		
+		setupInputSeed();
 		add(background);
 		add(title);
 		add(options);
 		add(bars);
+		add(seedInput);
+		add(startButton);
 		
 			FlxTransitionableState.defaultTransIn = new TransitionData();
 			FlxTransitionableState.defaultTransOut = new TransitionData();
@@ -53,12 +59,12 @@ class MenuState extends FlxUIState
 			
 			FlxTransitionableState.defaultTransIn.tileData = { asset: diamond, width: 16, height: 16 };
 			FlxTransitionableState.defaultTransOut.tileData = { asset: diamond, width: 16, height: 16 };
-			FlxTransitionableState.defaultTransIn.direction = FlxG.random.getObject([new FlxPoint( 0, -1), new FlxPoint(-1,1)]);
-			FlxTransitionableState.defaultTransOut.direction = FlxG.random.getObject([new FlxPoint( 0, 1), new FlxPoint(1,-1)]);		
+			FlxTransitionableState.defaultTransIn.direction = FlxG.random.getObject([ new FlxPoint(0,1)]);
+			FlxTransitionableState.defaultTransOut.direction = FlxG.random.getObject([ new FlxPoint(0,1)]);		
 			FlxTransitionableState.defaultTransOut.type = TransitionType.TILES;
 			FlxTransitionableState.defaultTransIn.type = TransitionType.TILES;
-			FlxTransitionableState.defaultTransOut.duration = 2;
-			FlxTransitionableState.defaultTransIn.duration = 2;
+			FlxTransitionableState.defaultTransOut.duration = 3;
+			FlxTransitionableState.defaultTransIn.duration = 3;
 			FlxTransitionableState.defaultTransOut.color = FlxColor.YELLOW;
 			FlxTransitionableState.defaultTransIn.color = FlxColor.YELLOW;
 			FlxTransitionableState.defaultTransIn.tileData.asset = diamond;
@@ -70,23 +76,32 @@ class MenuState extends FlxUIState
 	
 
 
+	private function setupInputSeed()
+	{	
+		seedInput = new FlxInputText((FlxG.width / 2) - 30, (FlxG.height  / 2) + 10, 70, "Enter seed", 8, FlxColor.WHITE, FlxColor.BLACK);
+		seedInput.filterMode = FlxInputText.ONLY_NUMERIC;
+		seedInput.lines = 1;
+		seedInput.maxLength = 12;
+		seedInput.fieldBorderColor = FlxColor.WHITE;
+		seedInput.fieldBorderThickness = 1;
+	}
 	override public function update(elapsed:Float):Void
 	{
 		
-		background.x += 0.2;
+		background.x += 0.5;
 		move();
-		
-		
+
 		#if desktop
 		Gamepad.checkForGamepad();
-		
-		if (FlxG.keys.anyJustPressed(["ENTER"]))
-		    startGame();
-			
+		   
 		if (Gamepad.GAMEPAD != null && (Gamepad.GAMEPAD.justPressed.A || Gamepad.GAMEPAD.justPressed.START))
 			startGame();
-			
 		#end 
+		
+		if (FlxG.keys.anyJustPressed([ENTER]))
+		{
+			startGame();
+		}
 		
 		super.update(elapsed);
 			
@@ -104,7 +119,15 @@ class MenuState extends FlxUIState
 	
 	private function startGame():Void
     {
+		if (seedInput.text == "")
 	   FlxG.switchState(new PlayState());
+	   else
+	   {
+	   Reg.SEEDED = true;
+	   Reg.masterSeed =  Std.parseInt(seedInput.text);
+	   FlxG.switchState(new PlayState());
+	   }
+
     }
 
 }

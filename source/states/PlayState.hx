@@ -13,6 +13,7 @@ import flixel.FlxState;
 import flixel.FlxCamera;
 import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxPoint;
+import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.text.FlxText;
 import flixel.tile.FlxTilemap;
@@ -116,8 +117,6 @@ class PlayState extends FlxTransitionableState
 		Reg.PS = this;
 		Reg.pause = false;
 		Reg.CURSED = false;
-		persistentUpdate = false;
-		persistentUpdateSet = false;
 
 		// init gameplay elements
 		player = new Player(10, FlxG.height / 2);
@@ -152,7 +151,8 @@ class PlayState extends FlxTransitionableState
 		addGameplayElements();
 
 		createTrailArea();
-      //  getMiniMap();
+		//persistentUpdate = true;
+        //getMiniMap();
 	}
 	
 
@@ -167,21 +167,17 @@ class PlayState extends FlxTransitionableState
 		Gamepad.updateGameInputs();
 		Gamepad.checkForExit();
 		#end
+		
+		trace(Reg.CURRENT_SEED.currentSeed);
+		trace(Reg.SEEDED);
+		trace(Reg.masterSeed);
+		
 		displayTracers();
 		addLevelObjects();
 		updateTrailArea();
 		trailArea.update(elapsed);
 		
-		if (!persistentUpdateSet)
-		{
-			new FlxTimer().start(transIn.duration , function(_) { 		
-			 persistentUpdate = true;  persistentUpdateSet = true;
-			}, 1);
-			
-	
-		}
-		
-		trace(persistentUpdate);
+		//trace(persistentUpdate);
 
 		// PLACEHOLDER	
 		barrierLeft.setPosition(FlxG.camera.scroll.x , FlxG.camera.scroll.y );
@@ -258,19 +254,17 @@ class PlayState extends FlxTransitionableState
 		add(backDrop);
 		add(map);
 		
-
+		_entities.add(sysObjects);
 		_entities.add(EExplosions);
-		_entities.add(coins);
 		_entities.add(blocks);
 		_entities.add(items);
 		_entities.add(hazards);
 		_entities.add(enemies);
 		_entities.add(emitters);
+		_entities.add(coins);
 		_entities.add(EBullets);
 		_entities.add(HBullets);
 		_entities.add(PBullets);
-		_entities.add(sysObjects);
-
 		
 		add(_entities);
 		add(player);	
@@ -300,11 +294,7 @@ class PlayState extends FlxTransitionableState
 		{
 			trailArea.add(hbullet);
 	    }
-		
-		for (coin in coins)
-		{
-			trailArea.add(coin);
-		}
+
 		
 		for (hazard in hazards)
 		{
@@ -321,6 +311,9 @@ class PlayState extends FlxTransitionableState
 	{
 		if (Reg.pause)
 		{
+			persistentUpdate = true;
+			FlxTimer.globalManager.active = false;
+			FlxTween.globalManager.active = false;
 			openSubState(new PauseState());
 			_gameCamera.followLerp = 0.0;
 			canQuit = true;
@@ -329,8 +322,13 @@ class PlayState extends FlxTransitionableState
 		else
 		{
 	     	closeSubState();
+			
+			FlxTimer.globalManager.active = true;
+			FlxTween.globalManager.active = true;
 			_gameCamera.followLerp = lerpSpeed;
 			canQuit = false;
+			
+			persistentUpdate = false;
 		}	
 	}
 

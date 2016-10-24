@@ -1,6 +1,5 @@
 package objects.enemies;
 
-
 import flixel.FlxObject;
 import flixel.addons.effects.FlxTrail;
 import flixel.util.FlxColor;
@@ -8,6 +7,8 @@ import flixel.FlxSprite;
 import flixel.FlxG;
 import flixel.math.FlxVelocity;
 import flixel.util.FlxTimer;
+import objects.items.MagnetItem;
+import objects.items.WeaponBackItem;
 
 // NEEDS TO BE FIXED
 
@@ -66,6 +67,9 @@ class EnemyTriangle extends Enemy
 	
 	override public function kill():Void
 	{	
+		drops = [new MagnetItem(x, y), new WeaponBackItem(x,y)];
+		dropRate = [0.25,0.25];
+		dropItem(drops, dropRate);
 		Reg.PS.effects.remove(bTrail);
 		super.kill();
 	}

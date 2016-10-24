@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.math.FlxPoint;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
 import states.GameWonState;
 import states.MenuState;
 import flixel.tweens.FlxEase;
@@ -46,8 +47,8 @@ class Goal extends FlxSprite
 
 		Reg.PS.persistentUpdate = false;
 		solid = false;
-		
-		FlxG.switchState(new GameWonState());	// placeholder as there is only one level in the game currently.
+		new FlxTimer().start(0.1, function(_) {
+		FlxG.switchState(new GameWonState()); }, 1);	// placeholder as there is only one level in the game currently.
 	}
 	
 }

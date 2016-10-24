@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.addons.editors.tiled.TiledMap;
 import flixel.addons.editors.tiled.TiledObject;
 import flixel.addons.editors.tiled.TiledObjectLayer;
+import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup;
 import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxMath;
@@ -167,7 +168,7 @@ class ObjectPlacement
 					
 
 		chunkIndex++;
-	}// end for loop
+		}// end for loop
 	}
 
 	

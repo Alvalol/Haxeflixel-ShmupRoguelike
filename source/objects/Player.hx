@@ -33,10 +33,7 @@ class Player extends FlxSprite
 	public var MAX_HOR_MOVE_SPEED:Int = 80;
 	public var MAX_VERT_MOVE_SPEED:Int = 100;
 	
-	public var MAGNET:Int = 0;
-	public var MAX_MAGNET:Int = 300;
-	public var MAGNET_FORCE:Int = 0;
-	public var MAX_MAGNET_FORCE:Int = 100;
+	public var MAGNET:Bool = false;
 	
 	public var RANGE:Float = 1; // maybe
 	public var MAX_RANGE:Float = 2.0;
@@ -90,7 +87,6 @@ class Player extends FlxSprite
 		comboTimer = new FlxTimer().start(0, function(_) { comboMultiplier = 1;} );
 		maxVelocity.set(HOR_MOVE_SPEED, VERT_MOVE_SPEED);
 		
-		
 	}
 	
 	override public function update(elapsed:Float):Void
@@ -99,6 +95,7 @@ class Player extends FlxSprite
 		move_right();
 
 		timeLeft = comboTimer.timeLeft;
+		
 		
 		if (!invinsible)
 		   collisions();
@@ -119,6 +116,7 @@ class Player extends FlxSprite
 		if (!Reg.pause)
 		{
 		    super.update(elapsed);
+			
 			for (weapon in weapons)
 			{
 			weapon.update_location(new FlxPoint(x, y));
@@ -142,7 +140,7 @@ class Player extends FlxSprite
 	public function resetComboTimer()
 	{
 		comboTimer.reset(comboTimerDuration);
-		//comboTimer.start(comboTimerDuration, function(_) { comboMultiplier = 1; });
+		comboTimer.start(comboTimerDuration, function(_) { comboMultiplier = 1; });
 	    //comboMultiplier = 1;
 	}
 	
@@ -316,6 +314,11 @@ class Player extends FlxSprite
 	public function set_comboMultiplier(value)
 	{
 		comboMultiplier = value;
+	}
+	
+	public function set_MAGNET(value:Bool):Bool 
+	{
+		return MAGNET = value;
 	}
 	
 }

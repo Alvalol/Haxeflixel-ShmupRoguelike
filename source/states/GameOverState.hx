@@ -2,6 +2,7 @@ package states;
 import flixel.FlxState;
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.addons.display.FlxBackdrop;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.math.FlxPoint;
 import flixel.text.FlxText;
@@ -14,9 +15,9 @@ import flixel.ui.FlxButton;
 class GameOverSubState extends FlxTransitionableState
 {
 
-	private var _text:FlxText;
 	private var _textScore:FlxText;
-	private var _restartButton:FlxButton;
+	private var placeholderText:FlxSprite;
+	private var background:FlxBackdrop;
 	
 	override public function create():Void
 	{
@@ -28,26 +29,30 @@ class GameOverSubState extends FlxTransitionableState
 		FlxG.mouse.load(cursor.pixels,4);
 		FlxG.mouse.visible = true; // must always be set to false pls
 		#end
-		_text = new FlxText(FlxG.width / 2 - 50, 20, FlxG.width, "Game Over");
-		_textScore = new FlxText(FlxG.width/ 2 - 50, FlxG.width, FlxG.width, Std.string(Reg.score));
-	    _restartButton = new FlxButton(FlxG.width / 2 - 60, 60, "Restart", onClick);
-		_textScore.text =  StringTools.lpad(
-		Std.string(Reg.score), "0", 5);
+		  
+		placeholderText = new FlxSprite(0, 0);
+		background = new FlxBackdrop(AssetPaths.background__png, 1, 1, true, true);
+		placeholderText.loadGraphic(AssetPaths.gameoverplaceholder__png, false, FlxG.width, FlxG.height);
+
+		_textScore = new FlxText(FlxG.width / 2 - 18, 40, FlxG.width, "SCORE : " + Reg.score);
+		_textScore.text =  StringTools.lpad(Std.string(Reg.score), "0", 5);
+		
 		
 		forEachOfType(FlxText, function(member)
 		{
-			member.setFormat(AssetPaths.pixel_font__ttf, 8, FlxColor.WHITE, FlxTextBorderStyle.OUTLINE, 0xffffffff);
+			member.setFormat(AssetPaths.smallfont__ttf, 8, FlxColor.WHITE, FlxTextBorderStyle.OUTLINE, 0xffffffff);
 		});	
 	
-		add(_text);
-		add(_textScore);
-		add(_restartButton);
-		
+		add(background);	
+		add(placeholderText);	
+		add(_textScore);			
 	}
 	
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		background.x += 0.5;
+		
 		#if desktop
 		if (FlxG.keys.anyJustPressed([ENTER]))
 		    onClick();

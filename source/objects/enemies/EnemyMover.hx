@@ -12,6 +12,7 @@ import objects.items.ItemsExplosiveItem;
 import objects.items.RangeItem;
 import flixel.math.FlxMath;
 import objects.items.SpeedDownItem;
+import objects.items.SpeedItem;
 import objects.items.WeaponLaserItem;
 
 
@@ -43,8 +44,8 @@ class EnemyMover extends Enemy
 	
 	override public function kill():Void
 	{	
-		drops = [new WeaponLaserItem(x, y)];
-		dropRate = [1];
+		drops = [new WeaponLaserItem(x, y), new SpeedItem(x,y), new SpeedDownItem(x,y)];
+		dropRate = [0.1, 0.25,0.5];
 		dropItem(drops, dropRate);
 		
 		super.kill();

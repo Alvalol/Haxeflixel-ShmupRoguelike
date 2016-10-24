@@ -51,8 +51,8 @@ class EnemyChaser extends Enemy
 	
 	override public function kill() 
 	{
-		drops = [new RangeItem(x, y), new DamageUpItem(x,y)];
-		dropRate = [0.25,0.5];
+		drops = [new DamageUpItem(x,y)];
+		dropRate = [0.5];
 		dropItem(drops, dropRate);
 
 		

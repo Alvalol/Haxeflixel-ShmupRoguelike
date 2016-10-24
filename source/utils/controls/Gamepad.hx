@@ -1,6 +1,7 @@
 package utils.controls;
 import flixel.FlxG;
 import flixel.input.gamepad.FlxGamepad;
+import flixel.util.FlxTimer;
 import openfl.system.System;
 import states.PlayState;
 import utils.pcg.MapChunkMerger;
@@ -43,8 +44,7 @@ public static var GAMEPAD:FlxGamepad;
 			Reg.pause = !Reg.pause;
 		}
 		
-		if (GAMEPAD.pressed.A || GAMEPAD.pressed.RIGHT_SHOULDER ||
-		    GAMEPAD.pressed.RIGHT_TRIGGER)
+		if (GAMEPAD.pressed.A || GAMEPAD.pressed.RIGHT_SHOULDER)
 		{
 		 Reg.PS.player.shoot();
 		}
@@ -54,17 +54,7 @@ public static var GAMEPAD:FlxGamepad;
 			Reg.PS.player.move_up();
 		}
 		
-		if (GAMEPAD.pressed.DPAD_RIGHT)
-		{
-			Reg.PS.player.move_right();
-		}
-		
-				
-		if (GAMEPAD.pressed.DPAD_LEFT)
-		{
-			Reg.PS.player.move_left();
-		}
-		
+
 		if (GAMEPAD.pressed.DPAD_DOWN)
 		{
 			Reg.PS.player.move_down();
@@ -85,11 +75,17 @@ public static var GAMEPAD:FlxGamepad;
 		{
 			Reg.PS.player.resetAccel();
 		}
-		}
 		
+			if ( GAMEPAD.anyJustReleased([A,RIGHT_SHOULDER]))
+		{
+			Reg.PS.player.set_shooting(false);
+		}
+		}
+
 		
 		if (FlxG.keys.anyJustPressed(Keyboard.pauseKeys))
 		{
+
 			Reg.pause = !Reg.pause;
 		}
 		

@@ -16,8 +16,6 @@ import openfl.system.System;
 class PauseState extends FlxSubState
 {
 	
-
-
 	override public function create():Void 
 	{
 		super.create();
@@ -38,6 +36,5 @@ class PauseState extends FlxSubState
 		seed.setFormat(AssetPaths.pixel_font__ttf, 8, FlxColor.fromRGB(255,255,255,5) ,
 			                FlxTextBorderStyle.OUTLINE, FlxColor.fromRGB(0, 0, 0, 250));
 		
-	}
-	
+	}	
 }
