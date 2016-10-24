@@ -43,9 +43,10 @@ class Goal extends FlxSprite
 	
 	private function reached(player:Player)
 	{
+
+		Reg.PS.persistentUpdate = false;
 		solid = false;
-		Reg.pause = true;
-		trace("YOU WIN");
+		
 		FlxG.switchState(new GameWonState());	// placeholder as there is only one level in the game currently.
 	}
 	

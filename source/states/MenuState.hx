@@ -3,29 +3,33 @@ package states;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.addons.transition.Transition;
+import flixel.addons.ui.FlxUIState;
+import flixel.math.FlxPoint;
+import flixel.math.FlxRect;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import utils.controls.Gamepad;
 import flixel.addons.display.FlxBackdrop;
+import flixel.addons.transition.FlxTransitionableState;
+import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileCircle;
+import flixel.addons.transition.TransitionData;
+import flixel.graphics.FlxGraphic;
+import flixel.util.FlxColor;
 
-import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
 
-class MenuState extends FlxState
+class MenuState extends FlxUIState
 {
-	
     var background:FlxBackdrop;
 	var title:FlxSprite;
 	var i = 0.0;
-	
+	var initialized:Bool = false;
 	
 	override public function create():Void
 	{
 		super.create();
-			
-	//    var cursor = new FlxSprite();
-		//cursor.loadGraphic(AssetPaths.cursor__png, false, 8, 8);
-	//	FlxG.mouse.load(cursor.pixels, 4);
+
 	    background = new FlxBackdrop(AssetPaths.background__png, 1, 1, true, true);
 		title = new FlxSprite(0, 0);
 		var options = new FlxSprite(0,0);
@@ -39,8 +43,34 @@ class MenuState extends FlxState
 		add(title);
 		add(options);
 		add(bars);
+		
+			FlxTransitionableState.defaultTransIn = new TransitionData();
+			FlxTransitionableState.defaultTransOut = new TransitionData();
+		
+			var diamond:FlxGraphic = FlxGraphic.fromClass(GraphicTransTileCircle);
+			diamond.persist = true;
+			diamond.destroyOnNoUse = false;
+			
+			
+			
+			FlxTransitionableState.defaultTransIn.tileData = { asset: diamond, width: 16, height: 16 };
+			FlxTransitionableState.defaultTransOut.tileData = { asset: diamond, width: 16, height: 16 };
+			FlxTransitionableState.defaultTransIn.direction = new FlxPoint( 0, -1);
+			FlxTransitionableState.defaultTransOut.direction = new FlxPoint( 0, 1);		
+			FlxTransitionableState.defaultTransOut.type = TransitionType.TILES;
+			FlxTransitionableState.defaultTransIn.type = TransitionType.TILES;
+			FlxTransitionableState.defaultTransOut.duration = 2.5;
+			FlxTransitionableState.defaultTransIn.duration = 2.5;
+			FlxTransitionableState.defaultTransOut.color = FlxColor.YELLOW;
+			FlxTransitionableState.defaultTransIn.color = FlxColor.YELLOW;
+			FlxTransitionableState.defaultTransIn.tileData.asset = diamond;
+			FlxTransitionableState.defaultTransOut.tileData.asset = diamond;
+			//Of course, this state has already been constructed, so we need to set a transOut value for it right now:
+			transOut = FlxTransitionableState.defaultTransOut;
+			transIn = FlxTransitionableState.defaultTransIn;
 	}
 	
+
 
 	override public function update(elapsed:Float):Void
 	{
@@ -76,8 +106,7 @@ class MenuState extends FlxState
 	
 	private function startGame():Void
     {
-
-	        FlxG.switchState(new PlayState());
+	   FlxG.switchState(new PlayState());
     }
 
 }

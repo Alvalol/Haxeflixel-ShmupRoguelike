@@ -262,23 +262,25 @@ class Player extends FlxSprite
 
 		var emitter = new FlxEmitter();
 		emitter.setPosition(x, y);
-		emitter.makeParticles(2,2, FlxColor.WHITE, 200);
+		emitter.makeParticles(2,2, FlxColor.WHITE, 50);
 		emitter.launchMode = FlxEmitterMode.CIRCLE;
-		emitter.lifespan.set(0.2, 3);
+		emitter.lifespan.set(0.2, 2);
 		Reg.PS.emitters.add(emitter);
-		emitter.start(true, 0.5, 200);	
+		emitter.start(true, 0.5, 50);	
 		new FlxTimer().start(2.5, function(_)
 		{
 		FlxG.switchState(new GameOverSubState());		
 		}, 1);
 		
-		
 	}
 	
 	override public function kill()
 	{
+
+		Reg.PS.persistentUpdate = false;
 		super.kill();
 		deathAnimation();
+
 	}
 	
 	public function get_immuneToWalls():Bool 

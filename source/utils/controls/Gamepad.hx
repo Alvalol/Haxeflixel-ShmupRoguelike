@@ -2,6 +2,7 @@ package utils.controls;
 import flixel.FlxG;
 import flixel.input.gamepad.FlxGamepad;
 import openfl.system.System;
+import states.PlayState;
 import utils.pcg.MapChunkMerger;
 
 #if desktop
@@ -94,7 +95,7 @@ public static var GAMEPAD:FlxGamepad;
 		
 		if (FlxG.keys.anyPressed(Keyboard.actionKeys))
 		{
-		 Reg.PS.player.shoot();
+		    Reg.PS.player.shoot();
 		}
 		
 		if (FlxG.keys.anyPressed(Keyboard.upKeys))
@@ -133,7 +134,6 @@ public static var GAMEPAD:FlxGamepad;
 		
 		if ( FlxG.keys.justPressed.R)
 		{
-		// obvious debug
 			FlxG.resetState();
 		}
 			

@@ -19,6 +19,7 @@ import flixel.tile.FlxTilemap;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxSpriteUtil;
+import flixel.util.FlxTimer;
 import lime.system.Display;
 import objects.effects.Barrier;
 import objects.hazards.Hazard;
@@ -32,6 +33,8 @@ import openfl.system.ApplicationDomain;
 import openfl.system.System;
 import openfl.utils.ByteArray;
 import substates.PauseState;
+
+import flixel.addons.transition.FlxTransitionableState;
 
 #if desktop
 import flixel.input.gamepad.FlxGamepad;
@@ -56,8 +59,13 @@ import utils.pcg.LevelLoaderProc;
 import haxe.io.Bytes;
 import utils.pcg.ObjectPlacement;
 import openfl.display.PNGEncoderOptions;
+import flixel.math.FlxRect;
 
-class PlayState extends FlxState
+import flixel.addons.transition.FlxTransitionableState;
+import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileCircle;
+import flixel.addons.transition.TransitionData;
+
+class PlayState extends FlxTransitionableState
 {
 	
 	public var map:FlxTilemap;
@@ -99,15 +107,18 @@ class PlayState extends FlxState
 	private var barrierLeft:Barrier;
 	private var barrierRight:Barrier;
 	
+	private var persistentUpdateSet:Bool;
+		
 	override public function create():Void
 	{
+		super.create();
+
 		Reg.PS = this;
 		Reg.pause = false;
-		
 		Reg.CURSED = false;
+		persistentUpdate = false;
 
 		// init gameplay elements
-		persistentUpdate = true;
 		player = new Player(10, FlxG.height / 2);
 		enemies = new FlxTypedGroup<Enemy>();
 		hazards = new FlxTypedGroup<Hazard>();
@@ -135,13 +146,14 @@ class PlayState extends FlxState
 		#end
 		map = LevelLoaderProc.loadGeneratedLevel();
 		backDrop = new FlxBackdrop(AssetPaths.background__png, 0.01, 0.01, true, true);
-	
+
+		cameraSetup();
 		addGameplayElements();
-      	cameraSetup();
+
 		createTrailArea();
       //  getMiniMap();
-		super.create();
 	}
+	
 
 	override public function update(elapsed:Float):Void
 	{
@@ -159,6 +171,18 @@ class PlayState extends FlxState
 		updateTrailArea();
 		trailArea.update(elapsed);
 		
+		if (!persistentUpdateSet)
+		{
+
+			new FlxTimer().start(transIn.duration - 1, function(_) { 		
+			 persistentUpdate = true;  persistentUpdateSet = true;
+			}, 1);
+			
+	
+		}
+		
+		trace(persistentUpdate);
+
 		// PLACEHOLDER	
 		barrierLeft.setPosition(FlxG.camera.scroll.x , FlxG.camera.scroll.y );
 		barrierRight.setPosition(FlxG.camera.scroll.x + FlxG.width -1 , FlxG.camera.scroll.y);
@@ -323,13 +347,14 @@ class PlayState extends FlxState
 		_hud = new HUD();
 		_hud.setCamera(_hudCamera);
 		
+		add(_hud);
+		
 		_gameCamera.setScrollBoundsRect(0, 0, map.width, map.height, true);
 		_gameCamera.pixelPerfectRender = false;	
 		_gameCamera.follow(_scroller, FlxCameraFollowStyle.TOPDOWN_TIGHT, lerpSpeed);
 
 		
 		add(_scroller);
-		add(_hud);
 	}
 
 	private function updateCam()

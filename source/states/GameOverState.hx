@@ -2,6 +2,7 @@ package states;
 import flixel.FlxState;
 import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.addons.transition.FlxTransitionableState;
 import flixel.math.FlxPoint;
 import flixel.text.FlxText;
 import flixel.FlxCamera;
@@ -10,7 +11,7 @@ import flixel.util.FlxTimer;
 import flixel.util.FlxColor;
 import flixel.ui.FlxButton;
 
-class GameOverSubState extends FlxState
+class GameOverSubState extends FlxTransitionableState
 {
 
 	private var _text:FlxText;
