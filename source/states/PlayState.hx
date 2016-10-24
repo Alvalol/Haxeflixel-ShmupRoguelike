@@ -117,6 +117,7 @@ class PlayState extends FlxTransitionableState
 		Reg.pause = false;
 		Reg.CURSED = false;
 		persistentUpdate = false;
+		persistentUpdateSet = false;
 
 		// init gameplay elements
 		player = new Player(10, FlxG.height / 2);
@@ -173,8 +174,7 @@ class PlayState extends FlxTransitionableState
 		
 		if (!persistentUpdateSet)
 		{
-
-			new FlxTimer().start(transIn.duration - 1, function(_) { 		
+			new FlxTimer().start(transIn.duration , function(_) { 		
 			 persistentUpdate = true;  persistentUpdateSet = true;
 			}, 1);
 			

@@ -51,16 +51,14 @@ class MenuState extends FlxUIState
 			diamond.persist = true;
 			diamond.destroyOnNoUse = false;
 			
-			
-			
 			FlxTransitionableState.defaultTransIn.tileData = { asset: diamond, width: 16, height: 16 };
 			FlxTransitionableState.defaultTransOut.tileData = { asset: diamond, width: 16, height: 16 };
-			FlxTransitionableState.defaultTransIn.direction = new FlxPoint( 0, -1);
-			FlxTransitionableState.defaultTransOut.direction = new FlxPoint( 0, 1);		
+			FlxTransitionableState.defaultTransIn.direction = FlxG.random.getObject([new FlxPoint( 0, -1), new FlxPoint(-1,1)]);
+			FlxTransitionableState.defaultTransOut.direction = FlxG.random.getObject([new FlxPoint( 0, 1), new FlxPoint(1,-1)]);		
 			FlxTransitionableState.defaultTransOut.type = TransitionType.TILES;
 			FlxTransitionableState.defaultTransIn.type = TransitionType.TILES;
-			FlxTransitionableState.defaultTransOut.duration = 2.5;
-			FlxTransitionableState.defaultTransIn.duration = 2.5;
+			FlxTransitionableState.defaultTransOut.duration = 2;
+			FlxTransitionableState.defaultTransIn.duration = 2;
 			FlxTransitionableState.defaultTransOut.color = FlxColor.YELLOW;
 			FlxTransitionableState.defaultTransIn.color = FlxColor.YELLOW;
 			FlxTransitionableState.defaultTransIn.tileData.asset = diamond;
