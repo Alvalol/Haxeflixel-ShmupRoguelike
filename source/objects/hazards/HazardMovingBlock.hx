@@ -32,7 +32,7 @@ class HazardMovingBlock extends Hazard
 		   }
 
 		if (direction == 0)
-			direction = FlxG.random.int( -1, 1);
+			direction = Reg.CURRENT_SEED.int( -1, 1);
 			
 		super.update(elapsed);
 	}

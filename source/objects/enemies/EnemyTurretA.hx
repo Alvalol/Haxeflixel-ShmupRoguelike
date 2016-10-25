@@ -82,7 +82,7 @@ class EnemyTurretA extends Enemy
 	
     private function animateToShoot()
 	{
-		if (!justShot && isOnScreen())
+		if (!justShot && isOnScreen(FlxG.camera))
 			{
 				animation.play("shoot");
 				justShot = true;

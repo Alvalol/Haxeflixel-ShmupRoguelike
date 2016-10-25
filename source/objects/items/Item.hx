@@ -71,6 +71,8 @@ class Item extends FlxSprite
 		
 	}
 	
+	
+	
 	private function collisions()
 	{
 		if (FlxG.overlap(Reg.PS.player, this))
@@ -176,7 +178,7 @@ class Item extends FlxSprite
 		if (!inWorldBounds())
 			exists = false;
 					
-        if (isOnScreen()) {
+        if (isOnScreen(FlxG.camera)) {
         if (!_appeared) 
              _appeared = true;
                           }
@@ -191,6 +193,7 @@ class Item extends FlxSprite
 		startDisTimer();
 		}
 	}
+	
 	
 	private function startDisTimer()
 	{

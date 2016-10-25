@@ -11,7 +11,7 @@ import flixel.FlxSprite;
 class HazardLaser extends Hazard
 {
 	
-	private var counter:Int = FlxG.random.int(0,20);
+	private var counter:Int = Reg.CURRENT_SEED.int(0,20);
 	private var maxCounter:Int = 300;
 	private var tactive:Bool = false;
 	private var canBeActive:Bool = true;

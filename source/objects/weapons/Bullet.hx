@@ -27,7 +27,7 @@ class Bullet extends FlxSprite
 	
 	private function collisions()
 	{
-			if (!isOnScreen())
+			if (!isOnScreen(FlxG.camera))
 			kill();
 			
        for (block in Reg.PS.blocks)

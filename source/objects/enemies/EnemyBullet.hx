@@ -39,7 +39,7 @@ class EnemyBullet extends FlxSprite
 			kill();
 		}
 		
-		if (!isOnScreen() || FlxG.collide(Reg.PS.map, this))
+		if (!isOnScreen(FlxG.camera) || FlxG.collide(Reg.PS.map, this))
 		{
 			createNoHit();
 			kill();

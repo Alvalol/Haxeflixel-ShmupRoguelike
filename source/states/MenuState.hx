@@ -34,21 +34,25 @@ class MenuState extends FlxUIState
 	override public function create():Void
 	{
 		super.create();
-
-	    background = new FlxBackdrop(AssetPaths.background__png, 1, 1, true, true);
+		
+		background = new FlxBackdrop(AssetPaths.background__png, 1, 1, true, true);
 		title = new FlxSprite(0, 0);
+
+		title.loadGraphic(AssetPaths.title__png, false, 256, 144);
+		
+		
 		var options = new FlxSprite(0,0);
 		var bars = new FlxSprite(0,0);
-		title.loadGraphic(AssetPaths.title__png, false, 256, 144);
 		options.loadGraphic(AssetPaths.options__png, false, 256, 144);
 		bars.loadGraphic(AssetPaths.bars__png, false, 256, 144);
+		
 		setupInputSeed();
 		add(background);
 		add(title);
 		add(options);
 		add(bars);
 		add(seedInput);
-		add(startButton);
+		//add(startButton);
 		
 			FlxTransitionableState.defaultTransIn = new TransitionData();
 			FlxTransitionableState.defaultTransOut = new TransitionData();
@@ -119,8 +123,11 @@ class MenuState extends FlxUIState
 	
 	private function startGame():Void
     {
-		if (seedInput.text == "")
+	   if (seedInput.text == null)
+	   {
+	   Reg.SEEDED = false;
 	   FlxG.switchState(new PlayState());
+	   }
 	   else
 	   {
 	   Reg.SEEDED = true;

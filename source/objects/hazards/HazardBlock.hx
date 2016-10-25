@@ -76,7 +76,7 @@ class HazardBlock extends Hazard
 		dropItem();
 		
 		
-		if (isOnScreen())
+		if (isOnScreen(FlxG.camera))
 		{
 		var e = new Explosion(x - 4, y - 4);
 		Reg.PS.effects.add(e);

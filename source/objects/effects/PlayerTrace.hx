@@ -29,13 +29,13 @@ class PlayerTrace extends FlxSprite
 	
 	override public function update(elapsed:Float):Void 
 	{
-		if (!isOnScreen())
+		if (!isOnScreen(FlxG.camera))
 		{
 			kill();
 			Reg.PS.effects.remove(this, true);
 		}
 	
-		if (isOnScreen())
+		if (isOnScreen(FlxG.camera))
 		{
 			new FlxTimer().start(_lifespan, function(_)
 			{

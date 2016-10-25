@@ -70,7 +70,7 @@ class Enemy extends FlxSprite
 		if (!inWorldBounds())
 			exists = false;
 			
-        if (isOnScreen()) 
+        if (isOnScreen(FlxG.camera)) 
 		{
 			if (!_appeared) 
 			{
@@ -92,7 +92,7 @@ class Enemy extends FlxSprite
 		if (FlxG.overlap(this, Reg.PS.player) && !FlxSpriteUtil.isFlickering(Reg.PS.player))
 			interact(Reg.PS.player);
 		
-		if (FlxG.overlap(Reg.PS.PBullets, this) && isOnScreen())
+		if (FlxG.overlap(Reg.PS.PBullets, this) && isOnScreen(FlxG.camera))
 			damage();
 	
 	}
@@ -180,7 +180,7 @@ class Enemy extends FlxSprite
 		Reg.PS.enemies.remove(this, true);
 		
 		
-		if (isOnScreen()){
+		if (isOnScreen(FlxG.camera)){
 		var e = Reg.PS.effects.recycle(Explosion) ;
 		if (e == null) e = new Explosion(x - 4, y - 4);
 		e.reset(x - 4, y - 4);

@@ -32,7 +32,7 @@ class HazardProximityShooter extends Hazard
 	
 	private function proximity()
 	{
-		if (FlxMath.absInt(Std.int(x))  - Std.int(Reg.PS.player.x) < 20 && !shot && isOnScreen())
+		if (FlxMath.absInt(Std.int(x))  - Std.int(Reg.PS.player.x) < 20 && !shot && isOnScreen(FlxG.camera))
 			shoot();
 	}
 	

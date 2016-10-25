@@ -312,8 +312,8 @@ class PlayState extends FlxTransitionableState
 		if (Reg.pause)
 		{
 			persistentUpdate = true;
-			FlxTimer.globalManager.active = false;
-			FlxTween.globalManager.active = false;
+			FlxTimer.manager.active = false;
+			FlxTween.manager.active = false;
 			openSubState(new PauseState());
 			_gameCamera.followLerp = 0.0;
 			canQuit = true;
@@ -323,8 +323,8 @@ class PlayState extends FlxTransitionableState
 		{
 	     	closeSubState();
 			
-			FlxTimer.globalManager.active = true;
-			FlxTween.globalManager.active = true;
+			FlxTimer.manager.active = true;
+			FlxTween.manager.active = true;
 			_gameCamera.followLerp = lerpSpeed;
 			canQuit = false;
 			

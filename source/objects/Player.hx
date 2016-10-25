@@ -130,7 +130,7 @@ class Player extends FlxSprite
 	private function displayTrace()
 	{
 		
-	  if (FlxG.random.int(0,100) > 40 && (acceleration.x != 0  || acceleration.y != 0))
+	  if (Reg.CURRENT_SEED.int(0,100) > 40 && (acceleration.x != 0  || acceleration.y != 0))
 		{
 		var tracePlayer = new objects.effects.PlayerTrace(x - 8, y-2);
 		Reg.PS.effects.add(tracePlayer);

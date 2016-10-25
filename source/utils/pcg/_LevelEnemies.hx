@@ -66,7 +66,7 @@ class LevelEnemies
 				var enPos = (currentLevel.getTileCoordsByIndex(i));
 				currentLevel.setTileByIndex(i, 0, true);
 				
-				var roll = FlxG.random.int(0, 100);
+				var roll = Reg.CURRENT_SEED.int(0, 100);
 				if(roll>50){
 				var enemy = new EnemyLeft(enPos.x, enPos.y);
 				Reg.PS.enemies.add(enemy);
