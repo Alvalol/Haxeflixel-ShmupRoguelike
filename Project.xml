@@ -83,6 +83,7 @@
 	<icon path="assets/images/icon.ico" />	
 	
 	<template path="AndroidManifest.xml" rename="AndroidManifest.xml" if="android" />
+	<android minimum-sdk-version="16" target-sdk-version="19" if="android" />
 	<setenv name="JAVA_HOME" value="C:\Program Files\Java\jdk1.8.0_101"></setenv>
 	
 </project>

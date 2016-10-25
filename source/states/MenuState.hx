@@ -100,12 +100,11 @@ class MenuState extends FlxUIState
 		   
 		if (Gamepad.GAMEPAD != null && (Gamepad.GAMEPAD.justPressed.A || Gamepad.GAMEPAD.justPressed.START))
 			startGame();
-		#end 
-		
+ 
 		if (FlxG.keys.anyJustPressed([ENTER]))
-		{
 			startGame();
-		}
+			
+		#end
 		
 		super.update(elapsed);
 			
