@@ -1,6 +1,7 @@
 package objects.effects;
 
 import flixel.FlxSprite;
+import flixel.FlxG;
 
 
 class NoHit extends FlxSprite
@@ -10,13 +11,13 @@ class NoHit extends FlxSprite
 	{
 		super(x, y);
 		loadGraphic(AssetPaths.nohit__png, true, 8, 8);
-		animation.add("nohit",[1,1,2,2,3,3,4,4,5,5],80);
+		animation.add("nohit",[1,1,2,2,3,3,4,4,5,5],80, false);
 		animation.play("nohit");
 	}
 	
 	override public function update(elapsed:Float):Void 
 	{
-		if (animation.curAnim.curFrame == 9)
+		if (animation.curAnim.curFrame == 9 || !isOnScreen(FlxG.camera))
 		{
 			kill();
 		}
@@ -27,8 +28,8 @@ class NoHit extends FlxSprite
 	
 	override public function kill()
 	{
-		
 		Reg.PS.effects.remove(this, true);
 		super.kill();
 	}
+	
 }

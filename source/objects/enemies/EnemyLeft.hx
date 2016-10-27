@@ -14,9 +14,11 @@ class EnemyLeft extends Enemy
 	private var factor:Int = 0;
 	private var updatedPosition:Bool = false;
 	
+	
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
+		lefty = true;
 		HP = 1;
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		animation.add("idle", [8,9,10,11], 12, true);
@@ -41,7 +43,7 @@ class EnemyLeft extends Enemy
 	{		
 		if (x - FlxG.camera.scroll.x < FlxG.width && !updatedPosition)
 		{
-			reset(FlxG.camera.scroll.x - 50, y);
+			reset(FlxG.camera.scroll.x, y);
 			updatedPosition = true;
 		}
 	}

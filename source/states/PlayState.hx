@@ -13,6 +13,7 @@ import flixel.FlxState;
 import flixel.FlxCamera;
 import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxPoint;
+import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.text.FlxText;
@@ -21,11 +22,13 @@ import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.util.FlxSpriteUtil;
 import flixel.util.FlxTimer;
+import Type;
 import lime.system.Display;
 import objects.effects.Barrier;
 import objects.hazards.Hazard;
 import objects.hazards.HazardBullet;
 import objects.hazards.HazardLaser;
+import objects.items.CurseItem;
 import objects.items.Item;
 import flixel.addons.effects.FlxTrailArea;
 import openfl.display.BitmapData;
@@ -34,6 +37,7 @@ import openfl.system.ApplicationDomain;
 import openfl.system.System;
 import openfl.utils.ByteArray;
 import substates.PauseState;
+
 
 import flixel.addons.transition.FlxTransitionableState;
 
@@ -109,6 +113,7 @@ class PlayState extends FlxTransitionableState
 	private var barrierRight:Barrier;
 	
 	private var persistentUpdateSet:Bool;
+	private var mapColorTween:FlxTween;
 		
 	override public function create():Void
 	{
@@ -116,7 +121,8 @@ class PlayState extends FlxTransitionableState
 
 		Reg.PS = this;
 		Reg.pause = false;
-		Reg.CURSED = false;
+		Reg.itemsExplode = false;
+		Reg.wallsHurt = false;
 
 		// init gameplay elements
 		player = new Player(10, FlxG.height / 2);
@@ -129,7 +135,6 @@ class PlayState extends FlxTransitionableState
         Reg.score = 0;
 		barrierLeft = new Barrier(0, 0);
 		barrierRight = new Barrier(0, 0);
-
 		
 		coins = new FlxTypedGroup<CoinItem>();
 		items = new FlxTypedGroup<Item>();
@@ -140,10 +145,10 @@ class PlayState extends FlxTransitionableState
 		emitters = new FlxTypedGroup<FlxEmitter>();
 		_entities = new FlxGroup();
 		
-		
 		#if desktop
-		FlxG.mouse.visible = false; // must always be set to false pls
+		FlxG.mouse.visible = true; // must always be set to false pls
 		#end
+		
 		map = LevelLoaderProc.loadGeneratedLevel();
 		backDrop = new FlxBackdrop(AssetPaths.background__png, 0.01, 0.01, true, true);
 
@@ -151,15 +156,20 @@ class PlayState extends FlxTransitionableState
 		addGameplayElements();
 
 		createTrailArea();
+		
+		createCurseAppearanceTweens();
+		
 		//persistentUpdate = true;
         //getMiniMap();
 	}
-	
 
 	override public function update(elapsed:Float):Void
 	{
 		if (!Reg.pause)
 		super.update(elapsed);
+		
+		
+		trace(mapColorTween);
 		
 		#if desktop
 		controlPauseScreen();
@@ -168,21 +178,19 @@ class PlayState extends FlxTransitionableState
 		Gamepad.checkForExit();
 		#end
 		
-		trace(Reg.CURRENT_SEED.currentSeed);
-		trace(Reg.SEEDED);
-		trace(Reg.masterSeed);
+		if (FlxG.mouse.justPressed)
+        createObject("objects.items.CurseItem", FlxG.mouse.x, FlxG.mouse.y);
 		
 		displayTracers();
 		addLevelObjects();
 		updateTrailArea();
 		trailArea.update(elapsed);
 		
-		//trace(persistentUpdate);
 
+		cursedAppearance();
 		// PLACEHOLDER	
 		barrierLeft.setPosition(FlxG.camera.scroll.x , FlxG.camera.scroll.y );
 		barrierRight.setPosition(FlxG.camera.scroll.x + FlxG.width -1 , FlxG.camera.scroll.y);
-		
 
 		FlxSpriteUtil.bound(player, 
 		                    FlxG.camera.scroll.x, 
@@ -220,6 +228,40 @@ class PlayState extends FlxTransitionableState
 		add(minimap);
 	}
 	
+	
+	private function createCurseAppearanceTweens()
+	{
+
+		 mapColorTween  =  FlxTween.tween(map, {color: 0xFFFF0000}, 1.5, { type : FlxTween.ONESHOT, ease: FlxEase.sineIn });
+		 mapColorTween.active = false;
+	}
+	
+	private function cursedAppearance()
+	{
+		if (Reg.wallsHurt)
+		{
+			if (!mapColorTween.active)
+			{
+				mapColorTween.active = true;
+			}
+		}
+		else
+		{
+			   mapColorTween.active = false;
+			
+		}
+	}
+	
+	private function createObject(objectType:Dynamic,_x:Float,_y:Float)
+	{
+			var objType:Class<Dynamic> = Type.resolveClass(objectType);
+			var objToAdd =  Type.createInstance(objType, [_x, _y]);
+			
+			if (objToAdd != null)
+			{
+			add(objToAdd);
+			}
+	}
 	
 	private function addLevelObjects()
 	{
@@ -304,7 +346,6 @@ class PlayState extends FlxTransitionableState
 		
 		trailArea.add(barrierLeft);
 		trailArea.add(barrierRight);
-		
 	}
 	
 	private function controlPauseScreen()
@@ -322,19 +363,17 @@ class PlayState extends FlxTransitionableState
 		else
 		{
 	     	closeSubState();
-			
 			FlxTimer.globalManager.active = true;
 			FlxTween.globalManager.active = true;
 			_gameCamera.followLerp = lerpSpeed;
 			canQuit = false;
-			
 			persistentUpdate = false;
 		}	
 	}
 
 	private function cameraSetup()
 	{	
-		_gameCamera = new FlxCamera();
+		_gameCamera = new FlxCamera();b
 		_hudCamera = new FlxCamera();
 		_scroller = new Scroller(player.x + _scrollerOffset, player.y); 
 		
@@ -375,7 +414,6 @@ class PlayState extends FlxTransitionableState
 		trace("enemies : " + enemies.length);
 		trace("SCROLLER : " + Reg.SCROLLER_ON);	
 		trace("items : " + items.length);
-
 		trace("eBullets : " +EBullets.length);
 		trace("PBullets : " + PBullets.length);
 	    trace("coins  " + coins.length);

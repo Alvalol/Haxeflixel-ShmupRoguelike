@@ -34,6 +34,7 @@ class MenuState extends FlxUIState
 	override public function create():Void
 	{
 		super.create();
+		FlxG.mouse.visible = true;
 
 	    background = new FlxBackdrop(AssetPaths.background__png, 1, 1, true, true);
 		title = new FlxSprite(0, 0);
@@ -48,7 +49,7 @@ class MenuState extends FlxUIState
 		add(options);
 		add(bars);
 		add(seedInput);
-		add(startButton);
+	//	add(startButton);
 		
 			FlxTransitionableState.defaultTransIn = new TransitionData();
 			FlxTransitionableState.defaultTransOut = new TransitionData();
@@ -63,8 +64,8 @@ class MenuState extends FlxUIState
 			FlxTransitionableState.defaultTransOut.direction = FlxG.random.getObject([ new FlxPoint(0,1)]);		
 			FlxTransitionableState.defaultTransOut.type = TransitionType.TILES;
 			FlxTransitionableState.defaultTransIn.type = TransitionType.TILES;
-			FlxTransitionableState.defaultTransOut.duration = 3;
-			FlxTransitionableState.defaultTransIn.duration = 3;
+			FlxTransitionableState.defaultTransOut.duration = 1;
+			FlxTransitionableState.defaultTransIn.duration = 1;
 			FlxTransitionableState.defaultTransOut.color = FlxColor.YELLOW;
 			FlxTransitionableState.defaultTransIn.color = FlxColor.YELLOW;
 			FlxTransitionableState.defaultTransIn.tileData.asset = diamond;
@@ -119,13 +120,16 @@ class MenuState extends FlxUIState
 	private function startGame():Void
     {
 		if (seedInput.text == "")
-	   FlxG.switchState(new PlayState());
+		{
+		  Reg.SEEDED = false;
+	      FlxG.switchState(new PlayState());
+		}
 	   else
-	   {
-	   Reg.SEEDED = true;
-	   Reg.masterSeed =  Std.parseInt(seedInput.text);
-	   FlxG.switchState(new PlayState());
-	   }
+		{
+		   Reg.SEEDED = true;
+		   Reg.masterSeed =  Std.parseInt(seedInput.text);
+		   FlxG.switchState(new PlayState());
+		}
 
     }
 

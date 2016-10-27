@@ -17,6 +17,8 @@ import objects.weapons.Bullet;
 class BaseBullet extends Bullet
 {
 	
+	private var createdNoHit:Bool = false;
+	
 	public function new(x:Float, y:Float,_moveSpeed:Int,_damage:Int) 
 	{
 		super(x, y);
@@ -45,26 +47,27 @@ class BaseBullet extends Bullet
 		    super.update(elapsed);
 	}
 	
-	override private function collisions()
+ 	override private function collisions()
     {
+	 if (isTouching(FlxObject.ANY))
+		 kill();
+	 
+	if (FlxG.collide(Reg.PS.map, this))
+		kill();
+		
+	if (FlxG.overlap(Reg.PS.hazards, this))
+	{
+		kill();
+	}
+		
+	if (x > FlxG.camera.scroll.x + FlxG.width + 8 || x < FlxG.camera.scroll.x - FlxG.width - 8)
+	{
+	   kill();
+	}
+	
 		super.collisions();
 	
-		
-	
-	  for (hazard in Reg.PS.hazards)
-	  {
-		  if (FlxG.pixelPerfectOverlap(hazard, this))
-		  {
-		       kill();
-		       createNoHit();
-		  }
-	  }
 
-	  if (FlxG.collide(Reg.PS.map, this))
-	  {
-		kill();
-		createNoHit();	
-	  }
 	}
 
 	private function move()
@@ -85,16 +88,21 @@ class BaseBullet extends Bullet
 	private function createNoHit()
 	{
 		var e = Reg.PS.effects.recycle(NoHit);
-		if (e == null) e = new NoHit(x-6, y);
+		if (e == null) e = new NoHit(x-6, y - 4);
 		
-		e.set_angle(this.angle);
+		e.set_angle(angle);
 		e.reset(x-6, y - 4);
 		Reg.PS.effects.add(e);
 	}
 	
 	override public function kill()
 	{ 
-		Reg.PS.PBullets.remove(this, true);
+		if (!createdNoHit)
+		{
+		createdNoHit = true;
+		createNoHit();
+		}
+	 	Reg.PS.PBullets.remove(this, true);
 		super.kill();
 	}
 }

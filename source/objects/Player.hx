@@ -47,8 +47,7 @@ class Player extends FlxSprite
 	
 	private var _cooldown:Float = 0.5;
 	public var invinsible:Bool = false;
-	
-	private var immuneToWalls(default, set):Bool = true;
+
 	private var weapons:Array<IWeapon>;
 	
 	var bullEffect:NewBullEffect;
@@ -59,7 +58,11 @@ class Player extends FlxSprite
 	var comboMultiplier:Float = 1;	
 	var comboTimer:FlxTimer;
 	var comboTimerDuration:Float = 5;
+	
 	public var timeLeft:Float;
+	
+	
+	public var currentCurses:Array<String>;
 
 	public function new(x:Float, y:Float) 
 	{
@@ -68,6 +71,7 @@ class Player extends FlxSprite
 		MAX_HP = 3;
 		
 		weapons = [new BaseWeapon(x, y)];
+		currentCurses = new Array<String>();
 
 		bullEffect = new NewBullEffect(x, y);
 		bullEffect.set_visible(false);
@@ -93,6 +97,8 @@ class Player extends FlxSprite
 	{	
 		if (!shooting)
 		move_right();
+		
+		
 
 		timeLeft = comboTimer.timeLeft;
 		
@@ -156,9 +162,8 @@ class Player extends FlxSprite
 		{
 		   if (FlxG.collide(Reg.PS.map, this))
 		   {
-			if (!immuneToWalls)
+			if (Reg.wallsHurt)
 			{
-
 				damage();
 				FlxObject.separate(this, Reg.PS.map);
 		   }
@@ -274,23 +279,12 @@ class Player extends FlxSprite
 	
 	override public function kill()
 	{
-
 		Reg.PS.persistentUpdate = false;
 		super.kill();
 		deathAnimation();
+	}
+	
 
-	}
-	
-	public function get_immuneToWalls():Bool 
-	{
-		return immuneToWalls;
-	}
-	
-	public function set_immuneToWalls(value:Bool):Bool 
-	{
-		return immuneToWalls = value;
-	}
-	
 	public function get_weapons():Array<IWeapon> 
 	{
 		return weapons;
@@ -320,5 +314,5 @@ class Player extends FlxSprite
 	{
 		return MAGNET = value;
 	}
-	
+
 }

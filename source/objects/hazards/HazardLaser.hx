@@ -15,7 +15,7 @@ class HazardLaser extends Hazard
 	private var maxCounter:Int = 300;
 	private var tactive:Bool = false;
 	private var canBeActive:Bool = true;
-	private var deactivationTreshold:Int = 32;
+	private var deactivationTreshold:Int = 64;
 	
 	private var animationTween:FlxTween;
 	

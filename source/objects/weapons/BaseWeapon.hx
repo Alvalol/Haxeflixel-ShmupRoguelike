@@ -24,7 +24,7 @@ class BaseWeapon implements IWeapon
 		max_bullets = 10;
 		max_range = 10;
 		damage = 1;
-		bulletSpeed = 250;
+		bulletSpeed = 200;
 	}
 	
 	
@@ -38,7 +38,6 @@ class BaseWeapon implements IWeapon
 		
 		if (Reg.PS.PBullets.countLiving() < max_bullets && !_coolingDown && Reg.PS.player.alive) 
 		{
-			
 			var pb =  Reg.PS.PBullets.recycle(BaseBullet);
 			if (pb == null) pb = new BaseBullet(location.x, location.y, bulletSpeed,damage);
 

@@ -14,7 +14,6 @@ class AntidoteItem extends Item
 	override public function interact(player:Player)
 	{
 		kill();
-		Reg.CURSED = false;
 		Reg.score += 100;
 		
 		super.interact(player);

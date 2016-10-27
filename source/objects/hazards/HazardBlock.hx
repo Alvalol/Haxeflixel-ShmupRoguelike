@@ -23,19 +23,14 @@ class HazardBlock extends Hazard
 		animation.add("static", [frame]);
 		animation.play("static");
 	//	centerOrigin();
-		color = Reg.CURRENT_SEED.getObject([0xFFFFFFFF]);
+	//	color = Reg.CURRENT_SEED.getObject([0xFFFFFFFF]);
 		immovable = true;
 		solid = true;
 	}
+
 	
 	override private function interact(player:Player)
 	{
-		if (!Reg.PS.player.get_immuneToWalls())
-		{
-		  FlxObject.separate(this, player);
-		  Reg.PS.player.damage();
-		}
-		else
 			  FlxObject.separate(this, player);
 	}
 	
@@ -59,6 +54,11 @@ class HazardBlock extends Hazard
 		particleTimer();
 		emitter.setPosition(x, y);
 		emitter.alpha.set(0.5, 1);
+		emitter.acceleration.start.min.y = 40;
+		emitter.acceleration.start.max.y = 100;
+		emitter.acceleration.end.min.y = 40;
+		emitter.acceleration.end.max.y = 100;
+		emitter.solid = true;
 		emitter.makeParticles(1,1, FlxColor.WHITE, desiredParticles);
 		emitter.launchMode = FlxEmitterMode.CIRCLE;
 		emitter.lifespan.set(0.2, 3);
@@ -87,7 +87,7 @@ class HazardBlock extends Hazard
 	private function dropItem()
 	{
 		var itemRoll = Reg.CURRENT_SEED.float(0,100);
-		if (itemRoll < 2.5)
+		if (itemRoll < 1)
 		{
 			var tObject:Item =	Reg.CURRENT_SEED.getObject([new HealthItem(x,y), new MagnetItem(x,y)]);			
 			Reg.PS.items.add(tObject);

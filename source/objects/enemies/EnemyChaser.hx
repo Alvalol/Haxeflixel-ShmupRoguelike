@@ -2,6 +2,7 @@ package objects.enemies;
 
 import flixel.FlxG;
 import flixel.addons.effects.FlxTrail;
+import flixel.math.FlxMath;
 import flixel.util.FlxColor;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -24,7 +25,7 @@ class EnemyChaser extends Enemy
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		animation.add("idle", [12,13],10);
 		animation.play("idle");
-		deathTimer();
+
 
 	}
 	
@@ -35,16 +36,11 @@ class EnemyChaser extends Enemy
 		super.update(elapsed);
 	}
 	
-	private function deathTimer()
-	{
-		new FlxTimer().start(5, function(_)		{ kill(); }, 1);
-	}
-	
 	
 	
 	private function move()
 	{
-	//	angle += 5;
+	//	Set angle to look at player
 		var aim = new FlxPoint(Reg.PS.player.x, Reg.PS.player.y);
 		FlxVelocity.moveTowardsPoint(this, aim, MOVE_SPEED, 0);	
 	}

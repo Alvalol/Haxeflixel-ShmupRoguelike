@@ -6,6 +6,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.FlxBasic;
 import flixel.FlxObject;
+import flixel.util.FlxSpriteUtil;
 
 
 class Hazard extends FlxSprite
@@ -17,7 +18,6 @@ class Hazard extends FlxSprite
 	public function new(x:Float,y:Float) 
 	{
 		super(x, y);
-
 	}
 	
 	override public function update(elapsed:Float)
@@ -31,11 +31,17 @@ class Hazard extends FlxSprite
 
 	private function collisions()
 	{
-		if (FlxG.overlap(Reg.PS.player, this))
+		if (FlxG.overlap(Reg.PS.player, this) && !FlxSpriteUtil.isFlickering(Reg.PS.player))
 		{
 			interact(Reg.PS.player);
 		}
-	}
+		
+		/*for (bullet in Reg.PS.PBullets)
+	    {
+		if (FlxG.overlap(bullet, this) && isOnScreen(FlxG.camera))
+		    bullet.kill();
+		}*/
+	}        
 	
 	private function basicChecks()
 	{
@@ -49,11 +55,11 @@ class Hazard extends FlxSprite
 			_appeared = true;	
 			}
 		}
-		else
-		{
-			if(_appeared)
-		    kill();
-		}
+		
+		if (_appeared && x <= FlxG.camera.scroll.x - 16)
+	   	 {
+				kill();
+		 }
 	}
 	
 	private function interact(player:Player)
@@ -64,7 +70,6 @@ class Hazard extends FlxSprite
 	override public function kill()
 	{
 		Reg.PS.hazards.remove(this, true);
-		
 		super.kill();
 	}
 	

@@ -34,6 +34,8 @@ class Item extends FlxSprite
 	private var disTimer:FlxTimer;
 	private var disTimerStarted:Bool = false;
 	
+	
+	
 
 	public function new(x:Float, y:Float) 
 	{
@@ -41,7 +43,6 @@ class Item extends FlxSprite
 		loadGraphic(AssetPaths.items__png, false, 8, 8);
 		setSize(8, 8);
 		_hp = 5;
-		
 		createSinTween();
 		// ensures all items have a small sine animation.  
 	}
@@ -56,13 +57,9 @@ class Item extends FlxSprite
 	{
         basicChecks();
 		collisions();
+
 		
-		if (Reg.CURSED)
-		{
-			destructibleCollisions();
-			explode();
-		}
-		
+		destructibleCollisions();
 		if (createdText)
 		{
 			text.velocity.y = -10;
@@ -91,8 +88,18 @@ class Item extends FlxSprite
 	{
 		if (FlxG.overlap(Reg.PS.PBullets, this))
 		{
-			damage();
-			Reg.PS.PBullets.getFirstAlive().kill();
+			if (Reg.itemsExplode)
+			{
+			 _hp--;
+			 FlxSpriteUtil.flicker(this, 0.25, 0.04);
+			 Reg.PS.PBullets.getFirstAlive().kill();
+			}
+		}
+		
+		if (_hp <= 0)
+		{
+			kill();
+			explode();
 		}
 	}
 	
@@ -115,7 +122,6 @@ class Item extends FlxSprite
 	{
 		var roll = Reg.CURRENT_SEED.int(0, 100);
 		
-		if (_hp <= 0)
 		if (roll > 75)
 		{
 			kill();

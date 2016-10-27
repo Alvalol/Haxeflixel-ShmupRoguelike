@@ -10,7 +10,6 @@ import objects.items.ImmunityWallItem;
 import objects.items.Item;
 import flixel.util.FlxTimer;
 import flixel.math.FlxMath;
-import objects.items.ItemsExplosiveItem;
 import objects.items.SpeedDownItem;
 
 class EnemyMinion extends Enemy

@@ -32,6 +32,8 @@ class Enemy extends FlxSprite
 	
 	private var displayDamage:String;
 	
+	private var lefty:Bool = false;
+	
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
@@ -77,10 +79,13 @@ class Enemy extends FlxSprite
 				 _appeared = true;
 		    }
 		}
-		if (_appeared && x <= FlxG.camera.scroll.x)
+		
+		if (_appeared && x < FlxG.camera.scroll.x - 16 && !lefty)
 			{
 				kill();
+				trace("enemy killed outside of the screen");
 			}
+		
 		
 		if (HP <= 0)
 		    kill();
@@ -92,7 +97,7 @@ class Enemy extends FlxSprite
 		if (FlxG.overlap(this, Reg.PS.player) && !FlxSpriteUtil.isFlickering(Reg.PS.player))
 			interact(Reg.PS.player);
 		
-		if (FlxG.overlap(Reg.PS.PBullets, this) && isOnScreen())
+		if (FlxG.overlap(Reg.PS.PBullets, this) && isOnScreen(FlxG.camera))
 			damage();
 	
 	}

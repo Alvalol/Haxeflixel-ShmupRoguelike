@@ -17,7 +17,6 @@ class LaserBullet extends Bullet
 	
 	override public function update(elapsed:Float)
 	{
-		collisions();
 		set_alpha(Reg.CURRENT_SEED.float(0, 1));
 		setPosition(Reg.PS.player.x + 8, Reg.PS.player.y + 1);
 		
@@ -25,11 +24,6 @@ class LaserBullet extends Bullet
 		    super.update(elapsed);
 	}
 	
-   override	private function collisions()
-	{
-		super.collisions();
-		
-	}
 	
 
 	

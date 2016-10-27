@@ -20,27 +20,22 @@ class Bullet extends FlxSprite
 		super.update(elapsed);
 	}
 	
+	private function collisions()
+	{
+	    FlxG.overlap(Reg.PS.blocks, this, overlappingObjects,null);
+	}
+	
+	private function overlappingObjects(object1:FlxSprite, object2:FlxSprite)
+	{
+		object1.kill();
+		object2.kill();
+	}
+	
 	public function set_BULLET_SPEED(speed:Int)
 	{
 	    MOVE_SPEED = speed;	
 	}
-	
-	private function collisions()
-	{
-			if (!isOnScreen())
-			kill();
-			
-       for (block in Reg.PS.blocks)
-		{	
-			if (FlxG.overlap(this, block))
-			{
-					kill();
-					block.kill();
-			}
-		}
 		
-	}
-	
 	public function set_damage(_damage:Int)
 	{
 		damage = _damage;
@@ -49,5 +44,10 @@ class Bullet extends FlxSprite
 	public function get_damage()
 	{
 		return damage;
+	}
+	
+	override public function kill()
+	{
+		super.kill();
 	}
 }

@@ -18,7 +18,7 @@ class ImmunityWallItem extends Item
 	{
 		kill();
 		Reg.score += 5;
-		player.set_immuneToWalls(true);
+		Reg.wallsHurt = false;
 	}
 	
 	

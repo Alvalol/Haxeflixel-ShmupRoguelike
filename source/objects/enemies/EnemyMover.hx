@@ -8,7 +8,6 @@ import flixel.addons.effects.FlxTrail;
 import objects.items.ImmunityWallItem;
 import objects.items.Item;
 import objects.items.HealthItem;
-import objects.items.ItemsExplosiveItem;
 import objects.items.RangeItem;
 import flixel.math.FlxMath;
 import objects.items.SpeedDownItem;
