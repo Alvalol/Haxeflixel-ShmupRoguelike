@@ -231,8 +231,7 @@ class PlayState extends FlxTransitionableState
 	
 	private function createCurseAppearanceTweens()
 	{
-
-		 mapColorTween  =  FlxTween.tween(map, {color: 0xFFFF0000}, 1.5, { type : FlxTween.ONESHOT, ease: FlxEase.sineIn });
+		 mapColorTween  =  FlxTween.tween(map, {color: FlxColor.fromRGB(255,0,0,255)}, 0.75, { type : FlxTween.ONESHOT, ease: FlxEase.elasticIn });
 		 mapColorTween.active = false;
 	}
 	
@@ -353,8 +352,8 @@ class PlayState extends FlxTransitionableState
 		if (Reg.pause)
 		{
 			persistentUpdate = true;
-			FlxTimer.manager.active = false;
-			FlxTween.manager.active = false;
+			FlxTimer.globalManager.active = false;
+			FlxTween.globalManager.active = false;
 			openSubState(new PauseState());
 			_gameCamera.followLerp = 0.0;
 			canQuit = true;
