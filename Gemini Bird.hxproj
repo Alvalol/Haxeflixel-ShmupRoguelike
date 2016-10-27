@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿﻿<?xml version="1.0" encoding="utf-8"?>
 <project version="2">
   <!-- Output SWF options -->
   <output>
@@ -15,38 +15,26 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="C:\HaxeToolkit\haxe\lib\flixel\4,0,1" />
-    <class path="C:\HaxeToolkit\haxe\lib\openfl\3,6,1" />
-    <class path="C:\HaxeToolkit\haxe\lib\lime\2,9,1" />
-    <class path="C:\HaxeToolkit\haxe\lib\flixel-addons\2,0,0" />
-    <class path="C:\HaxeToolkit\haxe\lib\polygonal-ds\2,0,0-beta\src" />
-    <class path="C:\HaxeToolkit\haxe\lib\polygonal-printf\1,0,2-beta" />
-    <class path="C:\HaxeToolkit\haxe\lib\flixel-ui\2,2,0" />
+    <class path="C:\Users\Alvaro\Desktop\shmup\hxcpp\flixel\4,2,0" />
+    <class path="C:\Users\Alvaro\Desktop\shmup\hxcpp\openfl\3,6,1" />
+    <class path="C:\Users\Alvaro\Desktop\shmup\hxcpp\lime\2,9,1" />
+    <class path="C:\Users\Alvaro\Desktop\shmup\hxcpp\hscript\2,0,7" />
+    <class path="C:\Users\Alvaro\Desktop\shmup\hxcpp\flixel-addons\2,1,0" />
+    <class path="C:\Users\Alvaro\Desktop\shmup\hxcpp\polygonal-ds\1,4,1" />
+    <class path="C:\Users\Alvaro\Desktop\shmup\hxcpp\polygonal-printf\1,0,2-beta" />
+    <class path="C:\Users\Alvaro\Desktop\shmup\hxcpp\flixel-ui\2,2,0" />
     <class path="source" />
-<<<<<<< HEAD
     <class path="C:\Users\Alvaro\Desktop\shmup\hxcpp\openfl\3,6,1\extern" />
     <class path="export\windows\neko\haxe" />
   </classpaths>
   <!-- Build options -->
   <build>
     <option directives="flixel=4.2.0&#xA;openfl=3.6.1&#xA;lime=2.9.1&#xA;hscript=2.0.7&#xA;flixel-addons=2.1.0&#xA;polygonal-ds=1.4.1&#xA;polygonal-printf=1.0.2-beta&#xA;flixel-ui=2.2.0&#xA;HXCPP_QUIET&#xA;openfl-next&#xA;tools=2.9.1&#xA;NAPE_NO_INLINE&#xA;no-compilation&#xA;native&#xA;FLX_NO_TOUCH&#xA;lime-native&#xA;openfl-native&#xA;windows&#xA;desktop&#xA;display" />
-=======
-    <class path="C:\HaxeToolkit\haxe\lib\openfl\3,6,1\extern" />
-    <class path="export\windows\cpp\haxe" />
-  </classpaths>
-  <!-- Build options -->
-  <build>
-    <option directives="flixel=4.0.1&#xA;openfl=3.6.1&#xA;lime=2.9.1&#xA;flixel-addons=2.0.0&#xA;polygonal-ds=2.0.0-beta&#xA;polygonal-printf=1.0.2-beta&#xA;flixel-ui=2.2.0&#xA;openfl-next&#xA;tools=2.9.1&#xA;FLX_NO_DEBUG&#xA;no-compilation&#xA;NAPE_RELEASE_BUILD&#xA;native&#xA;FLX_NO_TOUCH&#xA;lime-native&#xA;openfl-native&#xA;windows&#xA;desktop&#xA;display" />
->>>>>>> b6473e59ef5e5ede466b8d54749ad4540af5d9a2
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="False" />
-<<<<<<< HEAD
     <option additional="#--macro keep('IntIterator')&#xA;--remap flash:openfl&#xA;--macro flixel.system.macros.FlxDefines.run()&#xA;#--macro keep(&quot;Main&quot;)&#xA;-debug " />
-=======
-    <option additional="--remap flash:openfl&#xA;--macro flixel.system.macros.FlxDefines.run()" />
->>>>>>> b6473e59ef5e5ede466b8d54749ad4540af5d9a2
   </build>
   <!-- haxelib libraries -->
   <haxelib>

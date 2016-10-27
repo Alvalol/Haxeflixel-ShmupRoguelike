@@ -363,14 +363,10 @@ class PlayState extends FlxTransitionableState
 		else
 		{
 	     	closeSubState();
-<<<<<<< HEAD
+
 			FlxTimer.globalManager.active = true;
 			FlxTween.globalManager.active = true;
-=======
-			
-			FlxTimer.manager.active = true;
-			FlxTween.manager.active = true;
->>>>>>> b6473e59ef5e5ede466b8d54749ad4540af5d9a2
+
 			_gameCamera.followLerp = lerpSpeed;
 			canQuit = false;
 			persistentUpdate = false;
@@ -379,7 +375,7 @@ class PlayState extends FlxTransitionableState
 
 	private function cameraSetup()
 	{	
-		_gameCamera = new FlxCamera();b
+		_gameCamera = new FlxCamera();
 		_hudCamera = new FlxCamera();
 		_scroller = new Scroller(player.x + _scrollerOffset, player.y); 
 		

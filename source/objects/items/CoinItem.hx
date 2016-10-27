@@ -49,11 +49,8 @@ class CoinItem extends Item
 
 	private function magnetize()
 	{
-<<<<<<< HEAD
 		if (FlxMath.absInt(FlxMath.distanceBetween(this, Reg.PS.player)) < 80 && isOnScreen())
-=======
-		if (FlxMath.absInt(FlxMath.distanceBetween(this, Reg.PS.player)) > 10 && isOnScreen(FlxG.camera))
->>>>>>> b6473e59ef5e5ede466b8d54749ad4540af5d9a2
+
 		{
 			magnetized = true;	
 		}
