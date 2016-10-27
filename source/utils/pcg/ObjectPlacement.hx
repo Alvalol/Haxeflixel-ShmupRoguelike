@@ -174,7 +174,7 @@ class ObjectPlacement
 	
 	private static function placeEnemy(enemyPos:FlxPoint,enemy:Enemy)
 	{
-		if (FlxMath.distanceToPoint(Reg.PS.player, enemyPos) < minDistanceToEnemy && !enemy.isOnScreen())
+		if (FlxMath.distanceToPoint(Reg.PS.player, enemyPos) < minDistanceToEnemy && !enemy.isOnScreen(FlxG.camera))
 		Reg.PS.enemies.add(enemy);
 	}
 

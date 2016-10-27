@@ -22,7 +22,7 @@ class Explosion extends FlxSprite
 	
 	override public function update(elapsed:Float):Void 
 	{
-		if (animation.curAnim.curFrame == 9 && isOnScreen())
+		if (animation.curAnim.curFrame == 9 && isOnScreen(FlxG.camera))
 		{
 			kill();
 			Reg.PS.effects.remove(this, true);

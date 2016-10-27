@@ -16,7 +16,7 @@ class Barrier extends FlxSprite
 	override public function update(elapsed:Float):Void 
 	{
 
-		scale.set(FlxG.random.float(0.1, 1), 1);
+		scale.set(Reg.CURRENT_SEED.float(0.1, 1), 1);
 		super.update(elapsed);
 	}
 	

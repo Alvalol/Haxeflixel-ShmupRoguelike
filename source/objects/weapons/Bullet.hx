@@ -27,8 +27,23 @@ class Bullet extends FlxSprite
 	
 	private function overlappingObjects(object1:FlxSprite, object2:FlxSprite)
 	{
+<<<<<<< HEAD
 		object1.kill();
 		object2.kill();
+=======
+			if (!isOnScreen(FlxG.camera))
+			kill();
+			
+       for (block in Reg.PS.blocks)
+		{	
+			if (FlxG.overlap(this, block))
+			{
+					kill();
+					block.kill();
+			}
+		}
+		
+>>>>>>> b6473e59ef5e5ede466b8d54749ad4540af5d9a2
 	}
 	
 	public function set_BULLET_SPEED(speed:Int)

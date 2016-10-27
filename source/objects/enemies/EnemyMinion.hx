@@ -17,7 +17,7 @@ class EnemyMinion extends Enemy
 	public var Spawner:EnemySpawner;
 	public var direction:Float;
 
-	private var changeDirectionDelay:Float = FlxG.random.float(1.5, 2);
+	private var changeDirectionDelay:Float = Reg.CURRENT_SEED.float(1.5, 2);
 	private var directionChanged:Bool;
 	
 	public function new(x:Float,y:Float) 

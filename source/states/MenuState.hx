@@ -34,22 +34,35 @@ class MenuState extends FlxUIState
 	override public function create():Void
 	{
 		super.create();
+<<<<<<< HEAD
 		FlxG.mouse.visible = true;
 
 	    background = new FlxBackdrop(AssetPaths.background__png, 1, 1, true, true);
+=======
+		
+		background = new FlxBackdrop(AssetPaths.background__png, 1, 1, true, true);
+>>>>>>> b6473e59ef5e5ede466b8d54749ad4540af5d9a2
 		title = new FlxSprite(0, 0);
+
+		title.loadGraphic(AssetPaths.title__png, false, 256, 144);
+		
+		
 		var options = new FlxSprite(0,0);
 		var bars = new FlxSprite(0,0);
-		title.loadGraphic(AssetPaths.title__png, false, 256, 144);
 		options.loadGraphic(AssetPaths.options__png, false, 256, 144);
 		bars.loadGraphic(AssetPaths.bars__png, false, 256, 144);
+		
 		setupInputSeed();
 		add(background);
 		add(title);
 		add(options);
 		add(bars);
 		add(seedInput);
+<<<<<<< HEAD
 	//	add(startButton);
+=======
+		//add(startButton);
+>>>>>>> b6473e59ef5e5ede466b8d54749ad4540af5d9a2
 		
 			FlxTransitionableState.defaultTransIn = new TransitionData();
 			FlxTransitionableState.defaultTransOut = new TransitionData();
@@ -119,11 +132,19 @@ class MenuState extends FlxUIState
 	
 	private function startGame():Void
     {
+<<<<<<< HEAD
 		if (seedInput.text == "")
 		{
 		  Reg.SEEDED = false;
 	      FlxG.switchState(new PlayState());
 		}
+=======
+	   if (seedInput.text == null)
+	   {
+	   Reg.SEEDED = false;
+	   FlxG.switchState(new PlayState());
+	   }
+>>>>>>> b6473e59ef5e5ede466b8d54749ad4540af5d9a2
 	   else
 		{
 		   Reg.SEEDED = true;

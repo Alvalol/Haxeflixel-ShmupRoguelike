@@ -48,7 +48,7 @@ class Hazard extends FlxSprite
 		if (!inWorldBounds())
 			exists = false;
 			
-		if (isOnScreen())
+		if (isOnScreen(FlxG.camera))
 		{
 			if (!_appeared) 
 			{

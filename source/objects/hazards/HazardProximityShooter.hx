@@ -34,8 +34,12 @@ class HazardProximityShooter extends Hazard
 	
 	private function forceTrigger()
 	{
+<<<<<<< HEAD
 		if (FlxG.collide(Reg.PS.PBullets, this))
 		{
+=======
+		if (FlxMath.absInt(Std.int(x))  - Std.int(Reg.PS.player.x) < 20 && !shot && isOnScreen(FlxG.camera))
+>>>>>>> b6473e59ef5e5ede466b8d54749ad4540af5d9a2
 			shoot();
 		}
 	}

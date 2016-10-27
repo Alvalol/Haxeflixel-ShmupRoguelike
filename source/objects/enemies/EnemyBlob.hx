@@ -28,7 +28,7 @@ class EnemyBlob extends Enemy
 		HP = 1;
 		solid = true;
 		tsize = _tsize;
-		roll = FlxG.random.int(0, 100);
+		roll = Reg.CURRENT_SEED.int(0, 100);
 		loadGraphic(AssetPaths.bigEnemies__png, true, 16, 16);
 		animation.add("idle", [0,1],10);
 		animation.play("idle");
@@ -49,8 +49,8 @@ class EnemyBlob extends Enemy
 	
 	private function mitosis()
 	{
-		var m1 = new EnemyBlob(x + FlxG.random.int(-5,5), y + FlxG.random.int(-5,5) , tsize - 4);
-		var m2 = new EnemyBlob(x - FlxG.random.int(-5,5), y + FlxG.random.int(-5,5) , tsize - 4);
+		var m1 = new EnemyBlob(x + Reg.CURRENT_SEED.int(-5,5), y + Reg.CURRENT_SEED.int(-5,5) , tsize - 4);
+		var m2 = new EnemyBlob(x - Reg.CURRENT_SEED.int(-5,5), y + Reg.CURRENT_SEED.int(-5,5) , tsize - 4);
 		Reg.PS.enemies.add(m1);
 		Reg.PS.enemies.add(m2);
 	}
@@ -70,7 +70,7 @@ class EnemyBlob extends Enemy
 	    new FlxTimer().start(delayDirection, function(_)
 		{
 		 rolled = false;
-	     roll  = FlxG.random.int(0, 100);	
+	     roll  = Reg.CURRENT_SEED.int(0, 100);	
 		}, 1);
 	}
 	
@@ -97,6 +97,6 @@ class EnemyBlob extends Enemy
 	
 	private function move()
 	{
-		velocity.set(FlxG.random.float(-MOVE_SPEED/4, MOVE_SPEED/4), FlxG.random.float( -MOVE_SPEED/4, MOVE_SPEED/4));
+		velocity.set(Reg.CURRENT_SEED.float(-MOVE_SPEED/4, MOVE_SPEED/4), Reg.CURRENT_SEED.float( -MOVE_SPEED/4, MOVE_SPEED/4));
 	}
 }

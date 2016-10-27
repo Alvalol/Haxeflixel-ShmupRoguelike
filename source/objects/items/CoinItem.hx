@@ -23,8 +23,8 @@ class CoinItem extends Item
 	{
 		
 		super(x, y);
-		var scalea = FlxG.random.float(0.4, 0.5);
-		var scaleb = FlxG.random.float(0.4, 0.5);
+		var scalea = Reg.CURRENT_SEED.float(0.4, 0.5);
+		var scaleb = Reg.CURRENT_SEED.float(0.4, 0.5);
 		loadGraphic(AssetPaths.cube__png, true, 16, 16);
 		animation.add("idle", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15], 10);
 		animation.play("idle");
@@ -46,10 +46,14 @@ class CoinItem extends Item
 
 		super.update(elapsed);
 	}
-	
+
 	private function magnetize()
 	{
+<<<<<<< HEAD
 		if (FlxMath.absInt(FlxMath.distanceBetween(this, Reg.PS.player)) < 80 && isOnScreen())
+=======
+		if (FlxMath.absInt(FlxMath.distanceBetween(this, Reg.PS.player)) > 10 && isOnScreen(FlxG.camera))
+>>>>>>> b6473e59ef5e5ede466b8d54749ad4540af5d9a2
 		{
 			magnetized = true;	
 		}

@@ -91,7 +91,7 @@ class EnemyShooter extends Enemy
 	
 	private function cameraHandler()
 	{
-		if (isOnScreen() && _appeared)
+		if (isOnScreen(FlxG.camera) && _appeared)
 		{
 			Reg.SCROLLER_ON = false;
 		}

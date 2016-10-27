@@ -32,7 +32,7 @@ class EnemyMultishotDeath extends Enemy
 	
 	override public function update(elapsed:Float) 
 	{
-		if (!justShot && isOnScreen())
+		if (!justShot && isOnScreen(FlxG.camera))
 		{
 			shoot();
 		}
