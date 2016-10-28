@@ -2,6 +2,7 @@ package objects.enemies;
 
 import flixel.effects.FlxFlicker;
 import flixel.math.FlxPoint;
+import objects.items.CurseItem;
 
 import flash.filters.GlowFilter;
 import flixel.FlxSprite;
@@ -158,7 +159,17 @@ class Enemy extends FlxSprite
 				var newCoin:CoinItem =  new CoinItem(x, y);
 				Reg.PS.coins.add(newCoin);
 		}
-	}	
+		
+		
+		var curseRoll:Float = Reg.CURRENT_SEED.float(0, 100);
+		if (curseRoll <= 0.5)
+		{
+		var curseObject:CurseItem = new CurseItem(x, y);
+		Reg.PS.items.add(curseObject);
+		}
+	}
+	
+	
 	
 	
 	private function particles()

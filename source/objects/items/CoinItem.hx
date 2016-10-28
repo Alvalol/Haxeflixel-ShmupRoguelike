@@ -60,7 +60,7 @@ class CoinItem extends Item
 
 	private function moveToPlayer()
 	{
-		trace("Move to player is being called");
+
 	     FlxVelocity.accelerateTowardsObject(this, Reg.PS.player, 12000, 20000);
 	}
 	

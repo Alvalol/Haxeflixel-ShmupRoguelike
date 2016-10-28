@@ -8,6 +8,7 @@ import flixel.util.FlxTimer;
 import flixel.util.FlxSpriteUtil;
 import flixel.math.FlxPoint;
 import flixel.math.FlxVelocity;
+import objects.items.CurseItem;
 import objects.items.HealthItem;
 
 class EnemyBlob extends Enemy

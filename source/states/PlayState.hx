@@ -121,8 +121,7 @@ class PlayState extends FlxTransitionableState
 
 		Reg.PS = this;
 		Reg.pause = false;
-		Reg.itemsExplode = false;
-		Reg.wallsHurt = false;
+		resetCurses();
 
 		// init gameplay elements
 		player = new Player(10, FlxG.height / 2);
@@ -169,7 +168,7 @@ class PlayState extends FlxTransitionableState
 		super.update(elapsed);
 		
 		
-		trace(mapColorTween);
+	//	trace(mapColorTween);
 		
 		#if desktop
 		controlPauseScreen();
@@ -179,7 +178,9 @@ class PlayState extends FlxTransitionableState
 		#end
 		
 		if (FlxG.mouse.justPressed)
-        createObject("objects.items.CurseItem", FlxG.mouse.x, FlxG.mouse.y);
+        createObject("objects.items.AntidoteItem", FlxG.mouse.x, FlxG.mouse.y);
+		if (FlxG.mouse.justPressedMiddle)
+		createObject("objects.items.CurseItem", FlxG.mouse.x, FlxG.mouse.y);
 		
 		displayTracers();
 		addLevelObjects();
@@ -372,6 +373,14 @@ class PlayState extends FlxTransitionableState
 		}	
 	}
 
+	private function resetCurses()
+	{
+		Reg.itemsExplode = false;
+		Reg.wallsHurt = false;
+		Reg.mirrorControls = false;
+	}
+	
+	
 	private function cameraSetup()
 	{	
 		_gameCamera = new FlxCamera();

@@ -125,11 +125,10 @@ class MenuState extends FlxUIState
 	
 	private function startGame():Void
     {
-
-	   if (seedInput.text == null)
+	   if (seedInput.text == "")
 	   {
-	   Reg.SEEDED = false;
-	   FlxG.switchState(new PlayState());
+			Reg.SEEDED = false;
+			FlxG.switchState(new PlayState());
 	   }
 	   else
 		{

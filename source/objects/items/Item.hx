@@ -34,16 +34,18 @@ class Item extends FlxSprite
 	private var disTimer:FlxTimer;
 	private var disTimerStarted:Bool = false;
 	
+	private var colorChanged:Bool;
 	
 	
 
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
-		loadGraphic(AssetPaths.items__png, false, 8, 8);
-		setSize(8, 8);
+	//	loadGraphic(AssetPaths.items__png, false, 8, 8);
+		//setSize(8, 8);
 		_hp = 5;
 		createSinTween();
+		colorChanged = false;
 		// ensures all items have a small sine animation.  
 	}
 	
@@ -57,6 +59,19 @@ class Item extends FlxSprite
 	{
         basicChecks();
 		collisions();
+		
+		if (Reg.itemsExplode)
+		{
+			if(!colorChanged)
+			{
+			colorChanged = true;
+			color = 0xFF00FF00;
+			}
+		}
+		else
+		{
+			color = 0xFFFFFFFF;
+		}
 
 		
 		destructibleCollisions();

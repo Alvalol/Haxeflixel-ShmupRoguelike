@@ -38,7 +38,7 @@ public static var GAMEPAD:FlxGamepad;
 	{
 		if (GAMEPAD != null)
 		{
-			
+				
 		if (GAMEPAD.justPressed.START)
 		{
 			Reg.pause = !Reg.pause;
@@ -51,13 +51,19 @@ public static var GAMEPAD:FlxGamepad;
 		
 		if (GAMEPAD.pressed.DPAD_UP)
 		{
+		if (!Reg.mirrorControls)
 			Reg.PS.player.move_up();
+		else
+		    Reg.PS.player.move_down();
 		}
 		
 
 		if (GAMEPAD.pressed.DPAD_DOWN)
 		{
+			if(!Reg.mirrorControls)
 			Reg.PS.player.move_down();
+			else
+			Reg.PS.player.move_up();
 		}
 
 		
@@ -95,21 +101,13 @@ public static var GAMEPAD:FlxGamepad;
 		}
 		
 		if (FlxG.keys.anyPressed(Keyboard.upKeys))
-		{
+		{	
+			if(!Reg.mirrorControls)
 			Reg.PS.player.move_up();
+			else
+			Reg.PS.player.move_down();
 		}
-		/*
-		if ( FlxG.keys.anyPressed(Keyboard.rightKeys))
-		{
-			Reg.PS.player.move_right();
-		}
-		
-				
-		if ( FlxG.keys.anyPressed(Keyboard.leftKeys))
-		{
-			Reg.PS.player.move_left();
-		}
-		*/
+
 	
 		if (FlxG.keys.anyJustReleased(Keyboard.actionKeys))
 		{
@@ -118,7 +116,10 @@ public static var GAMEPAD:FlxGamepad;
 		
 		if ( FlxG.keys.anyPressed(Keyboard.downKeys))
 		{
+			if(!Reg.mirrorControls)
 			Reg.PS.player.move_down();
+			else
+			Reg.PS.player.move_up();
 		}
 
 		

@@ -1,6 +1,7 @@
 package objects.items;
 import flixel.util.FlxColor;
 import objects.Player;
+import flixel.math.FlxVelocity;
 
 class CurseItem extends Item
 {
@@ -11,9 +12,25 @@ class CurseItem extends Item
 		// such as : change controls, make items explosive, make blocks explosive, speed of scroll faster, all turrets can aim towards the player.
 		// 
 		super(x, y);
-		makeGraphic(8, 8, FlxColor.YELLOW);
+		loadGraphic(AssetPaths.items__png, true, 8, 8);
+		setSize(8, 8);
+		animation.add("idle", [8]);
+		animation.play("idle");
 		set_name("YOU ARE CURSED");
+		sinTween.active = false;
 	}
+	
+	override public function update(elapsed:Float) 
+	{
+		moveToPlayer();
+		super.update(elapsed);
+	}
+	
+	private function moveToPlayer()
+	{
+	   FlxVelocity.accelerateTowardsObject(this, Reg.PS.player, 2000, 1000);
+	}
+	
 	
 	override public function interact(player:Player)
 	{
@@ -46,10 +63,8 @@ class CurseItem extends Item
 		switch curseName
 		{
 		case "WallsHurt": Reg.wallsHurt = true;
-		case "MirrorControls": trace("MirrorControls has been chosen");
-		case "MirrorDisplay": trace("MirrorDisplay has been chosen");
+		case "MirrorControls": Reg.mirrorControls = true;
 		case "ExplosiveItems": Reg.itemsExplode = true;
-		case "ReducedView": trace("ReducedView has been chosen");
 		}
 	}
 	

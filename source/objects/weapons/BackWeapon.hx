@@ -18,8 +18,6 @@ class BackWeapon implements IWeapon
 	private var _offset:Int = 8;	
 	private var bulletSpeed:Int;
 	
-	
-	
 	public function new(_x:Float, _y:Float)
 	{
 		location = new FlxPoint(_x, _y);

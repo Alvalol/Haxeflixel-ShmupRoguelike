@@ -6,6 +6,7 @@ import flixel.effects.particles.FlxEmitter;
 import flixel.util.FlxTimer;
 import flixel.util.FlxColor;
 import objects.effects.Explosion;
+import objects.items.CurseItem;
 import objects.items.HealthItem;
 import objects.items.Item;
 import objects.items.MagnetItem;
@@ -87,9 +88,14 @@ class HazardBlock extends Hazard
 	private function dropItem()
 	{
 		var itemRoll = Reg.CURRENT_SEED.float(0,100);
-		if (itemRoll < 1)
+		if (itemRoll < 1 && itemRoll >= 0.1)
 		{
 			var tObject:Item =	Reg.CURRENT_SEED.getObject([new HealthItem(x,y), new MagnetItem(x,y)]);			
+			Reg.PS.items.add(tObject);
+		}
+		if (itemRoll <= 0.1)
+		{
+			var tObject:CurseItem = new CurseItem(x, y);
 			Reg.PS.items.add(tObject);
 		}
 		else

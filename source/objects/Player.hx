@@ -12,6 +12,8 @@ import flixel.util.FlxTimer;
 import objects.effects.NewBullEffect;
 import objects.effects.NoHit;
 import objects.weapons.BaseWeapon;
+import objects.weapons.BounceWeapon;
+import objects.weapons.BouncyBullet;
 import objects.weapons.IWeapon;
 import objects.weapons.BackWeapon;
 import objects.weapons.LaserWeapon;
@@ -61,6 +63,8 @@ class Player extends FlxSprite
 	
 	public var timeLeft:Float;
 	
+	private var colorChanged:Bool = false;
+	
 	
 	public var currentCurses:Array<String>;
 
@@ -98,6 +102,18 @@ class Player extends FlxSprite
 		if (!shooting)
 		move_right();
 		
+		if (Reg.mirrorControls)
+		{
+			if (!colorChanged)
+			{
+			colorChanged = true;
+			color = 0xFF00FF00;
+			}
+		}
+		else
+		{
+			color = 0xFFFFFFFF;
+		}
 		
 
 		timeLeft = comboTimer.timeLeft;
