@@ -194,7 +194,7 @@ class MapChunkMerger
 	public static function makeSeed()
 	{
 		if (!Reg.SEEDED)
-		    Reg.CURRENT_SEED = new FlxRandom(FlxG.random.int(0, FlxMath.MAX_VALUE_INT)); 
+		    Reg.CURRENT_SEED = new FlxRandom(FlxG.random.int(0, 999999999)); 
 		else
 		   Reg.CURRENT_SEED = new FlxRandom(Reg.masterSeed);
 	}

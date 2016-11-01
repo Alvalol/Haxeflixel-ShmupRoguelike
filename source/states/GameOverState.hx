@@ -62,6 +62,9 @@ class GameOverSubState extends FlxTransitionableState
 	public function onClick()
 	{
 		FlxG.switchState(new PlayState());
+		
+		// implement restart / main menu buttons / options.
+		// only if not playing the daily seed.
 	}
 	
 }

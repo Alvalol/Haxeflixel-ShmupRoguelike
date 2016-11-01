@@ -105,4 +105,5 @@ class BaseBullet extends Bullet
 	 	Reg.PS.PBullets.remove(this, true);
 		super.kill();
 	}
+
 }

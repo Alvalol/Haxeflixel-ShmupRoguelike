@@ -17,6 +17,9 @@ class LaserWeapon implements IWeapon
 	private var timersStarted:Bool = false;
 	
 	private var pb:Bullet;
+	private var canSpread = false;
+	private var spread = 0;
+	private var maxSpread = 0; // this doesn't make sense.
 	
 
 	public function new(_x:Float,_y:Float) 
@@ -71,5 +74,25 @@ class LaserWeapon implements IWeapon
 		return range = value;
 	}
 	
+	public function get_spread():Int
+	{
+		return spread;
+	}
+	
+	public function set_spread(value:Int)
+	{
+		spread = value;
+	}
+	
+	public function get_canSpread():Bool
+	{
+		return canSpread;
+	}
+	
+	
+	public function get_maxSpread():Int
+	{
+		return maxSpread;
+	}
 	
 }

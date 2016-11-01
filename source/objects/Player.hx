@@ -12,8 +12,6 @@ import flixel.util.FlxTimer;
 import objects.effects.NewBullEffect;
 import objects.effects.NoHit;
 import objects.weapons.BaseWeapon;
-import objects.weapons.BounceWeapon;
-import objects.weapons.BouncyBullet;
 import objects.weapons.IWeapon;
 import objects.weapons.BackWeapon;
 import objects.weapons.LaserWeapon;
@@ -29,8 +27,8 @@ class Player extends FlxSprite
 	private static inline var ACCELERATION:Int = 800;
 	private static inline var DECELERATION:Int = 800;
 	
-	public var HOR_MOVE_SPEED:Int =50;
-	public var VERT_MOVE_SPEED:Int =68;
+	public var HOR_MOVE_SPEED:Int = 50;
+	public var VERT_MOVE_SPEED:Int = 68;
 	
 	public var MAX_HOR_MOVE_SPEED:Int = 80;
 	public var MAX_VERT_MOVE_SPEED:Int = 100;

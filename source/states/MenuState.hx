@@ -88,7 +88,7 @@ class MenuState extends FlxUIState
 		seedInput = new FlxInputText((FlxG.width / 2) - 30, (FlxG.height  / 2) + 10, 70, "Enter seed", 8, FlxColor.WHITE, FlxColor.BLACK);
 		seedInput.filterMode = FlxInputText.ONLY_NUMERIC;
 		seedInput.lines = 1;
-		seedInput.maxLength = 12;
+		seedInput.maxLength = 9;
 		seedInput.fieldBorderColor = FlxColor.WHITE;
 		seedInput.fieldBorderThickness = 1;
 	}

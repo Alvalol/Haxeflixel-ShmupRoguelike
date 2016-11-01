@@ -22,7 +22,7 @@ class PauseState extends FlxSubState
 		set_bgColor(0xE6000000);
 		var pauseText = new FlxText(FlxG.width / 2 - 50, FlxG.height / 2 - 20, 0, "PAUSED"); // offset 
 		var messageText = new FlxText(FlxG.width / 2 - 80, FlxG.height / 2 + 5, "PRESS Q OR BACK TO QUIT");
-		var seed = new FlxText(FlxG.width / 2 - 80, FlxG.height / 2 + 20, "Current Seed is  " + Reg.CURRENT_SEED.currentSeed);
+		var seed = new FlxText(FlxG.width / 2 - 80, FlxG.height / 2 + 20, "Current Seed is  " + Reg.CURRENT_SEED.initialSeed);
 		add(messageText);
 		add(pauseText);
 		add(seed);

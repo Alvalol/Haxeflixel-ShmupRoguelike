@@ -3,13 +3,11 @@ import objects.Player;
 import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import flixel.FlxG;
+import objects.weapons.IWeapon;
 
 
 class SpreadItem extends Item
 {
-	/*
-	This item does not currently function correctly. And I'm planning on implementing a "stack weapon" system where effects stack. So please ignore it for the moment.
-	
 	
 	public function new(x:Float, y:Float) 
 	{
@@ -22,8 +20,12 @@ class SpreadItem extends Item
 	
 	override public function interact(player:Player)
 	{
-		if (player.SHOT_MOD < player.MAX_SHOTMOD) player.SHOT_MOD += 1;
+		kill();
+		var chosenWeapon:IWeapon = Reg.CURRENT_SEED.getObject(Reg.PS.player.get_weapons().filter(function(weapon) return weapon.get_canSpread()));
+		if (chosenWeapon.get_spread() < chosenWeapon.get_maxSpread())
+		chosenWeapon.set_spread(chosenWeapon.get_spread() +1);
+		
 		super.interact(player);
 	}
-	*/
+	
 }
