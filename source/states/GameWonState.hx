@@ -50,7 +50,13 @@ class GameWonState extends FlxTransitionableState
 			System.exit(0);
 		
 		}
-			#end	
+		
+		#else
+		  for (touch in FlxG.touches.list)
+		{
+			if (touch.justPressed) { onClick(); };
+		}
+		#end	
 			
 	}
 	

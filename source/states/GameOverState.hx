@@ -56,7 +56,12 @@ class GameOverSubState extends FlxTransitionableState
 		#if desktop
 		if (FlxG.keys.anyJustPressed([ENTER]))
 		    onClick();
-			#end
+		#else
+		  for (touch in FlxG.touches.list)
+		{
+			if (touch.justPressed) { onClick(); };
+		}
+		#end
 	}
 	
 	public function onClick()

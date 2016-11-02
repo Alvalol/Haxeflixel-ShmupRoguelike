@@ -19,6 +19,9 @@ import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileCircle;
 import flixel.addons.transition.TransitionData;
 import flixel.graphics.FlxGraphic;
 import flixel.util.FlxColor;
+#if !desktop
+import flixel.input.touch.FlxTouch;
+#end
 
 
 class MenuState extends FlxUIState
@@ -34,7 +37,10 @@ class MenuState extends FlxUIState
 	override public function create():Void
 	{
 		super.create();
+		
+		#if desktop
 		FlxG.mouse.visible = true;
+		#end
 
 	    background = new FlxBackdrop(AssetPaths.background__png, 1, 1, true, true);
 		
@@ -107,8 +113,15 @@ class MenuState extends FlxUIState
 		if (FlxG.keys.anyJustPressed([ENTER]))
 			startGame();
 			
-		#end
+
 		
+		#else
+	    for (touch in FlxG.touches.list)
+		{
+			if (touch.justPressed) { startGame(); };
+		}
+		
+		#end		
 		super.update(elapsed);
 			
 	}

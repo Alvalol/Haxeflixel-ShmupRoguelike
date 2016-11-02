@@ -148,6 +148,7 @@ class PlayState extends FlxTransitionableState
 		FlxG.mouse.visible = true; // must always be set to false pls
 		#end
 		
+		
 		map = LevelLoaderProc.loadGeneratedLevel();
 		backDrop = new FlxBackdrop(AssetPaths.background__png, 0.01, 0.01, true, true);
 
@@ -175,12 +176,16 @@ class PlayState extends FlxTransitionableState
 		Gamepad.checkForGamepad();
 		Gamepad.updateGameInputs();
 		Gamepad.checkForExit();
-		#end
+		
 		
 		if (FlxG.mouse.justPressed)
         createObject("objects.items.AntidoteItem", FlxG.mouse.x, FlxG.mouse.y);
 		if (FlxG.mouse.justPressedMiddle)
 		createObject("objects.items.CurseItem", FlxG.mouse.x, FlxG.mouse.y);
+		
+		#else
+		mobileControls();
+		#end
 		
 		displayTracers();
 		addLevelObjects();
@@ -291,6 +296,20 @@ class PlayState extends FlxTransitionableState
 		
 	}
 	
+	private function mobileControls()
+	{
+		for (touch in FlxG.touches.list)
+		{
+			if (touch.justPressed && touch.x <= FlxG.camera.width / 2 && touch.y >= FlxG.camera.height / 2)
+				player.move_up();
+			else if (touch.justPressed && touch.x <= FlxG.camera.width / 2 && touch.y <= FlxG.camera.height / 2)
+			    player.move_down();
+			else if (touch.justPressed && touch.x >= FlxG.camera.width / 2)
+			{
+				player.shoot();
+			}
+		}
+	}
 	private function addGameplayElements()
 	{		
 		add(backDrop);
@@ -418,7 +437,9 @@ class PlayState extends FlxTransitionableState
 	
 	private function displayTracers()
 	{
-		#if !FLX_NO_DEBUG // && desktop
+		#if desktop
+		#if !FLX_NO_DEBUG
+
 		if (FlxG.keys.justPressed.T)
 		{
 		trace("enemies : " + enemies.length);
@@ -433,6 +454,7 @@ class PlayState extends FlxTransitionableState
 		trace("MASTER SEED : " + Reg.CURRENT_SEED.initialSeed);
 		}
 	    #end
+		#end
 	}
 	
 }
