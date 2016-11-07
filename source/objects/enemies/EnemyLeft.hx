@@ -51,7 +51,7 @@ class EnemyLeft extends Enemy
 	override public function kill():Void
 	{	
 	    drops = [new SpeedItem(x, y)];
-		dropRate = [1.0];
+		dropRate = [0.75];
 		dropItem(drops,dropRate);
 		super.kill();
 	}

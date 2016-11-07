@@ -43,7 +43,7 @@ class EnemyMultishotDeath extends Enemy
 	override public function kill()
 	{
 		drops = [new HealthItem(x, y), new HealthMaxItem(x,y)];
-		dropRate = [0.25,0.25];
+		dropRate = [0.5,0.1];
 		dropItem(drops, dropRate);
 		new FlxTimer().start(0.1, function(_) { deathShot(); }, 1);
 		super.kill();

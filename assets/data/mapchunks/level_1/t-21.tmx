@@ -25,42 +25,24 @@
  </layer>
  <objectgroup name="objects"/>
  <objectgroup name="hazards">
-  <object id="39" type="block" gid="4" x="40" y="56" width="8" height="8"/>
-  <object id="41" type="block" gid="4" x="40" y="40" width="8" height="8"/>
-  <object id="42" type="block" gid="4" x="48" y="40" width="8" height="8"/>
-  <object id="43" type="block" gid="4" x="48" y="48" width="8" height="8"/>
-  <object id="44" type="block" gid="4" x="40" y="48" width="8" height="8"/>
-  <object id="45" type="block" gid="4" x="32" y="48" width="8" height="8"/>
-  <object id="46" type="block" gid="4" x="32" y="56" width="8" height="8"/>
-  <object id="47" type="block" gid="4" x="32" y="40" width="8" height="8"/>
-  <object id="48" type="block" gid="4" x="48" y="56" width="8" height="8"/>
-  <object id="58" type="block" gid="4" x="16" y="120" width="8" height="8"/>
-  <object id="59" type="block" gid="4" x="24" y="120" width="8" height="8"/>
-  <object id="60" type="block" gid="4" x="24" y="112" width="8" height="8"/>
-  <object id="61" type="block" gid="4" x="24" y="128" width="8" height="8"/>
-  <object id="62" type="block" gid="4" x="8" y="112" width="8" height="8"/>
-  <object id="63" type="block" gid="4" x="8" y="128" width="8" height="8"/>
-  <object id="64" type="block" gid="4" x="8" y="120" width="8" height="8"/>
-  <object id="65" type="block" gid="4" x="16" y="112" width="8" height="8"/>
-  <object id="66" type="block" gid="4" x="16" y="128" width="8" height="8"/>
-  <object id="67" type="block" gid="4" x="56" y="80" width="8" height="8"/>
-  <object id="68" type="block" gid="4" x="64" y="80" width="8" height="8"/>
-  <object id="69" type="block" gid="4" x="64" y="72" width="8" height="8"/>
-  <object id="70" type="block" gid="4" x="64" y="88" width="8" height="8"/>
-  <object id="71" type="block" gid="4" x="48" y="72" width="8" height="8"/>
-  <object id="72" type="block" gid="4" x="48" y="88" width="8" height="8"/>
-  <object id="73" type="block" gid="4" x="48" y="80" width="8" height="8"/>
-  <object id="74" type="block" gid="4" x="56" y="72" width="8" height="8"/>
-  <object id="75" type="block" gid="4" x="56" y="88" width="8" height="8"/>
-  <object id="76" type="block" gid="4" x="8" y="80" width="8" height="8"/>
-  <object id="77" type="block" gid="4" x="16" y="80" width="8" height="8"/>
-  <object id="78" type="block" gid="4" x="16" y="72" width="8" height="8"/>
-  <object id="79" type="block" gid="4" x="16" y="88" width="8" height="8"/>
-  <object id="80" type="block" gid="4" x="0" y="72" width="8" height="8"/>
-  <object id="81" type="block" gid="4" x="0" y="88" width="8" height="8"/>
-  <object id="82" type="block" gid="4" x="0" y="80" width="8" height="8"/>
-  <object id="83" type="block" gid="4" x="8" y="72" width="8" height="8"/>
-  <object id="84" type="block" gid="4" x="8" y="88" width="8" height="8"/>
+  <object id="39" type="block" gid="4" x="48" y="64" width="8" height="8"/>
+  <object id="41" type="block" gid="4" x="48" y="48" width="8" height="8"/>
+  <object id="42" type="block" gid="4" x="56" y="48" width="8" height="8"/>
+  <object id="43" type="block" gid="4" x="56" y="56" width="8" height="8"/>
+  <object id="44" type="block" gid="4" x="48" y="56" width="8" height="8"/>
+  <object id="45" type="block" gid="4" x="40" y="56" width="8" height="8"/>
+  <object id="46" type="block" gid="4" x="40" y="64" width="8" height="8"/>
+  <object id="47" type="block" gid="4" x="40" y="48" width="8" height="8"/>
+  <object id="48" type="block" gid="4" x="56" y="64" width="8" height="8"/>
+  <object id="58" type="block" gid="4" x="16" y="112" width="8" height="8"/>
+  <object id="59" type="block" gid="4" x="24" y="112" width="8" height="8"/>
+  <object id="60" type="block" gid="4" x="24" y="104" width="8" height="8"/>
+  <object id="61" type="block" gid="4" x="24" y="120" width="8" height="8"/>
+  <object id="62" type="block" gid="4" x="8" y="104" width="8" height="8"/>
+  <object id="63" type="block" gid="4" x="8" y="120" width="8" height="8"/>
+  <object id="64" type="block" gid="4" x="8" y="112" width="8" height="8"/>
+  <object id="65" type="block" gid="4" x="16" y="104" width="8" height="8"/>
+  <object id="66" type="block" gid="4" x="16" y="120" width="8" height="8"/>
   <object id="85" type="block" gid="4" x="56" y="128" width="8" height="8"/>
   <object id="86" type="block" gid="4" x="48" y="136" width="8" height="8"/>
   <object id="87" type="block" gid="4" x="40" y="144" width="8" height="8"/>

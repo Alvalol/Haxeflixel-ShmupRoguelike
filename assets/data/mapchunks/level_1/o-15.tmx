@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="201">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="203">
  <properties>
   <property name="type" value="open"/>
  </properties>
@@ -35,5 +35,6 @@
  </objectgroup>
  <objectgroup name="enemies">
   <object id="200" type="enemySpawner" gid="4" x="48" y="64" width="8" height="8"/>
+  <object id="202" type="enemyLeft" gid="4" x="16" y="136" width="8" height="8"/>
  </objectgroup>
 </map>

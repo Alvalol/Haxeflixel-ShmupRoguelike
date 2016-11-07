@@ -6,6 +6,8 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.util.FlxTimer;
 import flixel.group.FlxSpriteGroup;
+import objects.items.HealthMaxItem;
+import objects.items.SpreadItem;
 
 class EnemySpawner extends Enemy
 {
@@ -74,6 +76,13 @@ class EnemySpawner extends Enemy
 		minions.add(minion);
 	}
 	
+	override public function kill() 
+	{
+	    drops = [new SpreadItem(x, y), new HealthMaxItem(x,y)];// , new HealthMaxItem(x, y), new HealthMaxItem(x, y)];
+		dropRate = [0.25,0.4];
+		dropItem(drops,dropRate);
+		super.kill();
+	}
 	
 	private function adjustPlacement()
 	{

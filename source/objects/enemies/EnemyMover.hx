@@ -5,7 +5,6 @@ import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.addons.effects.FlxTrail;
-import objects.items.ImmunityWallItem;
 import objects.items.Item;
 import objects.items.HealthItem;
 import objects.items.RangeItem;
@@ -44,6 +43,7 @@ class EnemyMover extends Enemy
 	override public function kill():Void
 	{	
 		drops = [new WeaponLaserItem(x, y), new SpeedItem(x, y)];
+	    dropRate = [0.1,0.5];
 		dropItem(drops, dropRate);
 		
 		super.kill();

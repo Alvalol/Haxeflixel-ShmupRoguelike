@@ -169,7 +169,6 @@ class PlayState extends FlxTransitionableState
 		super.update(elapsed);
 		
 		
-	//	trace(mapColorTween);
 		
 		#if desktop
 		controlPauseScreen();

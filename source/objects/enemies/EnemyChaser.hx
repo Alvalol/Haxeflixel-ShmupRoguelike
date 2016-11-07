@@ -34,7 +34,6 @@ class EnemyChaser extends Enemy
 	override public function update(elapsed:Float) 
 	{
 		move();
-		
 		super.update(elapsed);
 	}
 	
@@ -50,7 +49,7 @@ class EnemyChaser extends Enemy
 	override public function kill() 
 	{
 		drops = [new DamageUpItem(x,y)];
-		dropRate = [0.5];
+		dropRate = [0.75];
 		dropItem(drops, dropRate);
 
 		

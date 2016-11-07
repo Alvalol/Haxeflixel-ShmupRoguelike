@@ -30,7 +30,13 @@ class AntidoteItem extends Item
 			case "WallsHurt": Reg.wallsHurt = false;
 		    case "MirrorControls":  Reg.mirrorControls = false;
 		    case "ExplosiveItems": Reg.itemsExplode = false;
-			}
+			case "SlowDown" : {   
+                                Reg.PS.player.HOR_MOVE_SPEED = 50;
+							    Reg.PS.player.VERT_MOVE_SPEED = 68;
+				                Reg.PS.player.maxVelocity.set(Reg.PS.player.HOR_MOVE_SPEED, Reg.PS.player.VERT_MOVE_SPEED);
+		                      }
+							
+		}
 			
 		}
 		

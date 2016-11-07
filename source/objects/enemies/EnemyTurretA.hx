@@ -14,7 +14,6 @@ import objects.items.CoinItem;
 import objects.items.DamageUpItem;
 import objects.items.HealthItem;
 import objects.items.HealthMaxItem;
-import objects.items.ImmunityWallItem;
 import objects.items.RangeItem;
 import objects.items.SpeedDownItem;
 import objects.items.SpreadItem;

@@ -68,7 +68,7 @@ class EnemyTriangle extends Enemy
 	override public function kill():Void
 	{	
 		drops = [new MagnetItem(x, y), new WeaponBackItem(x,y)];
-		dropRate = [0.25,0.25];
+		dropRate = [0.6,0.4];
 		dropItem(drops, dropRate);
 		Reg.PS.effects.remove(bTrail);
 		super.kill();

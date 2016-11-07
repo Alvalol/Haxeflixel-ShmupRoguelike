@@ -6,7 +6,6 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import objects.items.AntidoteItem;
 import objects.items.HealthItem;
-import objects.items.ImmunityWallItem;
 import objects.items.Item;
 import flixel.util.FlxTimer;
 import flixel.math.FlxMath;
@@ -92,8 +91,8 @@ class EnemyMinion extends Enemy
 	
 	override public function kill() 
 	{
-        drops = [new HealthItem(x, y)];
-	    dropRate = [0.25];
+        drops = [new AntidoteItem(x, y)];
+	    dropRate = [0.5];
 		dropItem(drops,dropRate);
 		Spawner.minions.remove(this);
 		super.kill();

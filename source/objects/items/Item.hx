@@ -19,7 +19,7 @@ class Item extends FlxSprite
 {
 	
 	private var _appeared:Bool = false;
-	private var _lifespan:Int = 5;
+	private var _lifespan:Int = 4;
 	private var _name:String;
 	private var _hp:Int;
 	private var text:FlxText;
@@ -33,9 +33,7 @@ class Item extends FlxSprite
 	
 	private var disTimer:FlxTimer;
 	private var disTimerStarted:Bool = false;
-	
 	private var colorChanged:Bool;
-	
 	
 
 	public function new(x:Float, y:Float) 
@@ -221,7 +219,7 @@ class Item extends FlxSprite
 		disTimerStarted = true;
 		disTimer = new FlxTimer().start(_lifespan, function(_)
 		{
-			FlxSpriteUtil.flicker(this, 1, 0.1, true, false, onTimedOut);
+			FlxSpriteUtil.flicker(this, 2.5, 0.1, true, false, onTimedOut);
 		}, 1);
 	}	
 	
