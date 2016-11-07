@@ -26,8 +26,8 @@ class EnemyMultishotDeath extends Enemy
 		super(x, y);
 		HP = 1;
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8, true);
-		animation.add("idle", [18, 19], 12, true);
-		animation.play("idle");
+		animation.add("default", [18, 19,20], 8, true);
+		animation.play("default");
 	}
 	
 	override public function update(elapsed:Float) 
@@ -56,8 +56,8 @@ class EnemyMultishotDeath extends Enemy
 		var eb = Reg.PS.EBullets.recycle(EnemyBullet);
 		if (eb == null) eb = new EnemyBullet(x , y);
 		
-		eb.reset(x + 2, y);
-		eb.scale.set(1, 1);
+		eb.reset(x + 5, y);
+		eb.scale.set(0.5,0.5);
 
 		_angle += 45;
 		angle = _angle;

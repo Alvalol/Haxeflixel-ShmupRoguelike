@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="244">
+ <properties>
+  <property name="type" value="open"/>
+ </properties>
+ <tileset firstgid="1" name="tiles" tilewidth="8" tileheight="8" tilecount="24" columns="6">
+  <image source="../../../images/tiles.png" width="48" height="32"/>
+  <tile id="1">
+   <properties>
+    <property name="type" value="open"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="main" width="12" height="20">
+  <data encoding="base64">
+   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  </data>
+ </layer>
+ <objectgroup name="objects"/>
+ <objectgroup name="hazards">
+  <object id="204" type="block" gid="2" x="16" y="32" width="8" height="8"/>
+  <object id="205" type="block" gid="2" x="16" y="24" width="8" height="8"/>
+  <object id="206" type="block" gid="2" x="16" y="16" width="8" height="8"/>
+  <object id="207" type="block" gid="2" x="24" y="24" width="8" height="8"/>
+  <object id="208" type="block" gid="2" x="24" y="32" width="8" height="8"/>
+  <object id="209" type="block" gid="2" x="24" y="16" width="8" height="8"/>
+  <object id="210" type="block" gid="2" x="32" y="24" width="8" height="8"/>
+  <object id="211" type="block" gid="2" x="32" y="32" width="8" height="8"/>
+  <object id="212" type="block" gid="2" x="32" y="16" width="8" height="8"/>
+  <object id="213" type="block" gid="2" x="40" y="24" width="8" height="8"/>
+  <object id="214" type="block" gid="2" x="40" y="32" width="8" height="8"/>
+  <object id="215" type="block" gid="2" x="40" y="16" width="8" height="8"/>
+  <object id="216" type="block" gid="2" x="48" y="24" width="8" height="8"/>
+  <object id="217" type="block" gid="2" x="48" y="32" width="8" height="8"/>
+  <object id="218" type="block" gid="2" x="48" y="16" width="8" height="8"/>
+  <object id="219" type="block" gid="2" x="56" y="24" width="8" height="8"/>
+  <object id="220" type="block" gid="2" x="56" y="32" width="8" height="8"/>
+  <object id="221" type="block" gid="2" x="64" y="24" width="8" height="8"/>
+  <object id="222" type="block" gid="2" x="56" y="16" width="8" height="8"/>
+  <object id="223" type="block" gid="2" x="8" y="24" width="8" height="8"/>
+  <object id="224" type="block" gid="2" x="64" y="128" width="8" height="8"/>
+  <object id="225" type="block" gid="2" x="32" y="144" width="8" height="8"/>
+  <object id="226" type="block" gid="2" x="64" y="144" width="8" height="8"/>
+  <object id="227" type="block" gid="2" x="72" y="128" width="8" height="8"/>
+  <object id="228" type="block" gid="2" x="32" y="128" width="8" height="8"/>
+  <object id="229" type="block" gid="2" x="72" y="136" width="8" height="8"/>
+  <object id="230" type="block" gid="2" x="48" y="136" width="8" height="8"/>
+  <object id="231" type="block" gid="2" x="32" y="136" width="8" height="8"/>
+  <object id="232" type="block" gid="2" x="40" y="136" width="8" height="8"/>
+  <object id="233" type="block" gid="2" x="56" y="128" width="8" height="8"/>
+  <object id="234" type="block" gid="2" x="40" y="128" width="8" height="8"/>
+  <object id="235" type="block" gid="2" x="56" y="144" width="8" height="8"/>
+  <object id="236" type="block" gid="2" x="48" y="128" width="8" height="8"/>
+  <object id="237" type="block" gid="2" x="40" y="144" width="8" height="8"/>
+  <object id="238" type="block" gid="2" x="72" y="144" width="8" height="8"/>
+  <object id="239" type="block" gid="2" x="80" y="136" width="8" height="8"/>
+  <object id="240" type="block" gid="2" x="24" y="136" width="8" height="8"/>
+  <object id="241" type="block" gid="2" x="56" y="136" width="8" height="8"/>
+  <object id="242" type="block" gid="2" x="48" y="144" width="8" height="8"/>
+  <object id="243" type="block" gid="2" x="64" y="136" width="8" height="8"/>
+ </objectgroup>
+ <objectgroup name="enemies">
+  <object id="202" type="enemyLeft" gid="4" x="16" y="56" width="8" height="8"/>
+  <object id="203" type="enemyLeft" gid="4" x="16" y="104" width="8" height="8"/>
+ </objectgroup>
+</map>

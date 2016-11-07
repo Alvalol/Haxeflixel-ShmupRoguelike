@@ -135,7 +135,7 @@ class ObjectPlacement
 					
 					case "enemyBlob" : allLevelEnemies.push(new EnemyBlob(pos.x, pos.y, 16));
 					case "enemyChaser" :  allLevelEnemies.push(new EnemyChaser(pos.x, pos.y));
-					case "enemyLeft" :  allLevelEnemies.push(new EnemyLeft(pos.y, pos.y));
+					case "enemyLeft" :  allLevelEnemies.push(new EnemyLeft(pos.x, pos.y));
 					case "enemyMultishot" :  allLevelEnemies.push(new EnemyMultishotDeath(pos.x, pos.y));
 					case "enemySpawner" :  allLevelEnemies.push(new EnemySpawner(pos.x, pos.y, enemy.flippedVertically));
      				case "enemyTurret" :  allLevelEnemies.push(new EnemyTurretA(pos.x, pos.y, enemy.flippedVertically));		

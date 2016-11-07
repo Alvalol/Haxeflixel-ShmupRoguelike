@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="174">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="211">
  <properties>
   <property name="type" value="open"/>
  </properties>
@@ -17,9 +17,17 @@
   </data>
  </layer>
  <objectgroup name="objects"/>
- <objectgroup name="hazards"/>
+ <objectgroup name="hazards">
+  <object id="201" type="block" gid="2" x="40" y="144" width="8" height="8"/>
+  <object id="202" type="block" gid="2" x="32" y="144" width="8" height="8"/>
+  <object id="203" type="block" gid="2" x="8" y="144" width="8" height="8"/>
+  <object id="204" type="block" gid="2" x="32" y="152" width="8" height="8"/>
+  <object id="206" type="block" gid="2" x="16" y="152" width="8" height="8"/>
+  <object id="207" type="block" gid="2" x="24" y="152" width="8" height="8"/>
+  <object id="208" type="block" gid="2" x="16" y="144" width="8" height="8"/>
+  <object id="209" type="block" gid="2" x="24" y="144" width="8" height="8"/>
+ </objectgroup>
  <objectgroup name="enemies">
-  <object id="47" type="enemyMultishot" gid="4" x="48" y="56" width="8" height="8"/>
-  <object id="173" type="enemyMultishot" gid="4" x="48" y="112" width="8" height="8"/>
+  <object id="210" type="enemySpawner" gid="4" x="24" y="136" width="8" height="8"/>
  </objectgroup>
 </map>

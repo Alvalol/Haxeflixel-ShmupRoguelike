@@ -16,7 +16,7 @@ class BaseWeapon implements IWeapon
 	public var location:FlxPoint;
 	
 	private var _coolingDown:Bool;
-	private var _offset:Int = 8;	
+	private var _offset:Int = 9;	
 	private var bulletSpeed:Int;
 	private var spread:Int = 1;
 	private var canSpread = true;
@@ -48,11 +48,12 @@ class BaseWeapon implements IWeapon
 			if (Reg.PS.PBullets.countLiving() < max_bullets && !_coolingDown && Reg.PS.player.alive) 
 			{
 				var pb =  Reg.PS.PBullets.recycle(BaseBullet);
-				if (pb == null) pb = new BaseBullet(location.x, location.y, bulletSpeed,damage);
+				if (pb == null) pb = new BaseBullet(location.x + _offset, location.y, bulletSpeed,damage);
 
 					pb.reset(location.x + _offset, location.y + 2);
 					pb.set_BULLET_SPEED(bulletSpeed);
 					pb.set_damage(damage);
+					pb.offset.set(12, 4);
 					
 					Reg.PS.PBullets.add(pb);
 					_coolingDown = true;
@@ -67,11 +68,12 @@ class BaseWeapon implements IWeapon
 				for (i in 0...2)
 				{
 					var pb:BaseBullet = cast Reg.PS.PBullets.recycle(BaseBullet);
-					if (pb == null) pb = new BaseBullet(location.x, location.y, bulletSpeed, damage);
+					if (pb == null) pb = new BaseBullet(location.x + _offset, location.y, bulletSpeed, damage);
 					
 					pb.reset(location.x + _offset, location.y + 2);
 					pb.set_BULLET_SPEED(bulletSpeed);
 					pb.set_damage(damage);
+					pb.offset.set(12, 4);
 					
 					pb.velocity.set(FlxVelocity.velocityFromAngle(angle, bulletSpeed).x,FlxVelocity.velocityFromAngle(angle, bulletSpeed).y);
 		            pb.angle = angle;
@@ -99,11 +101,12 @@ class BaseWeapon implements IWeapon
 				for (i in 0...3)
 				{
 					var pb:BaseBullet = cast Reg.PS.PBullets.recycle(BaseBullet);
-					if (pb == null) pb = new BaseBullet(location.x, location.y, bulletSpeed, damage);
+					if (pb == null) pb = new BaseBullet(location.x + _offset, location.y, bulletSpeed, damage);
 					
 					pb.reset(location.x + _offset, location.y + 2);
 					pb.set_BULLET_SPEED(bulletSpeed);
 					pb.set_damage(damage);
+					pb.offset.set(12, 4);
 					
 					pb.velocity.set(FlxVelocity.velocityFromAngle(angle, bulletSpeed).x,FlxVelocity.velocityFromAngle(angle, bulletSpeed).y);
 		            pb.angle = angle;

@@ -20,7 +20,8 @@ class HazardProximityShooter extends Hazard
 		flipY = _flipped;
 		solid = true;
 		loadGraphic(AssetPaths.hazards__png, true, 8,8);
-		animation.add("idle", [0]);
+		animation.add("idle", [4,5],8);
+		animation.add("inactive", [6]);
 		animation.play("idle");
 	}
 	
@@ -34,7 +35,7 @@ class HazardProximityShooter extends Hazard
 	
 	private function forceTrigger()
 	{
-		if (FlxG.collide(Reg.PS.PBullets, this))
+		if (FlxG.collide(Reg.PS.PBullets, this) && isOnScreen() )
 		{
 
 			shoot();
@@ -50,17 +51,23 @@ class HazardProximityShooter extends Hazard
 			
 		}
 	}
+	// duck in space kill crabs and rats and medusas... im sure need to go sleep. ist almost strangest game am ever seen. - tw_ladon
 	
 	private function shoot()
 	{
 		if (!shot)
 		{
-		 var hb:HazardBullet = new HazardBullet(x, y);
+		 var hb:HazardBullet = new HazardBullet(x, y+4);
 	     shot = true;
-		 
-			if (!flipY)
-			Reg.PS.HBullets.add(hb);	
+		 animation.play("inactive");
+		 hb.scale.set(0.75, 0.75);
 			
+			if (!flipY)
+			{
+			hb.reset(x, y - 4);
+
+			Reg.PS.HBullets.add(hb);
+			}
 			else
 			{
 				hb.velocity.y *= -1;

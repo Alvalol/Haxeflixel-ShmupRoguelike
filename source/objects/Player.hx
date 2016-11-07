@@ -27,16 +27,16 @@ class Player extends FlxSprite
 	private static inline var ACCELERATION:Int = 800;
 	private static inline var DECELERATION:Int = 800;
 	
-	public var HOR_MOVE_SPEED:Int = 50;
-	public var VERT_MOVE_SPEED:Int = 68;
+	public var HOR_MOVE_SPEED:Float = 50;
+	public var VERT_MOVE_SPEED:Float = 68;
 	
 	public var MAX_HOR_MOVE_SPEED:Int = 80;
 	public var MAX_VERT_MOVE_SPEED:Int = 100;
 	
 	public var MAGNET:Bool = false;
 	
-	public var RANGE:Float = 1; // maybe
-	public var MAX_RANGE:Float = 2.0;
+	public var RANGE:Float = 5; // maybe
+	public var MAX_RANGE:Float = 5.0;
 	
 	private static inline var MAX_BULLETS:Int = 10;
 	private static inline var BULLET_OFFSET:Int = 8;
@@ -54,6 +54,7 @@ class Player extends FlxSprite
 	var addedBull:Bool = false;
 	
 	var shooting:Bool = false;
+	var hpflicker:Bool = false;
 	
 	var comboMultiplier:Float = 1;	
 	var comboTimer:FlxTimer;
@@ -100,6 +101,7 @@ class Player extends FlxSprite
 		if (!shooting)
 		move_right();
 		
+		
 		if (Reg.mirrorControls)
 		{
 			if (!colorChanged)
@@ -108,25 +110,25 @@ class Player extends FlxSprite
 			color = 0xFF00FF00;
 			}
 		}
-		else
-		{
+			else
+			{
 			color = 0xFFFFFFFF;
-		}
+			}
 		
 
 		timeLeft = comboTimer.timeLeft;
 		
 		
-		if (!invinsible)
-		   collisions();
-		else 
-		   cheat();
+
+		collisions();
+
 		   
 		  if (!addedBull)
 		  {
 		   Reg.PS.effects.add(bullEffect);
 		   addedBull = true;
 		  }
+		  
 		  
 		bullEffect.setPosition(x+6, y-2);
 		  
@@ -146,6 +148,7 @@ class Player extends FlxSprite
 		//displayTrace();
 		
 	}
+	
 	
 	private function displayTrace()
 	{
@@ -171,7 +174,8 @@ class Player extends FlxSprite
 	}
 	
 	private function collisions()
-	{	   						
+	{	 
+		FlxObject.separate(this, Reg.PS.map);
 		if (alive)
 		{
 		   if (FlxG.collide(Reg.PS.map, this))
@@ -179,12 +183,8 @@ class Player extends FlxSprite
 			if (Reg.wallsHurt)
 			{
 				damage();
-				FlxObject.separate(this, Reg.PS.map);
 		   }
-		   else
-			   FlxObject.separate(this, Reg.PS.map);
 		   }
-			
 		   if (x <= FlxG.camera.scroll.x)
 			   damage();
 		}
@@ -192,9 +192,7 @@ class Player extends FlxSprite
 	
 	public function get_comboTimer():Float
 	{
-		
 	 return comboTimer.timeLeft;
-	 
 	}
 	private function basicChecks(elapsed:Float)
 	{
@@ -209,9 +207,7 @@ class Player extends FlxSprite
 	private function move()
 	{
 		move_up();
-		//move_right();
 		move_down();
-		//move_left();
 	}
 	
 	public function resetAccel()
@@ -253,7 +249,7 @@ class Player extends FlxSprite
 		
 		new FlxTimer().start(0.05, function(_) { bullEffect.set_visible(false); }, 1);
 		
-		new FlxTimer().start(0.025, function(_) { FlxG.camera.shake(0.001, 0.05); }, 1);
+	//	new FlxTimer().start(0.025, function(_) { FlxG.camera.shake(0.001, 0.05); }, 1);
 
 		for (weapon in weapons)
 		{
@@ -271,7 +267,7 @@ class Player extends FlxSprite
 		comboTimer.start(0);
 		FlxG.camera.shake(0.003, 0.5);
 		FlxSpriteUtil.flicker(this, 2, 0.05, true);
-	    }
+		}
 	}
 	
 	private function deathAnimation()

@@ -31,6 +31,8 @@
 	<classpath name="source" />
 	<assets path="assets" />
 
+
+
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="flixel" />
@@ -80,6 +82,7 @@
 	<!-- _________________________________ Custom _______________________________ -->
 
 	<!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
-	<icon path="assets/images/icon.ico" />	
-	
+	<icon path="assets/images/icon.ico" />
+	<template path="AndroidManifest.xml" rename="AndroidManifest.xml" if="android" />
+
 </project>

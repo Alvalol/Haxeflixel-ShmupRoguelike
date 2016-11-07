@@ -2,7 +2,9 @@ package objects.hazards;
 import flixel.FlxG;
 import flixel.addons.effects.FlxTrail;
 import flixel.addons.effects.FlxTrailArea;
+import flixel.math.FlxPoint;
 import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.FlxObject;
@@ -19,14 +21,24 @@ class HazardLaser extends Hazard
 	
 	private var animationTween:FlxTween;
 	
+	private var tempcanvas:FlxSprite;
+	
 
 	public function new(x:Float, y:Float) 
 	{
-		super(x+2, y - 8);
-		
-		makeGraphic(2, FlxG.height, FlxColor.YELLOW);
-		// add a "generator" that makes clear where the laser is located.
+		super(x, y - 8);
+		loadGraphic(AssetPaths.hazards__png, true, 8, 8);
+		animation.add("active", [2], 0);
+		animation.add("inactive", [3], 0);
+		scale.y = 20;
+		scale.x = 1;
+	    origin.set(width / 2, 0);
+		immovable = true;
 
+
+		// add a "generator" that makes clear where the laser is located.
+	    animationTween = FlxTween.tween(scale, {x :0.5}, 0.05, {type : FlxTween.PINGPONG });
+	
 	}
 	
 	override public function update(elapsed:Float):Void 
@@ -35,7 +47,21 @@ class HazardLaser extends Hazard
 		solid = tactive;
 		
 		checkForScroll();
-
+        if (tactive)
+		{
+		//	scale.x = 1;
+			animationTween.active = true;
+			animation.play("active");
+			height = scale.y * 8;
+			
+		}
+		else
+		{
+		    animationTween.active = false;
+			scale.x = 0.25;
+			animation.play("inactive");
+		}
+	
 		
 		super.update(elapsed);
      }
@@ -69,12 +95,10 @@ class HazardLaser extends Hazard
 		if (tactive)
 		{
 			alpha = 1;
-			color = FlxColor.RED;
 		}
 		else
 		{
 		    alpha = 0.1;
-			color = FlxColor.YELLOW;
 		}
 		
 	}

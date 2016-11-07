@@ -65,6 +65,10 @@ class CurseItem extends Item
 		case "WallsHurt": Reg.wallsHurt = true;
 		case "MirrorControls": Reg.mirrorControls = true;
 		case "ExplosiveItems": Reg.itemsExplode = true;
+		case "SlowDown" : { Reg.PS.player.HOR_MOVE_SPEED -= Reg.PS.player.HOR_MOVE_SPEED / 3;
+							Reg.PS.player.VERT_MOVE_SPEED -= Reg.PS.player.VERT_MOVE_SPEED / 3;
+			                Reg.PS.player.maxVelocity.set(Reg.PS.player.HOR_MOVE_SPEED, Reg.PS.player.VERT_MOVE_SPEED);
+						  }
 		}
 	}
 	

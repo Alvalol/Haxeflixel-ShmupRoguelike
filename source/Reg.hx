@@ -22,7 +22,7 @@ class Reg
 	public static var score:Float = 0;
 	public static var availableItems:Array<Int> = [2, 3, 4, 5]; // hacky af and not implemented
     public static var SCROLLER_ON = true;
-	public static var curseList:Array<String> = ["WallsHurt", "MirrorControls", "ExplosiveItems"];
+	public static var curseList:Array<String> = ["WallsHurt", "MirrorControls", "ExplosiveItems", "SlowDown"];
 	public static var itemDropMod:Float = 0;
 	
 	// curses switches

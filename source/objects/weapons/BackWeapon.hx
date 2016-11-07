@@ -58,7 +58,9 @@ class BackWeapon implements IWeapon
 						var pb =  Reg.PS.PBullets.recycle(BaseBullet);
 						if (pb == null) pb = new BaseBullet(location.x - _offset, location.y - 2 , bulletSpeed,damage);
 
-							pb.reset(location.x - _offset, location.y + 2);
+						  pb.centerOffsets();
+							pb.offset.set(2,0);
+							pb.reset(location.x - _offset, location.y);
 							pb.set_BULLET_SPEED(bulletSpeed);
 							pb.set_damage(damage);
 							pb.angle = ang;
@@ -81,7 +83,7 @@ class BackWeapon implements IWeapon
 				{
 					var pb:BaseBullet = cast Reg.PS.PBullets.recycle(BaseBullet);
 					if (pb == null) pb = new BaseBullet(location.x, location.y, bulletSpeed, damage);
-					
+								  pb.centerOffsets();
 					pb.reset(location.x + _offset, location.y + 2);
 					pb.set_BULLET_SPEED(bulletSpeed);
 					pb.set_damage(damage);
@@ -116,7 +118,7 @@ class BackWeapon implements IWeapon
 				{
 					var pb:BaseBullet = cast Reg.PS.PBullets.recycle(BaseBullet);
 					if (pb == null) pb = new BaseBullet(location.x, location.y, bulletSpeed, damage);
-					
+							  pb.centerOffsets();	
 					pb.reset(location.x + _offset, location.y + 2);
 					pb.set_BULLET_SPEED(bulletSpeed);
 					pb.set_damage(damage);

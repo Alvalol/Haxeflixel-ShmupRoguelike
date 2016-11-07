@@ -84,7 +84,6 @@ class Enemy extends FlxSprite
 		if (_appeared && x < FlxG.camera.scroll.x - 16 && !lefty)
 			{
 				kill();
-				trace("enemy killed outside of the screen");
 			}
 		
 		

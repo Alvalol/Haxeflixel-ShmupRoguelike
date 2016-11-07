@@ -26,13 +26,13 @@ class EnemyTriangle extends Enemy
 		HP = 1;
 		
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
-		animation.add("idle", [8]);
-        animation.play("idle");
+		animation.add("default", [8,9,10,11],8);
+        animation.play("default");
 		triggerAngleChange();
 		
 		createTrail();
 		
-		color = 0x00FF80; //placeholder while there is no asset for this enemy
+		//color = 0x00FF80; //placeholder while there is no asset for this enemy
 	}
 	
 	override public function update(elapsed:Float) 

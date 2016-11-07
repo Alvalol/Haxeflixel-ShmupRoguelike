@@ -29,7 +29,7 @@ class BaseBullet extends Bullet
 		width = 1;
 		height = 1;
 		scale.set(0.5, 0.5);
-		offset.set(12, 4);
+
 		
 		MOVE_SPEED = _moveSpeed;
 		damage = _damage;
@@ -64,10 +64,8 @@ class BaseBullet extends Bullet
 	{
 	   kill();
 	}
-	
 		super.collisions();
 	
-
 	}
 
 	private function move()
@@ -76,7 +74,6 @@ class BaseBullet extends Bullet
 	}
 	
 
-	
 	override public function revive()
 	{		
 		new FlxTimer().start(Reg.PS.player.RANGE, function(_) 
@@ -88,10 +85,15 @@ class BaseBullet extends Bullet
 	private function createNoHit()
 	{
 		var e = Reg.PS.effects.recycle(NoHit);
-		if (e == null) e = new NoHit(x-6, y - 4);
-		
+		if (e == null) e = new NoHit(x - 6, y - 4);
 		e.set_angle(angle);
-		e.reset(x-6, y - 4);
+		
+		// horrible hack for back weapon and base weapon. Fix this please.
+		if (scale.x == 0.5)
+		e.reset(x - 6, y - 4);
+		else
+		e.reset(x, y-1);
+			
 		Reg.PS.effects.add(e);
 	}
 	

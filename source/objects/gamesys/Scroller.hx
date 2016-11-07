@@ -28,22 +28,17 @@ class Scroller extends FlxSprite
 	   /*TODO : Implement speed variation based on a combo feature. If the player has a high combo, the game slows down. If the player has a low combo,
 		* the game goes faster (as he most likely isn't close to enemies, so we bring him towards them to keep the game's rhytm high
 		*/
-      if (!Reg.PS.player.invinsible)
-	  {
-	  if (Reg.PS.player.get_comboMultiplier() == 1 && Reg.PS.enemies.countLiving() == 0)
-	  {
-		 new FlxTimer().start(2, function(_) {  maxVelocity.set(MOVE_SPEED + SPEED_MOD, MOVE_SPEED + SPEED_MOD); }, 1);
-	  }
-	  else
+//	  if (Reg.PS.player.get_comboMultiplier() == 1 && Reg.PS.enemies.countLiving() == 0)
+
 	  maxVelocity.set(MOVE_SPEED, MOVE_SPEED);
-	  }
+	  /*(
 	  else
 
 		  maxVelocity.set(MOVE_SPEED * 10, MOVE_SPEED * 10);
 		  
 	  
 	
-	  
+	  */
 	  if (!Reg.pause)
 		   super.update(elapsed);
 	 }

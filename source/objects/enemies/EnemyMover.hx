@@ -27,8 +27,8 @@ class EnemyMover extends Enemy
 	    super(x, y);
 		HP = 1;
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
-		animation.add("idle", [8]);
-        animation.play("idle");
+		animation.add("default", [8,9,10,11],8);
+        animation.play("default");
 	}
 	
     override public function update(elapsed:Float)
@@ -43,8 +43,7 @@ class EnemyMover extends Enemy
 	
 	override public function kill():Void
 	{	
-		drops = [new WeaponLaserItem(x, y), new SpeedItem(x,y), new SpeedDownItem(x,y)];
-		dropRate = [0.1, 0.25,0.5];
+		drops = [new WeaponLaserItem(x, y), new SpeedItem(x, y)];
 		dropItem(drops, dropRate);
 		
 		super.kill();

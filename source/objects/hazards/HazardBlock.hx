@@ -28,11 +28,13 @@ class HazardBlock extends Hazard
 		immovable = true;
 		solid = true;
 	}
-
 	
-	override private function interact(player:Player)
+	override private function collisions()
 	{
-			  FlxObject.separate(this, player);
+		if (FlxG.overlap(Reg.PS.player, this))
+		{
+		  FlxObject.separate(this, Reg.PS.player);
+		}	
 	}
 	
 	private function particleTimer()
@@ -76,7 +78,6 @@ class HazardBlock extends Hazard
 		
 		dropItem();
 		
-		
 		if (isOnScreen(FlxG.camera))
 		{
 		var e = new Explosion(x - 4, y - 4);
@@ -88,12 +89,12 @@ class HazardBlock extends Hazard
 	private function dropItem()
 	{
 		var itemRoll = Reg.CURRENT_SEED.float(0,100);
-		if (itemRoll < 1 && itemRoll >= 0.1)
+		if (itemRoll <= 1 && itemRoll > 0.1)
 		{
 			var tObject:Item =	Reg.CURRENT_SEED.getObject([new HealthItem(x,y), new MagnetItem(x,y)]);			
 			Reg.PS.items.add(tObject);
 		}
-		if (itemRoll <= 0.1)
+		else if (itemRoll <= 0.1)
 		{
 			var tObject:CurseItem = new CurseItem(x, y);
 			Reg.PS.items.add(tObject);

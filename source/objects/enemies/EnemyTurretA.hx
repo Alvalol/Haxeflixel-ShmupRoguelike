@@ -51,14 +51,11 @@ class EnemyTurretA extends Enemy
 		flipY = _flipped;
 		
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
-		animation.add("idle", [0,1], 6, true);
-		animation.add("shoot", [0, 1, 2, 3, 4, 5, 6, 7, 7, 7, 8, 8], 8,false);
-		animation.play("idle");
-		
+		chooseType();		
 		immovable = true;
 		solid = true;
 
-		chooseType();
+
 	}
 
 	override public function update(elapsed:Float)
@@ -135,7 +132,7 @@ class EnemyTurretA extends Enemy
 	override public function kill():Void
 	{
 	    drops = [new HealthItem(x, y), new SpreadItem(x,y)];// , new HealthMaxItem(x, y), new HealthMaxItem(x, y)];
-		dropRate = [0.25,0.75];
+		dropRate = [0.25,0.025];
 		dropItem(drops,dropRate);
 		super.kill();
 	}
@@ -150,8 +147,18 @@ class EnemyTurretA extends Enemy
 	{
 		if (typeRoll <= 10)
 		{
-			color = 0xFFFFFF00;
 			type = 1;
+		    animation.add("idle", [24,25,26], 6, true);
+		    animation.add("shoot", [24, 25, 26, 27, 28, 29, 30, 31, 31, 31, 32, 32], 8,false);
+		    animation.play("idle");	
+		}
+			
+		else
+		{
+        animation.add("idle", [0,1], 6, true);
+		animation.add("shoot", [0, 1, 2, 3, 4, 5, 6, 7, 7, 7, 8, 8], 8,false);
+		animation.play("idle");
+		
 		}
 	}
 }

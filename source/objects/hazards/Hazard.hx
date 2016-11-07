@@ -31,16 +31,12 @@ class Hazard extends FlxSprite
 
 	private function collisions()
 	{
-		if (FlxG.overlap(Reg.PS.player, this) && !FlxSpriteUtil.isFlickering(Reg.PS.player))
+		if (FlxG.overlap(Reg.PS.player, this))
 		{
-			interact(Reg.PS.player);
+		  Reg.PS.player.damage();
+		  FlxObject.separate(this, Reg.PS.player);
 		}
 		
-		/*for (bullet in Reg.PS.PBullets)
-	    {
-		if (FlxG.overlap(bullet, this) && isOnScreen(FlxG.camera))
-		    bullet.kill();
-		}*/
 	}        
 	
 	private function basicChecks()

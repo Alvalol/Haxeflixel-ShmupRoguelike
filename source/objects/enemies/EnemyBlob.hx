@@ -20,7 +20,7 @@ class EnemyBlob extends Enemy
 	var delayDirection:Float = 0.2;
 	var MOVE_SPEED:Float = 50;
 	var tsize:Float = 32; 
-	var mtsize:Float = 8;	
+	var mtsize:Float = 4;	
 	
 	
 	public function new(x:Float,y:Float, _tsize:Float) 
@@ -50,8 +50,9 @@ class EnemyBlob extends Enemy
 	
 	private function mitosis()
 	{
-		var m1 = new EnemyBlob(x + Reg.CURRENT_SEED.int(-5,5), y + Reg.CURRENT_SEED.int(-5,5) , tsize - 4);
-		var m2 = new EnemyBlob(x - Reg.CURRENT_SEED.int(-5,5), y + Reg.CURRENT_SEED.int(-5,5) , tsize - 4);
+		var offset = 10;
+		var m1 = new EnemyBlob(x + Reg.CURRENT_SEED.int(-offset,offset), y + Reg.CURRENT_SEED.int(-offset,offset) , tsize - 2);
+		var m2 = new EnemyBlob(x - Reg.CURRENT_SEED.int(-offset,offset), y + Reg.CURRENT_SEED.int(-offset,offset) , tsize - 2);
 		Reg.PS.enemies.add(m1);
 		Reg.PS.enemies.add(m2);
 	}
@@ -98,6 +99,6 @@ class EnemyBlob extends Enemy
 	
 	private function move()
 	{
-		velocity.set(Reg.CURRENT_SEED.float(-MOVE_SPEED/4, MOVE_SPEED/4), Reg.CURRENT_SEED.float( -MOVE_SPEED/4, MOVE_SPEED/4));
+		velocity.set(Reg.CURRENT_SEED.float(-MOVE_SPEED/2, MOVE_SPEED/2), Reg.CURRENT_SEED.float( -MOVE_SPEED/2, MOVE_SPEED/2));
 	}
 }

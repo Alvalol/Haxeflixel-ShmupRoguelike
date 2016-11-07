@@ -148,7 +148,7 @@ class PlayState extends FlxTransitionableState
 		FlxG.mouse.visible = true; // must always be set to false pls
 		#end
 		
-		
+
 		map = LevelLoaderProc.loadGeneratedLevel();
 		backDrop = new FlxBackdrop(AssetPaths.background__png, 0.01, 0.01, true, true);
 
@@ -298,6 +298,7 @@ class PlayState extends FlxTransitionableState
 	
 	private function mobileControls()
 	{
+		#if !desktop
 		for (touch in FlxG.touches.list)
 		{
 			if (touch.justPressed && touch.x <= FlxG.camera.width / 2 && touch.y >= FlxG.camera.height / 2)
@@ -309,6 +310,7 @@ class PlayState extends FlxTransitionableState
 				player.shoot();
 			}
 		}
+		#end
 	}
 	private function addGameplayElements()
 	{		
@@ -356,12 +358,12 @@ class PlayState extends FlxTransitionableState
 			trailArea.add(hbullet);
 	    }
 
-		
+	/*	
 		for (hazard in hazards)
 		{
 			if (Type.getClassName(Type.getClass(hazard)).indexOf("HazardLaser") > -1)
 			trailArea.add(hazard);
-		}
+		}*/
 		
 		trailArea.add(barrierLeft);
 		trailArea.add(barrierRight);

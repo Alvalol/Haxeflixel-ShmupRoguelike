@@ -59,9 +59,7 @@ class GameWonState extends FlxTransitionableState
 		#end	
 			
 	}
-	
 
-	
 	public function onClick()
 	{
 		FlxG.switchState(new MenuState());

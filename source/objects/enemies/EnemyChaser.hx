@@ -21,10 +21,12 @@ class EnemyChaser extends Enemy
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
-		HP = 1;
+		HP = 4;
+		scale.set(2, 2);
+		updateHitbox();
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
-		animation.add("idle", [12,13],10);
-		animation.play("idle");
+		animation.add("default", [12,13],6);
+		animation.play("default");
 
 
 	}

@@ -58,17 +58,19 @@ class MapChunk
 		 Pulls all the files in the level_CURRENT_LEVEL folder and returns them as an Array<TiledMap>
 		 */
 		var allTMXfiles:Array<TiledMap> = new Array<TiledMap>();
-        #if desktop
-        var dir:String = "assets/data/mapchunks/level_" + Reg.currentLevel + "/";
-        #else
-        var dir:String = "/assets/assets/data/mapchunks/level_" + Reg.currentLevel + "/";
-        #end
+
+		#if desktop
+		var dir:String = "assets/data/mapchunks/level_" +  Reg.currentLevel + "/";
+		#else
+		var dir:String = "/assets/assets/data/mapchunk/level_" +  Reg.currentLevel + "/";
+		#end
+
 		
 		var dirContent:Array<String> = new Array<String>();
 		if (FileSystem.exists(dir)) 
 			dirContent = FileSystem.readDirectory(dir);
 		else
-			trace("File directory doesn't exist");
+			trace(dir + " File directory doesn't exist");
 		
 		if (!Reg.SANDBOX)
 		{

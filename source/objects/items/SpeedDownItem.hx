@@ -5,7 +5,7 @@ import flixel.FlxSprite;
 import flixel.FlxG;
 
 class SpeedDownItem extends Item
-{
+{/*
 
 	public function new(x:Float, y:Float) 
 	{
@@ -29,5 +29,5 @@ class SpeedDownItem extends Item
 		super.interact(player);
 		
 	}
-	
+	*/
 }
