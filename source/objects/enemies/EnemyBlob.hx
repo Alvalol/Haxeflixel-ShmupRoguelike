@@ -8,6 +8,7 @@ import flixel.util.FlxTimer;
 import flixel.util.FlxSpriteUtil;
 import flixel.math.FlxPoint;
 import flixel.math.FlxVelocity;
+import objects.items.CoinItem;
 import objects.items.CurseItem;
 import objects.items.HealthItem;
 
@@ -17,7 +18,7 @@ class EnemyBlob extends Enemy
 	 */
 	var roll:Int;
 	var rolled:Bool;
-	var delayDirection:Float = 0.2;
+	var delayDirection:Float = 2;
 	var MOVE_SPEED:Float = 50;
 	var tsize:Float = 32; 
 	var mtsize:Float = 4;	
@@ -29,7 +30,7 @@ class EnemyBlob extends Enemy
 		HP = 1;
 		solid = true;
 		tsize = _tsize;
-		roll = Reg.CURRENT_SEED.int(0, 100);
+		//roll = Reg.CURRENT_SEED.int(0, 100);
 		loadGraphic(AssetPaths.bigEnemies__png, true, 16, 16);
 		animation.add("idle", [0,1],10);
 		animation.play("idle");
@@ -38,11 +39,12 @@ class EnemyBlob extends Enemy
 	
 	override public function update(elapsed:Float) 
 	{
-		if (!rolled)
+	/*	if (!rolled)
 		{
 		rolled = true;
 		reroll();
-		}
+		}*/
+		
 		move();
 		super.update(elapsed);
 	}
@@ -50,9 +52,9 @@ class EnemyBlob extends Enemy
 	
 	private function mitosis()
 	{
-		var offset = 10;
-		var m1 = new EnemyBlob(x + Reg.CURRENT_SEED.int(-offset,offset), y + Reg.CURRENT_SEED.int(-offset,offset) , tsize - 2);
-		var m2 = new EnemyBlob(x - Reg.CURRENT_SEED.int(-offset,offset), y + Reg.CURRENT_SEED.int(-offset,offset) , tsize - 2);
+		var offset = 5;
+		var m1 = new EnemyBlob(x + Reg.CURRENT_SEED.int(-offset,offset), y + Reg.CURRENT_SEED.int(-offset,offset) , tsize - 4);
+     	var m2 = new EnemyBlob(x - Reg.CURRENT_SEED.int(-offset,offset), y + Reg.CURRENT_SEED.int(-offset,offset) , tsize - 4);
 		Reg.PS.enemies.add(m1);
 		Reg.PS.enemies.add(m2);
 	}
@@ -62,6 +64,11 @@ class EnemyBlob extends Enemy
 		if (tsize >= mtsize)
 		{
 		mitosis();
+		}
+		else
+		{
+		dropRate = [1];
+		dropItem([new CoinItem(x, y)],dropRate);
 		}
 		super.kill();
 	}
@@ -74,27 +81,6 @@ class EnemyBlob extends Enemy
 		 rolled = false;
 	     roll  = Reg.CURRENT_SEED.int(0, 100);	
 		}, 1);
-	}
-	
-	private function boundaries()
-	{
-		if (FlxG.collide(Reg.PS.map, this))
-		{
-		velocity.set(this.velocity.x * -1, this.velocity.y * -1);	
-		}
-		
-		if (x >=  FlxG.camera.scroll.x || x <= FlxG.camera.scroll.x + FlxG.camera.width
-		   || y >= FlxG.camera.scroll.y || x <= FlxG.camera.scroll.y + FlxG.camera.height)
-		   {
-				velocity.set(this.velocity.x * -1, this.velocity.y * -1);		   
-		   }
-		  
-        FlxSpriteUtil.bound(this, 
-		                    FlxG.camera.scroll.x, 
-							FlxG.camera.scroll.x + FlxG.camera.width,
-							FlxG.camera.scroll.y,
-							FlxG.camera.scroll.y + FlxG.camera.height);	
-							
 	}
 	
 	private function move()

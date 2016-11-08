@@ -22,13 +22,13 @@ class EnemyChaser extends Enemy
 	{
 		super(x, y);
 		HP = 4;
-		scale.set(2, 2);
-		updateHitbox();
+
+
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		animation.add("default", [12,13],6);
 		animation.play("default");
-
-
+		scale.set(2, 2);
+		updateHitbox();
 	}
 	
 	override public function update(elapsed:Float) 

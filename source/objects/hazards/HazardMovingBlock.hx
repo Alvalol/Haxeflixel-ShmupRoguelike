@@ -58,12 +58,13 @@ class HazardMovingBlock extends Hazard
 			direction *=-1;	
 			}
 		}
-		
+		/*
 		if ((FlxG.overlap(this, Reg.PS.PBullets) || FlxG.overlap(this,Reg.PS.player) && !gotshot))
 		{
 			gotshot = true;
 			new FlxTimer().start(1, function(_) { gotshot = false; });
 		}
+		*/
 		
 //		super.collisions();
 		if (FlxG.overlap(Reg.PS.player, this))

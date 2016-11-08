@@ -178,7 +178,11 @@ class PlayState extends FlxTransitionableState
 		
 		
 		if (FlxG.mouse.justPressed)
-        createObject("objects.items.AntidoteItem", FlxG.mouse.x, FlxG.mouse.y);
+		{
+       // createObject("objects.enemies.EnemyMeteorShower", FlxG.mouse.x, FlxG.mouse.y);
+		trace("CREATED");
+		}
+
 		if (FlxG.mouse.justPressedMiddle)
 		createObject("objects.items.CurseItem", FlxG.mouse.x, FlxG.mouse.y);
 		

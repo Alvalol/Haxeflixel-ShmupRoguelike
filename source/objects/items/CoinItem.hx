@@ -29,6 +29,7 @@ class CoinItem extends Item
 		animation.add("idle", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15], 10);
 		animation.play("idle");
 		scale.set(scalea, scaleb);
+		//updateHitbox();
 		set_name("");	
 		emitter = new FlxEmitter(x,y);
 	}

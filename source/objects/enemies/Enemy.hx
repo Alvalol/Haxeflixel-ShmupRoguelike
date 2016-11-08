@@ -145,7 +145,7 @@ class Enemy extends FlxSprite
 	private function dropItem(list:Array<Item>,rate:Array<Float>)
 	{
 		// Drop system must be reworked from the ground up and be implemented in a nicer way. This is a placeholder.
-		
+		 
 		var itemRoll = Reg.CURRENT_SEED.int(0,100);
 		if (itemRoll < 5 + Reg.itemDropMod)
 		{
@@ -191,11 +191,14 @@ class Enemy extends FlxSprite
 	override public function kill()
 	{
 		//?
+		if (isOnScreen())
+		{
 		FlxG.camera.shake(0.003, 0.05);
+		}
 		Reg.PS.enemies.remove(this, true);
 		
 		
-		if (isOnScreen(FlxG.camera)){
+		if (isOnScreen()){
 		var e = Reg.PS.effects.recycle(Explosion) ;
 		if (e == null) e = new Explosion(x - 4, y - 4);
 		e.reset(x - 4, y - 4);

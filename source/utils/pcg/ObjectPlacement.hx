@@ -17,6 +17,8 @@ import objects.enemies.EnemyBlob;
 import objects.enemies.EnemyChaser;
 import objects.enemies.EnemyExplosive;
 import objects.enemies.EnemyLeft;
+import objects.enemies.EnemyMeteor;
+import objects.enemies.EnemyMeteorShower;
 import objects.enemies.EnemyMover;
 import objects.enemies.EnemyMoverGroup;
 import objects.enemies.EnemyMultishotDeath;
@@ -138,9 +140,9 @@ class ObjectPlacement
 					case "enemyLeft" :  allLevelEnemies.push(new EnemyLeft(pos.x, pos.y));
 					case "enemyMultishot" :  allLevelEnemies.push(new EnemyMultishotDeath(pos.x, pos.y));
 					case "enemySpawner" :  allLevelEnemies.push(new EnemySpawner(pos.x, pos.y, enemy.flippedVertically));
-     				case "enemyTurret" :  allLevelEnemies.push(new EnemyTurretA(pos.x, pos.y, enemy.flippedVertically));		
+     				case "enemyTurret" :  allLevelEnemies.push(new EnemyTurretA(pos.x, pos.y,enemy.flippedVertically));		
 					case "enemyWorm" :  allLevelEnemies.push(new EnemyWorm(pos.x, pos.y, enemy.flippedVertically));
-			//		case "enemySatellite" : allLevelEnemies.push(new EnemySatellite(pos.x, pos.y));
+		     		case "enemyMeteorShower" : allLevelEnemies.push(new EnemyMeteorShower(pos.x));
 			   }
 			
 			   

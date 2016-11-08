@@ -26,7 +26,7 @@ class EnemySpawner extends Enemy
 		loadGraphic(AssetPaths.bigEnemies__png, true, 16, 16);
 		animation.add("idle", [2,3],10);
 		animation.play("idle");
-		HP = 15;
+		HP = 8;
 		
 	    tx = Std.int(x / 8); 
         ty = Std.int(y / 8);

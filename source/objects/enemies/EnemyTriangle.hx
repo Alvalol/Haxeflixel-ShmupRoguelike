@@ -23,7 +23,7 @@ class EnemyTriangle extends Enemy
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
-		HP = 1;
+		HP = 2;
 		
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		animation.add("default", [8,9,10,11],8);

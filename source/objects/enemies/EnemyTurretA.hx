@@ -147,6 +147,7 @@ class EnemyTurretA extends Enemy
 		if (typeRoll <= 10)
 		{
 			type = 1;
+			HP = 5;
 		    animation.add("idle", [24,25,26], 6, true);
 		    animation.add("shoot", [24, 25, 26, 27, 28, 29, 30, 31, 31, 31, 32, 32], 8,false);
 		    animation.play("idle");	
