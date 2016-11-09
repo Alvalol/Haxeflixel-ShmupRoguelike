@@ -4,7 +4,7 @@ import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxObject;
-import objects.items.AntidoteItem;
+import objects.items.CoinItem;
 import objects.items.HealthItem;
 import objects.items.Item;
 import flixel.util.FlxTimer;
@@ -91,8 +91,8 @@ class EnemyMinion extends Enemy
 	
 	override public function kill() 
 	{
-        drops = [new AntidoteItem(x, y)];
-	    dropRate = [0.5];
+        drops = [new CoinItem(x, y)];
+	    dropRate = [1];
 		dropItem(drops,dropRate);
 		Spawner.minions.remove(this);
 		super.kill();

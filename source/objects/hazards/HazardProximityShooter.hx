@@ -10,7 +10,6 @@ import flixel.math.FlxVelocity;
 
 class HazardProximityShooter extends Hazard
 {
-	
 	private var shot:Bool = false;
 
 	public function new(x:Float,y:Float, _flipped:Bool) 
@@ -35,9 +34,8 @@ class HazardProximityShooter extends Hazard
 	
 	private function forceTrigger()
 	{
-		if (FlxG.collide(Reg.PS.PBullets, this) && isOnScreen() )
+		if (FlxG.collide(Reg.PS.PBullets, this) && isOnScreen())
 		{
-
 			shoot();
 		}
 	}
@@ -46,31 +44,31 @@ class HazardProximityShooter extends Hazard
 	{
 		if (FlxMath.absInt(Std.int(x))  - Std.int(Reg.PS.player.x) < 15)
 		{
-			
 			    shoot();
-			
 		}
+		
 	}
+	
 	// duck in space kill crabs and rats and medusas... im sure need to go sleep. ist almost strangest game am ever seen. - tw_ladon
 	
 	private function shoot()
 	{
 		if (!shot)
 		{
-		 var hb:HazardBullet = new HazardBullet(x, y+4);
 	     shot = true;
+		 var hb:HazardBullet = new HazardBullet(x, y+4);
 		 animation.play("inactive");
 		 hb.scale.set(0.75, 0.75);
 			
 			if (!flipY)
 			{
-			hb.reset(x, y - 4);
-
+			hb.reset(x, y - 5);
 			Reg.PS.HBullets.add(hb);
 			}
 			else
 			{
 				hb.velocity.y *= -1;
+				hb.reset(x, y +5);
 				hb.angle = 180;
 				Reg.PS.HBullets.add(hb);	
 			}

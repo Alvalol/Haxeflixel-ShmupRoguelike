@@ -5,6 +5,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.util.FlxTimer;
+import objects.items.CoinItem;
 
 class EnemyMeteorShower extends Enemy
 {
@@ -20,8 +21,6 @@ class EnemyMeteorShower extends Enemy
 		HP = 1;
 		makeGraphic(4, 4, FlxColor.PINK);
 		visible = true;
-	    trace("METEOR SHOWER");
-
 	}
 	
 	
@@ -41,6 +40,7 @@ class EnemyMeteorShower extends Enemy
 		super.update(elapsed);
 	
     }
+
 	
 	private function createMeteors()
 	{

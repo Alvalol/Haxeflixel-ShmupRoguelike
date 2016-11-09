@@ -175,7 +175,6 @@ class Player extends FlxSprite
 	
 	private function collisions()
 	{	 
-		FlxObject.separate(this, Reg.PS.map);
 		if (alive)
 		{
 		   if (FlxG.collide(Reg.PS.map, this))
@@ -188,6 +187,7 @@ class Player extends FlxSprite
 		   if (x <= FlxG.camera.scroll.x)
 			   damage();
 		}
+		FlxObject.separate(this, Reg.PS.map);
 	}
 	
 	public function get_comboTimer():Float

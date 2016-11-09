@@ -1,7 +1,9 @@
 package objects.enemies;
 import flixel.util.FlxColor;
-
+import objects.items.CoinItem;
+import flixel.FlxObject;
 import flixel.FlxG;
+
 class EnemyMeteor extends Enemy
 {
 	private var MAX_MOVE:Float = Reg.CURRENT_SEED.float(30,100);
@@ -26,6 +28,23 @@ class EnemyMeteor extends Enemy
 		
 	    move();
 		super.update(elapsed);
+	}
+	
+	override function collisions() 
+	{
+		if (isTouching(FlxObject.ANY) && isOnScreen())// || FlxG.collide(Reg.PS.map,this)
+			kill();
+		
+		super.collisions();
+	}
+	
+		
+	override public function kill() 
+	{
+		drops = [new CoinItem(x, y)];
+	    dropRate = [1];
+		dropItem(drops,dropRate);
+		super.kill();
 	}
 	
 	private function move()

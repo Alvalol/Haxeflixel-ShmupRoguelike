@@ -24,18 +24,19 @@ class EnemyMultishotDeath extends Enemy
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
-		HP = 1;
+		HP = 3;
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8, true);
-		animation.add("default", [18, 19,20], 8, true);
+		animation.add("default", [18, 19, 20], 8, true);
+		setGraphicSize(16, 16);
 		animation.play("default");
+		updateHitbox();
 	}
 	
 	override public function update(elapsed:Float) 
 	{
 		if (!justShot && isOnScreen(FlxG.camera))
-		{
 			shoot();
-		}
+
 
 		super.update(elapsed);
 	}
@@ -57,7 +58,7 @@ class EnemyMultishotDeath extends Enemy
 		if (eb == null) eb = new EnemyBullet(x , y);
 		
 		eb.reset(x + 5, y);
-		eb.scale.set(0.5,0.5);
+		eb.scale.set(0.75,0.75);
 
 		_angle += 45;
 		angle = _angle;
@@ -83,7 +84,7 @@ class EnemyMultishotDeath extends Enemy
 		
 			eb.velocity.set(FlxVelocity.velocityFromAngle(tang, bulletSpeed).x,FlxVelocity.velocityFromAngle(tang, bulletSpeed).y);
 			tang += 45;
-			eb.scale.set(0.75,0.75);
+			eb.scale.set(0.5,0.5);
 			Reg.PS.EBullets.add(eb);
 		}
 	}

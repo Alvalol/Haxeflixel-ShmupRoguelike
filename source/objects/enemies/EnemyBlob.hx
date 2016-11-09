@@ -20,16 +20,16 @@ class EnemyBlob extends Enemy
 	var rolled:Bool;
 	var delayDirection:Float = 2;
 	var MOVE_SPEED:Float = 50;
-	var tsize:Float = 32; 
-	var mtsize:Float = 4;	
+	var tsize:Float; 
+	var mtsize:Float = 8;	
 	
 	
-	public function new(x:Float,y:Float, _tsize:Float) 
+	public function new(x:Float,y:Float, _tsize:Float = 32) 
 	{
 		super(x, y);
-		HP = 1;
-		solid = true;
+		HP = 2;
 		tsize = _tsize;
+		solid = true;
 		//roll = Reg.CURRENT_SEED.int(0, 100);
 		loadGraphic(AssetPaths.bigEnemies__png, true, 16, 16);
 		animation.add("idle", [0,1],10);
@@ -53,8 +53,8 @@ class EnemyBlob extends Enemy
 	private function mitosis()
 	{
 		var offset = 5;
-		var m1 = new EnemyBlob(x + Reg.CURRENT_SEED.int(-offset,offset), y + Reg.CURRENT_SEED.int(-offset,offset) , tsize - 4);
-     	var m2 = new EnemyBlob(x - Reg.CURRENT_SEED.int(-offset,offset), y + Reg.CURRENT_SEED.int(-offset,offset) , tsize - 4);
+		var m1 = new EnemyBlob(x + Reg.CURRENT_SEED.int(-offset,offset), y + Reg.CURRENT_SEED.int(-offset,offset) , tsize - 8);
+     	var m2 = new EnemyBlob(x - Reg.CURRENT_SEED.int(-offset,offset), y + Reg.CURRENT_SEED.int(-offset,offset) , tsize - 8);
 		Reg.PS.enemies.add(m1);
 		Reg.PS.enemies.add(m2);
 	}

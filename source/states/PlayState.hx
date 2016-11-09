@@ -179,7 +179,7 @@ class PlayState extends FlxTransitionableState
 		
 		if (FlxG.mouse.justPressed)
 		{
-       // createObject("objects.enemies.EnemyMeteorShower", FlxG.mouse.x, FlxG.mouse.y);
+         createObject("objects.enemies.EnemyBlob", FlxG.mouse.x, FlxG.mouse.y);
 		trace("CREATED");
 		}
 

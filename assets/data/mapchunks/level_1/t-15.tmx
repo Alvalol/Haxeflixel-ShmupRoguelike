@@ -19,11 +19,7 @@
   </data>
  </layer>
  <objectgroup name="objects"/>
- <objectgroup name="hazards">
-  <object id="102" type="block" gid="2" x="80" y="64" width="8" height="8"/>
-  <object id="105" type="block" gid="2" x="80" y="80" width="8" height="8"/>
-  <object id="106" type="block" gid="2" x="80" y="72" width="8" height="8"/>
- </objectgroup>
+ <objectgroup name="hazards"/>
  <objectgroup name="enemies">
   <object id="104" type="enemyMultishot" gid="4" x="88" y="136" width="8" height="8"/>
  </objectgroup>

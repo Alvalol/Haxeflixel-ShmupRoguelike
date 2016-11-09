@@ -29,6 +29,7 @@ class MenuState extends FlxUIState
     var background:FlxBackdrop;
 	var title:FlxSprite;
 	var i = 0.0;
+	var buildNumber:FlxText;
 	var initialized:Bool = false;
 	var seedInput:FlxInputText;
 	var seedValue:Int;
@@ -44,8 +45,10 @@ class MenuState extends FlxUIState
 
 	    background = new FlxBackdrop(AssetPaths.background__png, 1, 1, true, true);
 		
-		background = new FlxBackdrop(AssetPaths.background__png, 1, 1, true, true);
-
+		buildNumber = new FlxText(FlxG.width - 60, FlxG.height - 13, 0, "dev build 14", 8);
+		
+	
+		
 		title = new FlxSprite(0, 0);
 
 		title.loadGraphic(AssetPaths.title__png, false, 256, 144);
@@ -57,34 +60,43 @@ class MenuState extends FlxUIState
 		bars.loadGraphic(AssetPaths.bars__png, false, 256, 144);
 		
 		setupInputSeed();
+
 		add(background);
+
 		add(title);
 		add(options);
 		add(bars);
 		add(seedInput);
+		add(buildNumber);
+		FlxTransitionableState.defaultTransIn = new TransitionData();
+		FlxTransitionableState.defaultTransOut = new TransitionData();
 		
-			FlxTransitionableState.defaultTransIn = new TransitionData();
-			FlxTransitionableState.defaultTransOut = new TransitionData();
-		
-			var diamond:FlxGraphic = FlxGraphic.fromClass(GraphicTransTileCircle);
-			diamond.persist = true;
-			diamond.destroyOnNoUse = false;
+		var diamond:FlxGraphic = FlxGraphic.fromClass(GraphicTransTileCircle);
+		diamond.persist = true;
+		diamond.destroyOnNoUse = false;
 			
-			FlxTransitionableState.defaultTransIn.tileData = { asset: diamond, width: 16, height: 16 };
-			FlxTransitionableState.defaultTransOut.tileData = { asset: diamond, width: 16, height: 16 };
-			FlxTransitionableState.defaultTransIn.direction = FlxG.random.getObject([ new FlxPoint(0,1)]);
-			FlxTransitionableState.defaultTransOut.direction = FlxG.random.getObject([ new FlxPoint(0,1)]);		
-			FlxTransitionableState.defaultTransOut.type = TransitionType.TILES;
-			FlxTransitionableState.defaultTransIn.type = TransitionType.TILES;
-			FlxTransitionableState.defaultTransOut.duration = 1;
-			FlxTransitionableState.defaultTransIn.duration = 1;
-			FlxTransitionableState.defaultTransOut.color = FlxColor.YELLOW;
-			FlxTransitionableState.defaultTransIn.color = FlxColor.YELLOW;
-			FlxTransitionableState.defaultTransIn.tileData.asset = diamond;
-			FlxTransitionableState.defaultTransOut.tileData.asset = diamond;
+		FlxTransitionableState.defaultTransIn.tileData = { asset: diamond, width: 16, height: 16 };
+		FlxTransitionableState.defaultTransOut.tileData = { asset: diamond, width: 16, height: 16 };
+		FlxTransitionableState.defaultTransIn.direction = FlxG.random.getObject([ new FlxPoint(0,1)]);
+		FlxTransitionableState.defaultTransOut.direction = FlxG.random.getObject([ new FlxPoint(0,1)]);		
+		FlxTransitionableState.defaultTransOut.type = TransitionType.TILES;
+		FlxTransitionableState.defaultTransIn.type = TransitionType.TILES;
+		FlxTransitionableState.defaultTransOut.duration = 1;
+		FlxTransitionableState.defaultTransIn.duration = 1;
+		FlxTransitionableState.defaultTransOut.color = FlxColor.YELLOW;
+		FlxTransitionableState.defaultTransIn.color = FlxColor.YELLOW;
+		FlxTransitionableState.defaultTransIn.tileData.asset = diamond;
+		FlxTransitionableState.defaultTransOut.tileData.asset = diamond;
 			//Of course, this state has already been constructed, so we need to set a transOut value for it right now:
-			transOut = FlxTransitionableState.defaultTransOut;
-			transIn = FlxTransitionableState.defaultTransIn;
+		transOut = FlxTransitionableState.defaultTransOut;
+		transIn = FlxTransitionableState.defaultTransIn;
+	
+		forEachOfType(FlxText, function(member)
+		{
+			member.setFormat(AssetPaths.smallfont__ttf, 8, FlxColor.fromRGB(255,255,255,5) ,
+			                 FlxTextBorderStyle.OUTLINE, FlxColor.fromRGB(0,0,0,200));				
+	    });
+		
 	}
 	
 
