@@ -26,7 +26,7 @@ class HazardLaser extends Hazard
 	private var animationTween:FlxTween;
 	
 	private var tempcanvas:FlxSprite;
-	private var raytraced:Bool = false;
+	private var raytraced:Bool;
 	private var tempPoint:FlxPoint;
 	private var tempHeight:Int;
 	private var emitter:FlxEmitter;
@@ -37,7 +37,8 @@ class HazardLaser extends Hazard
 		loadGraphic(AssetPaths.hazards__png, true, 8, 8);
 		animation.add("active", [2], 0);
 		animation.add("inactive", [3], 0);
-		tempPoint = new FlxPoint(x, FlxG.camera.height);
+		raytraced = false;
+		tempPoint = new FlxPoint(x, FlxG.camera.height + 16);
 
 		origin.set(width / 2, 0);
 		immovable = true;
@@ -55,14 +56,15 @@ class HazardLaser extends Hazard
 		
 		if (!raytraced && isOnScreen() && _appeared)
 		{
-		raytraced = true;
-		if (tempPoint != null)
-		{
-        Reg.PS.map.ray(new FlxPoint(x, y), new FlxPoint(x, y + FlxG.height), tempPoint);
-		tempHeight = FlxMath.distanceToPoint(this, tempPoint);
-        setGraphicSize(8, tempHeight);
-		makeEmitter();
-		}
+			raytraced = true;
+			if (tempPoint != null)
+				{
+				Reg.PS.map.ray(new FlxPoint(x, y), new FlxPoint(x, y + FlxG.height), tempPoint);
+				tempHeight = FlxMath.distanceToPoint(this, tempPoint);
+				setGraphicSize(8, tempHeight);
+				makeEmitter();
+				}
+		
 		}
 		
 		checkEmitter();

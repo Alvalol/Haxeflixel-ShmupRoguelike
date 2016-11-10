@@ -23,7 +23,7 @@ class EnemyMinion extends Enemy
 	{
 		super(x, y);
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
-		animation.add("idle", [14, 15], 16, true);
+		animation.add("idle", [14, 15], 12, true);
 		animation.play("idle");
 		HP = 1;
 		changeDirection();

@@ -54,11 +54,7 @@ class BaseBullet extends Bullet
 	 
 	if (FlxG.collide(Reg.PS.map, this))
 		kill();
-		
-	if (FlxG.overlap(Reg.PS.hazards, this))
-	{
-		kill();
-	}
+
 		
 	if (x > FlxG.camera.scroll.x + FlxG.width + 8 || x < FlxG.camera.scroll.x - FlxG.width - 8)
 	{

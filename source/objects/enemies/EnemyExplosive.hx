@@ -18,7 +18,7 @@ class EnemyExplosive extends Enemy
 	public function new(x:Float, y :Float) 
 	{
 		super(x, y);
-		HP = 1;
+		HP = 2;
 		immovable = true;
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8);
 		animation.add("idle", [16,17], 8, true);
@@ -28,7 +28,6 @@ class EnemyExplosive extends Enemy
 	override public function update(elapsed:Float)
 	{
 		if (_appeared)
-		
 		{
 		move();
 		reachedScrollx();

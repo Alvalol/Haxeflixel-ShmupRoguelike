@@ -118,9 +118,7 @@ class Enemy extends FlxSprite
 		var curBullet = Reg.PS.PBullets.getFirstAlive();
 		
 		if  (!(Type.getClassName(Type.getClass(curBullet)).indexOf("LaserBullet") > -1))
-		{
 			curBullet.kill();
-		}
 
 		damageText = new FlxText(x + Reg.CURRENT_SEED.int( -1, 1), y + Reg.CURRENT_SEED.int( -1, 1), 0,  "-" + displayDamage);
 		damageText.set_antialiasing(false);
@@ -128,7 +126,6 @@ class Enemy extends FlxSprite
 		textTimer();
 		createdDamageText = true;
 	    damageText.moves = true;
-
 
 		Reg.PS.add(damageText);
 	}
@@ -158,8 +155,7 @@ class Enemy extends FlxSprite
 				var newCoin:CoinItem =  new CoinItem(x, y);
 				Reg.PS.coins.add(newCoin);
 		}
-		
-		
+
 		var curseRoll:Float = Reg.CURRENT_SEED.float(0, 100);
 		if (curseRoll <= 0.5)
 		{
@@ -167,9 +163,6 @@ class Enemy extends FlxSprite
 		Reg.PS.items.add(curseObject);
 		}
 	}
-	
-	
-	
 	
 	private function particles()
 	{
@@ -191,21 +184,18 @@ class Enemy extends FlxSprite
 	override public function kill()
 	{
 		//?
-		if (isOnScreen())
-		{
+		if (x >= FlxG.camera.scroll.x)
 		FlxG.camera.shake(0.003, 0.05);
-		}
+		
 		Reg.PS.enemies.remove(this, true);
 		
-		
-		if (isOnScreen()){
+		if (isOnScreen())
+		{
 		var e = Reg.PS.effects.recycle(Explosion) ;
 		if (e == null) e = new Explosion(x - 4, y - 4);
 		e.reset(x - 4, y - 4);
 		Reg.PS.effects.add(e);
 		particles();
-
-	//	trace("Enemy" + Type.typeof(this) + "dead");
 		}
 		
 		alive = false;

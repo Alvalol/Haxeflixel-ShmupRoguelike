@@ -10,6 +10,7 @@ import flixel.util.FlxArrayUtil;
 import flixel.addons.editors.tiled.TiledObject;
 import flixel.addons.editors.tiled.TiledObjectLayer;
 import flixel.addons.editors.tiled.TiledMap;
+import flixel.text.FlxText;
 
 import utils.pcg.MapChunk;
 
@@ -124,9 +125,9 @@ class MapChunkMerger
 			createChunkGroup(CURRENT_TYPE, CURRENT_RANGE);
 		}
 		}
-		
 		CHUNKS[MAX_LEVEL_SIZE] = Reg.CURRENT_SEED.getObject(TMXORGANIZED["exit"]);
 		}
+		
     }
 	
 	private static function createChunkGroup(type:String, amount:Int)

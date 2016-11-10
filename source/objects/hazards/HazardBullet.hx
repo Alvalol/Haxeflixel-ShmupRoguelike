@@ -12,38 +12,28 @@ import objects.effects.NoHit;
 class HazardBullet extends FlxSprite
 {
 	private var target:FlxPoint; 
-	private var BULLET_SPEED = 50;
+	public var BULLET_SPEED = 50;
 	
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
-		checkPlayer();
 		loadGraphic(AssetPaths.items__png, true, 8, 8);
 		animation.add("idle", [22,23], 8, true); // looping the animation gives it an interesting wobbly effect which might be desirable for some enemies.
 		animation.play("idle");
+
+		
 	}
+	
 	
 	override public function update(elapsed:Float):Void 
 	{
-		move();
 		collisions();
-		
+		velocity.y = BULLET_SPEED;		
 		if(!Reg.pause)
 		super.update(elapsed);
 	}
 	
-	private function checkPlayer()
-	{
-		if (Reg.PS.player.y < y)
-		  target = new FlxPoint(x, 0);
-		else
-		  target = new FlxPoint(x, Reg.PS.map.height);
-	}
 	
-	private function move()
-	{
-		FlxVelocity.moveTowardsPoint(this, target, BULLET_SPEED, 0);
-	}
 	
 	private function collisions()
 	{	

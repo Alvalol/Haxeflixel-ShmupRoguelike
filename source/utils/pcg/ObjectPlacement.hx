@@ -26,6 +26,7 @@ import objects.enemies.EnemySatellite;
 import objects.enemies.EnemyShooter;
 import objects.enemies.EnemySpawner;
 import objects.enemies.EnemyTurretA;
+import objects.enemies.EnemyWalker;
 import objects.enemies.EnemyWorm;
 import objects.gamesys.Goal;
 import objects.hazards.Hazard;
@@ -137,12 +138,14 @@ class ObjectPlacement
 					
 					case "enemyBlob" : allLevelEnemies.push(new EnemyBlob(pos.x, pos.y));
 					case "enemyChaser" :  allLevelEnemies.push(new EnemyChaser(pos.x, pos.y));
+					case "enemyExplosive" : allLevelEnemies.push(new EnemyExplosive(pos.x, pos.y));
 					case "enemyLeft" :  allLevelEnemies.push(new EnemyLeft(pos.x, pos.y));
 					case "enemyMultishot" :  allLevelEnemies.push(new EnemyMultishotDeath(pos.x, pos.y));
 					case "enemySpawner" :  allLevelEnemies.push(new EnemySpawner(pos.x, pos.y, enemy.flippedVertically));
      				case "enemyTurret" :  allLevelEnemies.push(new EnemyTurretA(pos.x, pos.y,enemy.flippedVertically));		
 					case "enemyWorm" :  allLevelEnemies.push(new EnemyWorm(pos.x, pos.y, enemy.flippedVertically));
 		     		case "enemyMeteorShower" : allLevelEnemies.push(new EnemyMeteorShower(pos.x));
+					case "enemyWalker" : allLevelEnemies.push(new EnemyWalker(pos.x, pos.y, enemy.flippedVertically));
 			   }
 			
 			   

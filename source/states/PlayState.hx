@@ -47,9 +47,7 @@ import utils.controls.Gamepad;
 #end
 import utils.pcg.MapChunkMerger;
 
-
 import flixel.addons.display.FlxBackdrop;
-
 import objects.enemies.EnemyBullet;
 import objects.Player;
 import objects.weapons.Bullet;
@@ -178,7 +176,7 @@ class PlayState extends FlxTransitionableState
 		
 		
 		if (FlxG.mouse.justPressed)
-			createObject("objects.hazards.HazardLaser", FlxG.mouse.x, FlxG.mouse.y);
+			createObject("objects.enemies.EnemyExplosive", FlxG.mouse.x, FlxG.mouse.y);
 
 		if (FlxG.mouse.justPressedMiddle)
 			createObject("objects.items.CurseItem", FlxG.mouse.x, FlxG.mouse.y);
@@ -189,7 +187,7 @@ class PlayState extends FlxTransitionableState
 		
 		displayTracers();
 		addLevelObjects();
-		updateTrailArea();
+	    updateTrailArea();
 		trailArea.update(elapsed);
 		
 

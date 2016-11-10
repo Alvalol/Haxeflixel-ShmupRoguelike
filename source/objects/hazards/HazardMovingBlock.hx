@@ -24,7 +24,7 @@ class HazardMovingBlock extends Hazard
 		maxVelocity.set(0, 0);
 		centerOffsets();
 		horizontal = hor;
-		makeEmitter();
+		//makeEmitter();
 	}
 	
 	override public function update(elapsed:Float):Void 
@@ -41,7 +41,7 @@ class HazardMovingBlock extends Hazard
 		if (direction == 0)
 			direction = Reg.CURRENT_SEED.int( -1, 1);
 			
-		updateEmitterPosition();
+		//updateEmitterPosition();
 		super.update(elapsed);
 	}
 	
@@ -108,6 +108,9 @@ class HazardMovingBlock extends Hazard
 			direction *=-1;	
 			}
 		}
+		
+		FlxG.overlap(Reg.PS.PBullets, this, NoDamage);
+		
 		/*
 		if ((FlxG.overlap(this, Reg.PS.PBullets) || FlxG.overlap(this,Reg.PS.player) && !gotshot))
 		{

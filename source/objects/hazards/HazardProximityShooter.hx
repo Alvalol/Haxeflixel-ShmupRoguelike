@@ -34,9 +34,12 @@ class HazardProximityShooter extends Hazard
 	
 	private function forceTrigger()
 	{
-		if (FlxG.collide(Reg.PS.PBullets, this) && isOnScreen())
+		if (isOnScreen())
 		{
-			shoot();
+		if(FlxG.collide(Reg.PS.PBullets, this, NoDamage)){
+       
+		shoot();
+		}
 		}
 	}
 	
@@ -56,18 +59,21 @@ class HazardProximityShooter extends Hazard
 		if (!shot)
 		{
 	     shot = true;
-		 var hb:HazardBullet = new HazardBullet(x, y+4);
+		 
+		 var hb:HazardBullet = Reg.PS.HBullets.recycle(HazardBullet);
+		 if (hb == null) { new HazardBullet(x, y); }
+
 		 animation.play("inactive");
 		 hb.scale.set(0.75, 0.75);
-			
 			if (!flipY)
 			{
+			hb.BULLET_SPEED = -FlxMath.absInt(hb.BULLET_SPEED);
 			hb.reset(x, y - 5);
 			Reg.PS.HBullets.add(hb);
 			}
 			else
 			{
-				hb.velocity.y *= -1;
+				hb.BULLET_SPEED = FlxMath.absInt(hb.BULLET_SPEED);
 				hb.reset(x, y +5);
 				hb.angle = 180;
 				Reg.PS.HBullets.add(hb);	
