@@ -2,13 +2,18 @@ package objects.hazards;
 import flixel.FlxG;
 import flixel.addons.effects.FlxTrail;
 import flixel.addons.effects.FlxTrailArea;
+import flixel.addons.tile.FlxTilemapExt;
+import flixel.effects.particles.FlxEmitter;
 import flixel.math.FlxPoint;
+import flixel.tile.FlxTilemap;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.FlxObject;
 import flixel.FlxSprite;
+import flixel.math.FlxMath;
+import flixel.tile.FlxTilemap;
 
 class HazardLaser extends Hazard
 {
@@ -18,23 +23,24 @@ class HazardLaser extends Hazard
 	private var tactive:Bool = false;
 	private var canBeActive:Bool = true;
 	private var deactivationTreshold:Int = 64;
-	
 	private var animationTween:FlxTween;
 	
 	private var tempcanvas:FlxSprite;
+	private var raytraced:Bool = false;
+	private var tempPoint:FlxPoint;
+	private var tempHeight:Int;
+	private var emitter:FlxEmitter;
 	
-
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y - 8);
 		loadGraphic(AssetPaths.hazards__png, true, 8, 8);
 		animation.add("active", [2], 0);
 		animation.add("inactive", [3], 0);
-		scale.y = 20;
-		scale.x = 1;
-	    origin.set(width / 2, 0);
-		immovable = true;
+		tempPoint = new FlxPoint(x, FlxG.camera.height);
 
+		origin.set(width / 2, 0);
+		immovable = true;
 
 		// add a "generator" that makes clear where the laser is located.
 	    animationTween = FlxTween.tween(scale, {x :0.5}, 0.05, {type : FlxTween.PINGPONG });
@@ -46,6 +52,20 @@ class HazardLaser extends Hazard
 		switchingStates();
 		solid = tactive;
 		
+		
+		if (!raytraced && isOnScreen() && _appeared)
+		{
+		raytraced = true;
+		if (tempPoint != null)
+		{
+        Reg.PS.map.ray(new FlxPoint(x, y), new FlxPoint(x, y + FlxG.height), tempPoint);
+		tempHeight = FlxMath.distanceToPoint(this, tempPoint);
+        setGraphicSize(8, tempHeight);
+		makeEmitter();
+		}
+		}
+		
+		checkEmitter();
 		checkForScroll();
         if (tactive)
 		{
@@ -66,7 +86,7 @@ class HazardLaser extends Hazard
 		super.update(elapsed);
      }
 	 
-
+	 
 	 
 	 private function checkForScroll()
 	 {
@@ -77,6 +97,42 @@ class HazardLaser extends Hazard
 		 }
 	 }
 	
+	 
+	 private function checkEmitter()
+	 {
+		 if (_appeared && isOnScreen() )
+		 {
+		if (tactive)
+			emitter.emitting = true;
+		else
+		    emitter.emitting = false;
+		 }
+	 }
+	 private function makeEmitter()
+	 {
+		emitter = Reg.PS.emitters.recycle(FlxEmitter);
+		if (emitter == null)
+		emitter = new FlxEmitter();
+		
+		emitter.setPosition(x + width / 2, tempPoint.y);
+		emitter.alpha.set(0.75,1);
+		emitter.makeParticles(1,1, FlxColor.WHITE, 15);
+		emitter.keepScaleRatio = true;
+		emitter.launchMode = FlxEmitterMode.CIRCLE;
+		emitter.launchAngle.set(200,340);
+		emitter.lifespan.set(0.075, 0.22);
+		emitter.angularVelocity.set(0, 0, 0, 0);
+		emitter.acceleration.start.min.y = -	200;
+		emitter.acceleration.start.max.y = -300;
+		emitter.velocity.start.min.y = -300;
+		emitter.velocity.start.max.y = -400;
+			
+	   
+		Reg.PS.emitters.add(emitter);
+		emitter.start(false, 0.025, 0);
+			
+	 }
+	 
 	private function switchingStates()
 	{
 		if (canBeActive)
@@ -121,6 +177,12 @@ class HazardLaser extends Hazard
 		{
 		player.damage();
 		}
+	}
+	
+	override public function kill() 
+	{
+		emitter.kill();
+		super.kill();
 	}
 	
 	private function appear()

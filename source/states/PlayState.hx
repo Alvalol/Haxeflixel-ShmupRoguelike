@@ -178,13 +178,10 @@ class PlayState extends FlxTransitionableState
 		
 		
 		if (FlxG.mouse.justPressed)
-		{
-         createObject("objects.enemies.EnemyBlob", FlxG.mouse.x, FlxG.mouse.y);
-		trace("CREATED");
-		}
+			createObject("objects.hazards.HazardLaser", FlxG.mouse.x, FlxG.mouse.y);
 
 		if (FlxG.mouse.justPressedMiddle)
-		createObject("objects.items.CurseItem", FlxG.mouse.x, FlxG.mouse.y);
+			createObject("objects.items.CurseItem", FlxG.mouse.x, FlxG.mouse.y);
 		
 		#else
 		mobileControls();
@@ -326,6 +323,7 @@ class PlayState extends FlxTransitionableState
 		_entities.add(items);
 		_entities.add(hazards);
 		_entities.add(enemies);
+
 		_entities.add(emitters);
 		_entities.add(coins);
 		_entities.add(EBullets);
@@ -422,8 +420,7 @@ class PlayState extends FlxTransitionableState
 		
 		_gameCamera.setScrollBoundsRect(0, 0, map.width, map.height, true);
 		_gameCamera.pixelPerfectRender = false;	
-		_gameCamera.follow(_scroller, FlxCameraFollowStyle.TOPDOWN_TIGHT, lerpSpeed);
-
+		_gameCamera.follow(_scroller, FlxCameraFollowStyle.TOPDOWN_TIGHT, lerpSpeed);	
 		
 		add(_scroller);
 	}

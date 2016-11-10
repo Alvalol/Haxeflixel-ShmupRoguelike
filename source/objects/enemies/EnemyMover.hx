@@ -19,6 +19,8 @@ class EnemyMover extends Enemy
 	private var sinFactor:Float = 0;
 	public var factor:Int = 0;
 	private var MOVE_SPEED:Float = 0.5;
+	
+	
 
 
 	public function new(x:Float, y:Float) 

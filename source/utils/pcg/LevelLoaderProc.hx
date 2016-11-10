@@ -1,6 +1,7 @@
 package utils.pcg;
 import flixel.FlxBasic;
 import flixel.FlxState;
+import flixel.addons.nape.FlxNapeTilemap;
 import flixel.graphics.FlxGraphic;
 import flixel.tile.FlxTilemap;
 import utils.pcg.MapChunk;
@@ -19,9 +20,9 @@ class LevelLoaderProc
 	// given my LevelGenerator.hx
 
 	
-	public static function loadGeneratedLevel():FlxTilemap
+	public static function loadGeneratedLevel():FlxNapeTilemap
 	{
-	    var loadedMap:FlxTilemap = new FlxTilemap();
+	    var loadedMap:FlxNapeTilemap = new FlxNapeTilemap();
 		MapChunkMerger.makeSeed();
 		var generatedMap:Array<Array<Int>> = MapChunkMerger.makeCleanArray();
 		ObjectPlacement.loadLevelObjects(loadedMap); 

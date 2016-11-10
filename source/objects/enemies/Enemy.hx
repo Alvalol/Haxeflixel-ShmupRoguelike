@@ -124,7 +124,7 @@ class Enemy extends FlxSprite
 
 		damageText = new FlxText(x + Reg.CURRENT_SEED.int( -1, 1), y + Reg.CURRENT_SEED.int( -1, 1), 0,  "-" + displayDamage);
 		damageText.set_antialiasing(false);
-        damageText.setFormat(AssetPaths.smallfont__ttf, 8, FlxColor.YELLOW, FlxTextBorderStyle.SHADOW, FlxColor.BLACK);
+        damageText.setFormat(AssetPaths.smallfont__ttf, 8, FlxColor.RED, FlxTextBorderStyle.SHADOW, FlxColor.BLACK);
 		textTimer();
 		createdDamageText = true;
 	    damageText.moves = true;
