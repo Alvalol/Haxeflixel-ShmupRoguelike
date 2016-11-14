@@ -27,29 +27,12 @@ class LevelLoaderProc
 		var generatedMap:Array<Array<Int>> = MapChunkMerger.makeCleanArray();
 		ObjectPlacement.loadLevelObjects(loadedMap); 
 		
-		fixTilemapData(generatedMap);
 		
         loadedMap.loadMapFrom2DArray(generatedMap, FlxTileFrames.fromBitmapAddSpacesAndBorders(FlxGraphic.fromAssetKey(AssetPaths.tileset__png), 
 	    new FlxPoint(8, 8), new FlxPoint(1,1), new FlxPoint(1, 1), null),  8, 8, AUTO);
 	
 		
 	    return loadedMap;
-	}
-	
-	
-	private static function fixTilemapData(tilemapData:Array<Array<Int>>)
-	{
-			
-		for (i in tilemapData)
-		{
-			for (j in i)
-			{
-			 if (j <= 0)
-			{
-				j = 0;
-			}
-		}
-		}
 	}
 	
 }

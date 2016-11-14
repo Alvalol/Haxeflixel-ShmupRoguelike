@@ -28,6 +28,7 @@ class LaserWeapon implements IWeapon
 		max_bullets = 1;
 		max_range = 0;
 		damage = 1;
+		
 	}
 	
 	public function shoot():Void

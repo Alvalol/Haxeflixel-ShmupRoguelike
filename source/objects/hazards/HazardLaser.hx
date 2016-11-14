@@ -43,6 +43,8 @@ class HazardLaser extends Hazard
 		origin.set(width / 2, 0);
 		immovable = true;
 
+		
+		
 		// add a "generator" that makes clear where the laser is located.
 	    animationTween = FlxTween.tween(scale, {x :0.5}, 0.05, {type : FlxTween.PINGPONG });
 	

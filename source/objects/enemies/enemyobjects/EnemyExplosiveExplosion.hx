@@ -6,7 +6,6 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 
 class EnemyExplosiveExplosion extends FlxSprite
-class EnemyExplosiveExplosion extends FlxSprite
 {
 
 	public function new(x:Float, y:Float) 

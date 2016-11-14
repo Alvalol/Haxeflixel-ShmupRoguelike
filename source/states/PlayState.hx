@@ -38,6 +38,8 @@ import openfl.system.System;
 import openfl.utils.ByteArray;
 import substates.PauseState;
 
+import flixel.addons.nape.FlxNapeSpace;
+
 
 import flixel.addons.transition.FlxTransitionableState;
 
@@ -112,6 +114,8 @@ class PlayState extends FlxTransitionableState
 	
 	private var persistentUpdateSet:Bool;
 	private var mapColorTween:FlxTween;
+	
+	public var napeSpace:FlxNapeSpace;
 		
 	override public function create():Void
 	{
@@ -120,7 +124,9 @@ class PlayState extends FlxTransitionableState
 		Reg.PS = this;
 		Reg.pause = false;
 		resetCurses();
-
+		
+		napeSpace = new FlxNapeSpace();
+	
 		// init gameplay elements
 		player = new Player(10, FlxG.height / 2);
 		enemies = new FlxTypedGroup<Enemy>();
@@ -158,15 +164,12 @@ class PlayState extends FlxTransitionableState
 		createCurseAppearanceTweens();
 		
 		//persistentUpdate = true;
-        //getMiniMap();
 	}
 
 	override public function update(elapsed:Float):Void
 	{
 		if (!Reg.pause)
 		super.update(elapsed);
-		
-		
 		
 		#if desktop
 		controlPauseScreen();
@@ -203,34 +206,6 @@ class PlayState extends FlxTransitionableState
 							FlxG.camera.scroll.y + FlxG.camera.height);	
 	}
 	
-	public function getMiniMap(wallColor:Int = 0xFFFF00FF, openColor:Int = 0xFFFFFFFF):Void
-	{
-		var minimap:FlxSprite = new FlxSprite();
-		var bData:BitmapData;
-		
-		minimap.makeGraphic(map.widthInTiles, map.heightInTiles, 0xFFFF0000);
-		bData = new BitmapData(map.widthInTiles, map.heightInTiles);
-		for (i in 0...map.widthInTiles)
-		{
-			for (j in 0...map.heightInTiles)
-			{
-				if (map.getTile(i, j) > 0) // Is collision tile
-				{
-					bData.setPixel(i, j, openColor);
-				}
-				else bData.setPixel(i, j, wallColor); // Else
-			}
-		}
-		
-		minimap.pixels = bData;
-		
-		minimap.setGraphicSize(250);
-		minimap.screenCenter();
-		minimap.visible = true;
-		minimap.scrollFactor.set(0, 0);
-		
-		add(minimap);
-	}
 	
 	
 	private function createCurseAppearanceTweens()
@@ -333,6 +308,7 @@ class PlayState extends FlxTransitionableState
 		add(effects);
 		_entities.add(barrierLeft);
 		_entities.add(barrierRight);	
+		enemies.clear();
 		effects.clear();
 		
 	}
