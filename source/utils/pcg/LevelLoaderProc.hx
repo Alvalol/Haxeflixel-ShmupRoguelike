@@ -4,11 +4,12 @@ import flixel.FlxState;
 import flixel.addons.nape.FlxNapeTilemap;
 import flixel.graphics.FlxGraphic;
 import flixel.tile.FlxTilemap;
+import nape.phys.Body;
 import utils.pcg.MapChunk;
 import utils.pcg.MapChunkMerger;
 import flixel.graphics.frames.FlxTileFrames;
 import openfl.Assets;
-
+import flixel.addons.nape.FlxNapeSpace;
 import flixel.math.FlxPoint;
 
 class LevelLoaderProc
@@ -24,14 +25,13 @@ class LevelLoaderProc
 	{
 	    var loadedMap:FlxNapeTilemap = new FlxNapeTilemap();
 		MapChunkMerger.makeSeed();
+		
 		var generatedMap:Array<Array<Int>> = MapChunkMerger.makeCleanArray();
 		ObjectPlacement.loadLevelObjects(loadedMap); 
-		
 		
         loadedMap.loadMapFrom2DArray(generatedMap, FlxTileFrames.fromBitmapAddSpacesAndBorders(FlxGraphic.fromAssetKey(AssetPaths.tileset__png), 
 	    new FlxPoint(8, 8), new FlxPoint(1,1), new FlxPoint(1, 1), null),  8, 8, AUTO);
 	
-		
 	    return loadedMap;
 	}
 	

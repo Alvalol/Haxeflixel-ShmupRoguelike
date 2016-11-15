@@ -24,6 +24,7 @@ import flixel.util.FlxSpriteUtil;
 import flixel.util.FlxTimer;
 import Type;
 import lime.system.Display;
+import nape.space.Space;
 import objects.effects.Barrier;
 import objects.hazards.Hazard;
 import objects.hazards.HazardBullet;
@@ -39,7 +40,6 @@ import openfl.utils.ByteArray;
 import substates.PauseState;
 
 import flixel.addons.nape.FlxNapeSpace;
-
 
 import flixel.addons.transition.FlxTransitionableState;
 
@@ -115,8 +115,8 @@ class PlayState extends FlxTransitionableState
 	private var persistentUpdateSet:Bool;
 	private var mapColorTween:FlxTween;
 	
-	public var napeSpace:FlxNapeSpace;
-		
+	public var space:Space;
+	
 	override public function create():Void
 	{
 		super.create();
@@ -124,9 +124,7 @@ class PlayState extends FlxTransitionableState
 		Reg.PS = this;
 		Reg.pause = false;
 		resetCurses();
-		
-		napeSpace = new FlxNapeSpace();
-	
+
 		// init gameplay elements
 		player = new Player(10, FlxG.height / 2);
 		enemies = new FlxTypedGroup<Enemy>();
@@ -134,6 +132,8 @@ class PlayState extends FlxTransitionableState
 		blocks = new FlxTypedGroup<HazardBlock>();
 		effects = new FlxSpriteGroup();
 		sysObjects = new FlxTypedGroup<FlxSprite>();
+		
+		FlxNapeSpace.init();
 		
         Reg.score = 0;
 		barrierLeft = new Barrier(0, 0);

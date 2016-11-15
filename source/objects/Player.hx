@@ -240,7 +240,7 @@ class Player extends FlxSprite
 	
 	public function shoot()
 	{
-		if (!Reg.pause)
+		if (!Reg.pause && HP > 0)
 		{
 		bullEffect.set_visible(true);
 		move_left();

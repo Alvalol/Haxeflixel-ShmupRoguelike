@@ -17,7 +17,14 @@ public static var GAMEPAD:FlxGamepad;
 	public static function checkForGamepad()
 	{
 		GAMEPAD = FlxG.gamepads.lastActive;
+		
+		if (GAMEPAD != null)
+		{
+		GAMEPAD.deadZoneMode = FlxGamepadDeadZoneMode.INDEPENDENT_AXES;
+		GAMEPAD.deadZone = 0.5;
+		}
 	}	
+	
 		
     public static function checkForExit()
 	{
@@ -44,12 +51,12 @@ public static var GAMEPAD:FlxGamepad;
 			Reg.pause = !Reg.pause;
 		}
 		
-		if (GAMEPAD.pressed.A || GAMEPAD.pressed.RIGHT_SHOULDER)
+		if (GAMEPAD.pressed.A || GAMEPAD.pressed.RIGHT_SHOULDER || GAMEPAD.analog.value.LEFT_STICK_X < 0 || GAMEPAD.pressed.DPAD_LEFT)
 		{
 		 Reg.PS.player.shoot();
 		}
 		
-		if (GAMEPAD.pressed.DPAD_UP)
+		if (GAMEPAD.pressed.DPAD_UP || GAMEPAD.analog.value.LEFT_STICK_Y < 0)
 		{
 		if (!Reg.mirrorControls)
 			Reg.PS.player.move_up();
@@ -58,7 +65,7 @@ public static var GAMEPAD:FlxGamepad;
 		}
 		
 
-		if (GAMEPAD.pressed.DPAD_DOWN)
+		if (GAMEPAD.pressed.DPAD_DOWN || GAMEPAD.analog.value.LEFT_STICK_Y > 0)
 		{
 			if(!Reg.mirrorControls)
 			Reg.PS.player.move_down();
@@ -82,7 +89,7 @@ public static var GAMEPAD:FlxGamepad;
 			Reg.PS.player.resetAccel();
 		}
 		
-			if ( GAMEPAD.anyJustReleased([A,RIGHT_SHOULDER]))
+			if (GAMEPAD.anyJustReleased([A,RIGHT_SHOULDER]) || !(GAMEPAD.analog.value.LEFT_STICK_X < 0) )
 		{
 			Reg.PS.player.set_shooting(false);
 		}

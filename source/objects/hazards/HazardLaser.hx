@@ -14,7 +14,11 @@ import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.math.FlxMath;
 import flixel.tile.FlxTilemap;
-
+import nape.geom.Ray;
+import nape.geom.RayResult;
+import nape.geom.Vec2;
+import flixel.addons.nape.FlxNapeSpace;
+import nape.dynamics.InteractionFilter;
 class HazardLaser extends Hazard
 {
 	
@@ -30,6 +34,7 @@ class HazardLaser extends Hazard
 	private var tempPoint:FlxPoint;
 	private var tempHeight:Int;
 	private var emitter:FlxEmitter;
+
 	
 	public function new(x:Float, y:Float) 
 	{
@@ -37,14 +42,13 @@ class HazardLaser extends Hazard
 		loadGraphic(AssetPaths.hazards__png, true, 8, 8);
 		animation.add("active", [2], 0);
 		animation.add("inactive", [3], 0);
-		raytraced = false;
-		tempPoint = new FlxPoint(x, FlxG.camera.height + 16);
+		//raytraced = false;
+		//tempPoint = new FlxPoint(x, FlxG.camera.height + 16);
 
 		origin.set(width / 2, 0);
+		
 		immovable = true;
 
-		
-		
 		// add a "generator" that makes clear where the laser is located.
 	    animationTween = FlxTween.tween(scale, {x :0.5}, 0.05, {type : FlxTween.PINGPONG });
 	
@@ -54,9 +58,10 @@ class HazardLaser extends Hazard
 	 {
 		switchingStates();
 		solid = tactive;
+		trace(rayResult.shape);
 		
 		
-		if (!raytraced && isOnScreen() && _appeared)
+		/*if (!raytraced && isOnScreen() && _appeared)
 		{
 			raytraced = true;
 			if (tempPoint != null)
@@ -70,7 +75,7 @@ class HazardLaser extends Hazard
 		}
 		
 		checkEmitter();
-		checkForScroll();
+		checkForScroll();*/
         if (tactive)
 		{
 		//	scale.x = 1;
@@ -112,6 +117,8 @@ class HazardLaser extends Hazard
 		    emitter.emitting = false;
 		 }
 	 }
+	 
+	 
 	 private function makeEmitter()
 	 {
 		emitter = Reg.PS.emitters.recycle(FlxEmitter);
