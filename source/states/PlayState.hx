@@ -124,6 +124,9 @@ class PlayState extends FlxTransitionableState
 		Reg.PS = this;
 		Reg.pause = false;
 		resetCurses();
+		
+		FlxNapeSpace.init();
+	
 
 		// init gameplay elements
 		player = new Player(10, FlxG.height / 2);
@@ -133,8 +136,7 @@ class PlayState extends FlxTransitionableState
 		effects = new FlxSpriteGroup();
 		sysObjects = new FlxTypedGroup<FlxSprite>();
 		
-		FlxNapeSpace.init();
-		
+
         Reg.score = 0;
 		barrierLeft = new Barrier(0, 0);
 		barrierRight = new Barrier(0, 0);

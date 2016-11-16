@@ -161,7 +161,7 @@ class ObjectPlacement
 			  {	  
 				  case "block" : allLevelBlocks.push(new HazardBlock(pos.x, pos.y)); // allLevelBlocks because blocks can be destroyed but hazards can't
 				  
-				  case "laserOUT" : allLevelHazards.push(new HazardLaser(pos.x, pos.y));
+				  case "laser" : allLevelHazards.push(new HazardLaser(pos.x, pos.y));
 				  
 				  case "movingBlock" : allLevelHazards.push(new HazardMovingBlock(pos.x, pos.y,hazard.flippedVertically));
 				  // there should be a property in the object (tiled) setting if it moves horizontally or vertically

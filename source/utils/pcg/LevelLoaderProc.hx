@@ -30,7 +30,9 @@ class LevelLoaderProc
 		ObjectPlacement.loadLevelObjects(loadedMap); 
 		
         loadedMap.loadMapFrom2DArray(generatedMap, FlxTileFrames.fromBitmapAddSpacesAndBorders(FlxGraphic.fromAssetKey(AssetPaths.tileset__png), 
-	    new FlxPoint(8, 8), new FlxPoint(1,1), new FlxPoint(1, 1), null),  8, 8, AUTO);
+	    new FlxPoint(8, 8), new FlxPoint(1, 1), new FlxPoint(1, 1), null),  8, 8, AUTO);
+		
+		loadedMap.body.space = FlxNapeSpace.space;
 	
 	    return loadedMap;
 	}
