@@ -21,6 +21,7 @@ import utils.controls.Keyboard;
 import flixel.math.FlxVelocity;
 import states.GameOverState;
 import states.PlayState;
+import flixel.system.FlxSound;
 
 class Player extends FlxSprite
 {
@@ -50,9 +51,12 @@ class Player extends FlxSprite
 
 	private var weapons:Array<IWeapon>;
 	
+	
 	var bullEffect:NewBullEffect;
 	var addedBull:Bool = false;
+
 	
+
 	var shooting:Bool = false;
 	var hpflicker:Bool = false;
 	
@@ -82,7 +86,6 @@ class Player extends FlxSprite
 		
 		setSize(4, 4);
 		
-		
 		centerOffsets();
 		animation.add("move", [0,1,1,1,0], 16);
 		animation.play("move");
@@ -100,8 +103,7 @@ class Player extends FlxSprite
 	{	
 		if (!shooting)
 		move_right();
-		
-		
+
 		if (Reg.mirrorControls)
 		{
 			if (!colorChanged)
@@ -171,6 +173,8 @@ class Player extends FlxSprite
 	private function cheat()
 	{
 			HP = 1;
+			
+		
 	}
 	
 	private function collisions()
@@ -240,6 +244,7 @@ class Player extends FlxSprite
 	
 	public function shoot()
 	{
+		
 		if (!Reg.pause && HP > 0)
 		{
 		bullEffect.set_visible(true);

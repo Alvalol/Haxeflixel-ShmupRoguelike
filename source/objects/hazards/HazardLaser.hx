@@ -3,6 +3,7 @@ import flixel.FlxG;
 import flixel.addons.effects.FlxTrail;
 import flixel.addons.effects.FlxTrailArea;
 import flixel.addons.tile.FlxTilemapExt;
+import flixel.addons.ui.U;
 import flixel.effects.particles.FlxEmitter;
 import flixel.math.FlxPoint;
 import flixel.tile.FlxTilemap;
@@ -17,7 +18,7 @@ import flixel.tile.FlxTilemap;
 
 class HazardLaser extends Hazard
 {
-	
+	// Can only be placed on floors the are more than 4 tiles high 
 	private var counter:Int = Reg.CURRENT_SEED.int(0,20);
 	private var maxCounter:Int = 300;
 	private var tactive:Bool = false;
@@ -38,9 +39,10 @@ class HazardLaser extends Hazard
 		animation.add("active", [2], 0);
 		animation.add("inactive", [3], 0);
 		raytraced = false;
-		tempPoint = new FlxPoint(x, FlxG.camera.height + 16);
+		tempPoint = new FlxPoint();
 
-		origin.set(width / 2, 0);
+	    origin.set(width / 2, 0);
+		trace(getPosition, origin);
 		immovable = true;
 
 		// add a "generator" that makes clear where the laser is located.
@@ -53,21 +55,34 @@ class HazardLaser extends Hazard
 		switchingStates(); 
 		solid = tactive;
 		
-		
 		if (!raytraced && isOnScreen() && _appeared)
 		{
 			raytraced = true;
-			if (tempPoint != null)
-				{
-				Reg.PS.map.ray(new FlxPoint(x, y), new FlxPoint(x, y + FlxG.camera.height + 16), tempPoint);
+				var ori = new FlxPoint(x, y);
+				var dest = new FlxPoint(x, FlxG.height);
+			
+			    ori.x =  U.clamp(ori.x, x, FlxG.width);
+				ori.y = U.clamp(ori.y, y, FlxG.height);
+				dest.x = U.clamp(dest.x, x, FlxG.width);
+				dest.y = U.clamp(dest.y, y, FlxG.height-14);
+				
+			
+				
+				Reg.PS.map.ray(ori, dest, tempPoint);
 				tempHeight = FlxMath.distanceToPoint(this, tempPoint);
+				
 				setGraphicSize(8, tempHeight);
+				trace(dest.y);
+				trace(tempHeight);
 				makeEmitter();
-				}
+			
 		
 		}
 		
-		checkEmitter();
+	
+		if(emitter != null)
+	    checkEmitter();
+		
 		checkForScroll();
         if (tactive)
 		{
@@ -83,7 +98,6 @@ class HazardLaser extends Hazard
 			scale.x = 0.25;
 			animation.play("inactive");
 		}
-	
 		
 		super.update(elapsed);
      }
@@ -102,14 +116,15 @@ class HazardLaser extends Hazard
 	 
 	 private function checkEmitter()
 	 {
-		 if (_appeared && isOnScreen() )
-		 {
+		if (_appeared && isOnScreen() )
+		{
 		if (tactive)
 			emitter.emitting = true;
 		else
 		    emitter.emitting = false;
-		 }
+		}
 	 }
+	 
 	 private function makeEmitter()
 	 {
 		emitter = Reg.PS.emitters.recycle(FlxEmitter);
@@ -129,7 +144,6 @@ class HazardLaser extends Hazard
 		emitter.velocity.start.min.y = -300;
 		emitter.velocity.start.max.y = -400;
 			
-	   
 		Reg.PS.emitters.add(emitter);
 		emitter.start(false, 0.025, 0);
 			

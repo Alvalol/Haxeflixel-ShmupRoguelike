@@ -7,7 +7,6 @@ import flixel.util.FlxTimer;
 
 class HazardMovingBlock extends Hazard
 {
-
 	private var direction:Int = 0;
 	private var MOVE_SPEED:Float = 0.5;
 	private var horizontal:Bool;

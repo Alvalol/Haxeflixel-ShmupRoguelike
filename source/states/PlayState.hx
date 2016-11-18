@@ -151,7 +151,7 @@ class PlayState extends FlxTransitionableState
 		_entities = new FlxGroup();
 		
 		#if desktop
-		FlxG.mouse.visible = true; // must always be set to false pls
+		FlxG.mouse.visible = false; // must always be set to false pls
 		#end
 		
 
@@ -181,7 +181,7 @@ class PlayState extends FlxTransitionableState
 		
 		
 		if (FlxG.mouse.justPressed)
-			createObject("objects.enemies.EnemyExplosive", FlxG.mouse.x, FlxG.mouse.y);
+			createObject("objects.hazards.HazardLaser", FlxG.mouse.x, FlxG.mouse.y);
 
 		if (FlxG.mouse.justPressedMiddle)
 			createObject("objects.items.CurseItem", FlxG.mouse.x, FlxG.mouse.y);
