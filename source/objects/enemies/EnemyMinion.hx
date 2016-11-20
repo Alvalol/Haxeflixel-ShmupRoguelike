@@ -61,6 +61,10 @@ class EnemyMinion extends Enemy
 	
 	override private function collisions()
 	{	
+		
+	  if (isTouching(FlxObject.ANY))
+		  kill();
+		  
 	  var dist = Std.int(Reg.PS.player.y) - Std.int(y);
       if (FlxG.collide(Reg.PS.enemies, this) || (FlxMath.absInt(dist) < 3 && Reg.PS.player.x < x) && !FlxG.overlap(Spawner,this))
 		  

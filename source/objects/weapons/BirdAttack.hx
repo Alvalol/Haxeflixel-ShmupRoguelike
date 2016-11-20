@@ -10,16 +10,16 @@ class BirdAttack extends FlxSprite
 {
 
 	var birds:Int = 0;
-	var desiredBirds:Int = Reg.CURRENT_SEED.int(50, 60);
+	var desiredBirds:Int = Reg.CURRENT_SEED.int(20,30);
 	var timerStarted:Bool = false;
 	var _appeared:Bool = false;
-	
+	var _aboutToKill:Bool = false;
 	
 	public function new()
 	{
-	super(0, FlxG.height / 2);
-	makeGraphic(4, 4, FlxColor.PINK);
-	visible = false; // will be false
+		super(-10, FlxG.height / 2);
+		makeGraphic(4, 4, FlxColor.PINK);
+		visible = false; // will be false
 	}
 	
 	override public function update(elapsed:Float):Void 
@@ -40,29 +40,32 @@ class BirdAttack extends FlxSprite
 		super.update(elapsed);
 	
     }
-
 	
 	private function createBirds()
 	{
         if (birds <= desiredBirds)
 		{
-			var newbird = new objects.weapons.BirdBomb(x, y);
-			var newbird2 = new BirdBomb(x + Reg.CURRENT_SEED.int( -10, 10), y + Reg.CURRENT_SEED.int( -10, 10));
-			var newbird3 = new BirdBomb(x + Reg.CURRENT_SEED.int( -10, 10), y + Reg.CURRENT_SEED.int( -10, 10));
-			Reg.PS.add(newbird);
-			Reg.PS.add(newbird2);
-			Reg.PS.add(newbird3);
-			birds += 3;
+			var simultbirds = 2;
+			for (i in 0...simultbirds)
+			{
+				var newbird = new BirdBomb(x, y);
+				Reg.PS.add(newbird);
+				birds++;
+			}
+			
 			if (!FlxSpriteUtil.isFlickering(Reg.PS.player))
 		    FlxSpriteUtil.flicker(Reg.PS.player, 0, 0.05);
 		}
 		else
 		{
-			if (FlxSpriteUtil.isFlickering(Reg.PS.player))
+			if (FlxSpriteUtil.isFlickering(Reg.PS.player) && !_aboutToKill)
+			{
+		    _aboutToKill = true;
 			new FlxTimer().start(1.5, function(_) {
-			FlxSpriteUtil.stopFlickering(Reg.PS.player);
+			FlxSpriteUtil.stopFlickering(Reg.PS.player); kill();
 			}, 1);
-			kill();
+			}
+
 		}
 	}
 }

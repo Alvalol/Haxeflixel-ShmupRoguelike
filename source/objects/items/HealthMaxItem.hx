@@ -12,7 +12,7 @@ class HealthMaxItem extends Item
 	{
 		super(x, y);
 		loadGraphic(AssetPaths.items__png, true, 8,8);
-		animation.add("static", [36,37,38,39,40,41,42,43],12);
+		animation.add("static", [36],12);
 		animation.play("static");
 	//	color = new FlxColor(0xFF00FF00);
 		set_name("MAX HP UP");
@@ -22,7 +22,7 @@ class HealthMaxItem extends Item
 	{
 		if (player.MAX_HP < player.MAX_POSSIBLE_HP)
 		{
-		player.MAX_HP ++;
+		player.MAX_HP++;
 		player.HP = player.MAX_HP;
 		}
 		

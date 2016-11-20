@@ -9,7 +9,9 @@ class BirdAttackItem extends Item
 	public function new(x:Float, y:Float) 
 	{
 		super(x, y);
-		makeGraphic(8, 8, FlxColor.GREEN);
+		loadGraphic(AssetPaths.items__png, true, 8, 8);
+		animation.add("default", [17]);
+		animation.play("default");
 	}
 	
 	override public function update(elapsed:Float) 

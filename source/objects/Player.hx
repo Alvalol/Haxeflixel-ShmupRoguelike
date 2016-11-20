@@ -22,6 +22,7 @@ import flixel.math.FlxVelocity;
 import states.GameOverState;
 import states.PlayState;
 import flixel.system.FlxSound;
+import flixel.tweens.FlxTween;
 
 class Player extends FlxSprite
 {
@@ -87,7 +88,7 @@ class Player extends FlxSprite
 		setSize(4, 4);
 		
 		centerOffsets();
-		animation.add("move", [0,1,1,1,0], 16);
+		animation.add("move", [0,1,2,3,4], 16);
 		animation.play("move");
 		
 		drag.x = DECELERATION;
@@ -96,6 +97,7 @@ class Player extends FlxSprite
 		
 		comboTimer = new FlxTimer().start(0, function(_) { comboMultiplier = 1;} );
 		maxVelocity.set(HOR_MOVE_SPEED, VERT_MOVE_SPEED);
+		//FlxTween.tween(this, {y : y + 0.1 }, 0.5, {type : FlxTween.PINGPONG });
 		
 	}
 	

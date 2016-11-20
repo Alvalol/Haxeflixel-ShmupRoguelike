@@ -32,8 +32,6 @@ class BaseWeapon implements IWeapon
 		max_range = 10;
 		damage = 1;
 		bulletSpeed = 200;
-
-		
 	}
 	
 	

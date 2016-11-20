@@ -26,7 +26,7 @@ class CoinItem extends Item
 		var scalea = Reg.CURRENT_SEED.float(0.4, 0.5);
 		var scaleb = Reg.CURRENT_SEED.float(0.4, 0.5);
 		loadGraphic(AssetPaths.cube__png, true, 16, 16);
-		animation.add("idle", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15], 10);
+		animation.add("idle", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15], 16);
 		animation.play("idle");
 		scale.set(scalea, scaleb);
 		//updateHitbox();

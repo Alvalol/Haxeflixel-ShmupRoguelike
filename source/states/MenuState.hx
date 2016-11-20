@@ -53,12 +53,8 @@ class MenuState extends FlxUIState
 		saveData.data.savedSeeds = new Array<Int>();
 		saveData.flush();
 		
-		trace(saveData);
 	    background = new FlxBackdrop(AssetPaths.background__png, 1, 1, true, true);
-		
 		buildNumber = new FlxText(FlxG.width - 60, FlxG.height - 13, 0, "dev build 14", 8);
-		
-	
 		
 		title = new FlxSprite(0, 0);
 
