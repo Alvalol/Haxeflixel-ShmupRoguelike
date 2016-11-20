@@ -144,7 +144,7 @@ class Enemy extends FlxSprite
 		// Drop system must be reworked from the ground up and be implemented in a nicer way. This is a placeholder.
 		 
 		var itemRoll = Reg.CURRENT_SEED.int(0,100);
-		if (itemRoll < 5 + Reg.itemDropMod)
+		if (itemRoll < 50 + Reg.itemDropMod)
 		{
 			var tObject:Item =	Reg.CURRENT_SEED.getObject(list,rate);			
 			Reg.PS.items.add(tObject);

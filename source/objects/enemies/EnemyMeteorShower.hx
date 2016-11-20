@@ -20,7 +20,7 @@ class EnemyMeteorShower extends Enemy
 		super(x ,10);
 		HP = 1;
 		makeGraphic(4, 4, FlxColor.PINK);
-		visible = true;
+		visible = false;
 	}
 	
 	

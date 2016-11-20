@@ -124,9 +124,6 @@ class PlayState extends FlxTransitionableState
 		Reg.PS = this;
 		Reg.pause = false;
 		resetCurses();
-		
-		FlxNapeSpace.init();
-	
 
 		// init gameplay elements
 		player = new Player(10, FlxG.height / 2);
@@ -155,7 +152,16 @@ class PlayState extends FlxTransitionableState
 		#end
 		
 
+		if (map == null)
+		{
 		map = LevelLoaderProc.loadGeneratedLevel();
+		}
+		else
+		{
+			map.destroy();
+		    map = LevelLoaderProc.loadGeneratedLevel();
+		}
+		
 		backDrop = new FlxBackdrop(AssetPaths.background__png, 0.01, 0.01, true, true);
 
 		cameraSetup();
@@ -173,15 +179,15 @@ class PlayState extends FlxTransitionableState
 		if (!Reg.pause)
 		super.update(elapsed);
 		
+		
 		#if desktop
 		controlPauseScreen();
 		Gamepad.checkForGamepad();
 		Gamepad.updateGameInputs();
 		Gamepad.checkForExit();
-		
-		
+	
 		if (FlxG.mouse.justPressed)
-			createObject("objects.hazards.HazardLaser", FlxG.mouse.x, FlxG.mouse.y);
+			createObject("objects.items.BirdAttackItem", FlxG.mouse.x, FlxG.mouse.y);
 
 		if (FlxG.mouse.justPressedMiddle)
 			createObject("objects.items.CurseItem", FlxG.mouse.x, FlxG.mouse.y);
@@ -235,7 +241,7 @@ class PlayState extends FlxTransitionableState
 	private function createObject(objectType:Dynamic,_x:Float,_y:Float)
 	{
 			var objType:Class<Dynamic> = Type.resolveClass(objectType);
-			var objToAdd =  Type.createInstance(objType, [_x, _y]);
+			var objToAdd = Type.createInstance(objType, [_x, _y]);
 			
 			if (objToAdd != null)
 			{

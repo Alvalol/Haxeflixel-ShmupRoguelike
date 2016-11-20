@@ -3,6 +3,7 @@ import flixel.FlxG;
 import flixel.input.gamepad.FlxGamepad;
 import flixel.util.FlxTimer;
 import openfl.system.System;
+import states.MenuState;
 import states.PlayState;
 import utils.pcg.MapChunkMerger;
 
@@ -38,6 +39,7 @@ public static var GAMEPAD:FlxGamepad;
 			{//ugly but good until I rework on this whole mess.
 				System.exit(0);
 			}
+
 		}
 	}
 	
@@ -77,11 +79,6 @@ public static var GAMEPAD:FlxGamepad;
 		if(GAMEPAD.justPressed.GUIDE)
 		{
 			Reg.pause = !Reg.pause;
-		}
-		
-		if (GAMEPAD.pressed.BACK)
-		{
-			FlxG.resetState();
 		}
 			
 		if (GAMEPAD.justReleased.ANY)
@@ -135,11 +132,6 @@ public static var GAMEPAD:FlxGamepad;
 			Reg.pause = !Reg.pause;
 		}
 		
-		
-		if ( FlxG.keys.justPressed.R)
-		{
-			FlxG.resetState();
-		}
 			
 		if ( FlxG.keys.justReleased.ANY)
 		{

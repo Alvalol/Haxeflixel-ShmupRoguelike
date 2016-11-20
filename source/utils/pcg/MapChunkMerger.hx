@@ -31,7 +31,7 @@ class MapChunkMerger
 	
 	public static function makeCleanArray():Array<Array<Int>>
 	{
-
+		makeSeed();
 		CHUNKS = [];
 		flowChunk();
 		CHUNKDATA = new Array<Array<Int>>();
@@ -195,10 +195,11 @@ class MapChunkMerger
 	public static function makeSeed()
 	{
 		if (!Reg.SEEDED)
-		    Reg.CURRENT_SEED = new FlxRandom(FlxG.random.int(0, 999999999)); 
+		    Reg.CURRENT_SEED = new FlxRandom(FlxG.random.int(0, 99999999));
 		else
 		   Reg.CURRENT_SEED = new FlxRandom(Reg.masterSeed);
-	}
+	
+    }
 	
 
 	private static function changeTypeAndRange()

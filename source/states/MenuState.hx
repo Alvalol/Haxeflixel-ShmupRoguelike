@@ -12,6 +12,7 @@ import flixel.math.FlxRect;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
+import flixel.util.FlxSave;
 import utils.controls.Gamepad;
 import flixel.addons.display.FlxBackdrop;
 import flixel.addons.transition.FlxTransitionableState;
@@ -22,6 +23,8 @@ import flixel.util.FlxColor;
 #if !desktop
 import flixel.input.touch.FlxTouch;
 #end
+import utils.pcg.MapChunk;
+import utils.pcg.MapChunkMerger;
 
 
 class MenuState extends FlxUIState
@@ -35,6 +38,8 @@ class MenuState extends FlxUIState
 	var seedValue:Int;
 	var startButton:FlxButton;
 	
+	var saveData:FlxSave;
+	
 	override public function create():Void
 	{
 		super.create();
@@ -42,7 +47,13 @@ class MenuState extends FlxUIState
 		#if desktop
 		FlxG.mouse.visible = true;
 		#end
-
+		
+		saveData = new FlxSave();
+		saveData.bind("save");
+		saveData.data.savedSeeds = new Array<Int>();
+		saveData.flush();
+		
+		trace(saveData);
 	    background = new FlxBackdrop(AssetPaths.background__png, 1, 1, true, true);
 		
 		buildNumber = new FlxText(FlxG.width - 60, FlxG.height - 13, 0, "dev build 14", 8);
@@ -59,14 +70,13 @@ class MenuState extends FlxUIState
 		options.loadGraphic(AssetPaths.options__png, false, 256, 144);
 		bars.loadGraphic(AssetPaths.bars__png, false, 256, 144);
 		
-		setupInputSeed();
-
+		
 		add(background);
+		setupInputSeed();
 
 		add(title);
 		add(options);
 		add(bars);
-		add(seedInput);
 		add(buildNumber);
 		FlxTransitionableState.defaultTransIn = new TransitionData();
 		FlxTransitionableState.defaultTransOut = new TransitionData();
@@ -99,8 +109,6 @@ class MenuState extends FlxUIState
 		
 	}
 	
-
-
 	private function setupInputSeed()
 	{	
 		seedInput = new FlxInputText((FlxG.width / 2) - 30, (FlxG.height  / 2) + 10, 70, "Enter seed", 8, FlxColor.WHITE, FlxColor.BLACK);
@@ -109,10 +117,19 @@ class MenuState extends FlxUIState
 		seedInput.maxLength = 9;
 		seedInput.fieldBorderColor = FlxColor.WHITE;
 		seedInput.fieldBorderThickness = 1;
+		
+		var seedText = new FlxText(seedInput.x - 25, seedInput.y, 0, "SEED", 8);
+		seedText.font = AssetPaths.smallfont__ttf;
+		seedText.color = FlxColor.WHITE;
+		add(seedInput);
+		add(seedText);
+		FlxG.log.redirectTraces = true;
 	}
 	override public function update(elapsed:Float):Void
 	{
 		
+		trace(Reg.CURRENT_SEED);
+        trace(saveData.data);
 		background.x += 0.5;
 		move();
 
@@ -122,9 +139,8 @@ class MenuState extends FlxUIState
 		if (Gamepad.GAMEPAD != null && (Gamepad.GAMEPAD.justPressed.A || Gamepad.GAMEPAD.justPressed.START))
 			startGame();
  
-		if (FlxG.keys.anyJustPressed([ENTER]))
+		if (FlxG.keys.anyJustPressed([ENTER, SPACE, M,O]))
 			startGame();
-			
 
 		
 		#else
@@ -138,7 +154,7 @@ class MenuState extends FlxUIState
 			
 	}
 	
-		private function move()
+	private function move()
 	{
 		var sinFactor = 0.05;
 		var factor = 0.05;
@@ -154,11 +170,13 @@ class MenuState extends FlxUIState
 	   {
 			Reg.SEEDED = false;
 			FlxG.switchState(new PlayState());
+			saveData.data.savedSeeds.push(Reg.CURRENT_SEED);
 	   }
 	   else
 		{
 		   Reg.SEEDED = true;
 		   Reg.masterSeed =  Std.parseInt(seedInput.text);
+		   saveData.data.savedSeeds.push(Reg.CURRENT_SEED);
 		   FlxG.switchState(new PlayState());
 		}
 

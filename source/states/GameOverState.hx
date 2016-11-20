@@ -5,6 +5,7 @@ import flixel.FlxSprite;
 import flixel.addons.display.FlxBackdrop;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.math.FlxPoint;
+import flixel.math.FlxRandom;
 import flixel.text.FlxText;
 import flixel.FlxCamera;
 import flixel.FlxObject;
@@ -30,9 +31,9 @@ class GameOverSubState extends FlxTransitionableState
 		FlxG.mouse.visible = true; // must always be set to false pls
 		#end
 		  
-		placeholderText = new FlxSprite(0, 0);
+		//placeholderText = new FlxSprite(0, 0);
 		background = new FlxBackdrop(AssetPaths.background__png, 1, 1, true, true);
-		placeholderText.loadGraphic(AssetPaths.gameoverplaceholder__png, false, FlxG.width, FlxG.height);
+		//placeholderText.loadGraphic(AssetPaths.gameoverplaceholder__png, false, FlxG.width, FlxG.height);
 
 		_textScore = new FlxText(FlxG.width / 2 - 18, 40, FlxG.width, "SCORE : " + Reg.score);
 		_textScore.text =  StringTools.lpad(Std.string(Reg.score), "0", 5);
@@ -42,10 +43,20 @@ class GameOverSubState extends FlxTransitionableState
 		{
 			member.setFormat(AssetPaths.smallfont__ttf, 8, FlxColor.WHITE, FlxTextBorderStyle.OUTLINE, 0xffffffff);
 		});	
-	
+		
+		var buttonRestart = new FlxButton(FlxG.camera.width/ 2, FlxG.height / 2, "NEW GAME", onClick);
+		var buttonSeed = new FlxButton(FlxG.camera.width  / 2, (FlxG.height / 2) + 20, "MAIN MENU", onClickSeed);
+		var sameSeed = new FlxButton(FlxG.camera.width / 2, FlxG.height / 2 + 40, "RETRY", onClickSameSeed);
+		
 		add(background);	
-		add(placeholderText);	
+		//add(placeholderText);	
 		add(_textScore);			
+	    
+		add(buttonRestart);
+		add(buttonSeed);
+		if(Reg.SEEDED)
+	    add(sameSeed);
+
 	}
 	
 	override public function update(elapsed:Float)
@@ -53,23 +64,29 @@ class GameOverSubState extends FlxTransitionableState
 		super.update(elapsed);
 		background.x += 0.5;
 		
-		#if desktop
-		if (FlxG.keys.anyJustPressed([ENTER]))
-		    onClick();
-		#else
-		  for (touch in FlxG.touches.list)
-		{
-			if (touch.justPressed) { onClick(); };
-		}
-		#end
+		
 	}
 	
 	public function onClick()
 	{
+		Reg.SEEDED = false;
 		FlxG.switchState(new PlayState());
 		
 		// implement restart / main menu buttons / options.
 		// only if not playing the daily seed.
+	}
+	
+	public function onClickSeed()
+	{
+		Reg.SEEDED = false;
+		FlxG.switchState(new MenuState());
+	}
+	
+	public function onClickSameSeed()
+	{
+		Reg.SEEDED = true;
+		Reg.CURRENT_SEED = new FlxRandom(Reg.masterSeed);
+		FlxG.switchState(new PlayState());
 	}
 	
 }

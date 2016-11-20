@@ -25,7 +25,6 @@ class EnemyMeteor extends Enemy
 	
 	override public function update(elapsed:Float) 
 	{
-		
 	    move();
 		super.update(elapsed);
 	}

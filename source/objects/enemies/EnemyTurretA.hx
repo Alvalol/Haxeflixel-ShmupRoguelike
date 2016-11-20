@@ -10,6 +10,7 @@ import flixel.math.FlxPoint;
 import flixel.tile.FlxBaseTilemap;
 import flixel.math.FlxVelocity;
 import objects.enemies.Enemy;
+import objects.items.BirdAttackItem;
 import objects.items.CoinItem;
 import objects.items.DamageUpItem;
 import objects.items.HealthItem;
@@ -130,8 +131,8 @@ class EnemyTurretA extends Enemy
 	
 	override public function kill():Void
 	{
-	    drops = [new HealthItem(x, y), new SpreadItem(x,y)];// , new HealthMaxItem(x, y), new HealthMaxItem(x, y)];
-		dropRate = [0.25,0.025];
+	    drops = [new HealthItem(x, y), new SpreadItem(x,y), new BirdAttackItem(x,y)];// , new HealthMaxItem(x, y), new HealthMaxItem(x, y)];
+		dropRate = [0.25,0.025,0.75];
 		dropItem(drops,dropRate);
 		super.kill();
 	}

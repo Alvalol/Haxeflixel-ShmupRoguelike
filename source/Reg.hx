@@ -18,6 +18,7 @@ class Reg
 	public static var masterSeed:Int; // set seed to wtv from 0 to 2147483647.
 	public static var pause:Bool = false;
 	public static var CURRENT_SEED:FlxRandom;
+	public static var LAST_SEED:Int;
 	
 	public static var score:Float = 0;
 	public static var availableItems:Array<Int> = [2, 3, 4, 5]; // hacky af and not implemented

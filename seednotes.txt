@@ -1,0 +1,15 @@
+Seed notes : 
+
+- Player enters game
+
+
+- Player can ENTER SEED => Game uses it to generate level.
+   => Player dies
+   => Player can > REPLAY SAME SEED / GET RANDOM SEED / GO TO MAIN MENU
+
+- Player DOES NOT enter SEED => Game generates one for him => Game generates level
+   => Player dies
+   => Player can > GET RANDOM SEED > GO TO MAIN MENU
+   
+   
+   22740138

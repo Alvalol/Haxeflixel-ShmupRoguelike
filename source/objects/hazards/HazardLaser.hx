@@ -42,7 +42,6 @@ class HazardLaser extends Hazard
 		tempPoint = new FlxPoint();
 
 	    origin.set(width / 2, 0);
-		trace(getPosition, origin);
 		immovable = true;
 
 		// add a "generator" that makes clear where the laser is located.
@@ -72,8 +71,6 @@ class HazardLaser extends Hazard
 				tempHeight = FlxMath.distanceToPoint(this, tempPoint);
 				
 				setGraphicSize(8, tempHeight);
-				trace(dest.y);
-				trace(tempHeight);
 				makeEmitter();
 			
 		

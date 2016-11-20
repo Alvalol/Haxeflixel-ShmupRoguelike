@@ -25,9 +25,6 @@ class BaseWeapon implements IWeapon
 	private var maxSpread:Int = 3;
 	
 	
-	private var _sndShoot:FlxSound;
-	
-	
 	public function new(_x:Float, _y:Float)
 	{
 		location = new FlxPoint(_x, _y);
@@ -35,8 +32,7 @@ class BaseWeapon implements IWeapon
 		max_range = 10;
 		damage = 1;
 		bulletSpeed = 200;
-	
-		_sndShoot = FlxG.sound.load(AssetPaths.shoot__wav, 0.25, false, null);
+
 		
 	}
 	
