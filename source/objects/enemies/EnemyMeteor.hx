@@ -31,7 +31,7 @@ class EnemyMeteor extends Enemy
 	
 	override function collisions() 
 	{
-		if (isTouching(FlxObject.ANY) && isOnScreen())// || FlxG.collide(Reg.PS.map,this)
+		if (isTouching(FlxObject.ANY) && isOnScreen())
 			kill();
 		
 		super.collisions();

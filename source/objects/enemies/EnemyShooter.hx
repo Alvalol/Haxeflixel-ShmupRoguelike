@@ -103,7 +103,7 @@ class EnemyShooter extends Enemy
 		{
 			var eb:EnemyBullet = Reg.PS.EBullets.recycle();
 	        if (eb == null)
-		        eb = new EnemyBullet(x, y);	
+		        eb = new EnemyBullet(x, y);
 			
 			eb.velocity.x = SHOOT_SPEED;
 			Reg.PS.EBullets.add(eb);

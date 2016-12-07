@@ -32,6 +32,7 @@ import objects.hazards.HazardLaser;
 import objects.items.CurseItem;
 import objects.items.Item;
 import flixel.addons.effects.FlxTrailArea;
+import objects.weapons.BirdBomb;
 import openfl.display.BitmapData;
 import openfl.filesystem.File;
 import openfl.system.ApplicationDomain;
@@ -83,6 +84,7 @@ class PlayState extends FlxTransitionableState
 	public var EExplosions:FlxTypedGroup<EnemyExplosiveExplosion>;
 	public var HBullets:FlxTypedGroup<HazardBullet>;
 	public var enemies(default, null):FlxTypedGroup<Enemy>;
+	public var birdBombs:FlxTypedGroup<BirdBomb>;
 	public var items(default, null):FlxTypedGroup<Item>;
 	public var emitters:FlxTypedGroup<FlxEmitter>;
 	public var coins:FlxTypedGroup <CoinItem>;
@@ -145,6 +147,7 @@ class PlayState extends FlxTransitionableState
 		EExplosions = new FlxTypedGroup<EnemyExplosiveExplosion>();
 		HBullets = new FlxTypedGroup<HazardBullet>();
 		emitters = new FlxTypedGroup<FlxEmitter>();
+		birdBombs = new FlxTypedGroup<BirdBomb>();
 		_entities = new FlxGroup();
 		
 		#if desktop
@@ -178,7 +181,7 @@ class PlayState extends FlxTransitionableState
 	{
 		if (!Reg.pause)
 		super.update(elapsed);
-		
+	
 		
 		#if desktop
 		controlPauseScreen();
@@ -196,11 +199,14 @@ class PlayState extends FlxTransitionableState
 		mobileControls();
 		#end
 		
+
+		
 		displayTracers();
 		addLevelObjects();
 	    updateTrailArea();
 		trailArea.update(elapsed);
 		
+		trace(birdBombs.length);
 
 		cursedAppearance();
 		// PLACEHOLDER	
@@ -304,7 +310,7 @@ class PlayState extends FlxTransitionableState
 		_entities.add(items);
 		_entities.add(hazards);
 		_entities.add(enemies);
-
+		_entities.add(birdBombs);
 		_entities.add(emitters);
 		_entities.add(coins);
 		_entities.add(EBullets);

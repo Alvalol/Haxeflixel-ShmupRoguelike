@@ -27,7 +27,7 @@ class HazardBullet extends FlxSprite
 	
 	override public function update(elapsed:Float):Void 
 	{
-		angle+= 5;
+		//angle+= 5;
 		collisions();
 		velocity.y = BULLET_SPEED;		
 		if(!Reg.pause)

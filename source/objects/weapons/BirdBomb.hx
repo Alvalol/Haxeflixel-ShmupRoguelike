@@ -19,15 +19,16 @@ class BirdBomb extends FlxSprite
         loadGraphic(AssetPaths.items__png, true, 8, 8);
 		animation.add("default", [24, 25], 12, true);
 		animation.play("default");
-		scale.set(2, 2);
 		destination = new FlxPoint(FlxG.camera.scroll.x + FlxG.camera.width * 2, Reg.CURRENT_SEED.int(-10, FlxG.camera.height+10));
 	}
 	
-	
 	override public function update(elapsed:Float):Void 
 	{
+	
 		move();
 		collisions();
+		
+		if(!Reg.pause)
 		super.update(elapsed);
 	}
 	
@@ -39,10 +40,11 @@ class BirdBomb extends FlxSprite
 	private function collisions()
 	{
 		
-		if (x >= FlxG.camera.scroll.x + FlxG.camera.width + 10)
+		if (x >= FlxG.camera.scroll.x + FlxG.camera.width + 10 && alive)
 		{
 			kill();
 		}
+
 		
 		if (x <= FlxG.camera.scroll.x + FlxG.camera.width)
 		{
@@ -53,7 +55,10 @@ class BirdBomb extends FlxSprite
 	
 	private function killBoth(enemy:FlxSprite, bird:FlxSprite)
 	{
+		if(bird.isOnScreen())
 		bird.kill();
+		
+		if(enemy.isOnScreen())
 		enemy.kill();
 	}
 	

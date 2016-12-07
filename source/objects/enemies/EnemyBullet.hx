@@ -6,25 +6,29 @@ import flixel.util.FlxColor;
 import flixel.FlxObject;
 import flixel.FlxG;
 import objects.effects.NoHit;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 
 class EnemyBullet extends FlxSprite
 {
 	private var creatednoHit = false;
-	
-	public function new(x:Float,y:Float) 
+
+	public function new(x:Float, y:Float)
 	{
 		super(x, y);
 		loadGraphic(AssetPaths.items__png, true, 8, 8);
 		animation.add("idle", [22,23], 8, true); // looping the animation gives it an interesting wobbly effect which might be desirable for some enemies.
 		animation.play("idle");
 		width = 8;
-
+        // Needs flx tween
 	}
 	
 	override public function update(elapsed:Float):Void
 	{
 		collisions();
-		angle+= 5;
+		//angle+= 5;
+		
+
 			
 		if(!Reg.pause)
 		super.update(elapsed);
@@ -78,12 +82,12 @@ class EnemyBullet extends FlxSprite
 	
 	override public function kill()
 	{	
-     	super.kill();
+		super.kill();
 	}
 	
 	override public function revive()
 	{
-
+		
 		super.revive();
 	}
 	

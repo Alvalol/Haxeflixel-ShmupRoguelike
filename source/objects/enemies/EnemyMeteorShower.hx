@@ -26,8 +26,8 @@ class EnemyMeteorShower extends Enemy
 	
 	override public function update(elapsed:Float):Void 
 	{
-		y = Reg.CURRENT_SEED.int(10, FlxG.height - 10);
-		x = FlxG.camera.scroll.x + FlxG.width;
+		y = Reg.CURRENT_SEED.int(10, FlxG.camera.height - 10);
+		x = FlxG.camera.scroll.x + FlxG.camera.width;
 		
 		if (_appeared)
 		{

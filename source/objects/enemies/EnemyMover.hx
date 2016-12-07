@@ -45,7 +45,7 @@ class EnemyMover extends Enemy
 	override public function kill():Void
 	{	
 		drops = [new WeaponLaserItem(x, y), new SpeedItem(x, y)];
-	    dropRate = [0.1,0.5];
+	    dropRate = [0.1,0.1];
 		dropItem(drops, dropRate);
 		
 		super.kill();

@@ -27,7 +27,7 @@ class EnemyMultishotDeath extends Enemy
 		HP = 3;
 		loadGraphic(AssetPaths.enemies__png, true, 8, 8, true);
 		animation.add("default", [18, 19, 20], 8, true);
-		setGraphicSize(16, 16);
+		//setGraphicSize(16, 16);
 		animation.play("default");
 		updateHitbox();
 	}
