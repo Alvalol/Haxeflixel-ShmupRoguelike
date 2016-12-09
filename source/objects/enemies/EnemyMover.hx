@@ -12,6 +12,7 @@ import flixel.math.FlxMath;
 import objects.items.SpeedDownItem;
 import objects.items.SpeedItem;
 import objects.items.WeaponLaserItem;
+import objects.items.DropWeaponItem;
 
 
 class EnemyMover extends Enemy
@@ -38,14 +39,16 @@ class EnemyMover extends Enemy
 		{
 		move();
 		}
+			
+		if (!Reg.pause && Reg.hatched)
 		super.update(elapsed);		
 	}
 	
 	
 	override public function kill():Void
 	{	
-		drops = [new WeaponLaserItem(x, y), new SpeedItem(x, y)];
-	    dropRate = [0.1,0.1];
+		drops = [new WeaponLaserItem(x, y), new SpeedItem(x, y), new DropWeaponItem(x,y)];
+	    dropRate = [0.1,0.5,1];
 		dropItem(drops, dropRate);
 		
 		super.kill();

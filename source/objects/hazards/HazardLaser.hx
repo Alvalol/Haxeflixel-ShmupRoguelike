@@ -96,6 +96,8 @@ class HazardLaser extends Hazard
 			animation.play("inactive");
 		}
 		
+		
+		if (!Reg.pause && Reg.hatched)
 		super.update(elapsed);
      }
 	 

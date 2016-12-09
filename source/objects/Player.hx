@@ -11,10 +11,12 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxTimer;
 import objects.effects.NewBullEffect;
 import objects.effects.NoHit;
+import objects.items.DropWeaponItem;
 import objects.weapons.BaseWeapon;
 import objects.weapons.IWeapon;
 import objects.weapons.BackWeapon;
 import objects.weapons.LaserWeapon;
+import objects.weapons.DropWeapon;
 
 import flixel.util.FlxSpriteUtil;
 import utils.controls.Keyboard;
@@ -29,10 +31,10 @@ class Player extends FlxSprite
 	private static inline var ACCELERATION:Int = 800;
 	private static inline var DECELERATION:Int = 800;
 	
-	public var HOR_MOVE_SPEED:Float = 50;
-	public var VERT_MOVE_SPEED:Float = 68;
+	public var HOR_MOVE_SPEED:Float = 70;
+	public var VERT_MOVE_SPEED:Float = 70;
 	
-	public var MAX_HOR_MOVE_SPEED:Int = 80;
+	public var MAX_HOR_MOVE_SPEED:Int = 100;
 	public var MAX_VERT_MOVE_SPEED:Int = 100;
 	
 	public var MAGNET:Bool = false;
@@ -56,8 +58,6 @@ class Player extends FlxSprite
 	var bullEffect:NewBullEffect;
 	var addedBull:Bool = false;
 
-	
-
 	var shooting:Bool = false;
 	var hpflicker:Bool = false;
 	
@@ -78,7 +78,7 @@ class Player extends FlxSprite
 		HP = 3; 
 		MAX_HP = 3;
 		
-		weapons = [new BaseWeapon(x, y)];
+		weapons = [new BaseWeapon(x,y)];
 		currentCurses = new Array<String>();
 
 		bullEffect = new NewBullEffect(x, y);
@@ -103,8 +103,8 @@ class Player extends FlxSprite
 	
 	override public function update(elapsed:Float):Void
 	{	
-		if (!shooting)
-		move_right();
+		//if (!shooting)
+		//move_right();
 
 		if (Reg.mirrorControls)
 		{
@@ -121,48 +121,32 @@ class Player extends FlxSprite
 		
 
 		timeLeft = comboTimer.timeLeft;
-		
-		
 
 		collisions();
 
 		   
-		  if (!addedBull)
+		if (!addedBull)
 		  {
 		   Reg.PS.effects.add(bullEffect);
 		   addedBull = true;
 		  }
 		  
-		  
-		bullEffect.setPosition(x+6, y-2);
-		  
+		bullEffect.setPosition(x+6, y-2);	  
 		basicChecks(elapsed);
 		
 		
 		if (!Reg.pause)
 		{
+			if(Reg.hatched)
 		    super.update(elapsed);
 			
 			for (weapon in weapons)
 			{
 			weapon.update_location(new FlxPoint(x, y));
 			}
-		}
-			
-		//displayTrace();
-		
+		}	
 	}
 	
-	
-	private function displayTrace()
-	{
-		
-	  if (Reg.CURRENT_SEED.int(0,100) > 40 && (acceleration.x != 0  || acceleration.y != 0))
-		{
-		var tracePlayer = new objects.effects.PlayerTrace(x - 8, y-2);
-		Reg.PS.effects.add(tracePlayer);
-		}
-	}
 	
 	public function resetComboTimer()
 	{
@@ -175,8 +159,6 @@ class Player extends FlxSprite
 	private function cheat()
 	{
 			HP = 1;
-			
-		
 	}
 	
 	private function collisions()
@@ -190,9 +172,10 @@ class Player extends FlxSprite
 				damage();
 		   }
 		   }
-		   if (x <= FlxG.camera.scroll.x)
+		   if (x <= FlxG.camera.scroll.x && Reg.hatched)
 			   damage();
 		}
+		
 		FlxObject.separate(this, Reg.PS.map);
 	}
 	
@@ -200,6 +183,7 @@ class Player extends FlxSprite
 	{
 	 return comboTimer.timeLeft;
 	}
+	
 	private function basicChecks(elapsed:Float)
 	{
 		if (alive)
@@ -214,43 +198,47 @@ class Player extends FlxSprite
 	{
 		move_up();
 		move_down();
+		move_left();
+		move_right();
 	}
 	
 	public function resetAccel()
 	{
-		acceleration.x = 0;
-		acceleration.y = 0;		
+		velocity.x = 0;
+		velocity.y = 0;
+
 	}
 		
 	public function move_up()
 	{
-			acceleration.y -= ACCELERATION;
+			velocity.y -= ACCELERATION / 30;
 	}
 	
 	public function move_right()
 	{
-		    velocity.x += ACCELERATION / 40;	
+		    velocity.x += ACCELERATION / 30;	
 	}
 	
 	public function move_down()
 	{
-		  acceleration.y += ACCELERATION;
+		  velocity.y += ACCELERATION / 30;
 	}
 
 	public function move_left()
 	{
-		    velocity.x -= ACCELERATION / 55;
+		
+		    velocity.x -= ACCELERATION / 30;
 	}
 	
-	// TODO : Complete reimplementation to support different types of "weapons"  
 	
 	public function shoot()
 	{
 		
-		if (!Reg.pause && HP > 0)
+		if (!Reg.pause && HP > 0 && !FlxG.collide(this,Reg.PS.map)) // fix the shooting inside walls pls.
 		{
 		bullEffect.set_visible(true);
-		move_left();
+		//if(Reg.hatched)
+		//  move_left();
 		
 		shooting = true;
 		
@@ -282,9 +270,13 @@ class Player extends FlxSprite
 
 		var emitter = new FlxEmitter();
 		emitter.setPosition(x, y);
-		emitter.makeParticles(2,2, FlxColor.WHITE, 50);
+		emitter.loadParticles(AssetPaths.particle__png, 150, 0, true, true);
+
 		emitter.launchMode = FlxEmitterMode.CIRCLE;
-		emitter.lifespan.set(0.2, 2);
+		emitter.scale.set(0.5, 0.5);
+		emitter.angularVelocity.set(-400, 400, 400, -400);
+		emitter.lifespan.set(1, 3);
+		emitter.alpha.set(1, 1, 0, 0);
 		Reg.PS.emitters.add(emitter);
 		emitter.start(true, 0.5, 50);	
 		new FlxTimer().start(2.5, function(_)

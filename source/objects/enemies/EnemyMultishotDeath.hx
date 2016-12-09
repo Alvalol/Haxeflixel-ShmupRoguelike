@@ -38,6 +38,7 @@ class EnemyMultishotDeath extends Enemy
 			shoot();
 
 
+		if (!Reg.pause && Reg.hatched)
 		super.update(elapsed);
 	}
 	
@@ -60,7 +61,7 @@ class EnemyMultishotDeath extends Enemy
 		eb.reset(x + 5, y);
 		eb.scale.set(0.75,0.75);
 
-		_angle += 45;
+		_angle += 90;
 		angle = _angle;
 		eb.velocity.set(FlxVelocity.velocityFromAngle(_angle, bulletSpeed).x,FlxVelocity.velocityFromAngle(_angle, bulletSpeed).y);
 		eb.set_angle(_angle);
@@ -83,7 +84,7 @@ class EnemyMultishotDeath extends Enemy
 			eb.reset(x, y);
 		
 			eb.velocity.set(FlxVelocity.velocityFromAngle(tang, bulletSpeed).x,FlxVelocity.velocityFromAngle(tang, bulletSpeed).y);
-			tang += 45;
+			tang += 90;
 			eb.scale.set(0.5,0.5);
 			Reg.PS.EBullets.add(eb);
 		}

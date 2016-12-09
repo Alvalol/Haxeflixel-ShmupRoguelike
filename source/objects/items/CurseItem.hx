@@ -20,6 +20,8 @@ class CurseItem extends Item
 		sinTween.active = false;
 	}
 	
+	// ***** bird to be implemented 
+	/// thronecode cannot know about this.
 	override public function update(elapsed:Float) 
 	{
 		moveToPlayer();
@@ -31,10 +33,8 @@ class CurseItem extends Item
 	   FlxVelocity.accelerateTowardsObject(this, Reg.PS.player, 2000, 1000);
 	}
 	
-	
 	override public function interact(player:Player)
 	{
-		
 		pickCurse();
 		kill();
 		super.interact(player);
@@ -62,7 +62,7 @@ class CurseItem extends Item
 	{
 		switch curseName
 		{
-		case "WallsHurt": Reg.wallsHurt = true;
+		case "WallsHurt": Reg.wallsHurt = true; //buggy
 		case "MirrorControls": Reg.mirrorControls = true;
 		case "ExplosiveItems": Reg.itemsExplode = true;
 		case "SlowDown" : { Reg.PS.player.HOR_MOVE_SPEED -= Reg.PS.player.HOR_MOVE_SPEED / 3;

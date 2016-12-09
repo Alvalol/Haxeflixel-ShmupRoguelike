@@ -17,6 +17,7 @@ class GameOverSubState extends FlxTransitionableState
 {
 
 	private var _textScore:FlxText;
+	private var _textHighScore:FlxText;
 	private var placeholderText:FlxSprite;
 	private var background:FlxBackdrop;
 	
@@ -36,8 +37,10 @@ class GameOverSubState extends FlxTransitionableState
 		//placeholderText.loadGraphic(AssetPaths.gameoverplaceholder__png, false, FlxG.width, FlxG.height);
 
 		_textScore = new FlxText(FlxG.width / 2 - 18, 40, FlxG.width, "SCORE : " + Reg.score);
-		_textScore.text =  StringTools.lpad(Std.string(Reg.score), "0", 5);
-		
+		//_textScore.text =  StringTools.lpad(Std.string(Reg.score), "0", 5);
+
+		_textHighScore = new FlxText(FlxG.width / 2 - 18, 50, FlxG.width, "HIGHSCORE : " + Reg.highscore);
+		//_textHighScore.text =  StringTools.lpad(Std.string(Reg.highscore), "0", 5);		
 		
 		forEachOfType(FlxText, function(member)
 		{
@@ -50,7 +53,8 @@ class GameOverSubState extends FlxTransitionableState
 		
 		add(background);	
 		//add(placeholderText);	
-		add(_textScore);			
+		add(_textScore);	
+		add(_textHighScore);
 	    
 		add(buttonRestart);
 		add(buttonSeed);

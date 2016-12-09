@@ -60,6 +60,7 @@ class Scroller extends FlxSprite
 	
 	  */
 	  if (!Reg.pause)
+	     if(Reg.hatched)
 		   super.update(elapsed);
 	 }
 }

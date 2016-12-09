@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="6">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="20" tilewidth="8" tileheight="8" nextobjectid="22">
  <properties>
-  <property name="type" value="open"/>
+  <property name="type" value="tutorial"/>
  </properties>
  <tileset firstgid="1" name="tiles" tilewidth="8" tileheight="8" tilecount="24" columns="6">
   <image source="../../../images/tiles.png" width="48" height="32"/>
@@ -11,7 +11,22 @@
    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
   </data>
  </layer>
- <objectgroup name="enemies">
-  <object id="5" type="enemyExplosive" gid="4" x="48" y="80" width="8" height="8"/>
+ <objectgroup name="hazards">
+  <object id="6" type="block" gid="2" x="40" y="64" width="8" height="8"/>
+  <object id="7" type="block" gid="2" x="48" y="64" width="8" height="8"/>
+  <object id="8" type="block" gid="2" x="40" y="72" width="8" height="8"/>
+  <object id="9" type="block" gid="2" x="48" y="72" width="8" height="8"/>
+  <object id="10" type="block" gid="2" x="72" y="24" width="8" height="8"/>
+  <object id="11" type="block" gid="2" x="64" y="32" width="8" height="8"/>
+  <object id="12" type="block" gid="2" x="72" y="32" width="8" height="8"/>
+  <object id="13" type="block" gid="2" x="64" y="24" width="8" height="8"/>
+  <object id="14" type="block" gid="2" x="24" y="120" width="8" height="8"/>
+  <object id="15" type="block" gid="2" x="16" y="128" width="8" height="8"/>
+  <object id="16" type="block" gid="2" x="24" y="128" width="8" height="8"/>
+  <object id="17" type="block" gid="2" x="16" y="120" width="8" height="8"/>
+  <object id="18" type="block" gid="2" x="80" y="128" width="8" height="8"/>
+  <object id="19" type="block" gid="2" x="72" y="136" width="8" height="8"/>
+  <object id="20" type="block" gid="2" x="80" y="136" width="8" height="8"/>
+  <object id="21" type="block" gid="2" x="72" y="128" width="8" height="8"/>
  </objectgroup>
 </map>

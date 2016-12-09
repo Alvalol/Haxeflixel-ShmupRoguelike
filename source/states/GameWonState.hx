@@ -42,7 +42,7 @@ class GameWonState extends FlxTransitionableState
 	{
 		super.update(elapsed);
 		#if desktop
-		if (FlxG.keys.anyJustPressed([ENTER]))
+		if (FlxG.keys.justPressed.ANY)
 		    onClick();
 		
         if (FlxG.keys.justPressed.ESCAPE)

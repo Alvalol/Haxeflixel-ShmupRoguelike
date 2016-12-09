@@ -26,6 +26,7 @@ import Type;
 import lime.system.Display;
 import nape.space.Space;
 import objects.effects.Barrier;
+import objects.effects.StartEgg;
 import objects.hazards.Hazard;
 import objects.hazards.HazardBullet;
 import objects.hazards.HazardLaser;
@@ -58,6 +59,7 @@ import objects.gamesys.Scroller;
 import objects.enemies.Enemy;
 import objects.items.CoinItem;
 import objects.hazards.HazardBlock;
+import flixel.util.FlxSave;
 import objects.enemies.enemyobjects.EnemyExplosiveExplosion;
 
 import flixel.FlxG;
@@ -77,6 +79,7 @@ class PlayState extends FlxTransitionableState
 	public var map:FlxTilemap;
 	public var hazards:FlxTypedGroup<Hazard>;
 	public var player(default, null):Player;
+	public var startEgg:StartEgg;
 	public var PBullets:FlxTypedGroup<Bullet>;
 	public var EBullets:FlxTypedGroup<EnemyBullet>;
 	public var blocks:FlxTypedGroup<HazardBlock>;
@@ -119,16 +122,29 @@ class PlayState extends FlxTransitionableState
 	
 	public var space:Space;
 	
+	private var checkedSave:Bool = false;
+	private var checkedScore:Bool = false;
+	
 	override public function create():Void
 	{
 		super.create();
 
+		
+
+		//FlxG.save.erase();
+		//FlxG.save.flush();
+		
 		Reg.PS = this;
 		Reg.pause = false;
+		//Reg.hatched = false;
 		resetCurses();
+		
+		
+		checkForTutorial();
 
 		// init gameplay elements
 		player = new Player(10, FlxG.height / 2);
+		startEgg = new StartEgg(10, FlxG.height / 2);
 		enemies = new FlxTypedGroup<Enemy>();
 		hazards = new FlxTypedGroup<Hazard>();
 		blocks = new FlxTypedGroup<HazardBlock>();
@@ -154,6 +170,9 @@ class PlayState extends FlxTransitionableState
 		FlxG.mouse.visible = false; // must always be set to false pls
 		#end
 		
+		
+		//FlxG.save.erase();
+	//	FlxG.save.flush();
 
 		if (map == null)
 		{
@@ -182,6 +201,8 @@ class PlayState extends FlxTransitionableState
 		if (!Reg.pause)
 		super.update(elapsed);
 	
+		checkSave();
+
 		
 		#if desktop
 		controlPauseScreen();
@@ -190,23 +211,27 @@ class PlayState extends FlxTransitionableState
 		Gamepad.checkForExit();
 	
 		if (FlxG.mouse.justPressed)
-			createObject("objects.items.BirdAttackItem", FlxG.mouse.x, FlxG.mouse.y);
+			createObject("objects.enemies.EnemyWorm", FlxG.mouse.x, FlxG.mouse.y);
 
-		if (FlxG.mouse.justPressedMiddle)
-			createObject("objects.items.CurseItem", FlxG.mouse.x, FlxG.mouse.y);
+		//if (FlxG.mouse.justPressedMiddle)
+	//		createObject("objects.items.EnemyWorm", FlxG.mouse.x, FlxG.mouse.y);
 		
 		#else
 		mobileControls();
 		#end
-		
-
 		
 		displayTracers();
 		addLevelObjects();
 	    updateTrailArea();
 		trailArea.update(elapsed);
 		
-		trace(birdBombs.length);
+		
+		
+		if (player.HP <=0 && !checkedScore)
+		{
+			checkScore();
+		}
+	//	trace(birdBombs.length);
 
 		cursedAppearance();
 		// PLACEHOLDER	
@@ -221,6 +246,59 @@ class PlayState extends FlxTransitionableState
 	}
 	
 	
+	
+	private function checkScore()
+	{
+		checkedScore = true;
+		
+		if (FlxG.save.data.highscore == null)
+		{
+			FlxG.save.data.highscore = Reg.score;
+			FlxG.save.flush();
+		}
+		
+		else if (FlxG.save.data.highscore < Reg.score)
+		{
+			FlxG.save.data.highscore = Reg.score;
+			FlxG.save.flush();
+		}
+		
+		Reg.highscore = FlxG.save.data.highscore;
+		
+		trace(FlxG.save.data.highscore);
+		
+	}
+	private function checkSave()
+	{
+		if (!checkedSave)
+		{
+			
+		checkedSave = true;
+	    if (FlxG.save.data.totalGamesPlayed == null)
+		{
+			FlxG.save.data.totalGamesPlayed = 1;
+			FlxG.save.flush();
+		}
+		else
+		{
+			FlxG.save.data.totalGamesPlayed += 1;
+			FlxG.save.flush();
+		}
+		
+		trace(FlxG.save.data.totalGamesPlayed);
+		//FlxG.save.data.totalGamesPlayed += 1;
+		//FlxG.save.close();
+		}
+	}
+	
+	
+	private function checkForTutorial()
+	{
+       if (FlxG.save.data.totalGamesPlayed < 4)
+		   Reg.tutorial = true;
+	   else
+	      Reg.tutorial = false;
+	}
 	
 	private function createCurseAppearanceTweens()
 	{
@@ -250,9 +328,8 @@ class PlayState extends FlxTransitionableState
 			var objToAdd = Type.createInstance(objType, [_x, _y]);
 			
 			if (objToAdd != null)
-			{
 			add(objToAdd);
-			}
+			
 	}
 	
 	private function addLevelObjects()
@@ -318,8 +395,11 @@ class PlayState extends FlxTransitionableState
 		_entities.add(PBullets);
 		
 		add(_entities);
-		add(player);	
 		add(effects);
+	
+        add(player);	
+	    add(startEgg);
+	
 		_entities.add(barrierLeft);
 		_entities.add(barrierRight);	
 		enemies.clear();

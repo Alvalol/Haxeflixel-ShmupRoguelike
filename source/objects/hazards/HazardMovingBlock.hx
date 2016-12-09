@@ -41,6 +41,7 @@ class HazardMovingBlock extends Hazard
 			direction = Reg.CURRENT_SEED.int( -1, 1);
 			
 		//updateEmitterPosition();
+		if (!Reg.pause && Reg.hatched)
 		super.update(elapsed);
 	}
 	

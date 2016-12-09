@@ -14,14 +14,13 @@ import flixel.util.FlxSpriteUtil;
 class Hazard extends FlxSprite
 {
 	private var _appeared:Bool = false;
-	private var damageText:FlxText;
 	private var createdDamageText:Bool;
+	private var damageText:FlxText;
 	
 	private var desiredParticles:Int =  4;
 		
 	public function new(x:Float,y:Float) 
 	{
-		damageText = new FlxText();
 		super(x, y);
 	}
 	
@@ -30,7 +29,7 @@ class Hazard extends FlxSprite
         basicChecks();
 		collisions();
 	
-		if(!Reg.pause)
+		if(!Reg.pause && Reg.hatched)
 		    super.update(elapsed);		
 	}
 
@@ -41,20 +40,20 @@ class Hazard extends FlxSprite
 		  Reg.PS.player.damage();
 		  FlxObject.separate(this, Reg.PS.player);
 		}
+		
 		if (isOnScreen())
 		FlxG.overlap(Reg.PS.PBullets, this, NoDamage);
-		
 	}   
 	
 	private function NoDamage(_bullet:FlxSprite, _enemy:FlxSprite)
 	{
-		damageText.setPosition(_bullet.x, _bullet.y);
-		_bullet.kill();
-		damageText.text = "-0";
-		damageText.set_antialiasing(false);
-		damageText.velocity.y = -1;
+		damageText = new FlxText(_bullet.x,_bullet.y,0,"-0",8);
         damageText.setFormat(AssetPaths.smallfont__ttf, 8, FlxColor.RED, FlxTextBorderStyle.SHADOW, FlxColor.BLACK);
+		_bullet.kill();
+
+		damageText.set_antialiasing(false);
 	    damageText.moves = true;
+		damageText.velocity.y = -10;
 		Reg.PS.add(damageText);
 
 		textTimer();
@@ -63,9 +62,9 @@ class Hazard extends FlxSprite
 	}
 	private function textTimer()
 	{
-		new FlxTimer().start(0.1, function(_) { 
+		new FlxTimer().start(0.01, function(_) { 
 			FlxSpriteUtil.fadeOut(damageText, 0.5, function(_) { 
-			destroy;
+			damageText.destroy;
 			}); 
 		} , 1);
 	}

@@ -48,18 +48,12 @@ class MenuState extends FlxUIState
 		FlxG.mouse.visible = true;
 		#end
 		
-		saveData = new FlxSave();
-		saveData.bind("save");
-		saveData.data.savedSeeds = new Array<Int>();
-		saveData.flush();
-		
 	    background = new FlxBackdrop(AssetPaths.background__png, 1, 1, true, true);
-		buildNumber = new FlxText(FlxG.width - 60, FlxG.height - 13, 0, "dev build 14", 8);
+		buildNumber = new FlxText(FlxG.width - 60, FlxG.height - 13, 0, "dev build 15", 8);
 		
 		title = new FlxSprite(0, 0);
 
 		title.loadGraphic(AssetPaths.title__png, false, 256, 144);
-		
 		
 		var options = new FlxSprite(0,0);
 		var bars = new FlxSprite(0,0);
@@ -119,13 +113,13 @@ class MenuState extends FlxUIState
 		seedText.color = FlxColor.WHITE;
 		add(seedInput);
 		add(seedText);
-		FlxG.log.redirectTraces = true;
+		FlxG.log.redirectTraces = false;
 	}
 	override public function update(elapsed:Float):Void
 	{
 		
-		trace(Reg.CURRENT_SEED);
-        trace(saveData.data);
+		//trace(Reg.CURRENT_SEED);
+       // trace(saveData.data);
 		background.x += 0.5;
 		move();
 
@@ -166,13 +160,11 @@ class MenuState extends FlxUIState
 	   {
 			Reg.SEEDED = false;
 			FlxG.switchState(new PlayState());
-			saveData.data.savedSeeds.push(Reg.CURRENT_SEED);
 	   }
 	   else
 		{
 		   Reg.SEEDED = true;
 		   Reg.masterSeed =  Std.parseInt(seedInput.text);
-		   saveData.data.savedSeeds.push(Reg.CURRENT_SEED);
 		   FlxG.switchState(new PlayState());
 		}
 

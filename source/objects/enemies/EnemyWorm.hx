@@ -20,7 +20,7 @@ class EnemyWorm extends Enemy
 	private var maxTop:FlxPoint;
 	private var animationTween:FlxTween;
 	private var tweenOptions:TweenOptions;
-	private var SHOOT_SPEED = -150;
+	private var SHOOT_SPEED = 150;
 	private var justShot = false;
 	private var flipFactor:Int;
 	
@@ -30,16 +30,19 @@ class EnemyWorm extends Enemy
 	{
 		super(x, y);
 		HP = 1;
-		makeGraphic(8, 16, FlxColor.LIME);
+		loadGraphic(AssetPaths.longworm__png, true, 8, 16);
+		animation.add("default", [0]);
+		animation.play("default");
 		
 		flipY = _flipped;
 	    adjustPlacement();
 		
-		tweenOptions = {type : FlxTween.PINGPONG, loopDelay:2, onComplete:resetShot};
+		tweenOptions = {type : FlxTween.PINGPONG, loopDelay:1, onComplete:resetShot};
 		startAnimation();
 
 		setFactor();
 		animationTween.active = active;	
+		
 		/*
 		#if !FLX_NO_DEBUG 
 		Tracker.addProfile(new TrackerProfile(EnemyWorm, ["aboveGround", "waiting"], [FlxSprite, FlxTween]));
@@ -52,6 +55,8 @@ class EnemyWorm extends Enemy
 	override public function update(elapsed:Float) 
 	{
 		shoot();
+    	trace(flipFactor);
+		if(!Reg.pause && Reg.hatched)
 		super.update(elapsed);
 	}
 	
@@ -64,11 +69,11 @@ class EnemyWorm extends Enemy
 	{
 		if (flipY)
 		{
-			flipFactor = -1;
+			flipFactor = 1;
 		}
 		else
 		{
-			flipFactor = 1;
+			flipFactor = -1;
 		}	
 	}
 	
@@ -76,18 +81,28 @@ class EnemyWorm extends Enemy
 	{
 		if (animationTween.percent >= 0.90 && !animationTween.backward && !justShot)
 		{
-		var tang = 70;
+			var tang:Int;
+	    if (flipY)
+		 tang = 70;
+		else
+		 tang = 250;
+		
 		
 		for (i in 0...3)
 		{
-		    var eb:EnemyBullet = Reg.PS.EBullets.recycle();
+		    var eb:EnemyBullet = Reg.PS.EBullets.recycle(EnemyBullet);
 	        if (eb == null)
 		        eb = new EnemyBullet(x, y);
 				
-			eb.velocity.set(FlxVelocity.velocityFromAngle(tang, SHOOT_SPEED).x,
-			FlxVelocity.velocityFromAngle(tang, SHOOT_SPEED  * flipFactor).y);
+			if(flipY)
+			eb.reset(x , y + height);
+			else
+			eb.reset(x , y - 5);
+			
+			eb.velocity.set(FlxVelocity.velocityFromAngle(tang, (SHOOT_SPEED /4 )).x,
+			FlxVelocity.velocityFromAngle(tang, (SHOOT_SPEED / 4  )).y);
 			tang += 20;
-			eb.scale.set(0.5, 0.5);
+		//	eb.scale.set(0.5, 0.5);
 			Reg.PS.EBullets.add(eb);
 		}	
 			justShot = true;	
@@ -104,7 +119,7 @@ class EnemyWorm extends Enemy
 	{
 		if (flipY)
 		{
-		animationTween = FlxTween.linearMotion(this, x, y, x, y + height , 25, false, tweenOptions);
+		animationTween = FlxTween.linearMotion(this, x, y, x, y + height, 25, false, tweenOptions);
 		}
 		else
 		{

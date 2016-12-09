@@ -32,6 +32,8 @@ class EnemyExplosive extends Enemy
 		move();
 		reachedScrollx();
 		}
+		
+		if(!Reg.pause && Reg.hatched)
 		super.update(elapsed);	
 	}
 	

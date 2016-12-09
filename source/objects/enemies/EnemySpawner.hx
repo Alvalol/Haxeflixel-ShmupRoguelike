@@ -50,6 +50,8 @@ class EnemySpawner extends Enemy
 			addMinions();
 		}
 		
+		
+		if (!Reg.pause && Reg.hatched)
 		super.update(elapsed);
 	}
 	

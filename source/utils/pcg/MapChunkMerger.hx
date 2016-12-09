@@ -26,8 +26,8 @@ class MapChunkMerger
 	private static var TYPE_LIST:Array<String> = [];
 	private static var CHUNK_HEIGHT = 0;
 	private static var CHUNK_WIDTH = 0;
-	private static var MIN_GROUP_RANGE = 6;
-	private static var MAX_GROUP_RANGE = 12;
+	private static var MIN_GROUP_RANGE = 8;
+	private static var MAX_GROUP_RANGE = 20;
 	
 	public static function makeCleanArray():Array<Array<Int>>
 	{
@@ -106,7 +106,7 @@ class MapChunkMerger
 		// making an array of keys that are in the RAWCHUNKS. To keep it separated + can't iterate over keys ?
 		for (key in TMXORGANIZED.keys())
 		{
-			if (key != "start" && key != "exit")
+			if (key != "start" && key != "exit" && key !="tutorial")
 			{
 			TYPE_LIST.push(key);
 			}
@@ -126,8 +126,16 @@ class MapChunkMerger
 		}
 		}
 		CHUNKS[MAX_LEVEL_SIZE] = Reg.CURRENT_SEED.getObject(TMXORGANIZED["exit"]);
-		}
 		
+		// tutorial condition
+
+		if (Reg.tutorial)
+		{
+		CHUNKS[1] = Reg.CURRENT_SEED.getObject(TMXORGANIZED["tutorial"]);
+	    CHUNKS[2] = Reg.CURRENT_SEED.getObject(TMXORGANIZED["tutorial"]);
+	    CHUNKS[3] = Reg.CURRENT_SEED.getObject(TMXORGANIZED["tutorial"]);
+		}
+		}
     }
 	
 	private static function createChunkGroup(type:String, amount:Int)
@@ -180,6 +188,8 @@ class MapChunkMerger
 							chunkGroup.push(Reg.CURRENT_SEED.getObject(TMXORGANIZED["open"]));
 						}
 			        }
+					
+					
 		}
 	    }
 			for (chunk in chunkGroup) { CHUNKS.push(chunk); }

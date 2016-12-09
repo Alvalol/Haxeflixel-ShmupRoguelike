@@ -49,8 +49,9 @@ class Enemy extends FlxSprite
 		{
 			damageText.velocity.y = -25;
 		}
+		
 
-		if (!Reg.pause)
+		if (!Reg.pause && Reg.hatched)
 		{
 			collisions();
 			super.update(elapsed);
@@ -132,9 +133,9 @@ class Enemy extends FlxSprite
 	
 	private function textTimer()
 	{
-		new FlxTimer().start(0.1, function(_) { 
+		new FlxTimer().start(0.01, function(_) { 
 			FlxSpriteUtil.fadeOut(damageText, 0.5, function(_) { 
-			destroy;
+			damageText.destroy;
 			}); 
 		} , 1);
 	}

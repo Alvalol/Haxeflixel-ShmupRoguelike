@@ -36,6 +36,8 @@ class EnemyLeft extends Enemy
 			move();
 		}
 		
+		
+		if (!Reg.pause && Reg.hatched)
 		super.update(elapsed);
 	}
 	

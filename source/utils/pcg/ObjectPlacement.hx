@@ -12,6 +12,7 @@ import flixel.FlxSprite;
 import flixel.math.FlxPoint;
 import flixel.tile.FlxTilemap;
 import objects.Player;
+import objects.effects.StartEgg;
 import objects.enemies.Enemy;
 import objects.enemies.EnemyBlob;
 import objects.enemies.EnemyChaser;
@@ -68,7 +69,8 @@ class ObjectPlacement
 			{
 				if (object.type == "player")
 				{
-						Reg.PS.player.setPosition(pos.x, pos.y);
+					    Reg.PS.player.setPosition(pos.x+8, pos.y);
+						Reg.PS.startEgg.setPosition(Reg.PS.player.x,Reg.PS.player.y);//Reg.PS.player.setPosition(pos.x, pos.y);
 				}
 				else
 				{

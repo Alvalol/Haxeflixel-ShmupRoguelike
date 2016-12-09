@@ -75,6 +75,7 @@ class EnemyBullet extends FlxSprite
 		var noHit = Reg.PS.effects.recycle(NoHit);
         if (noHit == null) noHit = new NoHit(x, y);
 		
+		noHit.reset(x, y);
 		noHit.set_angle(angle);
 		creatednoHit = true;
 		Reg.PS.effects.add(noHit);

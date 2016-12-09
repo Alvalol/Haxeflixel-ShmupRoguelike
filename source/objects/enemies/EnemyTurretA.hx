@@ -131,8 +131,8 @@ class EnemyTurretA extends Enemy
 	
 	override public function kill():Void
 	{
-	    drops = [new HealthItem(x, y), new SpreadItem(x, y)]; //new BirdAttackItem(x,y)];// , new HealthMaxItem(x, y), new HealthMaxItem(x, y)];
-		dropRate = [0.25,0.025,0.75];
+	    drops = [new HealthItem(x, y), new SpreadItem(x, y),new BirdAttackItem(x,y)];// , new HealthMaxItem(x, y), new HealthMaxItem(x, y)];
+		dropRate = [0.2,0.1,0.1];
 		dropItem(drops,dropRate);
 		super.kill();
 	}

@@ -95,7 +95,7 @@ class BaseBullet extends Bullet
 	
 	override public function kill()
 	{ 
-		if (!createdNoHit)
+		if (!createdNoHit && Reg.hatched)
 		{
 		createdNoHit = true;
 		createNoHit();

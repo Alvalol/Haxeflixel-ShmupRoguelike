@@ -53,7 +53,7 @@ public static var GAMEPAD:FlxGamepad;
 			Reg.pause = !Reg.pause;
 		}
 		
-		if (GAMEPAD.pressed.A || GAMEPAD.pressed.RIGHT_SHOULDER || GAMEPAD.analog.value.LEFT_STICK_X < 0 || GAMEPAD.pressed.DPAD_LEFT)
+		if (GAMEPAD.pressed.A || GAMEPAD.pressed.RIGHT_SHOULDER)
 		{
 		 Reg.PS.player.shoot();
 		}
@@ -75,18 +75,31 @@ public static var GAMEPAD:FlxGamepad;
 			Reg.PS.player.move_up();
 		}
 
+
+		if (GAMEPAD.pressed.DPAD_LEFT || GAMEPAD.analog.value.LEFT_STICK_X < 0)
+		{
+			if(!Reg.mirrorControls)
+			Reg.PS.player.move_left();
+			else
+			Reg.PS.player.move_right();
+		}
+			
+		
+		if (GAMEPAD.pressed.DPAD_LEFT || GAMEPAD.analog.value.LEFT_STICK_X > 0)
+		{
+			if(!Reg.mirrorControls)
+			Reg.PS.player.move_right();
+			else
+			Reg.PS.player.move_left();
+		}
 		
 		if(GAMEPAD.justPressed.GUIDE)
 		{
 			Reg.pause = !Reg.pause;
 		}
 			
-		if (GAMEPAD.justReleased.ANY)
-		{
-			Reg.PS.player.resetAccel();
-		}
 		
-			if (GAMEPAD.anyJustReleased([A,RIGHT_SHOULDER]) || !(GAMEPAD.analog.value.LEFT_STICK_X < 0) )
+		if (GAMEPAD.anyJustReleased([A,RIGHT_SHOULDER]) || !(GAMEPAD.analog.value.LEFT_STICK_X < 0) )
 		{
 			Reg.PS.player.set_shooting(false);
 		}
@@ -112,12 +125,6 @@ public static var GAMEPAD:FlxGamepad;
 			Reg.PS.player.move_down();
 		}
 
-	
-		if (FlxG.keys.anyJustReleased(Keyboard.actionKeys))
-		{
-			Reg.PS.player.set_shooting(false);
-		}
-		
 		if ( FlxG.keys.anyPressed(Keyboard.downKeys))
 		{
 			if(!Reg.mirrorControls)
@@ -127,15 +134,39 @@ public static var GAMEPAD:FlxGamepad;
 		}
 
 		
+		if ( FlxG.keys.anyPressed(Keyboard.leftKeys))
+		{
+			if(!Reg.mirrorControls)
+			Reg.PS.player.move_left();
+			else
+			Reg.PS.player.move_right();
+		}
+		
+		
+		
+		if ( FlxG.keys.anyPressed(Keyboard.rightKeys))
+		{
+			if(!Reg.mirrorControls)
+			Reg.PS.player.move_right();
+			else
+			Reg.PS.player.move_left();
+		}
+		
+		
+		if (FlxG.keys.anyJustReleased(Keyboard.actionKeys))
+		{
+			Reg.PS.player.set_shooting(false);
+		}
+		
+		
 		if( FlxG.keys.justPressed.ESCAPE)
 		{
 			Reg.pause = !Reg.pause;
 		}
 		
-			
-		if ( FlxG.keys.justReleased.ANY)
+		if (FlxG.keys.justPressed.R)
 		{
-			Reg.PS.player.resetAccel();
+			FlxG.switchState(new PlayState());
 		}
 		
 

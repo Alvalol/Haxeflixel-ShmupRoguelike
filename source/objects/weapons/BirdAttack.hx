@@ -55,7 +55,6 @@ class BirdAttack extends FlxSprite
 			
 		if (!FlxSpriteUtil.isFlickering(Reg.PS.player))
 		   FlxSpriteUtil.flicker(Reg.PS.player, 0, 0.05);
-			
 		}
 			
 		else
@@ -63,8 +62,11 @@ class BirdAttack extends FlxSprite
 			if (FlxSpriteUtil.isFlickering(Reg.PS.player) && !_aboutToKill)
 			{
 		    _aboutToKill = true;
-			new FlxTimer().start(1.5, function(_) {
-			FlxSpriteUtil.stopFlickering(Reg.PS.player); if(alive) kill();
+			new FlxTimer().start(2, function(_) {
+			FlxSpriteUtil.stopFlickering(Reg.PS.player); 
+			for (bird in Reg.PS.birdBombs)  if (bird.alive) bird.kill();
+			if (Reg.PS.birdBombs.length <= 0) { kill(); } 
+			
 			}, 1);
 			}
 
